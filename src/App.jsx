@@ -1,11 +1,12 @@
 import React from "react";
 import {
   ArrowRight,
+  BarChart3,
   Building2,
   CheckCircle2,
+  Clock3,
   Factory,
   FileText,
-  KeyRound,
   Layers3,
   LockKeyhole,
   Mail,
@@ -24,88 +25,91 @@ const LOGO_PATH = "/clonexa-logo.png";
 
 const modules = [
   {
-    name: "Production OS",
+    name: "Production",
     label: "Producción",
     icon: Factory,
     description:
-      "Control de referencias, avance, cantidades cerradas, tiempos productivos, sesiones y detalle operativo.",
-    proof: "Validado en flujos reales de producción."
+      "Referencias, cantidades, avances, tiempos productivos, costos y seguimiento operativo."
   },
   {
-    name: "Commercial OS",
+    name: "Commercial / Retail",
     label: "Ventas y tiendas",
     icon: Store,
     description:
-      "Reportes de ventas, cierres de tienda, consolidado comercial, top vendedores, estados y archivo operativo.",
-    proof: "Validado en cierres comerciales y reportes."
+      "Ventas, cierres, solicitudes, reportes comerciales, tiendas, rankings y control diario."
   },
   {
-    name: "Hospitality QR OS",
+    name: "Field & Materials",
+    label: "Campo y materiales",
+    icon: MapPinned,
+    description:
+      "Personal, GPS, solicitudes, entregas, devoluciones, inventario, bitácora y reportes."
+  },
+  {
+    name: "Hospitality QR",
     label: "Bares y restaurantes",
     icon: QrCode,
     description:
-      "Mesas por QR, pedidos, cuentas abiertas, inventario, stock, fidelización y flujo operativo de barra o cocina.",
-    proof: "Validado como sistema QR funcional."
+      "Mesas por QR, pedidos, estados, inventario, cuentas, cierre de día y operación comercial."
   },
   {
-    name: "Field & Materials OS",
-    label: "Campo, GPS y materiales",
-    icon: MapPinned,
-    description:
-      "Entradas y salidas de materiales, solicitudes, entregas, devoluciones, GPS, asistencia, payroll y bitácora.",
-    proof: "Validado en trazabilidad operativa de campo."
-  },
-  {
-    name: "Assembly OS",
+    name: "Assembly",
     label: "Asambleas",
     icon: Vote,
     description:
-      "Acceso por QR, registro, votaciones, control de tiempos, decisiones formales, auditoría y actas PDF.",
-    proof: "Módulo listo para decisiones formales."
+      "QR, clave, registro de asistentes, votación en vivo, cronómetro, resultados y acta PDF."
   }
 ];
 
 const coreItems = [
-  "Multiempresa / tenants",
+  "Empresas / tenants",
   "Usuarios y roles",
-  "Permisos",
-  "Módulos configurables",
+  "Módulos activos",
+  "Branding por cliente",
   "Dashboards",
   "Reportes",
   "Auditoría",
-  "Salidas PDF",
-  "Operación en tiempo real",
-  "Branding por cliente"
+  "PDF y evidencias"
 ];
 
 const steps = [
   {
     number: "01",
     title: "Creamos la empresa",
-    text: "Se configura el espacio del cliente, usuarios, accesos, permisos, branding y estructura inicial."
+    text: "Configuramos el espacio del cliente, usuarios, acceso, branding y estructura base."
   },
   {
     number: "02",
     title: "Activamos módulos",
-    text: "Se seleccionan módulos preconstruidos según la operación: producción, ventas, QR, campo o asambleas."
+    text: "Seleccionamos solo lo que la empresa necesita: producción, ventas, campo, QR o asambleas."
   },
   {
     number: "03",
-    title: "Configuramos flujos",
-    text: "Ajustamos roles, reglas, paneles, formularios, reportes y vistas según el proceso real del cliente."
+    title: "Ajustamos el flujo",
+    text: "Adaptamos roles, campos, paneles, reportes y reglas según la operación real."
   },
   {
     number: "04",
-    title: "Operar, medir y auditar",
-    text: "La empresa empieza a operar desde un sistema digital con datos, trazabilidad y control."
+    title: "Opera en tiempo real",
+    text: "La empresa empieza a trabajar con trazabilidad, métricas y evidencia desde una sola plataforma."
   }
 ];
 
 const problems = [
-  "Operaciones repartidas entre WhatsApp, Excel, formularios, correos y software aislado.",
-  "Reportes manuales que llegan tarde, incompletos o sin trazabilidad.",
-  "Procesos reales que no encajan en herramientas genéricas.",
+  "Operación repartida entre WhatsApp, Excel, formularios, correos y sistemas sueltos.",
+  "Reportes manuales, datos tardíos y poca trazabilidad.",
+  "Herramientas genéricas que no se ajustan a la operación real.",
   "Desarrollos a medida lentos, costosos y difíciles de mantener."
+];
+
+const assemblyFlow = [
+  "QR + clave",
+  "Registro",
+  "Pregunta en vivo",
+  "Cronómetro",
+  "Voto único",
+  "Resultados",
+  "Acta PDF"
 ];
 
 function Brand({ footer = false }) {
@@ -142,8 +146,8 @@ function App() {
 
         <div className="navLinks">
           <a href="#modules">Módulos</a>
+          <a href="#assembly">Asambleas</a>
           <a href="#core">Core SaaS</a>
-          <a href="#proof">Producto</a>
           <a href="#how">Cómo funciona</a>
           <a href="#contact" className="navCta">Solicitar demo</a>
         </div>
@@ -160,8 +164,8 @@ function App() {
           </button>
 
           <a onClick={() => setMenuOpen(false)} href="#modules">Módulos</a>
+          <a onClick={() => setMenuOpen(false)} href="#assembly">Asambleas</a>
           <a onClick={() => setMenuOpen(false)} href="#core">Core SaaS</a>
-          <a onClick={() => setMenuOpen(false)} href="#proof">Producto</a>
           <a onClick={() => setMenuOpen(false)} href="#how">Cómo funciona</a>
           <a onClick={() => setMenuOpen(false)} href="#contact">Solicitar demo</a>
         </div>
@@ -171,17 +175,16 @@ function App() {
         <div className="heroCopy">
           <div className="pill">
             <span className="pulse"></span>
-            SaaS modular · operaciones reales · módulos configurables
+            SaaS modular · multiempresa · operación en tiempo real
           </div>
 
           <h1>
-            Un solo sistema operativo SaaS para digitalizar operaciones empresariales reales.
+            CLONEXA replica operaciones reales con módulos adaptables.
           </h1>
 
           <p className="heroText">
-            CLONEXA convierte procesos fragmentados en plataformas digitales funcionales usando
-            un core SaaS reutilizable y módulos configurables para producción, ventas, QR,
-            campo, materiales y decisiones formales.
+            Un sistema operativo SaaS para convertir procesos fragmentados en operación digital:
+            producción, ventas, campo, hospitality, reportes y asambleas desde una misma plataforma.
           </p>
 
           <div className="heroActions">
@@ -189,14 +192,14 @@ function App() {
               Solicitar demo <ArrowRight size={18} />
             </a>
             <a href="#modules" className="button secondary">
-              Ver módulos validados
+              Ver módulos
             </a>
           </div>
 
           <div className="heroBadges">
-            <span>5 sistemas operativos funcionales</span>
-            <span>Un mismo core SaaS</span>
-            <span>Configuración por operación</span>
+            <span>Core SaaS común</span>
+            <span>Módulos configurables</span>
+            <span>Implementación rápida</span>
           </div>
         </div>
 
@@ -204,49 +207,49 @@ function App() {
           <div className="commandCard">
             <div className="commandHeader">
               <div>
-                <strong>CLONEXA Command Center</strong>
-                <span>Multiempresa · módulos · usuarios · auditoría</span>
+                <strong>CLONEXA Core</strong>
+                <span>Empresas · módulos · usuarios · reportes</span>
               </div>
               <div className="liveTag">Live</div>
             </div>
 
             <div className="commandGrid">
               <div className="commandItem active">
-                <Building2 size={20} />
-                <strong>Tenants</strong>
-                <span>Empresas configuradas</span>
+                <Building2 size={19} />
+                <strong>Empresa</strong>
+                <span>Tenant configurado</span>
               </div>
 
               <div className="commandItem">
-                <Layers3 size={20} />
+                <Layers3 size={19} />
                 <strong>Módulos</strong>
-                <span>Producción · QR · Campo</span>
+                <span>Activos por necesidad</span>
               </div>
 
               <div className="commandItem">
-                <Users size={20} />
-                <strong>Roles</strong>
-                <span>Accesos y permisos</span>
+                <Users size={19} />
+                <strong>Usuarios</strong>
+                <span>Roles y permisos</span>
               </div>
 
               <div className="commandItem">
-                <ShieldCheck size={20} />
+                <ShieldCheck size={19} />
                 <strong>Auditoría</strong>
-                <span>Operación trazable</span>
+                <span>Datos trazables</span>
               </div>
             </div>
 
             <div className="systemFlow">
               <div>
-                <span>Production</span>
+                <span>Operación configurada</span>
                 <div className="flowTrack"><div className="flowFill w88"></div></div>
               </div>
               <div>
-                <span>Commercial</span>
+                <span>Reportes y KPIs</span>
                 <div className="flowTrack"><div className="flowFill w74"></div></div>
               </div>
               <div>
-                <span>Field & Materials</span>
+                <span>Decisiones y actas</span>
                 <div className="flowTrack"><div className="flowFill w64"></div></div>
               </div>
             </div>
@@ -254,32 +257,20 @@ function App() {
         </div>
       </section>
 
-      <section className="section trustSection">
-        <div className="trustCard">
-          <span>Producto ya operando en flujos reales</span>
-          <strong>Producción · Ventas · QR Hospitality · Campo y materiales · Asambleas</strong>
-          <p>
-            CLONEXA no es una landing conceptual. Es una infraestructura SaaS modular que ya
-            soporta distintos tipos de operación sobre una misma base reutilizable.
-          </p>
-        </div>
-      </section>
-
       <section className="section problemSection">
         <div>
           <span className="kicker">Problema</span>
-          <h2>Las empresas no fallan por falta de trabajo. Fallan por operar fragmentadas.</h2>
+          <h2>Las empresas operan con procesos dispersos.</h2>
           <p className="sectionText">
-            Muchas empresas tienen procesos reales funcionando, pero la operación vive repartida
-            entre herramientas desconectadas. Eso genera errores, reportes tardíos, poca visibilidad
-            y decisiones sin evidencia.
+            Muchas operaciones funcionan, pero sus datos viven separados. CLONEXA conecta esos flujos
+            en una plataforma modular que se adapta a cada empresa sin reconstruir todo desde cero.
           </p>
         </div>
 
         <div className="problemList">
           {problems.map((problem) => (
             <div className="problemItem" key={problem}>
-              <CheckCircle2 size={20} />
+              <CheckCircle2 size={18} />
               <span>{problem}</span>
             </div>
           ))}
@@ -288,11 +279,11 @@ function App() {
 
       <section id="modules" className="section modulesSection">
         <div className="sectionHead">
-          <span className="kicker">Módulos validados</span>
-          <h2>Cinco operaciones distintas. Un mismo core SaaS.</h2>
+          <span className="kicker">Módulos adaptables</span>
+          <h2>Una plataforma. Diferentes operaciones.</h2>
           <p>
-            CLONEXA no es una colección de proyectos aislados. Cada módulo comparte tenants,
-            usuarios, roles, permisos, dashboards, reportes y trazabilidad.
+            CLONEXA no es una colección de sistemas separados. Cada vertical comparte el mismo core:
+            empresas, usuarios, permisos, módulos, reportes y auditoría.
           </p>
         </div>
 
@@ -301,41 +292,84 @@ function App() {
             const Icon = module.icon;
 
             return (
-              <div className="moduleCard" key={module.name}>
+              <div className={`moduleCard ${module.name === "Assembly" ? "assemblyModule" : ""}`} key={module.name}>
                 <div className="moduleTop">
                   <div className="moduleIcon">
-                    <Icon size={24} />
+                    <Icon size={22} />
                   </div>
                   <span>{module.label}</span>
                 </div>
 
                 <h3>{module.name}</h3>
                 <p>{module.description}</p>
-
-                <div className="proofTag">
-                  <Zap size={15} />
-                  {module.proof}
-                </div>
               </div>
             );
           })}
         </div>
       </section>
 
-      <section id="core" className="section coreSection">
-        <div className="coreCopy">
-          <span className="kicker">Core SaaS</span>
-          <h2>No construimos desde cero por cliente. Configuramos módulos sobre la misma infraestructura.</h2>
+      <section id="assembly" className="section assemblySection">
+        <div className="assemblyCopy">
+          <span className="kicker">CLONEXA Assembly</span>
+          <h2>Asambleas con QR, votación en vivo y acta PDF.</h2>
           <p className="sectionText">
-            Cada empresa opera sobre el mismo core SaaS de CLONEXA. Lo que cambia es la configuración
-            de módulos, flujos, roles, dashboards y reglas operativas según la realidad del negocio.
+            CLONEXA también cubre decisiones formales. Cada asistente accede con QR y clave,
+            se registra, vota preguntas publicadas en vivo y el sistema genera resultados y constancia.
+          </p>
+
+          <div className="assemblyChecks">
+            <div><QrCode size={18} /> QR individual o por sesión</div>
+            <div><Clock3 size={18} /> Cronómetro por pregunta</div>
+            <div><Vote size={18} /> Voto único por asistente</div>
+            <div><FileText size={18} /> Acta PDF descargable</div>
+          </div>
+        </div>
+
+        <div className="assemblyPanel">
+          <div className="assemblyPanelHeader">
+            <strong>Votación activa</strong>
+            <span>04:00 min</span>
+          </div>
+
+          <div className="questionBox">
+            <small>Pregunta publicada por moderador</small>
+            <h3>¿Se aprueba la contratación de vigilancia?</h3>
+          </div>
+
+          <div className="voteButtons">
+            <button>Sí</button>
+            <button>No</button>
+            <button>Abstención</button>
+          </div>
+
+          <div className="resultPreview">
+            <div><span>A favor</span><strong>68%</strong></div>
+            <div><span>En contra</span><strong>24%</strong></div>
+            <div><span>Abstención</span><strong>8%</strong></div>
+          </div>
+
+          <div className="assemblyFlow">
+            {assemblyFlow.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="core" className="section coreSection">
+        <div>
+          <span className="kicker">Core SaaS</span>
+          <h2>No hacemos un software diferente por cliente. Configuramos módulos sobre un mismo núcleo.</h2>
+          <p className="sectionText">
+            La proyección de CLONEXA es clara: un core SaaS multiempresa que permite activar
+            capacidades por operación y replicar empresas con módulos acondicionados.
           </p>
         </div>
 
         <div className="coreGrid">
           {coreItems.map((item) => (
             <div className="coreItem" key={item}>
-              <LockKeyhole size={16} />
+              <LockKeyhole size={15} />
               <span>{item}</span>
             </div>
           ))}
@@ -345,17 +379,17 @@ function App() {
       <section id="proof" className="section proofSection">
         <div className="sectionHead">
           <span className="kicker">Producto</span>
-          <h2>Vistas operativas listas para trabajar, medir y auditar.</h2>
+          <h2>Vistas limpias para operar, medir y auditar.</h2>
           <p>
-            La landing pública muestra vistas anonimizadas y datos demostrativos. La demo privada
-            permite revisar flujos reales sin exponer información sensible de clientes.
+            La landing pública muestra flujos demostrativos. La demo privada permite revisar
+            módulos activos, paneles, reportes y operación real sin exponer datos sensibles.
           </p>
         </div>
 
         <div className="screensGrid">
           <div className="screen production">
             <div className="screenHeader">
-              <span>Production OS</span>
+              <span>Production</span>
               <strong>Resumen productivo</strong>
             </div>
 
@@ -365,7 +399,7 @@ function App() {
                 <strong>14</strong>
               </div>
               <div>
-                <span>Tiempo productivo</span>
+                <span>Tiempo</span>
                 <strong>105h</strong>
               </div>
               <div>
@@ -375,75 +409,31 @@ function App() {
             </div>
 
             <div className="miniBars">
-              <div><span>Dreamy Jacket</span><div className="flowTrack"><div className="flowFill w100"></div></div></div>
-              <div><span>Koi Jacket</span><div className="flowTrack"><div className="flowFill w88"></div></div></div>
-              <div><span>Garden Jacket</span><div className="flowTrack"><div className="flowFill w44"></div></div></div>
+              <div><span>Referencia A</span><div className="flowTrack"><div className="flowFill w88"></div></div></div>
+              <div><span>Referencia B</span><div className="flowTrack"><div className="flowFill w64"></div></div></div>
             </div>
           </div>
 
-          <div className="screen qr">
+          <div className="screen operations">
             <div className="screenHeader">
-              <span>Hospitality QR OS</span>
-              <strong>Mesa QR</strong>
-            </div>
-
-            <div className="qrGrid">
-              {["Barra", "Mesa 1", "Mesa 2", "Mesa 3"].map((table) => (
-                <div className="qrCard" key={table}>
-                  <div className="fakeQr">
-                    <QrCode size={54} />
-                  </div>
-                  <strong>{table}</strong>
-                  <span>Libre · Cuenta $0</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="screen field">
-            <div className="screenHeader">
-              <span>Field & Materials OS</span>
-              <strong>Tablas auditables</strong>
+              <span>Operations</span>
+              <strong>Control operativo</strong>
             </div>
 
             <div className="tableMock">
               <div className="tableHead">
                 <span>Orden</span>
-                <span>Material</span>
-                <span>Status</span>
-                <span>GPS</span>
+                <span>Módulo</span>
+                <span>Estado</span>
               </div>
 
-              {["Cable de fibra", "Cable telefónico", "Cable HDMI", "Kit instalación"].map((row, index) => (
+              {["Materiales", "Ventas", "GPS", "Asamblea"].map((row, index) => (
                 <div className="tableRow" key={row}>
-                  <span>MAT-000{index + 1}</span>
+                  <span>OP-000{index + 1}</span>
                   <span>{row}</span>
-                  <span>{index % 2 === 0 ? "Delivered" : "Pending"}</span>
-                  <span>OK</span>
+                  <span>{index % 2 === 0 ? "Activo" : "Pendiente"}</span>
                 </div>
               ))}
-            </div>
-          </div>
-
-          <div className="screen commercial">
-            <div className="screenHeader">
-              <span>Commercial OS</span>
-              <strong>Reportes de ventas</strong>
-            </div>
-
-            <div className="reportCards">
-              <div>
-                <span>Cierres recibidos</span>
-                <strong>7</strong>
-              </div>
-              <div>
-                <span>Top vendedor</span>
-                <strong>Equipo A</strong>
-              </div>
-              <div>
-                <span>Estado</span>
-                <strong>Enviado</strong>
-              </div>
             </div>
           </div>
         </div>
@@ -476,12 +466,12 @@ function App() {
           <div className="comparisonGrid">
             <div>
               <h3>Software a medida</h3>
-              <p>Se construye desde cero, depende de entregas largas, cuesta mantenerlo y cada cliente se vuelve un proyecto separado.</p>
+              <p>Se construye desde cero, toma más tiempo, cuesta mantenerlo y cada cliente se vuelve un proyecto aislado.</p>
             </div>
 
             <div className="highlightBox">
               <h3>CLONEXA</h3>
-              <p>Usa un core SaaS compartido. Cada cliente activa módulos, flujos, roles y dashboards sobre una infraestructura reutilizable.</p>
+              <p>Usa un core compartido. Cada cliente activa módulos, flujos, roles y dashboards según su operación.</p>
             </div>
           </div>
         </div>
@@ -491,10 +481,9 @@ function App() {
         <div className="contactCard">
           <div>
             <span className="kicker">Demo privada</span>
-            <h2>¿Tu operación sigue repartida entre hojas, mensajes y reportes manuales?</h2>
+            <h2>Convierte tu operación en un sistema digital modular.</h2>
             <p>
-              Solicita una demo y revisamos qué módulos de CLONEXA pueden configurarse para tu operación.
-              Los detalles comerciales se revisan de forma privada.
+              Solicita una demo y revisamos qué módulos de CLONEXA pueden configurarse para tu empresa.
             </p>
           </div>
 
@@ -519,7 +508,7 @@ function App() {
 
         <div className="footerRight">
           <span>Sistema operativo SaaS modular</span>
-          <span>Producción · Ventas · QR · Campo · Asambleas</span>
+          <span>Producción · Ventas · Campo · QR · Asambleas</span>
         </div>
       </footer>
     </main>

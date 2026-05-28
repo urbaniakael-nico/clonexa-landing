@@ -1,7 +1,13 @@
-FROM python:3.12-slim
+FROM node:20-alpine
 
 WORKDIR /app
 
+COPY package*.json ./
+
+RUN npm install
+
 COPY . .
 
-CMD sh -c "python -m http.server ${PORT:-8080} --bind 0.0.0.0"
+RUN npm run build
+
+CMD sh -c "npm run start -- --port ${PORT:-8080}"

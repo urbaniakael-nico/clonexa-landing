@@ -2,447 +2,298 @@ import React from "react";
 import {
   ArrowRight,
   Building2,
-  BarChart3,
   CheckCircle2,
-  Database,
   Factory,
   FileText,
-  Globe2,
+  KeyRound,
   Layers3,
-  LineChart,
+  LockKeyhole,
   Mail,
   MapPinned,
-  Network,
+  Menu,
+  QrCode,
   ShieldCheck,
   Store,
   Users,
-  Workflow,
+  Vote,
+  X,
   Zap
 } from "lucide-react";
 
-const traction = [
-  {
-    label: "Functional clients",
-    value: "2",
-    note: "Velvet and Mundo Case operating on CLONEXA."
-  },
-  {
-    label: "Markets touched",
-    value: "3",
-    note: "Mexico, Colombia and the U.S."
-  },
-  {
-    label: "Deployment model",
-    value: "6 mo.",
-    note: "Paid implementation phase before SaaS subscription."
-  },
-  {
-    label: "Next expansion",
-    value: "Field Ops",
-    note: "Field operations client currently in negotiation."
-  }
-];
-
-const clientCases = [
-  {
-    name: "Velvet",
-    region: "Mexico / Colombia / U.S.",
-    icon: Factory,
-    title: "Production workflows",
-    description:
-      "Velvet uses CLONEXA to manage production references, progress, productive time, sessions and operational tracking.",
-    modules: ["Production", "References", "Workforce", "Productive time"]
-  },
-  {
-    name: "Mundo Case",
-    region: "LATAM / U.S.",
-    icon: Store,
-    title: "Commercial operations",
-    description:
-      "Mundo Case uses CLONEXA for sales reports, store closings, top sellers, revenue tracking and workforce workflows.",
-    modules: ["Sales reports", "Stores", "Commercial closing", "Workforce"]
-  }
-];
+const LOGO_PATH = "/clonexa-logo.png";
 
 const modules = [
   {
-    name: "Production",
+    name: "Production OS",
+    label: "Producción",
     icon: Factory,
-    text: "References, quantities, progress, productive time and operational detail."
+    description:
+      "Control de referencias, avance, cantidades cerradas, tiempos productivos, sesiones y detalle operativo.",
+    proof: "Validado en flujos reales de producción."
   },
   {
-    name: "Commercial",
+    name: "Commercial OS",
+    label: "Ventas y tiendas",
     icon: Store,
-    text: "Sales reports, store closings, top sellers, revenue and archive flows."
+    description:
+      "Reportes de ventas, cierres de tienda, consolidado comercial, top vendedores, estados y archivo operativo.",
+    proof: "Validado en cierres comerciales y reportes."
   },
   {
-    name: "Field Ops",
+    name: "Hospitality QR OS",
+    label: "Bares y restaurantes",
+    icon: QrCode,
+    description:
+      "Mesas por QR, pedidos, cuentas abiertas, inventario, stock, fidelización y flujo operativo de barra o cocina.",
+    proof: "Validado como sistema QR funcional."
+  },
+  {
+    name: "Field & Materials OS",
+    label: "Campo, GPS y materiales",
     icon: MapPinned,
-    text: "Tasks, evidence, field teams, route activity and operational control."
+    description:
+      "Entradas y salidas de materiales, solicitudes, entregas, devoluciones, GPS, asistencia, payroll y bitácora.",
+    proof: "Validado en trazabilidad operativa de campo."
   },
   {
-    name: "Workforce",
-    icon: Users,
-    text: "Teams, roles, sessions, activity, productivity and responsibilities."
-  },
-  {
-    name: "Dashboards",
-    icon: BarChart3,
-    text: "Live operating views, KPIs, summaries, rankings and management reports."
-  },
-  {
-    name: "Assembly",
-    icon: FileText,
-    text: "QR access, voting, meeting control, formal decisions and PDF minutes."
+    name: "Assembly OS",
+    label: "Asambleas",
+    icon: Vote,
+    description:
+      "Acceso por QR, registro, votaciones, control de tiempos, decisiones formales, auditoría y actas PDF.",
+    proof: "Módulo listo para decisiones formales."
   }
 ];
 
-const businessModel = [
-  {
-    market: "LATAM / Mexico",
-    deployment: "MXN $13,500 / month",
-    after: "MXN $6,000 / month",
-    yearOne: "MXN $117,000",
-    arr: "MXN $72,000 ARR"
-  },
-  {
-    market: "United States",
-    deployment: "USD $2,500 / month",
-    after: "USD $1,200 / month",
-    yearOne: "USD $22,200",
-    arr: "USD $14,400 ARR"
-  }
-];
-
-const operatingStack = [
-  "Company creation",
-  "Tenant management",
-  "Users and roles",
-  "Permissions",
-  "Module activation",
-  "Operational workflows",
+const coreItems = [
+  "Multiempresa / tenants",
+  "Usuarios y roles",
+  "Permisos",
+  "Módulos configurables",
   "Dashboards",
-  "Reports",
-  "Auditability",
-  "Document outputs"
+  "Reportes",
+  "Auditoría",
+  "Salidas PDF",
+  "Operación en tiempo real",
+  "Branding por cliente"
 ];
 
-const risks = [
+const steps = [
   {
-    risk: "Custom software perception",
-    answer:
-      "Every client runs on the same SaaS core. What changes is the configuration of modules, workflows, roles and dashboards."
+    number: "01",
+    title: "Creamos la empresa",
+    text: "Se configura el espacio del cliente, usuarios, accesos, permisos, branding y estructura inicial."
   },
   {
-    risk: "Too many verticals",
-    answer:
-      "The verticals are not separate products. They are module configurations built on the same reusable operating infrastructure."
+    number: "02",
+    title: "Activamos módulos",
+    text: "Se seleccionan módulos preconstruidos según la operación: producción, ventas, QR, campo o asambleas."
   },
   {
-    risk: "Implementation effort",
-    answer:
-      "The first 6 months are monetized as a paid deployment phase that covers onboarding, setup and operational configuration."
+    number: "03",
+    title: "Configuramos flujos",
+    text: "Ajustamos roles, reglas, paneles, formularios, reportes y vistas según el proceso real del cliente."
+  },
+  {
+    number: "04",
+    title: "Operar, medir y auditar",
+    text: "La empresa empieza a operar desde un sistema digital con datos, trazabilidad y control."
   }
 ];
+
+const problems = [
+  "Operaciones repartidas entre WhatsApp, Excel, formularios, correos y software aislado.",
+  "Reportes manuales que llegan tarde, incompletos o sin trazabilidad.",
+  "Procesos reales que no encajan en herramientas genéricas.",
+  "Desarrollos a medida lentos, costosos y difíciles de mantener."
+];
+
+function Brand({ footer = false }) {
+  const [logoOk, setLogoOk] = React.useState(Boolean(LOGO_PATH));
+
+  return (
+    <a href="#top" className={`brand ${footer ? "brandFooter" : ""}`}>
+      {logoOk ? (
+        <img
+          className="brandLogo"
+          src={LOGO_PATH}
+          alt="CLONEXA"
+          onError={() => setLogoOk(false)}
+        />
+      ) : (
+        <div className="brandFallback">C</div>
+      )}
+
+      <div className="brandText">
+        <strong>CLONEXA</strong>
+        <span>Operate · Measure · Decide · Audit</span>
+      </div>
+    </a>
+  );
+}
 
 function App() {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
   return (
     <main className="app">
       <nav className="nav">
-        <a href="#top" className="brand" aria-label="CLONEXA home">
-          <div className="brandMark">
-            <span>C</span>
-          </div>
-          <div>
-            <strong>CLONEXA</strong>
-            <small>Investor Brief</small>
-          </div>
-        </a>
+        <Brand />
 
         <div className="navLinks">
-          <a href="#traction">Traction</a>
-          <a href="#product">Product</a>
-          <a href="#model">Business Model</a>
-          <a href="#moat">Moat</a>
-          <a href="#contact" className="navButton">Request deck</a>
+          <a href="#modules">Módulos</a>
+          <a href="#core">Core SaaS</a>
+          <a href="#proof">Producto</a>
+          <a href="#how">Cómo funciona</a>
+          <a href="#contact" className="navCta">Solicitar demo</a>
         </div>
+
+        <button className="menuButton" onClick={() => setMenuOpen(true)} aria-label="Abrir menú">
+          <Menu size={22} />
+        </button>
       </nav>
+
+      {menuOpen && (
+        <div className="mobileMenu">
+          <button className="closeButton" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú">
+            <X size={22} />
+          </button>
+
+          <a onClick={() => setMenuOpen(false)} href="#modules">Módulos</a>
+          <a onClick={() => setMenuOpen(false)} href="#core">Core SaaS</a>
+          <a onClick={() => setMenuOpen(false)} href="#proof">Producto</a>
+          <a onClick={() => setMenuOpen(false)} href="#how">Cómo funciona</a>
+          <a onClick={() => setMenuOpen(false)} href="#contact">Solicitar demo</a>
+        </div>
+      )}
 
       <section id="top" className="hero section">
         <div className="heroCopy">
           <div className="pill">
-            <span className="dot"></span>
-            Functional clients live · Modular SaaS · Pre-seed ready
+            <span className="pulse"></span>
+            SaaS modular · operaciones reales · módulos configurables
           </div>
 
           <h1>
-            The modular SaaS operating system for fragmented business operations.
+            Un solo sistema operativo SaaS para digitalizar operaciones empresariales reales.
           </h1>
 
           <p className="heroText">
-            CLONEXA turns real company operations into configurable digital
-            platforms using one reusable SaaS core and multiple operational
-            modules. Already operating with functional clients across Mexico,
-            Colombia and the U.S.
+            CLONEXA convierte procesos fragmentados en plataformas digitales funcionales usando
+            un core SaaS reutilizable y módulos configurables para producción, ventas, QR,
+            campo, materiales y decisiones formales.
           </p>
 
           <div className="heroActions">
             <a href="#contact" className="button primary">
-              Request investor deck <ArrowRight size={18} />
+              Solicitar demo <ArrowRight size={18} />
             </a>
-            <a href="#traction" className="button secondary">
-              See traction
+            <a href="#modules" className="button secondary">
+              Ver módulos validados
             </a>
           </div>
 
-          <div className="proofLine">
-            <span>Not a concept.</span>
-            <span>Not a software agency.</span>
-            <span>One SaaS core, configured per operation.</span>
+          <div className="heroBadges">
+            <span>5 sistemas operativos funcionales</span>
+            <span>Un mismo core SaaS</span>
+            <span>Configuración por operación</span>
           </div>
         </div>
 
-        <div className="heroConsole">
-          <div className="consoleTop">
-            <div>
-              <strong>CLONEXA Command Center</strong>
-              <span>Multi-tenant SaaS control</span>
-            </div>
-            <div className="statusLive">Live</div>
-          </div>
-
-          <div className="consoleGrid">
-            <div className="consoleCard active">
-              <Building2 size={20} />
-              <strong>Companies</strong>
-              <span>Velvet · Mundo Case</span>
-            </div>
-            <div className="consoleCard">
-              <Layers3 size={20} />
-              <strong>Modules</strong>
-              <span>Production · Sales · Field</span>
-            </div>
-            <div className="consoleCard">
-              <Users size={20} />
-              <strong>Users</strong>
-              <span>Roles and permissions</span>
-            </div>
-            <div className="consoleCard">
-              <ShieldCheck size={20} />
-              <strong>Audit</strong>
-              <span>Traceable operations</span>
-            </div>
-          </div>
-
-          <div className="miniDashboard">
-            <div className="dashHeader">
-              <span>Operational activity</span>
-              <strong>Today</strong>
-            </div>
-
-            <div className="bars">
-              <div className="barRow">
-                <span>Production workflows</span>
-                <div className="barTrack">
-                  <div className="barFill w88"></div>
-                </div>
+        <div className="heroVisual">
+          <div className="commandCard">
+            <div className="commandHeader">
+              <div>
+                <strong>CLONEXA Command Center</strong>
+                <span>Multiempresa · módulos · usuarios · auditoría</span>
               </div>
-              <div className="barRow">
-                <span>Sales reports</span>
-                <div className="barTrack">
-                  <div className="barFill w72"></div>
-                </div>
+              <div className="liveTag">Live</div>
+            </div>
+
+            <div className="commandGrid">
+              <div className="commandItem active">
+                <Building2 size={20} />
+                <strong>Tenants</strong>
+                <span>Empresas configuradas</span>
               </div>
-              <div className="barRow">
-                <span>Workforce activity</span>
-                <div className="barTrack">
-                  <div className="barFill w64"></div>
-                </div>
+
+              <div className="commandItem">
+                <Layers3 size={20} />
+                <strong>Módulos</strong>
+                <span>Producción · QR · Campo</span>
+              </div>
+
+              <div className="commandItem">
+                <Users size={20} />
+                <strong>Roles</strong>
+                <span>Accesos y permisos</span>
+              </div>
+
+              <div className="commandItem">
+                <ShieldCheck size={20} />
+                <strong>Auditoría</strong>
+                <span>Operación trazable</span>
+              </div>
+            </div>
+
+            <div className="systemFlow">
+              <div>
+                <span>Production</span>
+                <div className="flowTrack"><div className="flowFill w88"></div></div>
+              </div>
+              <div>
+                <span>Commercial</span>
+                <div className="flowTrack"><div className="flowFill w74"></div></div>
+              </div>
+              <div>
+                <span>Field & Materials</span>
+                <div className="flowTrack"><div className="flowFill w64"></div></div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="traction" className="section tractionSection">
-        <div className="sectionHead">
-          <span className="kicker">Traction</span>
-          <h2>CLONEXA is already operating inside real companies.</h2>
+      <section className="section trustSection">
+        <div className="trustCard">
+          <span>Producto ya operando en flujos reales</span>
+          <strong>Producción · Ventas · QR Hospitality · Campo y materiales · Asambleas</strong>
           <p>
-            We are no longer validating only a concept. Velvet and Mundo Case
-            are using CLONEXA to manage real production, commercial and workforce
-            workflows. A field operations deployment is currently in negotiation.
+            CLONEXA no es una landing conceptual. Es una infraestructura SaaS modular que ya
+            soporta distintos tipos de operación sobre una misma base reutilizable.
           </p>
-        </div>
-
-        <div className="tractionGrid">
-          {traction.map((item) => (
-            <div className="metricCard" key={item.label}>
-              <span>{item.label}</span>
-              <strong>{item.value}</strong>
-              <p>{item.note}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="clientGrid">
-          {clientCases.map((client) => {
-            const Icon = client.icon;
-
-            return (
-              <div className="clientCard" key={client.name}>
-                <div className="clientTop">
-                  <div className="clientIcon">
-                    <Icon size={24} />
-                  </div>
-                  <div>
-                    <h3>{client.name}</h3>
-                    <span>{client.region}</span>
-                  </div>
-                </div>
-
-                <h4>{client.title}</h4>
-                <p>{client.description}</p>
-
-                <div className="tagRow">
-                  {client.modules.map((module) => (
-                    <span key={module}>{module}</span>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
         </div>
       </section>
 
       <section className="section problemSection">
-        <div className="problemCopy">
-          <span className="kicker">Problem</span>
-          <h2>Most SMEs still operate through disconnected tools.</h2>
-          <p>
-            Their real operations live across WhatsApp, spreadsheets, manual
-            reports, isolated dashboards, emails and custom workflows. The result
-            is poor visibility, slow decisions, duplicated work and operations
-            that are difficult to audit.
+        <div>
+          <span className="kicker">Problema</span>
+          <h2>Las empresas no fallan por falta de trabajo. Fallan por operar fragmentadas.</h2>
+          <p className="sectionText">
+            Muchas empresas tienen procesos reales funcionando, pero la operación vive repartida
+            entre herramientas desconectadas. Eso genera errores, reportes tardíos, poca visibilidad
+            y decisiones sin evidencia.
           </p>
         </div>
 
         <div className="problemList">
-          <div>
-            <CheckCircle2 size={20} />
-            <span>Manual reporting creates delays and errors.</span>
-          </div>
-          <div>
-            <CheckCircle2 size={20} />
-            <span>Generic SaaS tools do not match the real operation.</span>
-          </div>
-          <div>
-            <CheckCircle2 size={20} />
-            <span>Custom software is slow, expensive and hard to maintain.</span>
-          </div>
-          <div>
-            <CheckCircle2 size={20} />
-            <span>Management lacks real-time operational traceability.</span>
-          </div>
+          {problems.map((problem) => (
+            <div className="problemItem" key={problem}>
+              <CheckCircle2 size={20} />
+              <span>{problem}</span>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section id="product" className="section productSection">
+      <section id="modules" className="section modulesSection">
         <div className="sectionHead">
-          <span className="kicker">Product</span>
-          <h2>One SaaS core. Multiple operational modules.</h2>
+          <span className="kicker">Módulos validados</span>
+          <h2>Cinco operaciones distintas. Un mismo core SaaS.</h2>
           <p>
-            CLONEXA does not rebuild software from zero for every company.
-            Every client runs on the same SaaS infrastructure. What changes is
-            the configuration of modules, workflows, roles, dashboards and
-            operational rules.
+            CLONEXA no es una colección de proyectos aislados. Cada módulo comparte tenants,
+            usuarios, roles, permisos, dashboards, reportes y trazabilidad.
           </p>
-        </div>
-
-        <div className="productShowcase">
-          <div className="screenCard productionScreen">
-            <div className="screenTop">
-              <span>Production Module</span>
-              <strong>Velvet</strong>
-            </div>
-
-            <h3>Productive Summary</h3>
-
-            <div className="screenStats">
-              <div>
-                <span>Active references</span>
-                <strong>14</strong>
-              </div>
-              <div>
-                <span>Productive time</span>
-                <strong>105h</strong>
-              </div>
-              <div>
-                <span>Closed quantity</span>
-                <strong>56</strong>
-              </div>
-            </div>
-
-            <div className="screenBars">
-              <div>
-                <span>Dreamy Jacket / SM</span>
-                <div className="barTrack">
-                  <div className="barFill w100"></div>
-                </div>
-              </div>
-              <div>
-                <span>Koi Jacket / ML</span>
-                <div className="barTrack">
-                  <div className="barFill w100"></div>
-                </div>
-              </div>
-              <div>
-                <span>Garden Jacket / ML</span>
-                <div className="barTrack">
-                  <div className="barFill w46"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="screenCard commercialScreen">
-            <div className="screenTop">
-              <span>Commercial Module</span>
-              <strong>Mundo Case</strong>
-            </div>
-
-            <h3>Sales Reports</h3>
-
-            <div className="screenStats">
-              <div>
-                <span>Reports</span>
-                <strong>7</strong>
-              </div>
-              <div>
-                <span>Current cut</span>
-                <strong>$791k</strong>
-              </div>
-              <div>
-                <span>Top seller</span>
-                <strong>Angela</strong>
-              </div>
-            </div>
-
-            <div className="reportList">
-              <div>
-                <strong>Sales · 2026-05-23</strong>
-                <span>Sent · Revenue $25,220</span>
-              </div>
-              <div>
-                <strong>Stores · 2026-05-28</strong>
-                <span>Sent · Revenue $6,998</span>
-              </div>
-              <div>
-                <strong>Sales · 2026-05-20</strong>
-                <span>Archived · Revenue $8,860</span>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="modulesGrid">
@@ -451,179 +302,187 @@ function App() {
 
             return (
               <div className="moduleCard" key={module.name}>
-                <div className="moduleIcon">
-                  <Icon size={22} />
+                <div className="moduleTop">
+                  <div className="moduleIcon">
+                    <Icon size={24} />
+                  </div>
+                  <span>{module.label}</span>
                 </div>
+
                 <h3>{module.name}</h3>
-                <p>{module.text}</p>
+                <p>{module.description}</p>
+
+                <div className="proofTag">
+                  <Zap size={15} />
+                  {module.proof}
+                </div>
               </div>
             );
           })}
         </div>
       </section>
 
-      <section className="section architectureSection">
-        <div>
-          <span className="kicker">SaaS Infrastructure</span>
-          <h2>Built as a multi-tenant operating layer.</h2>
-          <p>
-            CLONEXA has a central admin console to create companies, activate
-            packages, manage users, configure access, monitor modules and
-            control the health of each client workspace.
+      <section id="core" className="section coreSection">
+        <div className="coreCopy">
+          <span className="kicker">Core SaaS</span>
+          <h2>No construimos desde cero por cliente. Configuramos módulos sobre la misma infraestructura.</h2>
+          <p className="sectionText">
+            Cada empresa opera sobre el mismo core SaaS de CLONEXA. Lo que cambia es la configuración
+            de módulos, flujos, roles, dashboards y reglas operativas según la realidad del negocio.
           </p>
         </div>
 
-        <div className="stackGrid">
-          {operatingStack.map((item) => (
-            <div className="stackItem" key={item}>
-              <Zap size={16} />
+        <div className="coreGrid">
+          {coreItems.map((item) => (
+            <div className="coreItem" key={item}>
+              <LockKeyhole size={16} />
               <span>{item}</span>
             </div>
           ))}
         </div>
       </section>
 
-      <section id="model" className="section modelSection">
+      <section id="proof" className="section proofSection">
         <div className="sectionHead">
-          <span className="kicker">Business Model</span>
-          <h2>Paid deployment phase + recurring SaaS subscription.</h2>
+          <span className="kicker">Producto</span>
+          <h2>Vistas operativas listas para trabajar, medir y auditar.</h2>
           <p>
-            The first 6 months monetize implementation value: setup, onboarding,
-            support and module configuration. After deployment, the client moves
-            into a recurring SaaS subscription.
+            La landing pública muestra vistas anonimizadas y datos demostrativos. La demo privada
+            permite revisar flujos reales sin exponer información sensible de clientes.
           </p>
         </div>
 
-        <div className="pricingGrid">
-          {businessModel.map((row) => (
-            <div className="pricingCard" key={row.market}>
-              <h3>{row.market}</h3>
+        <div className="screensGrid">
+          <div className="screen production">
+            <div className="screenHeader">
+              <span>Production OS</span>
+              <strong>Resumen productivo</strong>
+            </div>
 
-              <div className="priceLine">
-                <span>First 6 months</span>
-                <strong>{row.deployment}</strong>
+            <div className="stats">
+              <div>
+                <span>Referencias</span>
+                <strong>14</strong>
+              </div>
+              <div>
+                <span>Tiempo productivo</span>
+                <strong>105h</strong>
+              </div>
+              <div>
+                <span>Avance</span>
+                <strong>21%</strong>
+              </div>
+            </div>
+
+            <div className="miniBars">
+              <div><span>Dreamy Jacket</span><div className="flowTrack"><div className="flowFill w100"></div></div></div>
+              <div><span>Koi Jacket</span><div className="flowTrack"><div className="flowFill w88"></div></div></div>
+              <div><span>Garden Jacket</span><div className="flowTrack"><div className="flowFill w44"></div></div></div>
+            </div>
+          </div>
+
+          <div className="screen qr">
+            <div className="screenHeader">
+              <span>Hospitality QR OS</span>
+              <strong>Mesa QR</strong>
+            </div>
+
+            <div className="qrGrid">
+              {["Barra", "Mesa 1", "Mesa 2", "Mesa 3"].map((table) => (
+                <div className="qrCard" key={table}>
+                  <div className="fakeQr">
+                    <QrCode size={54} />
+                  </div>
+                  <strong>{table}</strong>
+                  <span>Libre · Cuenta $0</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="screen field">
+            <div className="screenHeader">
+              <span>Field & Materials OS</span>
+              <strong>Tablas auditables</strong>
+            </div>
+
+            <div className="tableMock">
+              <div className="tableHead">
+                <span>Orden</span>
+                <span>Material</span>
+                <span>Status</span>
+                <span>GPS</span>
               </div>
 
-              <div className="priceLine">
-                <span>After deployment</span>
-                <strong>{row.after}</strong>
-              </div>
+              {["Cable de fibra", "Cable telefónico", "Cable HDMI", "Kit instalación"].map((row, index) => (
+                <div className="tableRow" key={row}>
+                  <span>MAT-000{index + 1}</span>
+                  <span>{row}</span>
+                  <span>{index % 2 === 0 ? "Delivered" : "Pending"}</span>
+                  <span>OK</span>
+                </div>
+              ))}
+            </div>
+          </div>
 
-              <div className="priceLine mutedLine">
-                <span>Year 1 revenue per client</span>
-                <strong>{row.yearOne}</strong>
-              </div>
+          <div className="screen commercial">
+            <div className="screenHeader">
+              <span>Commercial OS</span>
+              <strong>Reportes de ventas</strong>
+            </div>
 
-              <div className="priceLine mutedLine">
-                <span>Post-deployment ARR</span>
-                <strong>{row.arr}</strong>
+            <div className="reportCards">
+              <div>
+                <span>Cierres recibidos</span>
+                <strong>7</strong>
               </div>
+              <div>
+                <span>Top vendedor</span>
+                <strong>Equipo A</strong>
+              </div>
+              <div>
+                <span>Estado</span>
+                <strong>Enviado</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="how" className="section howSection">
+        <div className="sectionHead">
+          <span className="kicker">Cómo funciona</span>
+          <h2>De operación dispersa a sistema digital configurable.</h2>
+        </div>
+
+        <div className="stepsGrid">
+          {steps.map((step) => (
+            <div className="stepCard" key={step.number}>
+              <span>{step.number}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
             </div>
           ))}
         </div>
-
-        <p className="disclaimer">
-          Current commercial terms are under negotiation. They should be
-          presented as early commercial validation until contracts are signed and
-          payments are received.
-        </p>
       </section>
 
-      <section id="moat" className="section moatSection">
-        <div className="sectionHead">
-          <span className="kicker">Why this can scale</span>
-          <h2>Every deployment strengthens the module library.</h2>
-          <p>
-            CLONEXA is not trying to become a services company. The strategy is
-            to convert repeated operational needs into reusable modules that
-            reduce implementation time for the next client.
-          </p>
-        </div>
-
-        <div className="moatGrid">
-          <div className="moatCard">
-            <Network size={26} />
-            <h3>Reusable core</h3>
-            <p>
-              Companies, users, roles, permissions, workflows, dashboards and
-              auditability are shared across clients.
-            </p>
+      <section className="section comparisonSection">
+        <div className="comparisonCard">
+          <div>
+            <span className="kicker">La diferencia</span>
+            <h2>CLONEXA no es software a medida. Es SaaS modular configurable.</h2>
           </div>
 
-          <div className="moatCard">
-            <Database size={26} />
-            <h3>Operational data layer</h3>
-            <p>
-              As companies operate inside CLONEXA, the platform becomes the
-              source of truth for daily execution.
-            </p>
-          </div>
-
-          <div className="moatCard">
-            <Workflow size={26} />
-            <h3>Module expansion</h3>
-            <p>
-              New client needs expand the reusable module library instead of
-              creating one-off custom software.
-            </p>
-          </div>
-
-          <div className="moatCard">
-            <LineChart size={26} />
-            <h3>Higher retention potential</h3>
-            <p>
-              Once CLONEXA manages operational workflows, reports and decisions,
-              switching costs increase.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section riskSection">
-        <div>
-          <span className="kicker">Investor objections</span>
-          <h2>The hard questions, answered directly.</h2>
-        </div>
-
-        <div className="riskList">
-          {risks.map((item) => (
-            <div className="riskItem" key={item.risk}>
-              <h3>{item.risk}</h3>
-              <p>{item.answer}</p>
+          <div className="comparisonGrid">
+            <div>
+              <h3>Software a medida</h3>
+              <p>Se construye desde cero, depende de entregas largas, cuesta mantenerlo y cada cliente se vuelve un proyecto separado.</p>
             </div>
-          ))}
-        </div>
-      </section>
 
-      <section className="section roadmapSection">
-        <div className="sectionHead">
-          <span className="kicker">Next milestones</span>
-          <h2>From functional deployments to repeatable SaaS sales.</h2>
-        </div>
-
-        <div className="roadmap">
-          <div>
-            <span>Now</span>
-            <h3>Functional clients live</h3>
-            <p>Velvet and Mundo Case operating production and commercial workflows.</p>
-          </div>
-
-          <div>
-            <span>Next 30 days</span>
-            <h3>Close field operations client</h3>
-            <p>Validate field teams, tasks, evidence and operational traceability.</p>
-          </div>
-
-          <div>
-            <span>Next 60 days</span>
-            <h3>Convert usage into paid contracts</h3>
-            <p>Formalize paid deployment terms and recurring SaaS subscriptions.</p>
-          </div>
-
-          <div>
-            <span>Next 90 days</span>
-            <h3>Standardize repeatable packages</h3>
-            <p>Reduce onboarding time and define repeatable vertical packages.</p>
+            <div className="highlightBox">
+              <h3>CLONEXA</h3>
+              <p>Usa un core SaaS compartido. Cada cliente activa módulos, flujos, roles y dashboards sobre una infraestructura reutilizable.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -631,48 +490,36 @@ function App() {
       <section id="contact" className="section contactSection">
         <div className="contactCard">
           <div>
-            <span className="kicker">Investor access</span>
-            <h2>CLONEXA is moving from product validation to early commercial validation.</h2>
+            <span className="kicker">Demo privada</span>
+            <h2>¿Tu operación sigue repartida entre hojas, mensajes y reportes manuales?</h2>
             <p>
-              We have functional clients, international usage, active paid
-              negotiations and a SaaS model designed around deployment revenue
-              plus recurring subscriptions.
+              Solicita una demo y revisamos qué módulos de CLONEXA pueden configurarse para tu operación.
+              Los detalles comerciales se revisan de forma privada.
             </p>
           </div>
 
           <div className="contactActions">
             <a
-              href="mailto:clonexasaas@gmail.com?subject=CLONEXA%20Investor%20Deck%20Request&body=Hi%20CLONEXA%20team%2C%20I%20would%20like%20to%20review%20the%20investor%20deck%20and%20demo."
               className="button primary"
+              href="mailto:clonexasaas@gmail.com?subject=Solicitud%20de%20demo%20CLONEXA&body=Hola%2C%20quiero%20solicitar%20una%20demo%20de%20CLONEXA."
             >
               <Mail size={18} />
-              Request investor deck
+              Solicitar demo
             </a>
 
-            <a
-              href="mailto:clonexasaas@gmail.com?subject=CLONEXA%20Demo%20Request&body=Hi%20CLONEXA%20team%2C%20I%20would%20like%20to%20schedule%20a%20demo."
-              className="button secondary"
-            >
-              Schedule demo
+            <a className="button secondary" href="mailto:clonexasaas@gmail.com">
+              clonexasaas@gmail.com
             </a>
           </div>
         </div>
       </section>
 
       <footer className="footer">
-        <div className="brand footerBrand">
-          <div className="brandMark">
-            <span>C</span>
-          </div>
-          <div>
-            <strong>CLONEXA</strong>
-            <small>Operate · Measure · Decide · Audit</small>
-          </div>
-        </div>
+        <Brand footer />
 
-        <div className="footerMeta">
-          <span>Modular SaaS Operating System</span>
-          <span>clonexasaas@gmail.com</span>
+        <div className="footerRight">
+          <span>Sistema operativo SaaS modular</span>
+          <span>Producción · Ventas · QR · Campo · Asambleas</span>
         </div>
       </footer>
     </main>

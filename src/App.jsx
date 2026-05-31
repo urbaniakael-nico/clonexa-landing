@@ -31,6 +31,61 @@ const MEDIA = {
   assembly: "/clonexa-media/bares-qr-fidelizacion-crm-panel-226aa7b281.jpg"
 };
 
+const LANDING_TRACKING_ENDPOINT =
+  "https://clonexa-backend-production.up.railway.app/api/v1/landing-analytics/events";
+
+function getStorageId(storage, key, prefix) {
+  try {
+    const current = storage.getItem(key);
+    if (current) return current;
+    const next = `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+    storage.setItem(key, next);
+    return next;
+  } catch (_) {
+    return `${prefix}-${Date.now().toString(36)}`;
+  }
+}
+
+function trackLandingVisit() {
+  if (window.__clonexaLandingTracked025R) return;
+  window.__clonexaLandingTracked025R = true;
+
+  const visitorId = getStorageId(localStorage, "clonexa_landing_visitor_id", "vis");
+  const sessionId = getStorageId(sessionStorage, "clonexa_landing_session_id", "ses");
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  const payload = {
+    event_type: "page_view",
+    url: window.location.href,
+    path: window.location.pathname || "/",
+    title: document.title,
+    referrer: document.referrer,
+    visitor_id: visitorId,
+    session_id: sessionId,
+    language: navigator.language || "",
+    timezone,
+    platform: navigator.platform || "",
+    device: /Mobi|Android/i.test(navigator.userAgent) ? "mobile" : "desktop",
+    screen: `${window.screen.width}x${window.screen.height}`,
+    viewport: `${window.innerWidth}x${window.innerHeight}`,
+    extra: {
+      landing: "clonexa-public",
+      tracker: "025R",
+      userAgent: navigator.userAgent
+    }
+  };
+
+  const body = JSON.stringify(payload);
+  const sent = navigator.sendBeacon?.(LANDING_TRACKING_ENDPOINT, body);
+  if (!sent) {
+    fetch(LANDING_TRACKING_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body,
+      keepalive: true
+    }).catch(() => {});
+  }
+}
+
 const systems = [
   {
     id: "production",
@@ -180,6 +235,10 @@ function SystemCard({ system }) {
 
 function App() {
   const [menuOpen, setMenuOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    trackLandingVisit();
+  }, []);
 
   return (
     <main className="app">

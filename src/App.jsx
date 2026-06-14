@@ -2,18 +2,19 @@ import React from "react";
 import {
   ArrowRight,
   BarChart3,
+  Bot,
   Building2,
-  CheckCircle2,
   Factory,
   FileText,
-  Layers3,
   LockKeyhole,
   Mail,
   MapPinned,
   Menu,
+  PackageSearch,
   PlayCircle,
   QrCode,
   ShieldCheck,
+  ShoppingBag,
   Store,
   Users,
   Vote,
@@ -23,12 +24,15 @@ import {
 
 const MEDIA = {
   logo: "/clonexa-logo.png",
-  video: "/clonexa-media/video-landing-clonexa-69a6bf95e6.mp4",
-  production: "/clonexa-media/produccion-referencias-control-701309b427.jpg",
-  commercial: "/clonexa-media/tiendas-ventas-control-a47a941bde.jpg",
-  qr: "/clonexa-media/bares-qr-fidelizacion-crm-panel-226aa7b281.jpg",
-  field: "/clonexa-media/campo-gps-materiales-seguimientos-87ee002e1c.jpg",
-  assembly: "/clonexa-media/bares-qr-fidelizacion-crm-panel-226aa7b281.jpg"
+  videoIa: "/clonexa-media/video-ia.mp4",
+  legacyVideo: "/clonexa-media/video-landing-clonexa-69a6bf95e6.mp4",
+  production: "/clonexa-media/produccion-ia.jpg",
+  stores: "/clonexa-media/tiendas-ia.jpg",
+  hospitality: "/clonexa-media/bares-pedidos-ia.jpg",
+  field: "/clonexa-media/campo-ia.jpg",
+  reports: "/clonexa-media/reportes-ia.jpg",
+  shoplink: "/clonexa-media/tienda-virtual-ia.jpg",
+  assembly: "/clonexa-media/asambleas-ia.jpg"
 };
 
 const LANDING_TRACKING_ENDPOINT =
@@ -47,8 +51,8 @@ function getStorageId(storage, key, prefix) {
 }
 
 function trackLandingVisit() {
-  if (window.__clonexaLandingTracked025R) return;
-  window.__clonexaLandingTracked025R = true;
+  if (window.__clonexaLandingTracked026L) return;
+  window.__clonexaLandingTracked026L = true;
 
   const visitorId = getStorageId(localStorage, "clonexa_landing_visitor_id", "vis");
   const sessionId = getStorageId(sessionStorage, "clonexa_landing_session_id", "ses");
@@ -69,7 +73,8 @@ function trackLandingVisit() {
     viewport: `${window.innerWidth}x${window.innerHeight}`,
     extra: {
       landing: "clonexa-public",
-      tracker: "025R",
+      tracker: "026L",
+      focus: "ai-verticals-landing",
       userAgent: navigator.userAgent
     }
   };
@@ -86,87 +91,128 @@ function trackLandingVisit() {
   }
 }
 
-const systems = [
+const activeVerticals = [
+  {
+    id: "shoplink",
+    label: "Catalogo / Tienda",
+    title: "Tienda publica, catalogo y pedidos conectados",
+    icon: ShoppingBag,
+    image: MEDIA.shoplink,
+    text:
+      "Activa tienda publica, productos, precios, stock visible, pedidos, clientes y seguimiento comercial desde el mismo panel.",
+    bullets: ["Catalogo asistido", "Carrito y pedidos", "CRM web", "Inventario visible"]
+  },
+  {
+    id: "ai",
+    label: "Asistente IA",
+    title: "IA operativa conectada a cada modulo activo",
+    icon: Bot,
+    image: MEDIA.reports,
+    text:
+      "El asistente ya no solo conversa: guia registros, consulta datos, entrega estados, arma reportes y evita omitir campos clave.",
+    bullets: ["WhatsApp y panel", "Flujos asistidos", "Consultas por vocabulario", "Cancelacion y atras"]
+  },
   {
     id: "production",
-    name: "Production OS",
-    title: "Producción",
+    label: "Produccion",
+    title: "Referencias, produccion y avance con control real",
     icon: Factory,
     image: MEDIA.production,
-    description:
-      "Controla referencias, cantidades, avance, tiempos productivos, sesiones y detalle operativo en tiempo real.",
-    bullets: ["Referencias activas", "Avance por producto", "Tiempo productivo", "Detalle auditable"]
+    text:
+      "Referencias comerciales con categoria, color, SKU, precio, meta, estado activo y asistencia para crear o archivar.",
+    bullets: ["Referencias activas", "SKU y precios", "Metas operativas", "Avance por referencia"]
   },
   {
-    id: "commercial",
-    name: "Commercial OS",
-    title: "Ventas y tiendas",
+    id: "stores",
+    label: "Tiendas",
+    title: "Ventas, cierre comercial y fuerza operativa",
     icon: Store,
-    image: MEDIA.commercial,
-    description:
-      "Centraliza reportes de ventas, cierres de tienda, top vendedores, consolidado comercial y estados enviados o archivados.",
-    bullets: ["Cierres comerciales", "Reportes de tienda", "Top vendedores", "Consolidado operativo"]
+    image: MEDIA.stores,
+    text:
+      "Consulta mejores vendedores, top tiendas, ventas por area, cierre enviado, metas, nomina y workforce desde CLONEXA.",
+    bullets: ["Cierres comerciales", "Ventas vs meta", "Workforce", "Nomina"]
   },
   {
-    id: "qr",
-    name: "Hospitality QR OS",
-    title: "Bares y restaurantes",
+    id: "hospitality",
+    label: "Hospitality",
+    title: "QR, pedidos, mesas, stock y fidelizacion",
     icon: QrCode,
-    image: MEDIA.qr,
-    description:
-      "Activa mesas QR, pedidos, cuentas abiertas, inventario, stock, fidelización y flujo operativo de barra o cocina.",
-    bullets: ["Mesas QR", "Pedidos digitales", "Cuentas abiertas", "Inventario y stock"]
+    image: MEDIA.hospitality,
+    text:
+      "Mesas QR con clave, pedidos, cuentas abiertas, stock, concursos, sorteos, pollas y reportes semanales o mensuales.",
+    bullets: ["QR por mesa", "Pedidos y cuentas", "Stock critico", "Fidelizacion"]
   },
   {
     id: "field",
-    name: "Field & Materials OS",
-    title: "Campo, materiales y GPS",
+    label: "Campo / GPS",
+    title: "Materiales, ubicaciones y parametros GPS",
     icon: MapPinned,
     image: MEDIA.field,
-    description:
-      "Gestiona solicitudes, entregas, devoluciones, materiales, asistencia, GPS, payroll y bitácoras operativas.",
-    bullets: ["Entradas y salidas", "GPS y evidencia", "Materiales", "Tablas auditables"]
+    text:
+      "Gestiona materiales, inventario, entradas, salidas, autorizaciones, GPS activo y puntos permitidos con asistencia.",
+    bullets: ["Inventario", "Adjuntar factura", "GPS activo", "Materiales"]
+  },
+  {
+    id: "reports",
+    label: "Reportes",
+    title: "Reportes descargables con estilo dashboard",
+    icon: BarChart3,
+    image: MEDIA.reports,
+    text:
+      "PDFs por rango, por categoria o super archivo con graficas, tablas auditables, colores de marca y resumen ejecutivo.",
+    bullets: ["PDF dashboard", "Graficas", "Rangos asistidos", "Super archivo"]
   },
   {
     id: "assembly",
-    name: "Assembly OS",
-    title: "Asambleas",
+    label: "Asambleas",
+    title: "Votaciones, QR, control de acceso y actas",
     icon: Vote,
     image: MEDIA.assembly,
-    description:
-      "Organiza accesos, registros, votaciones, control de tiempos, decisiones formales, auditoría y actas PDF.",
-    bullets: ["Acceso por QR", "Votaciones en vivo", "Cronómetro", "Actas PDF"]
+    text:
+      "Publica preguntas, controla tiempos, registra participantes, valida acceso y descarga actas con resultado auditable.",
+    bullets: ["Acceso QR", "Votacion en vivo", "Resultados", "Actas PDF"]
   }
 ];
 
-const steps = [
+const aiHighlights = [
   {
-    number: "01",
-    title: "Entendemos tu operación",
-    text: "Revisamos cómo trabajas hoy: procesos, usuarios, reportes, tareas, roles, ventas o producción."
+    icon: Bot,
+    title: "Asistencia por modulo",
+    text: "La IA reconoce frases como agregar inventario, modificar stock, precio de referencia, configurar GPS o reporte mensual."
   },
   {
-    number: "02",
-    title: "Activamos módulos",
-    text: "Seleccionamos los módulos de CLONEXA que encajan con tu empresa: producción, ventas, QR, campo o asambleas."
+    icon: Workflow,
+    title: "Flujos sin omitir campos",
+    text: "Guia paso a paso datos criticos: SKU, color, precio, correo, descuentos, fechas, cantidades, facturas y estados."
   },
   {
-    number: "03",
-    title: "Configuramos flujos",
-    text: "Adaptamos roles, formularios, dashboards, permisos y reportes sin construir todo desde cero."
+    icon: FileText,
+    title: "Reportes listos para descargar",
+    text: "Genera PDFs presentables tipo dashboard con indicadores, graficas, tablas y rangos asistidos."
   },
   {
-    number: "04",
-    title: "Operas con control",
-    text: "Tu equipo empieza a trabajar desde un sistema digital con datos, trazabilidad y reportes."
+    icon: ShieldCheck,
+    title: "Operacion blindada",
+    text: "Cada vertical conserva permisos, trazabilidad, auditoria, estados activos y acciones como guardar, archivar o deshabilitar."
   }
 ];
 
-const problems = [
-  "Operas con WhatsApp, Excel, formularios, correos o software desconectado.",
-  "Los reportes llegan tarde, incompletos o sin evidencia.",
-  "No tienes una vista clara de producción, ventas, campo o decisiones.",
-  "Necesitas digitalizar tu operación sin pagar un desarrollo a medida desde cero."
+const metricCards = [
+  ["Verticales conectadas", "ShopLink, produccion, retail, campo, hospitality y asambleas"],
+  ["IA operativa", "Panel y WhatsApp con consultas, registros y reportes asistidos"],
+  ["Datos completos", "Referencias, workforce, inventario, stock, QR, GPS y fidelizacion"],
+  ["Salida ejecutiva", "PDFs tipo dashboard con marca, rangos, tablas y graficas"]
+];
+
+const coreItems = [
+  ["Empresas", Building2],
+  ["Usuarios y roles", Users],
+  ["Permisos", LockKeyhole],
+  ["Modulos activos", PackageSearch],
+  ["Dashboards", BarChart3],
+  ["Flujos IA", Workflow],
+  ["Auditoria", ShieldCheck],
+  ["Reportes PDF", FileText]
 ];
 
 function Brand({ footer = false }) {
@@ -187,48 +233,59 @@ function Brand({ footer = false }) {
 
       <div className="brandText">
         <strong>CLONEXA</strong>
-        <span>Operate · Measure · Decide · Audit</span>
+        <span>AI Operating System</span>
       </div>
     </a>
   );
 }
 
-function SystemCard({ system }) {
-  const Icon = system.icon;
+function VideoBlock({ title, text, src, poster, featured = false }) {
+  return (
+    <article className={`videoBlock ${featured ? "videoBlockFeatured" : ""}`}>
+      <div className="videoCopy">
+        <span className="eyebrow">{featured ? "Nuevo video" : "Demo anterior"}</span>
+        <h3>{title}</h3>
+        <p>{text}</p>
+      </div>
+      <video className="demoVideo" controls playsInline preload="metadata" poster={poster}>
+        <source src={src} />
+        Tu navegador no puede reproducir este video.
+      </video>
+    </article>
+  );
+}
+
+function VerticalCard({ vertical }) {
+  const Icon = vertical.icon;
 
   return (
-    <article className={`systemCard ${system.id === "assembly" ? "assemblyCard" : ""}`}>
-      <div className="systemImageWrap">
-        {system.image ? (
-          <img src={system.image} alt={`${system.name} preview`} className="systemImage" />
-        ) : (
-          <div className="systemImageFallback">
-            <Icon size={54} />
-            <span>Preview del módulo</span>
-          </div>
-        )}
-      </div>
-
-      <div className="systemContent">
-        <div className="systemTop">
-          <div className="systemIcon">
-            <Icon size={22} />
-          </div>
-          <span>{system.title}</span>
+    <article className="verticalCard">
+      <img src={vertical.image} alt={`${vertical.title} en CLONEXA`} />
+      <div className="verticalBody">
+        <div className="verticalTop">
+          <span className="verticalIcon"><Icon size={18} /></span>
+          <span>{vertical.label}</span>
         </div>
-
-        <h3>{system.name}</h3>
-        <p>{system.description}</p>
-
-        <div className="bulletGrid">
-          {system.bullets.map((bullet) => (
-            <div key={bullet}>
-              <CheckCircle2 size={15} />
-              <span>{bullet}</span>
-            </div>
+        <h3>{vertical.title}</h3>
+        <p>{vertical.text}</p>
+        <div className="chips">
+          {vertical.bullets.map((bullet) => (
+            <span key={bullet}>{bullet}</span>
           ))}
         </div>
       </div>
+    </article>
+  );
+}
+
+function HighlightCard({ item }) {
+  const Icon = item.icon;
+
+  return (
+    <article className="highlightCard">
+      <Icon size={24} />
+      <h3>{item.title}</h3>
+      <p>{item.text}</p>
     </article>
   );
 }
@@ -246,324 +303,207 @@ function App() {
         <Brand />
 
         <div className="navLinks">
-          <a href="#video">Video</a>
-          <a href="#systems">Sistemas</a>
-          <a href="#assembly-focus">Asambleas</a>
-          <a href="#how">Cómo funciona</a>
-          <a href="#core">Core SaaS</a>
+          <a href="#video">Video IA</a>
+          <a href="#verticals">Verticales</a>
+          <a href="#assistant">IA</a>
+          <a href="#core">Core</a>
           <a href="#contact" className="navCta">Solicitar demo</a>
         </div>
 
-        <button className="menuButton" onClick={() => setMenuOpen(true)} aria-label="Abrir menú">
+        <button className="menuButton" onClick={() => setMenuOpen(true)} aria-label="Abrir menu">
           <Menu size={22} />
         </button>
       </nav>
 
       {menuOpen && (
         <div className="mobileMenu">
-          <button className="closeButton" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú">
+          <button className="closeButton" onClick={() => setMenuOpen(false)} aria-label="Cerrar menu">
             <X size={22} />
           </button>
 
-          <a onClick={() => setMenuOpen(false)} href="#video">Video</a>
-          <a onClick={() => setMenuOpen(false)} href="#systems">Sistemas</a>
-          <a onClick={() => setMenuOpen(false)} href="#assembly-focus">Asambleas</a>
-          <a onClick={() => setMenuOpen(false)} href="#how">Cómo funciona</a>
-          <a onClick={() => setMenuOpen(false)} href="#core">Core SaaS</a>
+          <a onClick={() => setMenuOpen(false)} href="#video">Video IA</a>
+          <a onClick={() => setMenuOpen(false)} href="#verticals">Verticales</a>
+          <a onClick={() => setMenuOpen(false)} href="#assistant">IA</a>
+          <a onClick={() => setMenuOpen(false)} href="#core">Core</a>
           <a onClick={() => setMenuOpen(false)} href="#contact">Solicitar demo</a>
         </div>
       )}
 
-      <section id="top" className="hero section">
-        <div className="heroCopy">
+      <section id="top" className="hero">
+        <img className="heroImage" src={MEDIA.reports} alt="CLONEXA dashboard con IA y reportes" />
+        <div className="heroOverlay" />
+        <div className="heroContent">
           <div className="pill">
-            <span className="pulse"></span>
-            SaaS modular para operaciones reales
+            <span className="pulse" />
+            Actualizacion IA + verticales
           </div>
 
-          <h1>
-            Digitaliza producción, ventas, QR, campo y asambleas desde un solo sistema.
-          </h1>
-
-          <p className="heroText">
-            CLONEXA ayuda a empresas que operan con procesos dispersos a convertir su operación
-            real en una plataforma digital con módulos configurables, dashboards, reportes y trazabilidad.
+          <h1>CLONEXA</h1>
+          <p className="heroLead">
+            Sistema operativo SaaS con asistente IA para operar tiendas, produccion,
+            campo, hospitality, catalogo publico, stock, QR, GPS, reportes y asambleas.
           </p>
 
           <div className="heroActions">
-            <a href="#contact" className="button primary">
-              Solicitar demo <ArrowRight size={18} />
+            <a href="#video" className="button primary">
+              Ver video IA <PlayCircle size={18} />
             </a>
-            <a href="#video" className="button secondary">
-              Ver cómo funciona <PlayCircle size={18} />
+            <a href="#verticals" className="button secondary">
+              Ver verticales <ArrowRight size={18} />
             </a>
           </div>
 
           <div className="heroBadges">
-            <span>Producción</span>
-            <span>Ventas</span>
-            <span>QR Hospitality</span>
-            <span>Campo y materiales</span>
-            <span>Asambleas</span>
+            <span>Asistente IA</span>
+            <span>WhatsApp</span>
+            <span>Reportes PDF</span>
+            <span>ShopLink</span>
+            <span>QR + GPS</span>
           </div>
         </div>
+      </section>
 
-        <div className="heroVisual">
-          <div className="operationCard">
-            <div className="operationHeader">
-              <div>
-                <strong>CLONEXA Operating Layer</strong>
-                <span>Un core SaaS · múltiples operaciones</span>
-              </div>
-              <div className="liveTag">Live</div>
-            </div>
-
-            <div className="operationGrid">
-              <div className="operationItem active">
-                <Factory size={22} />
-                <strong>Producción</strong>
-                <span>Referencias y tiempos</span>
-              </div>
-              <div className="operationItem">
-                <Store size={22} />
-                <strong>Ventas</strong>
-                <span>Cierres y reportes</span>
-              </div>
-              <div className="operationItem">
-                <QrCode size={22} />
-                <strong>QR</strong>
-                <span>Mesas y pedidos</span>
-              </div>
-              <div className="operationItem">
-                <Vote size={22} />
-                <strong>Asambleas</strong>
-                <span>Votaciones y actas</span>
-              </div>
-            </div>
-
-            <div className="operationFlow">
-              <div>
-                <span>Operación conectada</span>
-                <div className="track"><div className="fill w90"></div></div>
-              </div>
-              <div>
-                <span>Reportes y dashboards</span>
-                <div className="track"><div className="fill w78"></div></div>
-              </div>
-              <div>
-                <span>Decisiones trazables</span>
-                <div className="track"><div className="fill w86"></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <section className="section metricsSection">
+        {metricCards.map(([title, text]) => (
+          <article className="metricCard" key={title}>
+            <strong>{title}</strong>
+            <span>{text}</span>
+          </article>
+        ))}
       </section>
 
       <section id="video" className="section videoSection">
         <div className="sectionHead">
-          <span className="kicker">Video demo</span>
-          <h2>Así se ve CLONEXA en operación.</h2>
+          <span className="kicker">Video principal</span>
+          <h2>Primero la actualizacion de IA. Luego la demo original.</h2>
           <p>
-            Mira cómo los módulos convierten procesos reales en flujos digitales para operar,
-            medir, decidir y auditar desde una misma plataforma.
+            La landing ahora muestra primero el nuevo video de CLONEXA IA y conserva
+            el video anterior como respaldo comercial.
           </p>
         </div>
 
-        <div className="videoShell">
-          {MEDIA.video ? (
-            <video
-              className="demoVideo"
-              controls
-              playsInline
-              preload="metadata"
-              poster={MEDIA.production || MEDIA.commercial || MEDIA.qr || ""}
-            >
-              <source src={MEDIA.video} />
-              Tu navegador no puede reproducir este video.
-            </video>
-          ) : (
-            <div className="videoFallback">
-              <PlayCircle size={72} />
-              <h3>Video demo pendiente</h3>
-              <p>Agrega un archivo MP4 o WEBM en la carpeta de medios para mostrarlo aquí.</p>
-            </div>
-          )}
+        <div className="videoGrid">
+          <VideoBlock
+            featured
+            title="CLONEXA IA y verticales activas"
+            text="Resumen nuevo del asistente, los modulos enlazados y la operacion por vertical."
+            src={MEDIA.videoIa}
+            poster={MEDIA.reports}
+          />
+          <VideoBlock
+            title="Demo operativa CLONEXA"
+            text="Material anterior conservado para mostrar el recorrido base del producto."
+            src={MEDIA.legacyVideo}
+            poster={MEDIA.production}
+          />
         </div>
       </section>
 
-      <section className="section problemSection">
-        <div>
-          <span className="kicker">Problema</span>
-          <h2>Tu empresa ya opera. El problema es que la operación está dispersa.</h2>
-          <p className="sectionText">
-            Muchas empresas no necesitan más hojas de cálculo ni otra herramienta aislada.
-            Necesitan convertir sus procesos diarios en un sistema operativo digital que el equipo pueda usar.
-          </p>
-        </div>
-
-        <div className="problemList">
-          {problems.map((problem) => (
-            <div className="problemItem" key={problem}>
-              <CheckCircle2 size={20} />
-              <span>{problem}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="systems" className="section systemsSection">
+      <section id="verticals" className="section verticalsSection">
         <div className="sectionHead">
-          <span className="kicker">Sistemas operativos validados</span>
-          <h2>Elige el módulo que se parece a tu operación.</h2>
+          <span className="kicker">Verticales actualizadas</span>
+          <h2>Una sola base CLONEXA, varias operaciones listas para activar.</h2>
           <p>
-            Cada sistema se configura sobre el mismo core SaaS de CLONEXA. No son proyectos separados:
-            son módulos operativos reutilizables que se adaptan a distintos negocios.
+            Cada vertical se muestra con su imagen nueva y con las funciones mas
+            importantes que ya se integraron al asistente IA.
           </p>
         </div>
 
-        <div className="systemsGrid">
-          {systems.map((system) => (
-            <SystemCard key={system.id} system={system} />
+        <div className="verticalGrid">
+          {activeVerticals.map((vertical) => (
+            <VerticalCard key={vertical.id} vertical={vertical} />
           ))}
         </div>
       </section>
 
-      <section id="assembly-focus" className="section assemblyFocus">
-        <div className="assemblyCopy">
-          <span className="kicker">CLONEXA Assembly</span>
-          <h2>Asambleas con QR, clave, votación en vivo y acta PDF.</h2>
+      <section id="assistant" className="section assistantSection">
+        <div className="assistantCopy">
+          <span className="kicker">Asistente CLONEXA</span>
+          <h2>La IA responde, guia y ejecuta segun los modulos reales de cada empresa.</h2>
           <p className="sectionText">
-            CLONEXA también digitaliza decisiones formales. El moderador publica preguntas,
-            los asistentes ingresan con QR y clave, votan dentro del tiempo definido y el sistema
-            deja resultados, porcentajes y acta descargable.
+            El asistente detecta solo modulos activos, entiende vocabulario operativo
+            y acompana formularios completos: referencias, workforce, inventario,
+            stock, GPS, QR, reportes, hospitality y fidelizacion.
           </p>
+          <div className="assistantActions">
+            <a className="button primary" href="#contact">
+              Activar demo IA <ArrowRight size={18} />
+            </a>
+          </div>
         </div>
 
-        <div className="assemblyPanel">
-          <div className="assemblyHeader">
-            <strong>Votación activa</strong>
-            <span>04:00</span>
+        <div className="assistantPanel" aria-label="Resumen IA CLONEXA">
+          <div className="assistantTop">
+            <Bot size={26} />
+            <div>
+              <strong>Asistente IA</strong>
+              <span>Modulo conectado a datos reales</span>
+            </div>
           </div>
-
-          <div className="assemblyQuestion">
-            <small>Pregunta publicada</small>
-            <h3>¿Se aprueba la contratación de vigilancia?</h3>
-          </div>
-
-          <div className="assemblyVotes">
-            <button>Sí</button>
-            <button>No</button>
-            <button>Abstención</button>
-          </div>
-
-          <div className="assemblyResults">
-            <div><span>A favor</span><strong>68%</strong></div>
-            <div><span>En contra</span><strong>24%</strong></div>
-            <div><span>Abstención</span><strong>8%</strong></div>
+          <div className="assistantMessages">
+            <p>Necesito saber el precio de una referencia.</p>
+            <p>Agregar inventario y adjuntar factura.</p>
+            <p>Quien es el mejor vendedor de tienda?</p>
+            <p>Activar QR mesa 5 e imprimir.</p>
           </div>
         </div>
       </section>
 
-      <section id="how" className="section howSection">
-        <div className="sectionHead">
-          <span className="kicker">Cómo funciona</span>
-          <h2>De operación manual a plataforma funcional.</h2>
-        </div>
-
-        <div className="stepsGrid">
-          {steps.map((step) => (
-            <div className="stepCard" key={step.number}>
-              <span>{step.number}</span>
-              <h3>{step.title}</h3>
-              <p>{step.text}</p>
-            </div>
-          ))}
-        </div>
+      <section className="section highlightsSection">
+        {aiHighlights.map((item) => (
+          <HighlightCard key={item.title} item={item} />
+        ))}
       </section>
 
       <section id="core" className="section coreSection">
         <div>
           <span className="kicker">Core SaaS</span>
-          <h2>No construimos todo desde cero. Configuramos módulos sobre una misma base.</h2>
+          <h2>No es una app aislada. Es una capa operativa configurable.</h2>
           <p className="sectionText">
-            CLONEXA opera sobre un core SaaS reutilizable: empresas, usuarios, roles, permisos,
-            módulos, dashboards, reportes, auditoría y salidas documentales.
+            CLONEXA mantiene una misma base de empresas, usuarios, permisos,
+            modulos, dashboards, auditoria y documentos descargables.
           </p>
         </div>
 
         <div className="coreGrid">
-          {[
-            ["Empresas", Building2],
-            ["Usuarios y roles", Users],
-            ["Permisos", LockKeyhole],
-            ["Módulos", Layers3],
-            ["Dashboards", BarChart3],
-            ["Flujos", Workflow],
-            ["Auditoría", ShieldCheck],
-            ["Reportes PDF", FileText]
-          ].map(([label, Icon]) => (
-            <div className="coreItem" key={label}>
+          {coreItems.map(([label, Icon]) => (
+            <article className="coreItem" key={label}>
               <Icon size={20} />
               <span>{label}</span>
-            </div>
+            </article>
           ))}
         </div>
       </section>
 
-      <section className="section differenceSection">
-        <div className="differenceCard">
-          <div>
-            <span className="kicker">La diferencia</span>
-            <h2>CLONEXA no es una app aislada ni un desarrollo a medida tradicional.</h2>
-          </div>
-
-          <div className="differenceGrid">
-            <div>
-              <h3>Antes</h3>
-              <p>Procesos en Excel, WhatsApp, formularios, reportes manuales y decisiones sin trazabilidad.</p>
-            </div>
-
-            <div className="highlight">
-              <h3>Con CLONEXA</h3>
-              <p>Un sistema operativo SaaS configurable para que tu equipo opere, mida, reporte y audite desde un solo lugar.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section id="contact" className="section contactSection">
-        <div className="contactCard">
-          <div>
-            <span className="kicker">Demo privada</span>
-            <h2>Cuéntanos cómo opera tu empresa y te mostramos qué módulo encaja.</h2>
-            <p>
-              Agenda una demo para revisar producción, ventas, QR hospitality, campo, materiales o asambleas.
-              Los detalles comerciales se revisan de forma privada.
-            </p>
-          </div>
+        <div className="contactContent">
+          <span className="kicker">Demo privada</span>
+          <h2>Mostramos la vertical exacta que necesita tu empresa.</h2>
+          <p>
+            Agenda una revision de CLONEXA IA, ShopLink, produccion, tiendas,
+            hospitality, campo, reportes, QR, GPS, stock o asambleas.
+          </p>
+        </div>
 
-          <div className="contactActions">
-            <a
-              className="button primary"
-              href="mailto:clonexasaas@gmail.com?subject=Solicitud%20de%20demo%20CLONEXA&body=Hola%2C%20quiero%20solicitar%20una%20demo%20de%20CLONEXA.%20Mi%20empresa%20necesita%20digitalizar%20la%20operaci%C3%B3n."
-            >
-              <Mail size={18} />
-              Solicitar demo
-            </a>
-
-            <a className="button secondary" href="mailto:clonexasaas@gmail.com">
-              clonexasaas@gmail.com
-            </a>
-          </div>
+        <div className="contactActions">
+          <a
+            className="button primary"
+            href="mailto:clonexasaas@gmail.com?subject=Solicitud%20de%20demo%20CLONEXA%20IA&body=Hola%2C%20quiero%20solicitar%20una%20demo%20de%20CLONEXA%20IA%20y%20sus%20verticales."
+          >
+            <Mail size={18} />
+            Solicitar demo
+          </a>
+          <a className="button secondary" href="mailto:clonexasaas@gmail.com">
+            clonexasaas@gmail.com
+          </a>
         </div>
       </section>
 
       <footer className="footer">
         <Brand footer />
-
         <div className="footerRight">
-          <span>Sistema operativo SaaS modular</span>
-          <span>Producción · Ventas · QR · Campo · Asambleas</span>
+          <span>CLONEXA AI Operating System</span>
+          <span>IA, verticales, dashboards, reportes y auditoria</span>
         </div>
       </footer>
     </main>

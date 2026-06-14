@@ -1,17 +1,18 @@
 :root {
-  --bg: #050507;
-  --card: rgba(255, 255, 255, 0.045);
-  --card2: rgba(255, 255, 255, 0.07);
-  --border: rgba(255, 255, 255, 0.11);
-  --border2: rgba(255, 45, 105, 0.36);
-  --text: #f8f8fc;
-  --muted: #aaaabd;
-  --muted2: #77778b;
-  --accent: #ff2d69;
-  --accent2: #b61cff;
-  --orange: #ffad3d;
-  --green: #8fff7a;
-  --shadow: 0 22px 70px rgba(0, 0, 0, 0.34);
+  --bg: #060910;
+  --bg-2: #0c111c;
+  --panel: rgba(17, 23, 36, 0.84);
+  --panel-strong: rgba(24, 32, 50, 0.94);
+  --line: rgba(255, 255, 255, 0.13);
+  --line-strong: rgba(56, 229, 255, 0.42);
+  --text: #f7f8fd;
+  --muted: #b9c0cf;
+  --soft: #7f8798;
+  --cyan: #2bdcff;
+  --green: #55ff6d;
+  --pink: #ff2bbd;
+  --amber: #ffb23d;
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
 }
 
 * {
@@ -26,9 +27,9 @@ body {
   margin: 0;
   color: var(--text);
   background:
-    radial-gradient(circle at 14% 4%, rgba(255, 45, 105, 0.13), transparent 28rem),
-    radial-gradient(circle at 86% 10%, rgba(37, 230, 255, 0.08), transparent 30rem),
-    linear-gradient(180deg, #050507 0%, #080812 50%, #050507 100%);
+    linear-gradient(135deg, rgba(43, 220, 255, 0.1), transparent 34%),
+    linear-gradient(215deg, rgba(85, 255, 109, 0.1), transparent 31%),
+    linear-gradient(180deg, #060910 0%, #101421 48%, #05070c 100%);
   font-family:
     Inter,
     ui-sans-serif,
@@ -54,7 +55,7 @@ button {
 }
 
 .section {
-  width: min(1120px, calc(100% - 32px));
+  width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
   padding: 72px 0;
 }
@@ -63,13 +64,13 @@ button {
   position: sticky;
   top: 0;
   z-index: 100;
-  width: min(1120px, calc(100% - 32px));
+  width: min(1180px, calc(100% - 32px));
+  min-height: 72px;
   margin: 0 auto;
-  padding: 14px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(18px);
 }
 
 .brand {
@@ -79,35 +80,35 @@ button {
 }
 
 .brandLogo {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .brandFallback {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   display: grid;
   place-items: center;
-  border-radius: 12px;
-  border: 1px solid var(--border2);
-  color: var(--accent);
-  background: rgba(255, 45, 105, 0.08);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: var(--cyan);
+  background: rgba(43, 220, 255, 0.08);
   font-weight: 900;
 }
 
 .brandText strong {
   display: block;
-  font-size: 13px;
-  letter-spacing: 0.13em;
+  font-size: 14px;
+  letter-spacing: 0;
 }
 
 .brandText span {
   display: block;
   margin-top: 2px;
-  color: var(--muted2);
-  font-size: 11px;
+  color: var(--soft);
+  font-size: 12px;
 }
 
 .navLinks {
@@ -115,28 +116,32 @@ button {
   align-items: center;
   gap: 18px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .navLinks a:hover {
   color: var(--text);
 }
 
+.navCta,
+.button {
+  border-radius: 8px;
+}
+
 .navCta {
-  padding: 9px 14px;
-  border: 1px solid var(--border2);
-  border-radius: 999px;
+  padding: 10px 14px;
+  border: 1px solid var(--line-strong);
   color: var(--text) !important;
-  background: rgba(255, 45, 105, 0.08);
+  background: rgba(43, 220, 255, 0.1);
 }
 
 .menuButton,
 .closeButton {
   display: none;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   color: var(--text);
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
   padding: 9px;
   cursor: pointer;
 }
@@ -148,18 +153,18 @@ button {
   padding: 22px;
   display: grid;
   align-content: start;
-  gap: 14px;
-  border: 1px solid var(--border2);
-  border-radius: 24px;
-  background: rgba(8, 8, 14, 0.96);
+  gap: 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: rgba(8, 12, 20, 0.97);
   backdrop-filter: blur(20px);
 }
 
 .mobileMenu a {
   padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .mobileMenu .closeButton {
@@ -168,32 +173,61 @@ button {
 }
 
 .hero {
-  min-height: calc(100vh - 76px);
-  display: grid;
-  grid-template-columns: 1.02fr 0.98fr;
-  gap: 44px;
-  align-items: center;
-  padding-top: 44px;
+  position: relative;
+  min-height: 82vh;
+  margin-top: -72px;
+  padding: 132px max(16px, calc((100vw - 1180px) / 2)) 56px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+
+.heroImage,
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(1.12) contrast(1.02);
+}
+
+.heroOverlay {
+  background:
+    linear-gradient(90deg, rgba(4, 7, 12, 0.94) 0%, rgba(4, 7, 12, 0.74) 45%, rgba(4, 7, 12, 0.38) 100%),
+    linear-gradient(180deg, rgba(4, 7, 12, 0.78) 0%, rgba(4, 7, 12, 0.16) 45%, rgba(4, 7, 12, 0.9) 100%);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
 }
 
 .pill,
-.kicker {
+.kicker,
+.eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   color: var(--green);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 850;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .pulse {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
   background: var(--green);
-  box-shadow: 0 0 18px rgba(143, 255, 122, 0.65);
+  box-shadow: 0 0 18px rgba(85, 255, 109, 0.72);
 }
 
 h1,
@@ -201,38 +235,46 @@ h2,
 h3,
 p {
   margin: 0;
+  letter-spacing: 0;
 }
 
 h1 {
-  max-width: 760px;
-  margin-top: 18px;
-  font-size: clamp(38px, 5.4vw, 68px);
-  line-height: 0.98;
-  letter-spacing: -0.06em;
+  margin-top: 14px;
+  font-size: 76px;
+  line-height: 0.95;
+  font-weight: 950;
 }
 
 h2 {
-  max-width: 760px;
+  max-width: 780px;
   margin-top: 12px;
-  font-size: clamp(28px, 3.8vw, 46px);
-  line-height: 1.04;
-  letter-spacing: -0.045em;
+  font-size: 44px;
+  line-height: 1.05;
+  font-weight: 930;
 }
 
 h3 {
-  font-size: 18px;
-  letter-spacing: -0.02em;
+  font-size: 21px;
+  line-height: 1.18;
+  font-weight: 900;
 }
 
-.heroText,
+.heroLead,
 .sectionText,
 .sectionHead p,
-.contactCard p {
-  margin-top: 18px;
-  max-width: 720px;
+.contactContent p,
+.verticalBody p,
+.highlightCard p,
+.videoCopy p {
+  margin-top: 16px;
   color: var(--muted);
   font-size: 16px;
-  line-height: 1.68;
+  line-height: 1.65;
+}
+
+.heroLead {
+  max-width: 760px;
+  font-size: 19px;
 }
 
 .heroActions {
@@ -243,16 +285,16 @@ h3 {
 }
 
 .button {
-  min-height: 44px;
+  min-height: 46px;
   padding: 0 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  border-radius: 999px;
-  font-weight: 800;
+  border: 1px solid transparent;
+  font-weight: 850;
   font-size: 14px;
-  transition: transform 0.18s ease;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
 .button:hover {
@@ -260,16 +302,16 @@ h3 {
 }
 
 .primary {
-  border: 1px solid var(--border2);
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  color: white;
-  box-shadow: 0 14px 42px rgba(255, 45, 105, 0.2);
+  border-color: rgba(85, 255, 109, 0.46);
+  background: linear-gradient(135deg, var(--green), var(--cyan));
+  color: #061011;
+  box-shadow: 0 14px 40px rgba(43, 220, 255, 0.24);
 }
 
 .secondary {
-  border: 1px solid var(--border);
+  border-color: var(--line);
   color: var(--text);
-  background: rgba(255, 255, 255, 0.045);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .heroBadges {
@@ -279,135 +321,61 @@ h3 {
   gap: 8px;
 }
 
-.heroBadges span {
-  padding: 8px 11px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  color: var(--muted);
-  background: rgba(255, 255, 255, 0.035);
+.heroBadges span,
+.chips span {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.07);
   font-size: 12px;
+  font-weight: 780;
 }
 
-.operationCard,
-.problemItem,
-.systemCard,
-.stepCard,
+.heroBadges span {
+  padding: 9px 11px;
+}
+
+.metricsSection {
+  padding-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.metricCard,
+.videoBlock,
+.verticalCard,
+.assistantPanel,
+.highlightCard,
 .coreItem,
-.differenceCard,
-.contactCard,
-.assemblyPanel,
-.videoShell {
-  border: 1px solid var(--border);
-  background: var(--card);
-  backdrop-filter: blur(14px);
+.contactSection {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
   box-shadow: var(--shadow);
 }
 
-.operationCard {
-  padding: 20px;
-  border-radius: 28px;
-  border-color: var(--border2);
-}
-
-.operationHeader {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: center;
-}
-
-.operationHeader strong,
-.operationHeader span {
-  display: block;
-}
-
-.operationHeader span {
-  margin-top: 4px;
-  color: var(--muted2);
-  font-size: 12px;
-}
-
-.liveTag {
-  padding: 7px 10px;
-  border: 1px solid rgba(143, 255, 122, 0.3);
-  border-radius: 999px;
-  color: var(--green);
-  background: rgba(143, 255, 122, 0.07);
-  font-size: 12px;
-  font-weight: 850;
-}
-
-.operationGrid {
-  margin-top: 20px;
+.metricCard {
+  min-height: 118px;
+  padding: 18px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  align-content: start;
+  gap: 8px;
 }
 
-.operationItem {
-  min-height: 108px;
-  padding: 15px;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: rgba(255,255,255,0.035);
+.metricCard strong {
+  font-size: 16px;
 }
 
-.operationItem.active {
-  border-color: var(--border2);
-  background: rgba(255, 45, 105, 0.09);
-}
-
-.operationItem svg {
-  color: var(--accent);
-}
-
-.operationItem strong {
-  display: block;
-  margin-top: 14px;
-}
-
-.operationItem span {
-  display: block;
-  margin-top: 5px;
+.metricCard span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 1.5;
 }
-
-.operationFlow {
-  margin-top: 14px;
-  padding: 15px;
-  display: grid;
-  gap: 12px;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: rgba(255,255,255,0.035);
-}
-
-.operationFlow span {
-  display: block;
-  margin-bottom: 6px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.track {
-  height: 8px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.12);
-}
-
-.fill {
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--green), var(--accent));
-}
-
-.w90 { width: 90%; }
-.w86 { width: 86%; }
-.w78 { width: 78%; }
 
 .sectionHead {
+  max-width: 820px;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -418,307 +386,177 @@ h3 {
 }
 
 .videoSection {
-  padding-top: 36px;
+  padding-top: 60px;
 }
 
-.videoShell {
-  margin-top: 34px;
-  padding: 10px;
-  border-radius: 26px;
-  border-color: var(--border2);
+.videoGrid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.videoBlock {
+  overflow: hidden;
+  background: var(--panel-strong);
+}
+
+.videoBlockFeatured {
+  border-color: var(--line-strong);
+}
+
+.videoCopy {
+  padding: 20px;
+}
+
+.videoCopy h3 {
+  margin-top: 8px;
 }
 
 .demoVideo {
   width: 100%;
-  max-height: 640px;
+  aspect-ratio: 16 / 9;
   display: block;
-  border-radius: 20px;
   background: #000;
-}
-
-.videoFallback {
-  min-height: 360px;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  color: var(--muted);
-}
-
-.videoFallback svg {
-  color: var(--accent);
-}
-
-.videoFallback h3 {
-  margin-top: 16px;
-  color: var(--text);
-}
-
-.videoFallback p {
-  margin-top: 10px;
-}
-
-.problemSection,
-.coreSection,
-.assemblyFocus {
-  display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: 42px;
-  align-items: center;
-}
-
-.problemList {
-  display: grid;
-  gap: 12px;
-}
-
-.problemItem {
-  padding: 16px;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  border-radius: 18px;
-  color: var(--muted);
-  box-shadow: none;
-}
-
-.problemItem svg {
-  flex: 0 0 auto;
-  color: var(--accent);
-}
-
-.systemsGrid {
-  margin-top: 36px;
-  display: grid;
-  gap: 20px;
-}
-
-.systemCard {
-  display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  overflow: hidden;
-  border-radius: 28px;
-  box-shadow: var(--shadow);
-}
-
-.systemCard:nth-child(even) {
-  grid-template-columns: 1.05fr 0.95fr;
-}
-
-.systemCard:nth-child(even) .systemImageWrap {
-  order: 2;
-}
-
-.assemblyCard {
-  border-color: var(--border2);
-}
-
-.systemImageWrap {
-  min-height: 340px;
-  background: rgba(255,255,255,0.04);
-  border-right: 1px solid var(--border);
-}
-
-.systemCard:nth-child(even) .systemImageWrap {
-  border-right: 0;
-  border-left: 1px solid var(--border);
-}
-
-.systemImage {
-  width: 100%;
-  height: 100%;
-  display: block;
   object-fit: cover;
 }
 
-.systemImageFallback {
+.verticalGrid {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.verticalCard {
+  overflow: hidden;
+  background: rgba(15, 22, 36, 0.9);
+}
+
+.verticalCard img {
   width: 100%;
-  height: 100%;
-  min-height: 340px;
+  height: 280px;
+  display: block;
+  object-fit: cover;
+  border-bottom: 1px solid var(--line);
+}
+
+.verticalBody {
+  padding: 22px;
+}
+
+.verticalTop {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.verticalIcon {
+  width: 32px;
+  height: 32px;
   display: grid;
   place-items: center;
-  text-align: center;
-  color: var(--muted);
+  border: 1px solid rgba(85, 255, 109, 0.32);
+  border-radius: 8px;
+  background: rgba(85, 255, 109, 0.08);
 }
 
-.systemImageFallback svg {
-  color: var(--accent);
+.verticalBody h3 {
+  margin-top: 14px;
 }
 
-.systemImageFallback span {
-  display: block;
-  margin-top: 12px;
-}
-
-.systemContent {
-  padding: 28px;
+.chips {
+  margin-top: 18px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.systemTop {
+.chips span {
+  padding: 8px 10px;
+}
+
+.assistantSection,
+.coreSection,
+.contactSection {
+  display: grid;
+  grid-template-columns: 1fr 0.84fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.assistantActions {
+  margin-top: 24px;
+}
+
+.assistantPanel {
+  padding: 22px;
+  border-color: rgba(255, 43, 189, 0.38);
+  background:
+    linear-gradient(135deg, rgba(43, 220, 255, 0.13), transparent 48%),
+    rgba(18, 24, 39, 0.94);
+}
+
+.assistantTop {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.systemIcon {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--border2);
-  border-radius: 15px;
-  color: var(--accent);
-  background: rgba(255,45,105,0.08);
+.assistantTop svg {
+  color: var(--cyan);
 }
 
-.systemTop span {
-  color: var(--green);
-  font-size: 11px;
-  font-weight: 850;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.systemContent h3 {
-  margin-top: 20px;
-  font-size: clamp(24px, 2.8vw, 36px);
-  letter-spacing: -0.04em;
-}
-
-.systemContent p {
-  margin-top: 14px;
-  color: var(--muted);
-  line-height: 1.65;
-  font-size: 15px;
-}
-
-.bulletGrid {
-  margin-top: 22px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.bulletGrid div {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text);
-  font-size: 13px;
-}
-
-.bulletGrid svg {
-  color: var(--green);
-}
-
-.assemblyPanel {
-  padding: 22px;
-  border-radius: 24px;
-  border-color: var(--border2);
-}
-
-.assemblyHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.assemblyHeader span {
-  color: var(--green);
-  font-weight: 900;
-}
-
-.assemblyQuestion {
-  margin-top: 18px;
-  padding: 18px;
-  border-radius: 18px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.04);
-}
-
-.assemblyQuestion small {
-  color: var(--muted2);
-}
-
-.assemblyQuestion h3 {
-  margin-top: 8px;
-}
-
-.assemblyVotes {
-  margin-top: 14px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.assemblyVotes button {
-  min-height: 42px;
-  border-radius: 14px;
-  border: 1px solid var(--border2);
-  color: var(--text);
-  background: rgba(255, 45, 105, 0.08);
-}
-
-.assemblyResults {
-  margin-top: 14px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.assemblyResults div {
-  padding: 14px;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.04);
-}
-
-.assemblyResults span,
-.assemblyResults strong {
+.assistantTop strong,
+.assistantTop span {
   display: block;
 }
 
-.assemblyResults span {
-  color: var(--muted2);
-  font-size: 12px;
+.assistantTop span {
+  margin-top: 3px;
+  color: var(--soft);
+  font-size: 13px;
 }
 
-.assemblyResults strong {
-  margin-top: 5px;
-  font-size: 22px;
+.assistantMessages {
+  margin-top: 22px;
+  display: grid;
+  gap: 10px;
 }
 
-.stepsGrid {
-  margin-top: 34px;
+.assistantMessages p {
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 14px;
+}
+
+.highlightsSection {
+  padding-top: 20px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
 }
 
-.stepCard {
-  min-height: 210px;
+.highlightCard {
+  min-height: 250px;
   padding: 20px;
-  border-radius: 22px;
   box-shadow: none;
 }
 
-.stepCard span {
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 900;
+.highlightCard svg {
+  color: var(--cyan);
 }
 
-.stepCard h3 {
+.highlightCard h3 {
   margin-top: 22px;
-}
-
-.stepCard p {
-  margin-top: 10px;
-  color: var(--muted);
-  line-height: 1.6;
-  font-size: 14px;
 }
 
 .coreGrid {
@@ -728,11 +566,11 @@ h3 {
 }
 
 .coreItem {
-  padding: 14px;
+  min-height: 70px;
+  padding: 16px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  border-radius: 16px;
+  gap: 11px;
   box-shadow: none;
 }
 
@@ -740,63 +578,31 @@ h3 {
   color: var(--green);
 }
 
-.differenceCard {
-  padding: 30px;
-  border-radius: 26px;
-  border-color: var(--border2);
-}
-
-.differenceGrid {
-  margin-top: 24px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-}
-
-.differenceGrid > div {
-  padding: 22px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  background: rgba(255,255,255,0.035);
-}
-
-.differenceGrid p {
-  margin-top: 10px;
-  color: var(--muted);
-  line-height: 1.62;
-  font-size: 14px;
-}
-
-.highlight {
-  border-color: var(--border2) !important;
-  background: rgba(255, 45, 105, 0.07) !important;
-}
-
-.contactCard {
-  padding: 34px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 28px;
-  align-items: center;
-  border-radius: 26px;
-  border-color: var(--border2);
+.contactSection {
+  padding: 32px;
+  border-color: var(--line-strong);
+  background:
+    linear-gradient(135deg, rgba(85, 255, 109, 0.12), transparent 46%),
+    linear-gradient(225deg, rgba(255, 43, 189, 0.12), transparent 42%),
+    var(--panel-strong);
 }
 
 .contactActions {
   display: grid;
   gap: 10px;
+  justify-items: stretch;
 }
 
 .footer {
-  width: min(1120px, calc(100% - 32px));
+  width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 36px 0 46px;
+  padding: 34px 0 46px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 24px;
-  border-top: 1px solid var(--border);
-  color: var(--muted2);
+  border-top: 1px solid var(--line);
+  color: var(--soft);
 }
 
 .footerRight {
@@ -806,7 +612,7 @@ h3 {
   font-size: 13px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 980px) {
   .navLinks {
     display: none;
   }
@@ -815,53 +621,58 @@ h3 {
     display: inline-flex;
   }
 
-  .hero,
-  .problemSection,
-  .coreSection,
-  .contactCard,
-  .systemCard,
-  .systemCard:nth-child(even),
-  .assemblyFocus {
-    grid-template-columns: 1fr;
+  .hero {
+    min-height: 78vh;
   }
 
-  .systemCard:nth-child(even) .systemImageWrap {
-    order: 0;
-  }
-
-  .systemImageWrap,
-  .systemCard:nth-child(even) .systemImageWrap {
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .stepsGrid {
+  .metricsSection,
+  .highlightsSection {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .contactActions {
-    justify-items: start;
+  .videoGrid,
+  .verticalGrid,
+  .assistantSection,
+  .coreSection,
+  .contactSection {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 680px) {
   .section {
-    padding: 58px 0;
+    width: min(100% - 24px, 1180px);
+    padding: 54px 0;
+  }
+
+  .nav {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .hero {
+    min-height: 76vh;
+    padding: 118px 16px 42px;
   }
 
   h1 {
-    font-size: 38px;
+    font-size: 46px;
   }
 
   h2 {
     font-size: 30px;
   }
 
-  .heroText,
+  h3 {
+    font-size: 19px;
+  }
+
+  .heroLead,
   .sectionText,
   .sectionHead p,
-  .contactCard p {
+  .contactContent p,
+  .verticalBody p,
+  .highlightCard p,
+  .videoCopy p {
     font-size: 15px;
   }
 
@@ -875,38 +686,26 @@ h3 {
     width: 100%;
   }
 
-  .operationGrid,
-  .stepsGrid,
-  .coreGrid,
-  .bulletGrid,
-  .differenceGrid,
-  .assemblyVotes,
-  .assemblyResults {
+  .metricsSection,
+  .highlightsSection,
+  .coreGrid {
     grid-template-columns: 1fr;
   }
 
-  .videoShell {
-    padding: 8px;
-    border-radius: 22px;
+  .verticalCard img {
+    height: 220px;
   }
 
-  .demoVideo {
-    border-radius: 16px;
-  }
-
-  .systemImageWrap,
-  .systemImageFallback {
-    min-height: 240px;
-  }
-
-  .systemContent,
-  .differenceCard,
-  .contactCard,
-  .assemblyPanel {
-    padding: 24px;
+  .verticalBody,
+  .videoCopy,
+  .assistantPanel,
+  .highlightCard,
+  .contactSection {
+    padding: 18px;
   }
 
   .footer {
+    width: min(100% - 24px, 1180px);
     flex-direction: column;
     align-items: flex-start;
   }

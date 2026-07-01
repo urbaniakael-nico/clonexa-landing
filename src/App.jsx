@@ -36,7 +36,16 @@ const MEDIA = {
   field: "/clonexa-media/vertical-field.mp4",
   shoplink: "/clonexa-media/vertical-shoplink.mp4",
   assembly: "/clonexa-media/vertical-assembly.mp4",
-  reportsPoster: "/clonexa-media/reportes-ia.jpg"
+  landingPoster: "/clonexa-media/poster-landing-main.png",
+  videoIaPoster: "/clonexa-media/poster-video-ia.png",
+  demoPoster: "/clonexa-media/poster-demo-comercial.png",
+  transportPoster: "/clonexa-media/poster-transport.png",
+  productionPoster: "/clonexa-media/poster-production.png",
+  storesPoster: "/clonexa-media/poster-stores.png",
+  hospitalityPoster: "/clonexa-media/poster-hospitality.png",
+  fieldPoster: "/clonexa-media/poster-field.png",
+  shoplinkPoster: "/clonexa-media/poster-shoplink.png",
+  assemblyPoster: "/clonexa-media/poster-assembly.png"
 };
 
 const LANDING_TRACKING_ENDPOINT =
@@ -102,6 +111,7 @@ const activeVerticals = [
     title: "Llamadas, rutas, tickets, contratos y tesoreria",
     icon: PhoneCall,
     video: MEDIA.transport,
+    poster: MEDIA.transportPoster,
     text:
       "Para operaciones con asesores, supervisores y tesoreria: registro de llamadas, bases asignadas, cotizaciones, tickets imprimibles, contratos con saldo y alertas de cupo.",
     bullets: ["Agentes", "Supervisor live", "Tickets", "Tesoreria"]
@@ -112,6 +122,7 @@ const activeVerticals = [
     title: "Catalogo online con pedidos y CRM conectado",
     icon: ShoppingBag,
     video: MEDIA.shoplink,
+    poster: MEDIA.shoplinkPoster,
     text:
       "Activa una tienda publica con productos, precios, stock visible, carrito, pedidos, clientes, seguimiento comercial y reportes de venta.",
     bullets: ["Catalogo", "Carrito", "CRM web", "Stock visible"]
@@ -122,6 +133,7 @@ const activeVerticals = [
     title: "Ventas, metas, nomina y cierres diarios",
     icon: Store,
     video: MEDIA.stores,
+    poster: MEDIA.storesPoster,
     text:
       "Controla tiendas, areas de venta, vendedores, metas, cierres enviados, ranking, solicitudes, minipaneles y stock inteligente para equipos comerciales.",
     bullets: ["Cierres", "Metas", "Nomina", "Mini paneles"]
@@ -132,6 +144,7 @@ const activeVerticals = [
     title: "Referencias, produccion, cotizaciones y pagos",
     icon: Factory,
     video: MEDIA.production,
+    poster: MEDIA.productionPoster,
     text:
       "Administra referencias con categoria, color, SKU, precio, meta, produccion, cotizaciones, ordenes de pago, CRM, workforce y nomina.",
     bullets: ["Referencias", "SKU", "Produccion", "Pagos"]
@@ -142,6 +155,7 @@ const activeVerticals = [
     title: "QR, pedidos, mesas, stock y fidelizacion",
     icon: QrCode,
     video: MEDIA.hospitality,
+    poster: MEDIA.hospitalityPoster,
     text:
       "Para bares y restaurantes: QR por mesa, clave de acceso, pedidos, cuentas abiertas, stock, sorteos, pollas, concursos y reportes descargables.",
     bullets: ["QR", "Pedidos", "Stock", "Fidelizacion"]
@@ -152,6 +166,7 @@ const activeVerticals = [
     title: "Inventario, materiales, ubicaciones y reportes",
     icon: MapPinned,
     video: MEDIA.field,
+    poster: MEDIA.fieldPoster,
     text:
       "Gestiona personal de campo, materiales, entradas, salidas, autorizaciones, inventario, facturas adjuntas, GPS y puntos permitidos.",
     bullets: ["GPS", "Materiales", "Inventario", "Facturas"]
@@ -162,6 +177,7 @@ const activeVerticals = [
     title: "Votaciones, QR, control de acceso y actas",
     icon: Vote,
     video: MEDIA.assembly,
+    poster: MEDIA.assemblyPoster,
     text:
       "Publica preguntas, valida participantes, controla tiempos, registra votos en vivo, genera resultados auditables y descarga actas.",
     bullets: ["Acceso QR", "Votacion", "Resultados", "Actas"]
@@ -297,7 +313,7 @@ function VerticalCard({ vertical, watched, onVideoEnded, onRequestDemo }) {
           loop={false}
           playsInline
           preload="metadata"
-          poster={MEDIA.reportsPoster}
+          poster={vertical.poster}
           onEnded={() => onVideoEnded(vertical)}
           controls
         >
@@ -552,7 +568,7 @@ function App() {
           loop
           playsInline
           preload="metadata"
-          poster={MEDIA.reportsPoster}
+          poster={MEDIA.landingPoster}
         >
           <source src={MEDIA.landingMain} type="video/mp4" />
         </video>
@@ -619,13 +635,13 @@ function App() {
             title="CLONEXA IA y verticales activas"
             text="La actualizacion principal: IA, paneles, reportes, datos y operaciones reales."
             src={MEDIA.videoIa}
-            poster={MEDIA.reportsPoster}
+            poster={MEDIA.videoIaPoster}
           />
           <VideoBlock
             title="Demo comercial CLONEXA"
             text="Material base conservado para reforzar la vision y el recorrido del producto."
             src={MEDIA.legacyVideo}
-            poster={MEDIA.reportsPoster}
+            poster={MEDIA.demoPoster}
           />
         </div>
       </section>

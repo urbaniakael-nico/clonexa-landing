@@ -953,3 +953,19 @@ h3 {
     text-align: left;
   }
 }
+
+.footerLegal {
+  margin-top: 6px;
+  color: var(--soft);
+}
+
+.footerLegal a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footerLegal a:hover,
+.footerLegal a[aria-current="page"] {
+  color: var(--text);
+}

@@ -781,6 +781,11 @@ function App() {
         <div className="footerRight">
           <span>CLONEXA AI Operating System</span>
           <span>IA, verticales, dashboards, reportes y auditoria</span>
+          <nav className="footerLegal" aria-label="Legal">
+            <a href="/privacidad">Privacidad</a> <span aria-hidden="true">·</span>{" "}
+            <a href="/terminos">Términos</a> <span aria-hidden="true">·</span>{" "}
+            <a href="/borrar-datos">Borrar mis datos</a>
+          </nav>
         </div>
       </footer>
     </main>

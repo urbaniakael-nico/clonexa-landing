@@ -1,23 +1,55 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Tema antes de pintar (sin parpadeo): eleccion guardada o tema del sistema.
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem("clonexa_theme");
+        } catch (e) {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
 
-    <title>CLONEXA IA | Sistema operativo SaaS por verticales</title>
-
+    <title>Clonexa | Sistema operativo para restaurantes, bares, talleres y equipos en campo</title>
     <meta
       name="description"
-      content="CLONEXA integra asistente IA, WhatsApp, dashboards, reportes PDF y verticales SaaS para tiendas, produccion, campo, hospitality, QR, GPS, stock y asambleas."
+      content="Pedidos, cocina, caja, inventario, turnos, nómina, clientes y reportes en un solo sistema. Tarifa plana con usuarios ilimitados. Agenda tu demo gratis de 20 minutos."
     />
+    <link rel="canonical" href="https://clonexa.com.co/" />
+    <meta name="theme-color" content="#0a0710" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fbf8fa" media="(prefers-color-scheme: light)" />
 
-    <meta property="og:title" content="CLONEXA IA | Sistema operativo SaaS por verticales" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/brand/clonexa-icono.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Clonexa" />
+    <meta property="og:url" content="https://clonexa.com.co/" />
+    <meta property="og:title" content="Clonexa | Todo tu negocio, no solo la caja" />
     <meta
       property="og:description"
-      content="Opera con asistente IA y verticales listas: ShopLink, produccion, tiendas, hospitality, QR, GPS, stock, reportes y asambleas."
+      content="Pedidos, cocina, caja, inventario, turnos, nómina y reportes en un solo sistema. Usuarios ilimitados. Agenda tu demo gratis."
     />
-    <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#060910" />
+    <meta property="og:image" content="https://clonexa.com.co/og-clonexa.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Clonexa: todo tu negocio, no solo la caja" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Clonexa | Todo tu negocio, no solo la caja" />
+    <meta
+      name="twitter:description"
+      content="Pedidos, cocina, caja, inventario, turnos, nómina y reportes en un solo sistema. Usuarios ilimitados."
+    />
+    <meta name="twitter:image" content="https://clonexa.com.co/og-clonexa.png" />
   </head>
 
   <body>

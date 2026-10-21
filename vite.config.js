@@ -2,6 +2,9 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { legalPagesPlugin } from "./legal/pages.js";
 
+// Railway mientras tanto y el dominio propio (con y sin www).
+const ALLOWED_HOSTS = [".up.railway.app", "clonexa.com.co", "www.clonexa.com.co"];
+
 export default defineConfig({
   plugins: [react(), legalPagesPlugin()],
   build: {
@@ -16,16 +19,10 @@ export default defineConfig({
   },
   server: {
     host: "0.0.0.0",
-    allowedHosts: [
-      "clonexa-landing-production.up.railway.app",
-      ".up.railway.app"
-    ]
+    allowedHosts: ALLOWED_HOSTS
   },
   preview: {
     host: "0.0.0.0",
-    allowedHosts: [
-      "clonexa-landing-production.up.railway.app",
-      ".up.railway.app"
-    ]
+    allowedHosts: ALLOWED_HOSTS
   }
 });

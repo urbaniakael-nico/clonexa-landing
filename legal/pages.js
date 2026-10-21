@@ -20,16 +20,15 @@ const CLOSE_ICON =
   '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
 
 const SECTIONS = [
-  ["/#video", "Video"],
-  ["/#verticals", "Verticales"],
-  ["/#assistant", "IA"],
-  ["/#demo-request", "Demo"]
+  ["/#demo", "Demo en vivo"],
+  ["/#negocios", "Negocios"],
+  ["/#planes", "Planes"],
+  ["/#preguntas", "Preguntas"]
 ];
 
 function brand(footer) {
-  return `<a href="/" class="brand${footer ? " brandFooter" : ""}">
-      <img class="brandLogo" src="/clonexa-logo.png" alt="CLONEXA" />
-      <div class="brandText"><strong>CLONEXA</strong><span>AI Operating System</span></div>
+  return `<a href="/" class="brand${footer ? " brandFooter" : ""}" aria-label="Clonexa, ir al inicio">
+      <img class="legalLogo" src="/brand/clonexa-logo.svg" alt="Clonexa" width="181" height="32" />
     </a>`;
 }
 
@@ -48,14 +47,14 @@ export function legalHeader() {
       ${brand(false)}
       <div class="navLinks">
         ${links}
-        <a href="/#contact" class="navCta">Contactar</a>
+        <a href="/#agenda" class="navCta">Agenda tu demo</a>
       </div>
       <button class="menuButton" type="button" data-menu-open aria-label="Abrir menu">${MENU_ICON}</button>
     </nav>
     <div class="mobileMenu" data-menu hidden>
       <button class="closeButton" type="button" data-menu-close aria-label="Cerrar menu">${CLOSE_ICON}</button>
       ${SECTIONS.map(([href, label]) => `<a href="${href}">${label}</a>`).join("\n      ")}
-      <a href="/#contact">Contactar</a>
+      <a href="/#agenda">Agenda tu demo</a>
     </div>`;
 }
 
@@ -63,8 +62,7 @@ export function legalFooter(current) {
   return `<footer class="footer">
       ${brand(true)}
       <div class="footerRight">
-        <span>CLONEXA AI Operating System</span>
-        <span>IA, verticales, dashboards, reportes y auditoria</span>
+        <span>© 2026 Clonexa · Bogotá, Colombia</span>
         <nav class="footerLegal" aria-label="Legal">${legalLinks(current)}</nav>
       </div>
     </footer>`;

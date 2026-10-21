@@ -68,3 +68,9 @@
     font-size: 19px;
   }
 }
+
+.legalLogo {
+  height: 32px;
+  width: auto;
+  display: block;
+}

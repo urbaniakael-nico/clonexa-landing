@@ -20,10 +20,10 @@ const CLOSE_ICON =
   '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
 
 const SECTIONS = [
-  ["/#demo", "Demo en vivo"],
-  ["/#negocios", "Negocios"],
-  ["/#planes", "Planes"],
-  ["/#preguntas", "Preguntas"]
+  ["/#soluciones", "Soluciones"],
+  ["/#medida", "A la medida"],
+  ["/#arma", "Arma tu sistema"],
+  ["/#planes", "Planes"]
 ];
 
 function brand(footer) {

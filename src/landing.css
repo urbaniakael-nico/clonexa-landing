@@ -1,4 +1,4 @@
-/* Landing v3 de Clonexa. Temas por [data-theme] en <html> (lo fija index.html antes de pintar). */
+/* Landing v4 de Clonexa. Temas por [data-theme] en <html> (lo fija index.html antes de pintar). */
 :root {
   color-scheme: dark;
   --bg: #0a0710;
@@ -256,28 +256,7 @@ ol {
   font-weight: 600;
 }
 
-/* Hero */
-.hero {
-  display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  gap: 40px;
-  align-items: center;
-  padding-top: 46px;
-  padding-bottom: 34px;
-  background: radial-gradient(600px 300px at 80% 40%, var(--glow), transparent);
-}
-
-.tag {
-  display: inline-block;
-  margin-bottom: 16px;
-  padding: 6px 12px;
-  border: 1px solid var(--accent);
-  border-radius: 99px;
-  color: var(--accent);
-  font-size: 13px;
-  font-weight: 600;
-}
-
+/* Titulos del hero */
 h1 {
   margin-bottom: 18px;
   font-size: 56px;
@@ -472,144 +451,6 @@ h2 {
 
 .cardIcon {
   font-size: 28px;
-}
-
-.flowCard {
-  text-align: center;
-}
-
-.step {
-  margin-top: 4px;
-  color: var(--accent) !important;
-  font-size: 12px !important;
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-
-/* Capturas */
-.shot {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 14px;
-}
-
-.shotFrame {
-  overflow: hidden;
-  border: 6px solid #000;
-  background: var(--shot-bg);
-  box-shadow: var(--shadow);
-}
-
-.shotFrame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-}
-
-.shot-phone .shotFrame {
-  width: 128px;
-  aspect-ratio: 9 / 19.5;
-  border-radius: 22px;
-}
-
-.shot-screen {
-  width: 100%;
-}
-
-.shot-screen .shotFrame {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 12px;
-}
-
-.flowCard .shot {
-  height: 200px;
-  align-items: center;
-}
-
-.flowCard .shot-screen .shotFrame {
-  border-width: 4px;
-}
-
-.flowCard .shot-phone .shotFrame {
-  width: auto;
-  height: 200px;
-}
-
-.shotSoon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  height: 100%;
-  min-height: 120px;
-  padding: 12px;
-  color: var(--mut);
-  font-size: 12px;
-  text-align: center;
-}
-
-.shotSoonLabel {
-  color: var(--txt);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-/* Demo en vivo */
-.demoBox {
-  padding: 30px;
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  background: var(--bg2);
-}
-
-.tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 22px;
-}
-
-.tab {
-  min-height: 44px;
-  padding: 10px 16px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--card);
-  color: var(--mut);
-  font: inherit;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.tab[aria-selected="true"] {
-  border-color: transparent;
-  background: linear-gradient(90deg, var(--btn-a), var(--btn-b));
-  color: #fff;
-  font-weight: 700;
-}
-
-.tabPanel {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 28px;
-  align-items: center;
-}
-
-.benefits {
-  margin-bottom: 20px;
-}
-
-.benefits li {
-  padding: 11px 0;
-  border-bottom: 1px solid var(--line);
-  color: var(--mut);
-}
-
-.tabPanel .shot {
-  margin: 0;
 }
 
 /* Comparacion */
@@ -1015,6 +856,623 @@ h2 {
   transform: scale(0.8);
 }
 
+
+/* ===== Landing v4 ===== */
+
+/* Barra fija */
+.navBar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.navBar .nav {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+html {
+  scroll-padding-top: 84px;
+}
+
+.pill {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border-radius: 99px;
+  background: var(--soft);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.gradInline {
+  display: inline;
+}
+
+/* Hero: captura real + celular con Nexa */
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 40px;
+  align-items: center;
+  padding-top: 52px;
+  padding-bottom: 34px;
+}
+
+.heroShow {
+  position: relative;
+  padding: 0 70px 70px 0;
+}
+
+.heroScreen {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+}
+
+.heroScreen img {
+  width: 100%;
+}
+
+.heroShow .nexa {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 168px;
+}
+
+.heroShow .phone {
+  width: 168px;
+  border-width: 6px;
+  border-radius: 26px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* En el hero el poster ya trae el logo y el texto: solo el boton (el titulo queda para lectores de pantalla) */
+.heroShow .nexaPlay {
+  padding-bottom: 12px;
+  background: linear-gradient(180deg, transparent 70%, rgba(10, 7, 16, 0.55));
+}
+
+.heroShow .nexaPlay strong {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.heroShow .nexaCircle {
+  width: 48px;
+  height: 48px;
+}
+
+.heroShow .nexa figcaption {
+  max-width: 168px;
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.35;
+}
+
+/* Franja de industrias */
+.strip ul {
+  gap: 10px;
+}
+
+.strip li {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--card);
+  font-size: 14px;
+}
+
+/* Dos caminos */
+.paths {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.path {
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+}
+
+.path h3 {
+  margin: 4px 0 8px;
+  font-size: 24px;
+}
+
+.path > p:not(.pill) {
+  margin-bottom: 16px;
+}
+
+.path ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.path li {
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg2);
+  font-size: 14.5px;
+}
+
+.path .btn {
+  align-self: flex-start;
+}
+
+.path-medida {
+  border-color: rgba(255, 45, 111, 0.35);
+  background: linear-gradient(160deg, #2a0c19, var(--card) 60%);
+}
+
+[data-theme="light"] .path-medida {
+  background: linear-gradient(160deg, #ffe3ec, #fff 60%);
+}
+
+/* Arma tu sistema */
+.builder {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items: stretch;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 10px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--txt);
+  font: inherit;
+  font-size: 14.5px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+}
+
+.chip[aria-pressed="true"] {
+  border-color: transparent;
+  background: linear-gradient(90deg, var(--btn-a), var(--btn-b));
+  color: #fff;
+  box-shadow: 0 8px 22px var(--glow);
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.result h3 {
+  font-size: 19px;
+}
+
+.resultSub {
+  margin: 4px 0 14px;
+  color: var(--mut);
+  font-size: 14px;
+}
+
+.stack {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 8px;
+}
+
+.blk {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg2);
+  font-size: 14px;
+  font-weight: 700;
+  animation: pop 0.25s ease;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--yes);
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.meter {
+  margin: 16px 0 14px;
+  color: var(--mut);
+  font-size: 14px;
+}
+
+.meterBar {
+  height: 8px;
+  margin-top: 6px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--bg2);
+}
+
+.meterBar b {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--btn-a), var(--btn-b));
+  transition: width 0.3s ease;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Caja de ejemplo y pestanas */
+.demoBox {
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--bg2);
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.tab {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--mut);
+  font: inherit;
+  font-size: 14.5px;
+  cursor: pointer;
+}
+
+.tab[aria-selected="true"] {
+  border-color: transparent;
+  background: linear-gradient(90deg, var(--btn-a), var(--btn-b));
+  color: #fff;
+  font-weight: 700;
+}
+
+.tabPanel {
+  display: grid;
+  grid-template-columns: 0.62fr 1.38fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.benefits {
+  margin-bottom: 20px;
+}
+
+.benefits li {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--mut);
+}
+
+/* Recorridos por pasos con capturas reales */
+.seqTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.seqSteps {
+  display: grid;
+  flex: 1;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 8px;
+}
+
+.seqSteps button {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 44px;
+  padding: 10px 10px 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--txt);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+}
+
+.seqSteps button[aria-current="step"] {
+  border-color: var(--accent);
+}
+
+.seqNum {
+  display: block;
+  color: var(--accent);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.seqProgress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--btn-a), var(--btn-b));
+}
+
+[aria-current="step"] .seqProgress {
+  width: 100%;
+}
+
+.seqRunning [aria-current="step"] .seqProgress {
+  width: 0;
+  animation: seqProg var(--step-ms) linear forwards;
+}
+
+@keyframes seqProg {
+  to {
+    width: 100%;
+  }
+}
+
+.seqPlay {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--txt);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.seqStage {
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.seqText h3 {
+  margin-bottom: 8px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.seqText > p:not(.pill) {
+  color: var(--mut);
+}
+
+.legend {
+  margin-top: 12px;
+  font-size: 13px !important;
+}
+
+.seqArrows {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.seqArrows button {
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--txt);
+  font: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.seqArrows button:hover,
+.seqPlay:hover {
+  border-color: var(--accent);
+}
+
+.seqMedia {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: radial-gradient(circle at 70% 30%, var(--glow), transparent 65%), var(--card);
+}
+
+.seqShot {
+  position: absolute;
+  inset: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.seqShotOn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.shotImg {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.shot-screen.shotImg {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.25);
+}
+
+.shot-phone.shotImg {
+  border: 7px solid #0b0b0f;
+  border-radius: 30px;
+  background: #fff;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.3);
+}
+
+/* En las pestanas el recorrido va en una columna (pasos arriba, texto bajo la captura) */
+.seq-solution .seqStage {
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.seq-solution .seqText {
+  order: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 16px;
+  align-items: center;
+}
+
+.seq-solution .seqText h3 {
+  font-size: 20px;
+}
+
+.seq-solution .seqText .pill {
+  display: none;
+}
+
+.seq-solution .seqText h3,
+.seq-solution .seqText > p {
+  grid-column: 1;
+}
+
+.seq-solution .seqArrows {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin-top: 0;
+}
+
+/* Tienda en linea */
+.commerce {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 30px;
+  align-items: center;
+  padding: 32px;
+}
+
+.commerce .sectionHead {
+  margin-bottom: 22px;
+}
+
+.commerceList {
+  display: grid;
+  gap: 12px;
+}
+
+.commerceList li {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg2);
+  font-weight: 600;
+}
+
+/* Como trabajamos */
+.num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--btn-a), var(--btn-b));
+  color: #fff;
+  font-weight: 900;
+}
+
+.follow h2 {
+  font-size: 24px;
+}
+
+.social-tiktok {
+  color: var(--txt) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seqShot,
+  .blk,
+  .btn,
+  .meterBar b {
+    transition: none;
+    animation: none;
+  }
+}
+
 /* Tableta */
 @media (max-width: 1040px) {
   .navLinks {
@@ -1028,17 +1486,21 @@ h2 {
   h1 {
     font-size: 46px;
   }
+
+  .hero,
+  .tabPanel {
+    grid-template-columns: 1fr;
+  }
+
+  .heroShow {
+    max-width: 680px;
+  }
 }
 
 /* Celular */
 @media (max-width: 760px) {
   .wrap {
     padding: 0 16px;
-  }
-
-  .nav {
-    padding-top: 14px;
-    padding-bottom: 14px;
   }
 
   .navCta {
@@ -1049,22 +1511,24 @@ h2 {
     height: 26px;
   }
 
-  .hero,
-  .tabPanel,
+  .paths,
+  .builder,
   .cta,
   .plans,
   .faq,
-  .grid3 {
+  .grid3,
+  .commerce,
+  .seqStage {
     grid-template-columns: 1fr;
   }
 
   .hero {
-    padding-top: 22px;
-    gap: 32px;
+    padding-top: 26px;
+    gap: 28px;
   }
 
   h1 {
-    font-size: 38px;
+    font-size: 36px;
   }
 
   .lead {
@@ -1075,13 +1539,30 @@ h2 {
     flex: 1 1 100%;
   }
 
-  .phone {
-    width: 240px;
+  .heroShow {
+    padding: 0;
   }
 
-  .strip ul {
-    gap: 8px 18px;
-    font-size: 14px;
+  .heroShow .nexa {
+    position: static;
+    width: auto;
+    margin-top: -64px;
+    align-items: flex-end;
+  }
+
+  .heroShow .phone {
+    width: 132px;
+    margin-right: 6px;
+  }
+
+  .heroShow .nexa figcaption {
+    max-width: none;
+    text-align: right;
+  }
+
+  .strip li {
+    padding: 6px 11px;
+    font-size: 13px;
   }
 
   .section {
@@ -1093,8 +1574,20 @@ h2 {
     font-size: 28px;
   }
 
+  .path ul {
+    grid-template-columns: 1fr;
+  }
+
+  .path .btn {
+    align-self: stretch;
+  }
+
+  .result {
+    min-height: 0;
+  }
+
   .demoBox {
-    padding: 18px;
+    padding: 16px;
   }
 
   .tabs {
@@ -1107,8 +1600,52 @@ h2 {
     font-size: 13px;
   }
 
-  .tabPanel .btn {
+  .tabSide .btn {
     width: 100%;
+  }
+
+  .seqTop {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .seqSteps {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .seq-solution .seqSteps {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  }
+
+  .seqTitle {
+    display: none;
+  }
+
+  .seqMedia {
+    aspect-ratio: 4 / 3;
+  }
+
+  .seqShot {
+    inset: 8px;
+  }
+
+  .seq-example .seqText {
+    order: 2;
+  }
+
+  .seq-solution .seqText {
+    grid-template-columns: 1fr;
+  }
+
+  .seq-solution .seqArrows {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 14px;
+  }
+
+  .seqText h3 {
+    font-size: 21px;
   }
 
   .compare {
@@ -1124,8 +1661,13 @@ h2 {
     font-size: 12px;
   }
 
+  .commerce,
   .cta {
     padding: 24px 18px;
+  }
+
+  .commerce .btn {
+    width: 100%;
   }
 
   .plans {
@@ -1139,10 +1681,10 @@ h2 {
   }
 
   .waFloat {
-    right: 16px;
-    bottom: 16px;
-    width: 56px;
-    height: 56px;
+    right: 14px;
+    bottom: 14px;
+    width: 52px;
+    height: 52px;
   }
 }
 
@@ -1152,11 +1694,15 @@ h2 {
   }
 
   .themeSwitch button {
-    padding: 4px 8px;
+    padding: 4px 10px;
   }
-}
 
-/* En la demo, la captura con su proporcion real */
-.tabPanel .shot-screen .shotFrame {
-  aspect-ratio: auto;
+  .themeLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
 }

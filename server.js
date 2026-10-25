@@ -11,10 +11,18 @@ import { resolveLegalPath } from "./legal/pages.js";
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "dist");
 const PORT = Number(process.env.PORT || 8080);
 
-// CANONICAL_HOST=www.clonexa.com.co hace que clonexa.com.co redirija (301) a www (o al reves).
+// CANONICAL_HOST=www.clonexa.com.co: clonexa.com.co y la URL de Railway redirigen (301) a www.
+// Por la URL de Railway NO se redirigen los .txt de TikTok ni las paginas legales (ni lo que
+// ellas cargan), para no romper verificaciones ya hechas con esa URL.
 // Vacio: los dos dominios y la URL de Railway responden igual.
 const CANONICAL_HOST = (process.env.CANONICAL_HOST || "").trim().toLowerCase();
 const OWN_HOSTS = new Set(["clonexa.com.co", "www.clonexa.com.co"]);
+const RAILWAY_KEEP = [
+  /^\/tiktok[\w-]*\.txt$/i,
+  /^\/(privacidad|terminos|borrar-datos|privacy|terms|data-deletion)\/?$/,
+  /^\/(assets|brand)\//,
+  /^\/(favicon\.ico|apple-touch-icon\.png)$/
+];
 
 const TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -39,7 +47,13 @@ const compressedCache = new Map();
 export function redirectForHost(hostHeader, url) {
   if (!CANONICAL_HOST) return null;
   const host = String(hostHeader || "").toLowerCase().split(":")[0];
-  if (!OWN_HOSTS.has(host) || host === CANONICAL_HOST) return null;
+  if (!host || host === CANONICAL_HOST) return null;
+  if (host.endsWith(".up.railway.app")) {
+    const urlPath = String(url || "/").split("?")[0].split("#")[0];
+    if (RAILWAY_KEEP.some((rule) => rule.test(urlPath))) return null;
+  } else if (!OWN_HOSTS.has(host)) {
+    return null;
+  }
   return `https://${CANONICAL_HOST}${url}`;
 }
 

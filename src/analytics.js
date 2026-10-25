@@ -68,7 +68,7 @@ export function buildEvent(eventType, extra = {}) {
     viewport: `${window.innerWidth}x${window.innerHeight}`,
     extra: {
       landing: "clonexa-public",
-      tracker: "v3",
+      tracker: "v4",
       host: window.location.host,
       userAgent: navigator.userAgent,
       ...extra
@@ -99,7 +99,7 @@ export function sendEvent(eventType, extra) {
 }
 
 export function trackPageView() {
-  if (window.__clonexaLandingTrackedV3) return;
-  window.__clonexaLandingTrackedV3 = true;
-  sendEvent("page_view", { focus: "landing-v3" });
+  if (window.__clonexaLandingTrackedV4) return;
+  window.__clonexaLandingTrackedV4 = true;
+  sendEvent("page_view", { focus: "landing-v4" });
 }

@@ -67,7 +67,7 @@ test("rutas que deben seguir respondiendo", { skip: !HAS_DIST && "sin dist/ (cor
 
     const legal = await (await get(port, "/privacidad")).text();
     assert.match(legal, /Política de privacidad/);
-    assert.match(legal, /href="https:\/\/clonexa\.com\.co\/privacidad"/);
+    assert.match(legal, /href="https:\/\/www\.clonexa\.com\.co\/privacidad"/);
 
     const range = await get(port, "/nexa-prueba.mp4", { Range: "bytes=0-99" });
     assert.equal(range.status, 206);
@@ -77,8 +77,8 @@ test("rutas que deben seguir respondiendo", { skip: !HAS_DIST && "sin dist/ (cor
     const gz = await get(port, "/");
     assert.equal(gz.status, 200);
     const html = await gz.text();
-    assert.match(html, /<link rel="canonical" href="https:\/\/clonexa\.com\.co\/"/);
-    assert.match(html, /property="og:url" content="https:\/\/clonexa\.com\.co\/"/);
+    assert.match(html, /<link rel="canonical" href="https:\/\/www\.clonexa\.com\.co\/"/);
+    assert.match(html, /property="og:url" content="https:\/\/www\.clonexa\.com\.co\/"/);
     assert.match(html, /og-clonexa\.png/);
     assert.match(html, /name="twitter:card" content="summary_large_image"/);
     assert.match(html, /localStorage\.getItem\("clonexa_theme"\)/, "tema antes de pintar");
@@ -89,15 +89,15 @@ test("rutas que deben seguir respondiendo", { skip: !HAS_DIST && "sin dist/ (cor
     assert.equal((await get(port, "/")).headers.get("cache-control"), "no-cache");
 
     const robots = await (await get(port, "/robots.txt")).text();
-    assert.match(robots, /Sitemap: https:\/\/clonexa\.com\.co\/sitemap\.xml/);
+    assert.match(robots, /Sitemap: https:\/\/www\.clonexa\.com\.co\/sitemap\.xml/);
     const sitemap = await (await get(port, "/sitemap.xml")).text();
-    assert.match(sitemap, /<loc>https:\/\/clonexa\.com\.co\/<\/loc>/);
+    assert.match(sitemap, /<loc>https:\/\/www\.clonexa\.com\.co\/<\/loc>/);
   } finally {
     server.kill();
   }
 });
 
-test("los dos dominios y Railway responden igual; CANONICAL_HOST redirige solo el dominio propio", { skip: !HAS_DIST && "sin dist/" }, async () => {
+test("sin CANONICAL_HOST todo responde igual; con CANONICAL_HOST la raiz y Railway van a www salvo TikTok y legales", { skip: !HAS_DIST && "sin dist/" }, async () => {
   const open = await startServer(41732);
   try {
     for (const host of ["clonexa.com.co", "www.clonexa.com.co", "clonexa-landing-production.up.railway.app"]) {
@@ -112,7 +112,17 @@ test("los dos dominios y Railway responden igual; CANONICAL_HOST redirige solo e
     assert.equal(res.status, 301);
     assert.equal(res.headers.get("location"), "https://www.clonexa.com.co/planes?utm_source=instagram");
     assert.equal((await get(41733, "/", { Host: "www.clonexa.com.co" })).status, 200);
-    assert.equal((await get(41733, "/", { Host: "clonexa-landing-production.up.railway.app" })).status, 200);
+    const RW = "clonexa-landing-production.up.railway.app";
+    const fromRailway = await get(41733, "/?utm_source=tiktok", { Host: RW });
+    assert.equal(fromRailway.status, 301, "Railway / va a www");
+    assert.equal(fromRailway.headers.get("location"), "https://www.clonexa.com.co/?utm_source=tiktok");
+    const tiktok = fs.readdirSync(path.join(ROOT, "public")).filter((f) => /^tiktok.*.txt$/.test(f));
+    for (const p of ["/privacidad", "/privacidad/", "/terminos", "/borrar-datos", "/brand/clonexa-logo.svg", "/favicon.ico", ...tiktok.map((f) => `/${f}`)]) {
+      assert.equal((await get(41733, p, { Host: RW })).status, 200, `Railway ${p} no se redirige`);
+    }
+    assert.equal((await get(41733, "/privacy", { Host: RW })).headers.get("location"), "/privacidad", "alias legal sigue en Railway");
+    assert.equal((await get(41733, "/privacidad", { Host: "clonexa.com.co" })).status, 301, "raiz siempre a www");
+    assert.equal((await get(41733, "/", { Host: "localhost:8080" })).status, 200, "otros hosts sin redireccion");
   } finally {
     www.kill();
   }

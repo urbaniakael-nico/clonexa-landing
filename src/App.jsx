@@ -1,31 +1,41 @@
 import React from "react";
 import { sendEvent, trackPageView } from "./analytics.js";
 import {
-  BUSINESS_TYPES,
+  BUILDER_DEFAULT,
+  BUILDER_MODULES,
   CASES,
+  COMMERCE_ITEMS,
   COMPARISON,
-  DEMO_TABS,
+  EXAMPLE_STEPS,
   FAQ,
-  FLOW_STEPS,
   HERO_CHECKS,
+  HERO_SHOT,
+  INDUSTRIES,
   LEGAL_LINKS,
   NAV_LINKS,
   NEXA_VIDEO_POSTER,
   NEXA_VIDEO_URL,
+  PATHS,
   PLANS,
-  PROBLEMS,
+  PLAN_CTA,
+  PROCESS,
   SHOTS,
   SOCIAL,
+  SOLUTIONS,
   WA_GENERAL,
+  builderSummary,
+  builderWhatsapp,
   demoRequestMessage,
   planWhatsapp,
-  tabWhatsapp,
+  solutionWhatsapp,
   waLink
 } from "./content.js";
 import { validateDemoForm } from "./form.js";
 import { SOCIAL_ICONS, WhatsappIcon } from "./icons.jsx";
 
 const THEME_KEY = "clonexa_theme";
+// Tiempo de cada paso en los recorridos automaticos.
+const STEP_MS = 5000;
 
 function currentTheme() {
   return document.documentElement.dataset.theme === "light" ? "light" : "dark";
@@ -63,6 +73,26 @@ function useTheme() {
   return [theme, setTheme];
 }
 
+function prefersReducedMotion() {
+  return Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
+}
+
+// true mientras el elemento esta en pantalla (los recorridos solo avanzan si se ven).
+function useInView(ref) {
+  const [inView, setInView] = React.useState(false);
+  React.useEffect(() => {
+    const node = ref.current;
+    if (!node || !("IntersectionObserver" in window)) {
+      setInView(true);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.35 });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [ref]);
+  return inView;
+}
+
 function Logo({ className = "" }) {
   return (
     <span className={`logo ${className}`}>
@@ -84,10 +114,12 @@ function ThemeSwitch({ theme, setTheme }) {
   return (
     <div className="themeSwitch" role="group" aria-label="Tema de la página">
       <button type="button" aria-pressed={theme === "dark"} onClick={() => setTheme("dark")}>
-        <span aria-hidden="true">🌙</span> Oscuro
+        <span aria-hidden="true">🌙</span>
+        <span className="themeLabel"> Oscuro</span>
       </button>
       <button type="button" aria-pressed={theme === "light"} onClick={() => setTheme("light")}>
-        <span aria-hidden="true">☀️</span> Claro
+        <span aria-hidden="true">☀️</span>
+        <span className="themeLabel"> Claro</span>
       </button>
     </div>
   );
@@ -95,24 +127,45 @@ function ThemeSwitch({ theme, setTheme }) {
 
 function Header({ theme, setTheme }) {
   return (
-    <header className="wrap nav">
-      <a href="#inicio" className="navBrand" aria-label="Clonexa, ir al inicio">
-        <Logo />
-      </a>
-      <nav className="navLinks" aria-label="Secciones">
-        {NAV_LINKS.map(([href, label]) => (
-          <a key={href} href={href}>
-            {label}
-          </a>
-        ))}
-      </nav>
-      <div className="navRight">
-        <ThemeSwitch theme={theme} setTheme={setTheme} />
-        <a href="#agenda" className="btn btnSmall navCta">
-          Agenda tu demo
+    <div className="navBar">
+      <header className="wrap nav">
+        <a href="#inicio" className="navBrand" aria-label="Clonexa, ir al inicio">
+          <Logo />
         </a>
-      </div>
-    </header>
+        <nav className="navLinks" aria-label="Secciones">
+          {NAV_LINKS.map(([href, label]) => (
+            <a key={href} href={href}>
+              {label}
+            </a>
+          ))}
+        </nav>
+        <div className="navRight">
+          <ThemeSwitch theme={theme} setTheme={setTheme} />
+          <a href="#agenda" className="btn btnSmall navCta">
+            Agenda tu demo
+          </a>
+        </div>
+      </header>
+    </div>
+  );
+}
+
+// Captura real de Clonexa: celular (390 px) o pantalla (1280 px), con su version pequena.
+function ShotImage({ id, sizes, eager = false, className = "" }) {
+  const shot = SHOTS[id];
+  return (
+    <img
+      className={`shotImg shot-${shot.frame} ${className}`}
+      src={shot.src}
+      srcSet={`${shot.srcSm} ${shot.smWidth}w, ${shot.src} ${shot.width}w`}
+      sizes={sizes}
+      alt={shot.alt}
+      width={shot.width}
+      height={shot.height}
+      loading={eager ? "eager" : "lazy"}
+      fetchpriority={eager ? "high" : undefined}
+      decoding={eager ? "sync" : "async"}
+    />
   );
 }
 
@@ -146,7 +199,7 @@ function NexaVideo() {
         {!playing && (
           <button type="button" className="nexaPlay" onClick={play}>
             <span className="nexaCircle" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="30" height="30">
+              <svg viewBox="0 0 24 24" width="26" height="26">
                 <path d="M8 5v14l11-7z" fill="currentColor" />
               </svg>
             </span>
@@ -164,44 +217,56 @@ function Hero() {
   return (
     <section id="inicio" className="wrap hero">
       <div className="heroCopy">
-        <p className="tag">Mucho más que un POS · Sistema operativo para tu negocio</p>
+        <p className="kicker">SOFTWARE A LA MEDIDA · EN LA NUBE</p>
         <h1>
-          Todo tu negocio, <span className="grad">no solo la caja.</span>
+          Si tu negocio lo hace, <span className="grad">Clonexa lo conecta.</span>
         </h1>
         <p className="lead">
-          Pedidos, cocina, caja, inventario, turnos, nómina, clientes y reportes en un solo sistema. Se adapta a tu
-          forma de trabajar. Tarifa plana, con usuarios ilimitados.
+          Desde un restaurante hasta una distribuidora con call center, bodega, rutas y vendedores: construimos el
+          sistema que tu operación necesita y lo conectamos todo en un solo lugar.
         </p>
         <div className="heroActions">
           <a href="#agenda" className="btn">
             Agenda tu demo gratis
           </a>
-          <a href="#demo" className="btn btnGhost">
-            <span aria-hidden="true">▶</span> Ver demo en vivo
+          <a href="#arma" className="btn btnGhost">
+            <span aria-hidden="true">🧩</span> Arma tu sistema
           </a>
         </div>
         <ul className="checks">
-          {HERO_CHECKS.map(([bold, rest]) => (
-            <li key={bold + rest}>
+          {HERO_CHECKS.map((parts) => (
+            <li key={parts.join("")}>
               <span className="checkMark" aria-hidden="true">
                 ✓
               </span>{" "}
-              {bold && <strong>{bold}</strong>}
-              {rest}
+              {parts.length === 3 ? (
+                <>
+                  <strong>{parts[0]}</strong>
+                  {parts[1]}
+                  <strong>{parts[2]}</strong>
+                </>
+              ) : (
+                parts[1]
+              )}
             </li>
           ))}
         </ul>
       </div>
-      <NexaVideo />
+      <div className="heroShow">
+        <div className="heroScreen">
+          <ShotImage id={HERO_SHOT} eager sizes="(max-width: 760px) 92vw, (max-width: 1180px) 50vw, 600px" />
+        </div>
+        <NexaVideo />
+      </div>
     </section>
   );
 }
 
-function BusinessStrip() {
+function Industries() {
   return (
-    <section id="negocios" className="wrap strip" aria-label="Tipos de negocio">
+    <section className="wrap strip" aria-label="Industrias">
       <ul>
-        {BUSINESS_TYPES.map(([icon, label]) => (
+        {INDUSTRIES.map(([icon, label]) => (
           <li key={label}>
             <span aria-hidden="true">{icon}</span> {label}
           </li>
@@ -221,23 +286,33 @@ function SectionHead({ kicker, title, sub, id }) {
   );
 }
 
-function Problems() {
+function TwoPaths() {
   return (
-    <section className="wrap section" aria-labelledby="problema-titulo">
+    <section id="medida" className="wrap section" aria-labelledby="caminos-titulo">
       <SectionHead
-        id="problema-titulo"
-        kicker="EL PROBLEMA"
-        title="¿Te suena familiar?"
-        sub="Lo que vemos en casi todos los negocios antes de Clonexa."
+        id="caminos-titulo"
+        kicker="DOS CAMINOS"
+        title={
+          <>
+            Empieza con lo listo. <span className="grad gradInline">Crece a la medida.</span>
+          </>
+        }
+        sub="No te vendemos un programa cerrado. Clonexa se arma por módulos: usas lo que ya funciona y construimos lo que tu operación necesita, conectado con todo lo demás."
       />
-      <div className="grid3">
-        {PROBLEMS.map((item) => (
-          <article className="card" key={item.title}>
-            <div className="cardIcon" aria-hidden="true">
-              {item.icon}
-            </div>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
+      <div className="paths">
+        {PATHS.map((path) => (
+          <article className={`card path path-${path.id}`} key={path.id}>
+            <p className="pill">{path.tag}</p>
+            <h3>{path.title}</h3>
+            <p>{path.text}</p>
+            <ul>
+              {path.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <a href={path.cta[0]} className={`btn${path.id === "listo" ? " btnGhost" : ""}`}>
+              {path.cta[1]}
+            </a>
           </article>
         ))}
       </div>
@@ -245,129 +320,275 @@ function Problems() {
   );
 }
 
-// Captura real en marco de celular o de pantalla; sin archivo, "Captura proximamente".
-function Shot({ id, frame = "screen", label, sizes }) {
-  const shot = SHOTS[id];
-  const [failed, setFailed] = React.useState(false);
-  const ready = shot?.src && !failed;
+function Builder() {
+  const [selected, setSelected] = React.useState(BUILDER_DEFAULT);
+  const { chosen, level, percent } = builderSummary(selected);
+
+  function toggle(name) {
+    setSelected((current) => (current.includes(name) ? current.filter((item) => item !== name) : [...current, name]));
+  }
+
   return (
-    <div className={`shot shot-${frame}`}>
-      <div className="shotFrame">
-        {ready ? (
-          <img
-            src={shot.src}
-            srcSet={`${shot.src.replace(".webp", "-sm.webp")} ${Math.round(shot.width / 2)}w, ${shot.src} ${shot.width}w`}
-            alt={shot.alt}
-            width={shot.width}
-            height={shot.height}
-            loading="lazy"
-            decoding="async"
-            sizes={sizes}
-            onError={() => setFailed(true)}
-          />
-        ) : (
-          <div className="shotSoon" role="img" aria-label={`${label}: captura próximamente`}>
-            <span className="shotSoonLabel">{label}</span>
-            <span>Captura próximamente</span>
+    <section id="arma" className="wrap section" aria-labelledby="arma-titulo">
+      <SectionHead
+        id="arma-titulo"
+        kicker="INTERACTIVO"
+        title="Arma tu sistema en 30 segundos"
+        sub="Toca lo que necesita tu empresa. Te armamos la propuesta y te mostramos la demo con eso conectado."
+      />
+      <div className="builder">
+        <ul className="chips" aria-label="Módulos">
+          {BUILDER_MODULES.map(([icon, name]) => (
+            <li key={name}>
+              <button type="button" className="chip" aria-pressed={selected.includes(name)} onClick={() => toggle(name)}>
+                <span aria-hidden="true">{icon}</span> {name}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div className="result">
+          <h3>Tu sistema Clonexa</h3>
+          <p className="resultSub" aria-live="polite">
+            {chosen.length ? `${chosen.length} módulos conectados entre sí · un solo sistema` : "Elige al menos un módulo"}
+          </p>
+          <ul className="stack" aria-label="Módulos elegidos">
+            {chosen.map(([icon, name]) => (
+              <li className="blk" key={name}>
+                <span className="dot" aria-hidden="true" />
+                <span aria-hidden="true">{icon}</span> {name}
+              </li>
+            ))}
+          </ul>
+          <div className="meter">
+            <span>Tipo de proyecto: {level || "—"}</span>
+            <div className="meterBar" aria-hidden="true">
+              <b style={{ width: `${percent}%` }} />
+            </div>
           </div>
+          {chosen.length ? (
+            <ExternalLink href={builderWhatsapp(selected)} className="btn btnBlock" data-wa="arma-tu-sistema">
+              <span aria-hidden="true">💬</span> Cotizar este sistema por WhatsApp
+            </ExternalLink>
+          ) : (
+            <button type="button" className="btn btnBlock" disabled>
+              <span aria-hidden="true">💬</span> Cotizar este sistema por WhatsApp
+            </button>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Recorrido por pasos con capturas reales: flechas, pasos y avance automatico (pausable).
+function Sequence({ steps, label, variant = "solution", legend }) {
+  const ref = React.useRef(null);
+  const inView = useInView(ref);
+  const [index, setIndex] = React.useState(0);
+  const [playing, setPlaying] = React.useState(() => !prefersReducedMotion());
+  const [held, setHeld] = React.useState(false);
+  const running = playing && !held && inView && steps.length > 1;
+  const step = steps[index];
+
+  React.useEffect(() => {
+    if (!running) return undefined;
+    const timer = setTimeout(() => setIndex((i) => (i + 1) % steps.length), STEP_MS);
+    return () => clearTimeout(timer);
+  }, [running, index, steps.length]);
+
+  const go = (next) => setIndex((next + steps.length) % steps.length);
+  const phone = SHOTS[step.shot].frame === "phone";
+
+  return (
+    <div
+      ref={ref}
+      className={`seq seq-${variant}${running ? " seqRunning" : ""}`}
+      style={{ "--step-ms": `${STEP_MS}ms` }}
+      onPointerEnter={() => setHeld(true)}
+      onPointerLeave={() => setHeld(false)}
+      onFocus={() => setHeld(true)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setHeld(false);
+      }}
+    >
+      <div className="seqTop">
+        <ol className="seqSteps" aria-label={`Pasos: ${label}`}>
+          {steps.map((item, i) => (
+            <li key={item.shot}>
+              <button type="button" aria-current={i === index ? "step" : undefined} onClick={() => go(i)}>
+                <span className="seqNum">PASO {i + 1}</span>
+                <span className="seqTitle">{item.title}</span>
+                <span className="seqProgress" aria-hidden="true" key={i === index ? `on-${index}` : "off"} />
+              </button>
+            </li>
+          ))}
+        </ol>
+        {steps.length > 1 && (
+          <button type="button" className="seqPlay" aria-pressed={playing} onClick={() => setPlaying((p) => !p)}>
+            <span aria-hidden="true">{playing ? "⏸" : "▶"}</span> Recorrido automático
+          </button>
         )}
+      </div>
+      <div className="seqStage">
+        <div className="seqText">
+          <p className="pill">
+            PASO {index + 1} DE {steps.length}
+          </p>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+          {legend && <p className="legend">{legend}</p>}
+          {steps.length > 1 && (
+            <div className="seqArrows">
+              <button type="button" onClick={() => go(index - 1)} aria-label="Paso anterior">
+                ←
+              </button>
+              <button type="button" onClick={() => go(index + 1)} aria-label="Paso siguiente">
+                →
+              </button>
+            </div>
+          )}
+        </div>
+        <div className={`seqMedia${phone ? " seqMediaPhone" : ""}`}>
+          {steps.map((item, i) => {
+            const active = i === index;
+            const shot = SHOTS[item.shot];
+            return (
+              <a
+                key={item.shot}
+                href={shot.src}
+                target="_blank"
+                rel="noopener"
+                className={`seqShot${active ? " seqShotOn" : ""}`}
+                aria-hidden={active ? undefined : true}
+                tabIndex={active ? undefined : -1}
+                aria-label={active ? `Ampliar captura: ${item.title}` : undefined}
+              >
+                <ShotImage id={item.shot} sizes={shot.frame === "phone" ? "260px" : "(max-width: 760px) 92vw, 720px"} />
+              </a>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
 }
 
-function Flow() {
+function Example() {
   return (
-    <section className="wrap section" aria-labelledby="flujo-titulo">
-      <SectionHead
-        id="flujo-titulo"
-        kicker="CÓMO FUNCIONA"
-        title="Un pedido, de principio a fin"
-        sub="Del celular del mesero a la caja y al reporte, sin papeles y en tiempo real."
-      />
-      <ol className="grid4 flow">
-        {FLOW_STEPS.map((step, index) => (
-          <li className="card flowCard" key={step.title}>
-            <Shot id={step.shot} frame={step.frame} label={step.label} sizes={step.frame === "phone" ? "140px" : "(max-width: 520px) 92vw, (max-width: 1040px) 45vw, 270px"} />
-            <p className="step">PASO {index + 1}</p>
-            <h3>{step.title}</h3>
-            <p>{step.text}</p>
-          </li>
-        ))}
-      </ol>
+    <section id="ejemplo" className="wrap section" aria-labelledby="ejemplo-titulo">
+      <div className="demoBox">
+        <SectionHead
+          id="ejemplo-titulo"
+          kicker="EJEMPLO EN ACCIÓN"
+          title="Tiendas, call center, bodega y gerencia en un solo sistema"
+        />
+        <Sequence
+          steps={EXAMPLE_STEPS}
+          label="Ejemplo en acción"
+          variant="example"
+          legend="Ejemplo ilustrativo con datos inventados."
+        />
+      </div>
     </section>
   );
 }
 
-function DemoTabs() {
-  const [active, setActive] = React.useState(DEMO_TABS[0].id);
+function Solutions() {
+  const [active, setActive] = React.useState(SOLUTIONS[0].id);
   const tabRefs = React.useRef({});
-  const current = DEMO_TABS.find((tab) => tab.id === active) || DEMO_TABS[0];
+  const current = SOLUTIONS.find((tab) => tab.id === active) || SOLUTIONS[0];
 
   function onKeyDown(event) {
-    const index = DEMO_TABS.findIndex((tab) => tab.id === active);
+    const index = SOLUTIONS.findIndex((tab) => tab.id === active);
     let next = null;
-    if (event.key === "ArrowRight") next = (index + 1) % DEMO_TABS.length;
-    if (event.key === "ArrowLeft") next = (index - 1 + DEMO_TABS.length) % DEMO_TABS.length;
+    if (event.key === "ArrowRight") next = (index + 1) % SOLUTIONS.length;
+    if (event.key === "ArrowLeft") next = (index - 1 + SOLUTIONS.length) % SOLUTIONS.length;
     if (event.key === "Home") next = 0;
-    if (event.key === "End") next = DEMO_TABS.length - 1;
+    if (event.key === "End") next = SOLUTIONS.length - 1;
     if (next === null) return;
     event.preventDefault();
-    const id = DEMO_TABS[next].id;
+    const id = SOLUTIONS[next].id;
     setActive(id);
     tabRefs.current[id]?.focus();
   }
 
   return (
-    <section id="demo" className="wrap section" aria-labelledby="demo-titulo">
-      <div className="demoBox">
-        <SectionHead
-          id="demo-titulo"
-          kicker="DEMO EN VIVO"
-          title="Míralo funcionando en tu tipo de negocio"
-          sub="Pantallas reales de Clonexa. Elige tu negocio."
-        />
-        <div className="tabs" role="tablist" aria-label="Tipo de negocio" onKeyDown={onKeyDown}>
-          {DEMO_TABS.map((tab) => (
-            <button
-              key={tab.id}
-              ref={(node) => {
-                tabRefs.current[tab.id] = node;
-              }}
-              type="button"
-              role="tab"
-              id={`tab-${tab.id}`}
-              aria-selected={tab.id === active}
-              aria-controls={`panel-${tab.id}`}
-              tabIndex={tab.id === active ? 0 : -1}
-              className="tab"
-              onClick={() => setActive(tab.id)}
-            >
-              <span aria-hidden="true">{tab.icon}</span> {tab.label}
-            </button>
+    <section id="soluciones" className="wrap section" aria-labelledby="soluciones-titulo">
+      <SectionHead
+        id="soluciones-titulo"
+        kicker="SOLUCIONES LISTAS"
+        title="Míralo funcionando en tu tipo de negocio"
+        sub="Pantallas reales de Clonexa con datos de ejemplo."
+      />
+      <div className="tabs" role="tablist" aria-label="Tipo de negocio" onKeyDown={onKeyDown}>
+        {SOLUTIONS.map((tab) => (
+          <button
+            key={tab.id}
+            ref={(node) => {
+              tabRefs.current[tab.id] = node;
+            }}
+            type="button"
+            role="tab"
+            id={`tab-${tab.id}`}
+            aria-selected={tab.id === active}
+            aria-controls={`panel-${tab.id}`}
+            tabIndex={tab.id === active ? 0 : -1}
+            className="tab"
+            onClick={() => setActive(tab.id)}
+          >
+            <span aria-hidden="true">{tab.icon}</span> {tab.label}
+          </button>
+        ))}
+      </div>
+      <div className="tabPanel" role="tabpanel" id={`panel-${current.id}`} aria-labelledby={`tab-${current.id}`}>
+        <div className="tabSide">
+          <ul className="benefits">
+            {current.items.map(([bold, rest]) => (
+              <li key={bold}>
+                <strong>{bold}</strong>
+                {rest}
+              </li>
+            ))}
+          </ul>
+          <ExternalLink href={solutionWhatsapp(current)} className="btn" data-wa={current.id}>
+            Quiero verlo en mi {current.business}
+          </ExternalLink>
+        </div>
+        <Sequence key={current.id} steps={current.steps} label={current.label} />
+      </div>
+    </section>
+  );
+}
+
+function Commerce() {
+  return (
+    <section className="wrap section" aria-labelledby="tienda-titulo">
+      <div className="card commerce">
+        <div>
+          <SectionHead
+            id="tienda-titulo"
+            kicker="COMERCIO ELECTRÓNICO"
+            title="Tu propia tienda en línea o marketplace"
+            sub="Catálogo, carrito, pagos en línea, varios vendedores, envíos y seguimiento del pedido, conectados a tu bodega, tu caja y tus reportes. Sin pagar comisión por cada venta a una plataforma ajena."
+          />
+          <ExternalLink
+            href={waLink("Hola Clonexa, quiero cotizar mi tienda en línea.")}
+            className="btn"
+            data-wa="tienda-en-linea"
+          >
+            Quiero mi tienda en línea
+          </ExternalLink>
+        </div>
+        <ul className="commerceList">
+          {COMMERCE_ITEMS.map((item) => (
+            <li key={item}>
+              <span className="checkMark" aria-hidden="true">
+                ✓
+              </span>{" "}
+              {item}
+            </li>
           ))}
-        </div>
-        <div
-          className="tabPanel"
-          role="tabpanel"
-          id={`panel-${current.id}`}
-          aria-labelledby={`tab-${current.id}`}
-        >
-          <div>
-            <ul className="benefits">
-              {current.items.map(([bold, rest]) => (
-                <li key={bold}>
-                  <strong>{bold}</strong>
-                  {rest}
-                </li>
-              ))}
-            </ul>
-            <ExternalLink href={tabWhatsapp(current)} className="btn" data-wa={current.id}>
-              Quiero verlo en mi {current.business}
-            </ExternalLink>
-          </div>
-          <Shot key={current.id} id={current.shot} label={current.label} sizes="(max-width: 760px) 92vw, 620px" />
-        </div>
+        </ul>
       </div>
     </section>
   );
@@ -398,8 +619,8 @@ function Comparison() {
       <SectionHead
         id="diferencia-titulo"
         kicker="LA DIFERENCIA"
-        title="Clonexa vs. un POS común"
-        sub="Un POS te ayuda a cobrar. Clonexa te ayuda a manejar todo el negocio."
+        title="Software genérico vs. Clonexa"
+        sub="Un programa genérico te obliga a trabajar como él quiere. Clonexa se adapta a como trabaja tu empresa."
       />
       <table className="compare">
         <thead>
@@ -407,18 +628,18 @@ function Comparison() {
             <th scope="col">
               <span className="srOnly">Función</span>
             </th>
-            <th scope="col">POS común</th>
+            <th scope="col">Software genérico</th>
             <th scope="col" className="cx">
               Clonexa
             </th>
           </tr>
         </thead>
         <tbody>
-          {COMPARISON.map(([feature, pos, clonexa]) => (
+          {COMPARISON.map(([feature, generic, clonexa]) => (
             <tr key={feature}>
               <th scope="row">{feature}</th>
               <td>
-                <Mark value={pos} />
+                <Mark value={generic} />
               </td>
               <td className="cx">
                 <Mark value={clonexa} />
@@ -427,6 +648,30 @@ function Comparison() {
           ))}
         </tbody>
       </table>
+    </section>
+  );
+}
+
+function Process() {
+  return (
+    <section className="wrap section" aria-labelledby="proceso-titulo">
+      <SectionHead
+        id="proceso-titulo"
+        kicker="CÓMO TRABAJAMOS"
+        title="De la idea a tu sistema funcionando"
+        sub="Construimos por etapas: empiezas a usarlo rápido y lo vamos ampliando contigo."
+      />
+      <ol className="grid4">
+        {PROCESS.map(([title, text], index) => (
+          <li className="card" key={title}>
+            <span className="num" aria-hidden="true">
+              {index + 1}
+            </span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }
@@ -460,7 +705,7 @@ function Plans() {
         id="planes-titulo"
         kicker="PLANES"
         title="Un precio fijo. Usuarios ilimitados."
-        sub="Pagas una mensualidad fija según los módulos que necesitas. Sin cobro por usuario ni por caja."
+        sub="Mensualidad fija según los módulos. Los desarrollos a la medida se cotizan por etapas."
       />
       <div className="plans">
         {PLANS.map((plan) => (
@@ -482,9 +727,9 @@ function Plans() {
               href={planWhatsapp(plan)}
               className={`btn btnBlock${plan.recommended ? "" : " btnGhost"}`}
               data-wa={`plan-${plan.id}`}
-              aria-label={`${plan.cta}: ${plan.name}`}
+              aria-label={`${PLAN_CTA}: ${plan.name}`}
             >
-              {plan.cta}
+              {PLAN_CTA}
             </ExternalLink>
           </article>
         ))}
@@ -494,7 +739,7 @@ function Plans() {
 }
 
 function Faq() {
-  const [open, setOpen] = React.useState(-1);
+  const [open, setOpen] = React.useState(0);
   return (
     <section id="preguntas" className="wrap section" aria-labelledby="faq-titulo">
       <SectionHead id="faq-titulo" kicker="PREGUNTAS" title="Preguntas frecuentes" />
@@ -578,7 +823,7 @@ function DemoForm() {
         <div>
           <h2 id="agenda-titulo">Agenda tu demo gratis</h2>
           <p className="ctaSub">
-            Te mostramos Clonexa funcionando con un negocio como el tuyo. 20 minutos, sin compromiso.
+            Te mostramos Clonexa funcionando con una empresa como la tuya. 20 minutos, sin compromiso.
           </p>
         </div>
         {sentLink ? (
@@ -595,9 +840,9 @@ function DemoForm() {
         ) : (
           <form className="demoForm" onSubmit={submit} noValidate>
             {field("name", "Tu nombre", { autoComplete: "name", placeholder: "Tu nombre" })}
-            {field("business", "Nombre y tipo de negocio", {
+            {field("business", "Empresa y tipo de negocio", {
               autoComplete: "organization",
-              placeholder: "Ej: La Brasa, asadero"
+              placeholder: "Ej: La Brasa, restaurante"
             })}
             {field("whatsapp", "WhatsApp", {
               type: "tel",
@@ -618,8 +863,8 @@ function DemoForm() {
 function Follow() {
   return (
     <section className="wrap follow" aria-labelledby="siguenos-titulo">
-      <h2 id="siguenos-titulo">Síguenos y recibe descuentos exclusivos</h2>
-      <p>Tips para tu negocio, novedades de Clonexa y promociones solo para seguidores.</p>
+      <h2 id="siguenos-titulo">Síguenos y obtén descuento en tu desarrollo</h2>
+      <p>Tips para tu negocio, novedades de Clonexa y promociones exclusivas para seguidores.</p>
       <ul className="social">
         {SOCIAL.map((item) => {
           const Icon = SOCIAL_ICONS[item.id];
@@ -653,27 +898,40 @@ function Footer() {
   );
 }
 
-// Boton flotante: se esconde mientras el formulario esta en pantalla.
+// Boton flotante: se esconde mientras el formulario o el pie estan en pantalla
+// y, en celular, mientras se ve el hero (no tapa el video de Nexa).
 function FloatingWhatsapp() {
-  const [hidden, setHidden] = React.useState(false);
+  const [hidden, setHidden] = React.useState(() => Boolean(window.matchMedia?.("(max-width: 760px)").matches));
   React.useEffect(() => {
-    const target = document.getElementById("agenda");
-    if (!target || !("IntersectionObserver" in window)) return undefined;
-    const observer = new IntersectionObserver(([entry]) => setHidden(entry.isIntersecting), { threshold: 0.05 });
-    observer.observe(target);
+    const mobile = Boolean(window.matchMedia?.("(max-width: 760px)").matches);
+    const targets = [mobile && document.getElementById("inicio"), document.getElementById("agenda"), document.querySelector(".footer")].filter(
+      Boolean
+    );
+    if (!targets.length || !("IntersectionObserver" in window)) return undefined;
+    const visible = new Set();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => (entry.isIntersecting ? visible.add(entry.target) : visible.delete(entry.target)));
+        setHidden(visible.size > 0);
+      },
+      { threshold: 0.05 }
+    );
+    targets.forEach((target) => observer.observe(target));
     return () => observer.disconnect();
   }, []);
   return (
-    <ExternalLink
-      href={WA_GENERAL}
-      className={`waFloat${hidden ? " waHidden" : ""}`}
-      aria-label="Escríbenos por WhatsApp"
-      data-wa="flotante"
-      tabIndex={hidden ? -1 : undefined}
-      aria-hidden={hidden || undefined}
-    >
-      <WhatsappIcon />
-    </ExternalLink>
+    <aside aria-label="Contacto por WhatsApp">
+      <ExternalLink
+        href={WA_GENERAL}
+        className={`waFloat${hidden ? " waHidden" : ""}`}
+        aria-label="Escríbenos por WhatsApp"
+        data-wa="flotante"
+        tabIndex={hidden ? -1 : undefined}
+        aria-hidden={hidden || undefined}
+      >
+        <WhatsappIcon />
+      </ExternalLink>
+    </aside>
   );
 }
 
@@ -692,11 +950,14 @@ export default function App() {
       <Header theme={theme} setTheme={setTheme} />
       <main id="contenido">
         <Hero />
-        <BusinessStrip />
-        <Problems />
-        <Flow />
-        <DemoTabs />
+        <Industries />
+        <TwoPaths />
+        <Builder />
+        <Example />
+        <Solutions />
+        <Commerce />
         <Comparison />
+        <Process />
         <Cases />
         <Plans />
         <Faq />

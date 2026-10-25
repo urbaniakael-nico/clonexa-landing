@@ -152,3 +152,48 @@ test("gzip devuelve el mismo contenido", { skip: !HAS_DIST && "sin dist/" }, asy
     server.kill();
   }
 });
+
+test("SEO: robots exacto, sitemap www, sin noindex ni X-Robots-Tag, titulo, JSON-LD y favicon", { skip: !HAS_DIST && "sin dist/" }, async () => {
+  const server = await startServer(41735);
+  try {
+    const robots = await (await get(41735, "/robots.txt")).text();
+    assert.equal(robots.replace(/\r\n/g, "\n").trim(), "User-agent: *\nAllow: /\n\nSitemap: https://www.clonexa.com.co/sitemap.xml");
+    assert.doesNotMatch(robots, /Disallow/i);
+
+    const sitemap = await (await get(41735, "/sitemap.xml")).text();
+    const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    assert.deepEqual(locs, ["/", "/privacidad", "/terminos", "/borrar-datos"].map((p) => `https://www.clonexa.com.co${p}`));
+    assert.equal((sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) || []).length, 4);
+
+    for (const p of ["/", "/privacidad", "/terminos", "/borrar-datos", "/robots.txt", "/sitemap.xml"]) {
+      const res = await get(41735, p);
+      assert.equal(res.status, 200, p);
+      assert.equal(res.headers.get("x-robots-tag"), null, `${p}: X-Robots-Tag`);
+      assert.doesNotMatch(await res.text(), /noindex|nofollow/i, `${p}: noindex`);
+    }
+
+    const html = await (await get(41735, "/")).text();
+    assert.match(html, /<title>Clonexa \|[^<]+<\/title>/);
+    assert.match(html, /<meta\s+name="description"\s+content="[^"]{50,160}"/);
+    const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    const org = ld["@graph"].find((n) => n["@type"] === "Organization");
+    const site = ld["@graph"].find((n) => n["@type"] === "WebSite");
+    assert.equal(org.name, "Clonexa");
+    assert.equal(org.url, "https://www.clonexa.com.co/");
+    assert.equal(site.name, "Clonexa");
+    assert.equal(site.url, "https://www.clonexa.com.co/");
+    const { SOCIAL } = await import("../src/content.js");
+    assert.deepEqual(org.sameAs, SOCIAL.map((s) => s.url.replace("?utm_source=web", "")), "sameAs = redes de Siguenos");
+    assert.equal((await get(41735, new URL(org.logo).pathname)).status, 200, "logo");
+
+    for (const [p, size] of [["/favicon-48.png", 48], ["/favicon-96.png", 96]]) {
+      assert.match(html, new RegExp(`href="${p}" type="image/png" sizes="${size}x${size}"`));
+      assert.equal((await get(41735, p)).status, 200, p);
+      const png = fs.readFileSync(path.join(ROOT, "dist", p));
+      assert.equal(png.readUInt32BE(16), size, `${p} ancho`);
+      assert.equal(png.readUInt32BE(20), size, `${p} alto`);
+    }
+  } finally {
+    server.kill();
+  }
+});

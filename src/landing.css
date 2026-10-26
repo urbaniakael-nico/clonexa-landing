@@ -2153,3 +2153,21 @@ html {
     gap: 8px;
   }
 }
+
+/* Boton de sonido del video de Nexa (los controles nativos lo esconden en el celular pequeno) */
+.nexaSound {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(10, 7, 16, 0.65);
+  color: #fff;
+  cursor: pointer;
+}

@@ -1,8 +1,8 @@
 // Textos, enlaces y capturas de la landing v4.
 
 // Video vertical de Nexa en el hero: cambiar aqui cuando este el video final.
-export const NEXA_VIDEO_URL = "/nexa-prueba.mp4";
-export const NEXA_VIDEO_POSTER = "/capturas/nexa-poster.webp";
+export const NEXA_VIDEO_URL = "/nexa-presentacion.mp4";
+export const NEXA_VIDEO_POSTER = "/capturas/nexa-presentacion-poster.webp";
 
 // WhatsApp: solo enlaces wa.me, el numero nunca se muestra como texto.
 const WHATSAPP_ID = "13468244098";

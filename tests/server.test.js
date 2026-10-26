@@ -48,7 +48,7 @@ test("rutas que deben seguir respondiendo", { skip: !HAS_DIST && "sin dist/ (cor
   try {
     const tiktok = fs.readdirSync(path.join(ROOT, "public")).filter((f) => /^tiktok.*\.txt$/.test(f));
     assert.ok(tiktok.length >= 2, "faltan los archivos de verificacion de TikTok");
-    for (const p of ["/", "/privacidad", "/privacidad/", "/terminos", "/borrar-datos", "/nexa-prueba.mp4", "/robots.txt", "/sitemap.xml",
+    for (const p of ["/", "/privacidad", "/privacidad/", "/terminos", "/borrar-datos", "/nexa-prueba.mp4", "/nexa-presentacion.mp4", "/capturas/nexa-presentacion-poster.webp", "/robots.txt", "/sitemap.xml",
       "/favicon.ico", "/apple-touch-icon.png", "/og-clonexa.png", "/brand/clonexa-logo.svg", "/brand/clonexa-logo-claro.svg", ...tiktok.map((f) => `/${f}`)]) {
       const res = await get(port, p);
       assert.equal(res.status, 200, `${p} -> ${res.status}`);
@@ -69,6 +69,10 @@ test("rutas que deben seguir respondiendo", { skip: !HAS_DIST && "sin dist/ (cor
     assert.match(legal, /Política de privacidad/);
     assert.match(legal, /href="https:\/\/www\.clonexa\.com\.co\/privacidad"/);
 
+    const nexa = await get(port, "/nexa-presentacion.mp4", { Range: "bytes=0-1023" });
+    assert.equal(nexa.status, 206, "video del hero con rangos");
+    assert.equal(nexa.headers.get("content-type"), "video/mp4");
+
     const range = await get(port, "/nexa-prueba.mp4", { Range: "bytes=0-99" });
     assert.equal(range.status, 206);
     assert.equal(range.headers.get("content-length"), "100");
@@ -77,6 +81,13 @@ test("rutas que deben seguir respondiendo", { skip: !HAS_DIST && "sin dist/ (cor
     const gz = await get(port, "/");
     assert.equal(gz.status, 200);
     const html = await gz.text();
+    // Video de Nexa en el hero: el nuevo, con portada y sin precargar completo.
+    const video = html.match(/<video[^>]*>/)[0];
+    assert.match(video, /src="\/nexa-presentacion\.mp4"/);
+    assert.match(video, /poster="\/capturas\/nexa-presentacion-poster\.webp"/);
+    assert.match(video, /preload="(none|metadata)"/);
+    assert.doesNotMatch(video, /autoplay/);
+    assert.match(html, /Nexa es una presentadora creada con IA/);
     assert.match(html, /<link rel="canonical" href="https:\/\/www\.clonexa\.com\.co\/"/);
     assert.match(html, /property="og:url" content="https:\/\/www\.clonexa\.com\.co\/"/);
     assert.match(html, /og-clonexa\.png/);

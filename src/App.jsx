@@ -29,13 +29,27 @@ import { DemoForm, ExternalLink, FaqList, Follow, SectionHead, Sequence, ShotIma
 function NexaVideo() {
   const ref = React.useRef(null);
   const [playing, setPlaying] = React.useState(false);
+  const [muted, setMuted] = React.useState(true);
 
+  // El toque en "play" permite sonido; si el navegador lo bloquea, arranca sin sonido.
+  // Ademas de los controles nativos hay un boton de sonido propio: en el celular del hero
+  // (132 px) Chrome esconde el boton de volumen de sus controles.
   function play() {
     const video = ref.current;
     if (!video) return;
-    video.muted = true;
+    video.muted = false;
     setPlaying(true);
-    video.play().catch(() => setPlaying(false));
+    video.play().catch(() => {
+      video.muted = true;
+      video.play().catch(() => setPlaying(false));
+    });
+  }
+
+  function toggleSound() {
+    const video = ref.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setMuted(video.muted);
   }
 
   return (
@@ -51,8 +65,21 @@ function NexaVideo() {
           preload="none"
           controls={playing}
           aria-label="Video: Nexa te presenta Clonexa"
+          onVolumeChange={(event) => setMuted(event.currentTarget.muted)}
           onEnded={() => setPlaying(false)}
         />
+        {playing && (
+          <button type="button" className="nexaSound" onClick={toggleSound} aria-label={muted ? "Activar sonido" : "Silenciar"}>
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
+              {muted ? (
+                <path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              ) : (
+                <path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" />
+              )}
+            </svg>
+          </button>
+        )}
         {!playing && (
           <button type="button" className="nexaPlay" onClick={play}>
             <span className="nexaCircle" aria-hidden="true">
@@ -61,7 +88,7 @@ function NexaVideo() {
               </svg>
             </span>
             <strong>Nexa te presenta Clonexa</strong>
-            <span className="srOnly">Reproducir video sin sonido</span>
+            <span className="srOnly">Reproducir video</span>
           </button>
         )}
       </div>

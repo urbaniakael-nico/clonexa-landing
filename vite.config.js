@@ -5,18 +5,21 @@ import { legalPagesPlugin } from "./legal/pages.js";
 // Railway mientras tanto y el dominio propio (con y sin www).
 const ALLOWED_HOSTS = [".up.railway.app", "clonexa.com.co", "www.clonexa.com.co"];
 
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [react(), legalPagesPlugin()],
-  build: {
-    rollupOptions: {
-      input: {
-        main: "index.html",
-        privacidad: "privacidad/index.html",
-        terminos: "terminos/index.html",
-        "borrar-datos": "borrar-datos/index.html"
-      }
-    }
-  },
+  // El build SSR (prerender) solo usa src/entry-server.jsx; el del cliente, las paginas HTML.
+  build: isSsrBuild
+    ? {}
+    : {
+        rollupOptions: {
+          input: {
+            main: "index.html",
+            privacidad: "privacidad/index.html",
+            terminos: "terminos/index.html",
+            "borrar-datos": "borrar-datos/index.html"
+          }
+        }
+      },
   server: {
     host: "0.0.0.0",
     allowedHosts: ALLOWED_HOSTS
@@ -25,4 +28,4 @@ export default defineConfig({
     host: "0.0.0.0",
     allowedHosts: ALLOWED_HOSTS
   }
-});
+}));

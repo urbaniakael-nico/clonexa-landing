@@ -131,9 +131,16 @@ async function handle(req, res) {
   }
   const urlPath = (legal?.rewrite || url).split("?")[0].split("#")[0];
 
-  let found = await findFile(urlPath);
-  if (!found && !path.extname(urlPath)) found = await findFile("/index.html");
+  const found = await findFile(urlPath);
   if (!found) {
+    // Paginas que no existen: 404 real con la pagina 404 prerenderizada; archivos: texto corto.
+    const notFound = !path.extname(urlPath) && (await findFile("/404.html"));
+    if (notFound) {
+      res.writeHead(404, { "Content-Type": TYPES[".html"], "Cache-Control": "no-cache" });
+      if (req.method === "HEAD") return res.end();
+      createReadStream(notFound.file).pipe(res);
+      return;
+    }
     res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
     res.end("No encontrado");
     return;

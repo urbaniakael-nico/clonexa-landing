@@ -81,7 +81,7 @@ test("DIAN Próximamente sin fechas; planes sin precios; industrias, pestañas y
   assert.equal(EXAMPLE_STEPS.length, 6);
 });
 
-const SOURCE = ["../src/content.js", "../src/App.jsx", "../index.html"]
+const SOURCE = ["../src/content.js", "../src/App.jsx", "../src/layout.jsx", "../src/pages.jsx", "../src/industries.js", "../src/site.js", "../index.html"]
   .map((f) => fs.readFileSync(new URL(f, import.meta.url), "utf8"))
   .join("\n");
 

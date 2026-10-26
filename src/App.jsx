@@ -1,5 +1,5 @@
+// Inicio de la landing (secciones). La barra, el pie y el formulario estan en layout.jsx.
 import React from "react";
-import { sendEvent, trackPageView } from "./analytics.js";
 import {
   BUILDER_DEFAULT,
   BUILDER_MODULES,
@@ -11,163 +11,20 @@ import {
   HERO_CHECKS,
   HERO_SHOT,
   INDUSTRIES,
-  LEGAL_LINKS,
-  NAV_LINKS,
   NEXA_VIDEO_POSTER,
   NEXA_VIDEO_URL,
   PATHS,
   PLANS,
   PLAN_CTA,
   PROCESS,
-  SHOTS,
-  SOCIAL,
   SOLUTIONS,
-  WA_GENERAL,
   builderSummary,
   builderWhatsapp,
-  demoRequestMessage,
   planWhatsapp,
   solutionWhatsapp,
   waLink
 } from "./content.js";
-import { validateDemoForm } from "./form.js";
-import { SOCIAL_ICONS, WhatsappIcon } from "./icons.jsx";
-
-const THEME_KEY = "clonexa_theme";
-// Tiempo de cada paso en los recorridos automaticos.
-const STEP_MS = 5000;
-
-function currentTheme() {
-  return document.documentElement.dataset.theme === "light" ? "light" : "dark";
-}
-
-function useTheme() {
-  const [theme, setThemeState] = React.useState(currentTheme);
-
-  React.useEffect(() => {
-    let saved = null;
-    try {
-      saved = localStorage.getItem(THEME_KEY);
-    } catch (_) {}
-    if (saved) return undefined;
-    // Sin eleccion guardada: sigue el tema del sistema.
-    const media = window.matchMedia?.("(prefers-color-scheme: light)");
-    if (!media) return undefined;
-    const onChange = () => {
-      const next = media.matches ? "light" : "dark";
-      document.documentElement.dataset.theme = next;
-      setThemeState(next);
-    };
-    media.addEventListener?.("change", onChange);
-    return () => media.removeEventListener?.("change", onChange);
-  }, []);
-
-  function setTheme(next) {
-    document.documentElement.dataset.theme = next;
-    try {
-      localStorage.setItem(THEME_KEY, next);
-    } catch (_) {}
-    setThemeState(next);
-  }
-
-  return [theme, setTheme];
-}
-
-function prefersReducedMotion() {
-  return Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
-}
-
-// true mientras el elemento esta en pantalla (los recorridos solo avanzan si se ven).
-function useInView(ref) {
-  const [inView, setInView] = React.useState(false);
-  React.useEffect(() => {
-    const node = ref.current;
-    if (!node || !("IntersectionObserver" in window)) {
-      setInView(true);
-      return undefined;
-    }
-    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.35 });
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [ref]);
-  return inView;
-}
-
-function Logo({ className = "" }) {
-  return (
-    <span className={`logo ${className}`}>
-      <img className="logoDark" src="/brand/clonexa-logo.svg" alt="Clonexa" width="181" height="32" />
-      <img className="logoLight" src="/brand/clonexa-logo-claro.svg" alt="Clonexa" width="181" height="32" />
-    </span>
-  );
-}
-
-function ExternalLink({ href, className, children, ...rest }) {
-  return (
-    <a href={href} className={className} target="_blank" rel="noopener noreferrer" {...rest}>
-      {children}
-    </a>
-  );
-}
-
-function ThemeSwitch({ theme, setTheme }) {
-  return (
-    <div className="themeSwitch" role="group" aria-label="Tema de la página">
-      <button type="button" aria-pressed={theme === "dark"} onClick={() => setTheme("dark")}>
-        <span aria-hidden="true">🌙</span>
-        <span className="themeLabel"> Oscuro</span>
-      </button>
-      <button type="button" aria-pressed={theme === "light"} onClick={() => setTheme("light")}>
-        <span aria-hidden="true">☀️</span>
-        <span className="themeLabel"> Claro</span>
-      </button>
-    </div>
-  );
-}
-
-function Header({ theme, setTheme }) {
-  return (
-    <div className="navBar">
-      <header className="wrap nav">
-        <a href="#inicio" className="navBrand" aria-label="Clonexa, ir al inicio">
-          <Logo />
-        </a>
-        <nav className="navLinks" aria-label="Secciones">
-          {NAV_LINKS.map(([href, label]) => (
-            <a key={href} href={href}>
-              {label}
-            </a>
-          ))}
-        </nav>
-        <div className="navRight">
-          <ThemeSwitch theme={theme} setTheme={setTheme} />
-          <a href="#agenda" className="btn btnSmall navCta">
-            Agenda tu demo
-          </a>
-        </div>
-      </header>
-    </div>
-  );
-}
-
-// Captura real de Clonexa: celular (390 px) o pantalla (1280 px), con su version pequena.
-function ShotImage({ id, sizes, eager = false, className = "" }) {
-  const shot = SHOTS[id];
-  return (
-    <img
-      className={`shotImg shot-${shot.frame} ${className}`}
-      src={shot.src}
-      srcSet={`${shot.srcSm} ${shot.smWidth}w, ${shot.src} ${shot.width}w`}
-      sizes={sizes}
-      alt={shot.alt}
-      width={shot.width}
-      height={shot.height}
-      loading={eager ? "eager" : "lazy"}
-      fetchpriority={eager ? "high" : undefined}
-      decoding={eager ? "sync" : "async"}
-    />
-  );
-}
+import { DemoForm, ExternalLink, FaqList, Follow, SectionHead, Sequence, ShotImage } from "./layout.jsx";
 
 function NexaVideo() {
   const ref = React.useRef(null);
@@ -215,7 +72,7 @@ function NexaVideo() {
 
 function Hero() {
   return (
-    <section id="inicio" className="wrap hero">
+    <section id="inicio" className="wrap hero" data-wa-hide>
       <div className="heroCopy">
         <p className="kicker">SOFTWARE A LA MEDIDA · EN LA NUBE</p>
         <h1>
@@ -266,23 +123,21 @@ function Industries() {
   return (
     <section className="wrap strip" aria-label="Industrias">
       <ul>
-        {INDUSTRIES.map(([icon, label]) => (
+        {INDUSTRIES.map(([icon, label, href]) => (
           <li key={label}>
-            <span aria-hidden="true">{icon}</span> {label}
+            {href ? (
+              <a href={href}>
+                <span aria-hidden="true">{icon}</span> {label}
+              </a>
+            ) : (
+              <span>
+                <span aria-hidden="true">{icon}</span> {label}
+              </span>
+            )}
           </li>
         ))}
       </ul>
     </section>
-  );
-}
-
-function SectionHead({ kicker, title, sub, id }) {
-  return (
-    <div className="sectionHead">
-      <p className="kicker">{kicker}</p>
-      <h2 id={id}>{title}</h2>
-      {sub && <p className="sub">{sub}</p>}
-    </div>
   );
 }
 
@@ -380,99 +235,6 @@ function Builder() {
   );
 }
 
-// Recorrido por pasos con capturas reales: flechas, pasos y avance automatico (pausable).
-function Sequence({ steps, label, variant = "solution", legend }) {
-  const ref = React.useRef(null);
-  const inView = useInView(ref);
-  const [index, setIndex] = React.useState(0);
-  const [playing, setPlaying] = React.useState(() => !prefersReducedMotion());
-  const [held, setHeld] = React.useState(false);
-  const running = playing && !held && inView && steps.length > 1;
-  const step = steps[index];
-
-  React.useEffect(() => {
-    if (!running) return undefined;
-    const timer = setTimeout(() => setIndex((i) => (i + 1) % steps.length), STEP_MS);
-    return () => clearTimeout(timer);
-  }, [running, index, steps.length]);
-
-  const go = (next) => setIndex((next + steps.length) % steps.length);
-  const phone = SHOTS[step.shot].frame === "phone";
-
-  return (
-    <div
-      ref={ref}
-      className={`seq seq-${variant}${running ? " seqRunning" : ""}`}
-      style={{ "--step-ms": `${STEP_MS}ms` }}
-      onPointerEnter={() => setHeld(true)}
-      onPointerLeave={() => setHeld(false)}
-      onFocus={() => setHeld(true)}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setHeld(false);
-      }}
-    >
-      <div className="seqTop">
-        <ol className="seqSteps" aria-label={`Pasos: ${label}`}>
-          {steps.map((item, i) => (
-            <li key={item.shot}>
-              <button type="button" aria-current={i === index ? "step" : undefined} onClick={() => go(i)}>
-                <span className="seqNum">PASO {i + 1}</span>
-                <span className="seqTitle">{item.title}</span>
-                <span className="seqProgress" aria-hidden="true" key={i === index ? `on-${index}` : "off"} />
-              </button>
-            </li>
-          ))}
-        </ol>
-        {steps.length > 1 && (
-          <button type="button" className="seqPlay" aria-pressed={playing} onClick={() => setPlaying((p) => !p)}>
-            <span aria-hidden="true">{playing ? "⏸" : "▶"}</span> Recorrido automático
-          </button>
-        )}
-      </div>
-      <div className="seqStage">
-        <div className="seqText">
-          <p className="pill">
-            PASO {index + 1} DE {steps.length}
-          </p>
-          <h3>{step.title}</h3>
-          <p>{step.text}</p>
-          {legend && <p className="legend">{legend}</p>}
-          {steps.length > 1 && (
-            <div className="seqArrows">
-              <button type="button" onClick={() => go(index - 1)} aria-label="Paso anterior">
-                ←
-              </button>
-              <button type="button" onClick={() => go(index + 1)} aria-label="Paso siguiente">
-                →
-              </button>
-            </div>
-          )}
-        </div>
-        <div className={`seqMedia${phone ? " seqMediaPhone" : ""}`}>
-          {steps.map((item, i) => {
-            const active = i === index;
-            const shot = SHOTS[item.shot];
-            return (
-              <a
-                key={item.shot}
-                href={shot.src}
-                target="_blank"
-                rel="noopener"
-                className={`seqShot${active ? " seqShotOn" : ""}`}
-                aria-hidden={active ? undefined : true}
-                tabIndex={active ? undefined : -1}
-                aria-label={active ? `Ampliar captura: ${item.title}` : undefined}
-              >
-                <ShotImage id={item.shot} sizes={shot.frame === "phone" ? "260px" : "(max-width: 760px) 92vw, 720px"} />
-              </a>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function Example() {
   return (
     <section id="ejemplo" className="wrap section" aria-labelledby="ejemplo-titulo">
@@ -553,6 +315,11 @@ function Solutions() {
           <ExternalLink href={solutionWhatsapp(current)} className="btn" data-wa={current.id}>
             Quiero verlo en mi {current.business}
           </ExternalLink>
+          {current.page && (
+            <p className="tabMore">
+              <a href={current.page}>Ver todo sobre Clonexa para {current.label.toLowerCase()} →</a>
+            </p>
+          )}
         </div>
         <Sequence key={current.id} steps={current.steps} label={current.label} />
       </div>
@@ -739,233 +506,31 @@ function Plans() {
 }
 
 function Faq() {
-  const [open, setOpen] = React.useState(0);
   return (
     <section id="preguntas" className="wrap section" aria-labelledby="faq-titulo">
       <SectionHead id="faq-titulo" kicker="PREGUNTAS" title="Preguntas frecuentes" />
-      <div className="faq">
-        {FAQ.map(([question, answer], index) => {
-          const isOpen = open === index;
-          return (
-            <div className={`faqItem${isOpen ? " faqOpen" : ""}`} key={question}>
-              <h3>
-                <button
-                  type="button"
-                  id={`faq-q-${index}`}
-                  aria-expanded={isOpen}
-                  aria-controls={`faq-a-${index}`}
-                  onClick={() => setOpen(isOpen ? -1 : index)}
-                >
-                  <span>{question}</span>
-                  <span className="faqIcon" aria-hidden="true" />
-                </button>
-              </h3>
-              <div id={`faq-a-${index}`} role="region" aria-labelledby={`faq-q-${index}`} hidden={!isOpen}>
-                <p>{answer}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <FaqList items={FAQ} />
     </section>
   );
 }
 
-const EMPTY_FORM = { name: "", business: "", whatsapp: "" };
-
-function DemoForm() {
-  const [form, setForm] = React.useState(EMPTY_FORM);
-  const [errors, setErrors] = React.useState({});
-  const [sentLink, setSentLink] = React.useState("");
-
-  function update(field) {
-    return (event) => setForm((current) => ({ ...current, [field]: event.target.value }));
-  }
-
-  function submit(event) {
-    event.preventDefault();
-    const found = validateDemoForm(form);
-    setErrors(found);
-    if (Object.keys(found).length) {
-      document.getElementById(`demo-${Object.keys(found)[0]}`)?.focus();
-      return;
-    }
-    const data = { name: form.name.trim(), business: form.business.trim(), whatsapp: form.whatsapp.trim() };
-    sendEvent("demo_request", { form: "agenda-demo", ...data });
-    const link = waLink(demoRequestMessage(data));
-    window.open(link, "_blank", "noopener");
-    setSentLink(link);
-    setForm(EMPTY_FORM);
-  }
-
-  const field = (id, label, props) => (
-    <div className="field">
-      <label htmlFor={`demo-${id}`}>{label}</label>
-      <input
-        id={`demo-${id}`}
-        value={form[id]}
-        onChange={update(id)}
-        aria-invalid={Boolean(errors[id])}
-        aria-describedby={errors[id] ? `demo-${id}-error` : undefined}
-        {...props}
-      />
-      {errors[id] && (
-        <p className="fieldError" id={`demo-${id}-error`}>
-          {errors[id]}
-        </p>
-      )}
-    </div>
-  );
-
-  return (
-    <section id="agenda" className="wrap section" aria-labelledby="agenda-titulo">
-      <div className="cta">
-        <div>
-          <h2 id="agenda-titulo">Agenda tu demo gratis</h2>
-          <p className="ctaSub">
-            Te mostramos Clonexa funcionando con una empresa como la tuya. 20 minutos, sin compromiso.
-          </p>
-        </div>
-        {sentLink ? (
-          <div className="thanks" role="status">
-            <h3>¡Gracias! Ya casi está.</h3>
-            <p>Abrimos WhatsApp con tus datos para coordinar la demo. Si no se abrió, toca el botón.</p>
-            <ExternalLink href={sentLink} className="btn btnBlock" data-wa="formulario">
-              Abrir WhatsApp
-            </ExternalLink>
-            <button type="button" className="linkButton" onClick={() => setSentLink("")}>
-              Enviar otra solicitud
-            </button>
-          </div>
-        ) : (
-          <form className="demoForm" onSubmit={submit} noValidate>
-            {field("name", "Tu nombre", { autoComplete: "name", placeholder: "Tu nombre" })}
-            {field("business", "Empresa y tipo de negocio", {
-              autoComplete: "organization",
-              placeholder: "Ej: La Brasa, restaurante"
-            })}
-            {field("whatsapp", "WhatsApp", {
-              type: "tel",
-              inputMode: "tel",
-              autoComplete: "tel",
-              placeholder: "Tu número de WhatsApp"
-            })}
-            <button type="submit" className="btn btnBlock">
-              Quiero mi demo
-            </button>
-          </form>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function Follow() {
-  return (
-    <section className="wrap follow" aria-labelledby="siguenos-titulo">
-      <h2 id="siguenos-titulo">Síguenos y obtén descuento en tu desarrollo</h2>
-      <p>Tips para tu negocio, novedades de Clonexa y promociones exclusivas para seguidores.</p>
-      <ul className="social">
-        {SOCIAL.map((item) => {
-          const Icon = SOCIAL_ICONS[item.id];
-          return (
-            <li key={item.id}>
-              <ExternalLink href={item.url} className={`social-${item.id}`} aria-label={`Clonexa en ${item.label}`}>
-                <Icon />
-              </ExternalLink>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="wrap footer">
-      <Logo className="logoSmall" />
-      <p>© 2026 Clonexa · Bogotá, Colombia</p>
-      <nav aria-label="Legal" className="footerLegal">
-        {LEGAL_LINKS.map(([href, label], index) => (
-          <React.Fragment key={href}>
-            {index > 0 && <span aria-hidden="true"> · </span>}
-            <a href={href}>{label}</a>
-          </React.Fragment>
-        ))}
-      </nav>
-    </footer>
-  );
-}
-
-// Boton flotante: se esconde mientras el formulario o el pie estan en pantalla
-// y, en celular, mientras se ve el hero (no tapa el video de Nexa).
-function FloatingWhatsapp() {
-  const [hidden, setHidden] = React.useState(() => Boolean(window.matchMedia?.("(max-width: 760px)").matches));
-  React.useEffect(() => {
-    const mobile = Boolean(window.matchMedia?.("(max-width: 760px)").matches);
-    const targets = [mobile && document.getElementById("inicio"), document.getElementById("agenda"), document.querySelector(".footer")].filter(
-      Boolean
-    );
-    if (!targets.length || !("IntersectionObserver" in window)) return undefined;
-    const visible = new Set();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => (entry.isIntersecting ? visible.add(entry.target) : visible.delete(entry.target)));
-        setHidden(visible.size > 0);
-      },
-      { threshold: 0.05 }
-    );
-    targets.forEach((target) => observer.observe(target));
-    return () => observer.disconnect();
-  }, []);
-  return (
-    <aside aria-label="Contacto por WhatsApp">
-      <ExternalLink
-        href={WA_GENERAL}
-        className={`waFloat${hidden ? " waHidden" : ""}`}
-        aria-label="Escríbenos por WhatsApp"
-        data-wa="flotante"
-        tabIndex={hidden ? -1 : undefined}
-        aria-hidden={hidden || undefined}
-      >
-        <WhatsappIcon />
-      </ExternalLink>
-    </aside>
-  );
-}
-
-export default function App() {
-  const [theme, setTheme] = useTheme();
-
-  React.useEffect(() => {
-    trackPageView();
-  }, []);
-
+export default function HomePage() {
   return (
     <>
-      <a href="#contenido" className="skip">
-        Saltar al contenido
-      </a>
-      <Header theme={theme} setTheme={setTheme} />
-      <main id="contenido">
-        <Hero />
-        <Industries />
-        <TwoPaths />
-        <Builder />
-        <Example />
-        <Solutions />
-        <Commerce />
-        <Comparison />
-        <Process />
-        <Cases />
-        <Plans />
-        <Faq />
-        <DemoForm />
-        <Follow />
-      </main>
-      <Footer />
-      <FloatingWhatsapp />
+      <Hero />
+      <Industries />
+      <TwoPaths />
+      <Builder />
+      <Example />
+      <Solutions />
+      <Commerce />
+      <Comparison />
+      <Process />
+      <Cases />
+      <Plans />
+      <Faq />
+      <DemoForm />
+      <Follow />
     </>
   );
 }

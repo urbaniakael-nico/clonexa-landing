@@ -13,9 +13,9 @@ export function waLink(message) {
 
 export const WA_GENERAL = waLink("Hola Clonexa, quiero agendar una demo gratis de 20 minutos.");
 
-export function demoRequestMessage({ name, business, whatsapp }) {
+export function demoRequestMessage({ name, business, whatsapp }, greeting = "Hola Clonexa, quiero agendar mi demo gratis.") {
   return [
-    "Hola Clonexa, quiero agendar mi demo gratis.",
+    greeting,
     `Nombre: ${name}`,
     `Negocio: ${business}`,
     `WhatsApp: ${whatsapp}`
@@ -37,15 +37,16 @@ export const HERO_CHECKS = [
   ["", "Tu marca y tus colores"]
 ];
 
+// [icono, industria, pagina propia (solo las que tienen pantallas reales)].
 export const INDUSTRIES = [
-  ["🍽️", "Restaurantes"],
-  ["🍸", "Bares"],
-  ["🧵", "Talleres y fábricas"],
-  ["🚚", "Distribuidoras"],
-  ["🏬", "Tiendas y cadenas"],
-  ["🎧", "Call centers"],
-  ["🦺", "Personal en campo"],
-  ["🛒", "Tiendas en línea"]
+  ["🍽️", "Restaurantes", "/restaurantes"],
+  ["🍸", "Bares", "/bares"],
+  ["🧵", "Talleres y fábricas", "/talleres-y-fabricas"],
+  ["🚚", "Distribuidoras", null],
+  ["🏬", "Tiendas y cadenas", null],
+  ["🎧", "Call centers", "/call-centers"],
+  ["🦺", "Personal en campo", "/personal-en-campo"],
+  ["🛒", "Tiendas en línea", null]
 ];
 
 export const PATHS = [
@@ -144,6 +145,7 @@ export const HERO_SHOT = "hero-caja";
 export const SOLUTIONS = [
   {
     id: "restaurantes",
+    page: "/restaurantes",
     icon: "🍽️",
     label: "Restaurantes",
     business: "restaurante",
@@ -164,6 +166,7 @@ export const SOLUTIONS = [
   },
   {
     id: "bares",
+    page: "/bares",
     icon: "🍸",
     label: "Bares",
     business: "bar",
@@ -183,6 +186,7 @@ export const SOLUTIONS = [
   },
   {
     id: "talleres",
+    page: "/talleres-y-fabricas",
     icon: "🧵",
     label: "Talleres y fábricas",
     business: "taller",
@@ -202,6 +206,7 @@ export const SOLUTIONS = [
   },
   {
     id: "campo",
+    page: "/personal-en-campo",
     icon: "🦺",
     label: "Personal en campo",
     business: "operación en campo",

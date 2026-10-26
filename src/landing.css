@@ -1706,3 +1706,450 @@ html {
     white-space: nowrap;
   }
 }
+
+/* ===== Paginas por industria, menu de industrias y pie ===== */
+
+/* Industrias del inicio con enlace a su pagina */
+.strip li {
+  padding: 0;
+}
+
+.strip li > a,
+.strip li > span {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 99px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.strip li > a:hover {
+  color: var(--txt);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.tabMore {
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.tabMore a {
+  color: var(--accent);
+}
+
+/* Menu "Industrias" (desplegable con <details>, funciona sin JavaScript) */
+.navLinks {
+  align-items: center;
+}
+
+.navDrop {
+  position: relative;
+}
+
+.navDrop summary,
+.mobileMenu summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.navDrop summary::-webkit-details-marker,
+.mobileMenu summary::-webkit-details-marker {
+  display: none;
+}
+
+.navDrop summary {
+  color: var(--mut);
+}
+
+.navDrop summary::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 7px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-3px) rotate(45deg);
+}
+
+.navDrop summary:hover,
+.navDrop[open] summary {
+  color: var(--txt);
+}
+
+.dropList {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: -14px;
+  z-index: 40;
+  min-width: 240px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.dropList a,
+.mobilePanel a:not(.btn) {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--txt);
+  text-decoration: none;
+}
+
+.dropList a:hover,
+.dropList a[aria-current="page"],
+.mobilePanel a[aria-current="page"] {
+  background: var(--soft);
+}
+
+.navLinks a[aria-current="page"] {
+  color: var(--txt);
+}
+
+.mobileMenu {
+  display: none;
+}
+
+.mobileMenu summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--txt);
+}
+
+.mobilePanel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  padding: 12px 16px 18px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+
+.mobileTitle {
+  margin: 4px 12px 4px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.mobileMore {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.mobileMore .btn {
+  margin-top: 10px;
+}
+
+/* Migas de pan */
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 18px;
+  color: var(--mut);
+  font-size: 14px;
+}
+
+.crumbs li + li::before {
+  content: "›";
+  margin-right: 6px;
+}
+
+.crumbs a {
+  color: var(--mut);
+}
+
+/* Encabezado de las paginas */
+.pageHero {
+  padding-top: 28px;
+  padding-bottom: 20px;
+}
+
+.pageHero h1 {
+  max-width: 900px;
+  font-size: 46px;
+}
+
+.pageHero .lead {
+  max-width: 820px;
+  margin-bottom: 14px;
+}
+
+.pageText {
+  max-width: 760px;
+  margin-bottom: 14px;
+  color: var(--mut);
+  font-size: 17px;
+}
+
+.pageHero .heroActions {
+  margin-top: 22px;
+}
+
+/* Asi funciona */
+.flowSteps {
+  display: grid;
+  gap: 28px;
+  counter-reset: step;
+}
+
+.flowStep {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 32px;
+  align-items: center;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--card);
+}
+
+.flowStep:nth-child(even) {
+  grid-template-columns: 1.2fr 0.8fr;
+}
+
+.flowStep:nth-child(even) .flowText {
+  order: 2;
+}
+
+.flowText h3 {
+  margin-bottom: 8px;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.flowText p:not(.pill) {
+  color: var(--mut);
+}
+
+.flowShot {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.flowShot a {
+  display: block;
+  max-width: 100%;
+}
+
+.flowStep:not(.flowPhone) .flowShot a,
+.flowShot .shot-screen {
+  width: 100%;
+}
+
+.flowPhone .flowShot .shotImg {
+  width: 210px;
+}
+
+/* Modulos */
+.moduleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.moduleGrid .card h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+}
+
+/* Enlaces a industrias */
+.industryLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 6px 0 18px;
+}
+
+.industryLinks a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--txt);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.industryLinks a:hover {
+  border-color: var(--accent);
+}
+
+/* Que es Clonexa */
+.aboutPage h2 {
+  margin-top: 36px;
+  font-size: 28px;
+}
+
+.aboutPage .pageText a {
+  color: var(--accent);
+}
+
+.aboutShot {
+  margin: 26px 0 8px;
+}
+
+.aboutShot img {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+.aboutShot figcaption {
+  margin-top: 8px;
+  color: var(--mut);
+  font-size: 13px;
+}
+
+.aboutList {
+  display: grid;
+  gap: 10px;
+  max-width: 760px;
+  color: var(--mut);
+  font-size: 17px;
+}
+
+.aboutList strong {
+  color: var(--txt);
+}
+
+.disclaimer {
+  margin-top: 30px;
+  color: var(--mut);
+  font-size: 13px;
+}
+
+.notFound {
+  padding-bottom: 40px;
+}
+
+/* WhatsApp dentro del formulario */
+.ctaWa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  color: #ffd2de;
+  font-weight: 700;
+}
+
+.ctaWa svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Pie con columnas */
+.footer {
+  display: block;
+}
+
+.footerTop {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 24px;
+  padding-bottom: 24px;
+}
+
+.footerBrand p {
+  margin-top: 10px;
+}
+
+.footerTitle {
+  margin-bottom: 8px;
+  color: var(--txt);
+  font-weight: 700;
+}
+
+.footerCol li a {
+  display: inline-block;
+  padding: 4px 0;
+  color: var(--mut);
+  text-decoration: none;
+}
+
+.footerCol li a:hover {
+  color: var(--txt);
+  text-decoration: underline;
+}
+
+.footerBottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 1040px) {
+  .mobileMenu {
+    display: block;
+  }
+
+  .navBar .nav {
+    position: relative;
+  }
+}
+
+@media (max-width: 760px) {
+  .pageHero h1 {
+    font-size: 32px;
+  }
+
+  .flowStep,
+  .flowStep:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 16px;
+  }
+
+  .flowStep:nth-child(even) .flowText {
+    order: 0;
+  }
+
+  .flowPhone .flowShot .shotImg {
+    width: 200px;
+  }
+
+  .footerTop {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .footerBottom {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .footer {
+    padding-top: 30px;
+    text-align: left;
+  }
+
+  .navRight {
+    gap: 8px;
+  }
+}

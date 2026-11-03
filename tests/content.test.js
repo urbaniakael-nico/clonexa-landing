@@ -22,10 +22,10 @@ import {
 } from "../src/content.js";
 import { validateDemoForm } from "../src/form.js";
 
-const WA = /^https:\/\/wa\.me\/13468244098\?text=.+/;
+const WA = /^https:\/\/wa\.me\/573144798220\?text=.+/;
 const text = (link) => decodeURIComponent(new URL(link).searchParams.get("text"));
 
-test("todos los enlaces de WhatsApp van a wa.me/13468244098 con un mensaje en español", () => {
+test("todos los enlaces de WhatsApp van a wa.me/573144798220 con un mensaje en español", () => {
   assert.match(WA_GENERAL, WA);
   assert.match(text(WA_GENERAL), /demo/i);
   for (const tab of SOLUTIONS) {

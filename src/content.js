@@ -5,7 +5,7 @@ export const NEXA_VIDEO_URL = "/nexa-presentacion.mp4";
 export const NEXA_VIDEO_POSTER = "/capturas/nexa-presentacion-poster.webp";
 
 // WhatsApp: solo enlaces wa.me, el numero nunca se muestra como texto.
-const WHATSAPP_ID = "13468244098";
+const WHATSAPP_ID = "573144798220";
 
 export function waLink(message) {
   return `https://wa.me/${WHATSAPP_ID}?text=${encodeURIComponent(message)}`;

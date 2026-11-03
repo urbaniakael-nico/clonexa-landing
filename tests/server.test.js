@@ -143,14 +143,14 @@ test("el numero de WhatsApp nunca aparece como texto: en el HTML solo dentro de 
   const pages = ["index.html", "404.html", ...fs.readdirSync(path.join(ROOT, "dist"), { withFileTypes: true }).filter((d) => d.isDirectory() && fs.existsSync(path.join(ROOT, "dist", d.name, "index.html"))).map((d) => path.join(d.name, "index.html"))];
   for (const page of pages) {
     const html = fs.readFileSync(path.join(ROOT, "dist", page), "utf8");
-    assert.ok(!/(?<!\d)346\s?824\s?4098|\+1\s?346/.test(html), `${page} muestra el numero`);
-    const all = (html.match(/13468244098/g) || []).length;
-    const inLinks = (html.match(/https:\/\/wa\.me\/13468244098\?text=/g) || []).length;
+    assert.ok(!/(?<!\d)346\s?824\s?4098|\+1\s?346|13468244098|(?<!\d)314\s?479\s?8220|\+57\s?314/.test(html), `${page} muestra el numero o queda el viejo`);
+    const all = (html.match(/573144798220/g) || []).length;
+    const inLinks = (html.match(/https:\/\/wa\.me\/573144798220\?text=/g) || []).length;
     assert.equal(all, inLinks, `${page}: numero fuera de wa.me`);
   }
   for (const f of fs.readdirSync(path.join(ROOT, "dist", "assets")).filter((f) => f.endsWith(".js"))) {
     const text = fs.readFileSync(path.join(ROOT, "dist", "assets", f), "utf8");
-    assert.ok((text.match(/13468244098/g) || []).length <= 1, `${f}: numero repetido fuera de wa.me`);
+    assert.ok((text.match(/573144798220/g) || []).length <= 1, `${f}: numero repetido fuera de wa.me`);
   }
 });
 
@@ -234,7 +234,7 @@ test("prerender: cada ruta trae en el HTML su title, description, canonical, og,
       }
       const words = visibleText(html).split(" ").length;
       assert.ok(words > 400, `${p}: ${words} palabras en el HTML sin JS`);
-      assert.ok(!/13468244098|346\s?824/.test(visibleText(html)), `${p}: numero de WhatsApp como texto`);
+      assert.ok(!/573144798220|314\s?479\s?8220|13468244098|346\s?824/.test(visibleText(html)), `${p}: numero de WhatsApp como texto`);
     }
 
     // Inicio: WebSite + Organization

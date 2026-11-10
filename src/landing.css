@@ -2171,3 +2171,64 @@ html {
   color: #fff;
   cursor: pointer;
 }
+
+/* Carta en video con QR (visitas de la prospeccion de restaurantes o #carta-video) */
+.cartaVideo {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 36px;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 80px;
+}
+
+.cartaPoints {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 22px;
+  padding-left: 20px;
+  color: var(--txt);
+}
+
+.cartaShow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-width: 0;
+}
+
+.cartaQr {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  max-width: 170px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+  text-align: center;
+  color: var(--mut);
+  font-size: 13px;
+}
+
+.cartaQr img {
+  display: block;
+  width: 132px;
+  height: 132px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+@media (max-width: 860px) {
+  .cartaVideo {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .cartaQr {
+    display: none;
+  }
+}

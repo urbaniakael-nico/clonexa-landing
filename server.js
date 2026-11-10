@@ -37,6 +37,7 @@ const TYPES = {
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".webp": "image/webp",
+  ".gif": "image/gif",
   ".ico": "image/x-icon",
   ".mp4": "video/mp4",
   ".woff2": "font/woff2"

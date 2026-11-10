@@ -130,7 +130,7 @@ export const SHOTS = {
   "rest-cuenta": shot("rest-cuenta", 1600, 680, 800, "Cuenta de la mesa 7 en la caja: productos pedidos, total de la cuenta y cobro en efectivo, transferencia o tarjeta"),
   "rest-cierre": shot("rest-cierre", 1600, 1000, 800, "Cierre de caja del día en Clonexa: total de ventas, productos vendidos, pedidos cobrados y cobrado por método de pago"),
   "bar-qr": shot("bar-qr", 780, 1688, 480, "Menú QR del bar en el celular: cocteles con precio, cuenta de la mesa y pedir canción", "phone"),
-  "bar-barra": shot("bar-barra", 1198, 1000, 800, "Pantalla de barra del bar: pedidos QR por mesa en columnas Pendiente, Alistando, Entregado y Cerrado"),
+  "bar-barra": shot("bar-barra", 1600, 757, 800, "Panel de barra del bar: mesas y cuentas de barra abiertas con su total, los pedidos nuevos resaltados, botón + para agregar y las canciones pedidas por mesa"),
   "bar-juegos": shot("bar-juegos", 1600, 900, 800, "Juegos en vivo en el televisor del bar: juego Memoria relámpago con el tiempo, el premio y la tabla de jugadores"),
   "bar-cierre": shot("bar-cierre", 1600, 1000, 800, "Cierre de caja del día de negocio del bar: total de ventas, ventas de barra y cobrado por método"),
   "taller-tablero": shot("taller-tablero", 1600, 700, 800, "Tablero del taller en la tableta: quién está trabajando, en pausa o sin turno y hace cuánto"),
@@ -187,7 +187,7 @@ export const SOLUTIONS = [
     ],
     steps: [
       { shot: "bar-qr", title: "Piden desde la mesa", text: "Con el QR de la mesa: cocteles, la cuenta y hasta la canción." },
-      { shot: "bar-barra", title: "La barra lo ve en vivo", text: "Cada pedido por mesa, de pendiente a entregado." },
+      { shot: "bar-barra", title: "La barra lo ve en vivo", text: "Cada mesa con su total, los pedidos nuevos resaltados y las canciones pedidas." },
       { shot: "bar-juegos", title: "Juegos en vivo en el TV", text: "Los clientes juegan desde el celular y la tabla sale en la pantalla del bar." },
       { shot: "bar-cierre", title: "Cierre por día de negocio", text: "Lo vendido en la noche queda en el mismo día, aunque cierres de madrugada." }
     ]

@@ -59,7 +59,7 @@ export const INDUSTRY_PAGES = [
     ],
     steps: [
       { shot: "bar-qr", title: "Piden desde la mesa con el QR", text: "El cliente abre la carta en su celular, agrega cocteles o cervezas, ve la cuenta total de la mesa y puede pedir una canción." },
-      { shot: "bar-barra", title: "La barra ve cada pedido en vivo", text: "Los pedidos llegan por mesa a la pantalla de barra y pasan por Pendiente, Alistando, Entregado y Cerrado. Nadie tiene que gritar el pedido." },
+      { shot: "bar-barra", title: "La barra ve cada pedido en vivo", text: "Los pedidos llegan por mesa al panel de barra: cada mesa con su total, los pedidos nuevos resaltados en rojo, un + para agregar sin buscar la mesa y las canciones que pidió cada mesa. Nadie tiene que gritar el pedido." },
       { shot: "bar-juegos", title: "Juegos en vivo en el televisor", text: "Los clientes juegan desde el celular y la pantalla del bar muestra el juego, el tiempo, el premio y la tabla de jugadores." },
       { shot: "bar-cierre", title: "Cierre por día de negocio", text: "El cierre de caja reúne lo vendido en la noche aunque cierres de madrugada, con las ventas de barra y lo cobrado por método." }
     ],

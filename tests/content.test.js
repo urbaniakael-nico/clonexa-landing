@@ -136,3 +136,36 @@ test("package.json con versiones exactas y package-lock presente", () => {
     assert.equal(lock.packages[`node_modules/${name}`].version, pkg.dependencies[name], `lock de ${name}`);
   }
 });
+
+// Medidas reales de un .webp (VP8X, VP8 o VP8L) sin dependencias.
+function webpSize(file) {
+  const b = fs.readFileSync(file);
+  const kind = b.toString("ascii", 12, 16);
+  if (kind === "VP8X") return [1 + b.readUIntLE(24, 3), 1 + b.readUIntLE(27, 3)];
+  if (kind === "VP8L") { const v = b.readUInt32LE(21); return [(v & 0x3fff) + 1, ((v >> 14) & 0x3fff) + 1]; }
+  return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+}
+
+test("cada captura declara las medidas reales de su archivo (no se estira ni se recorta) y su version -sm existe", () => {
+  for (const [id, shot] of Object.entries(SHOTS)) {
+    const file = `public${shot.src}`;
+    assert.ok(fs.existsSync(file), `${id}: falta ${file}`);
+    if (shot.video) { assert.ok(fs.existsSync(`public${shot.video}`), `${id}: falta el video`); continue; }
+    const [w, h] = webpSize(file);
+    assert.equal(w, shot.width, `${id}: ancho del archivo ${w} != ${shot.width}`);
+    assert.equal(h, shot.height, `${id}: alto del archivo ${h} != ${shot.height}`);
+    const [sw, sh] = webpSize(`public${shot.srcSm}`);
+    assert.equal(sw, shot.smWidth, `${id}: -sm mide ${sw}`);
+    assert.ok(Math.abs(sw / sh - w / h) < 0.02, `${id}: -sm con otra proporcion`);
+  }
+});
+
+test("bares paso 2: el panel de barra nuevo (no las columnas viejas rotas)", () => {
+  assert.equal(SHOTS["bar-barra"].width, 1600);
+  assert.doesNotMatch(SHOTS["bar-barra"].alt, /Alistando|columnas/);
+});
+
+test("la captura grande del inicio pide la version grande en tableta (sizes = ancho real en una columna)", () => {
+  const app = fs.readFileSync("src/App.jsx", "utf8");
+  assert.match(app, /ShotImage id=\{HERO_SHOT\} eager sizes="\(max-width: 1040px\) min\(92vw, 680px\), 640px"/);
+});

@@ -138,7 +138,7 @@ function Hero() {
       </div>
       <div className="heroShow">
         <div className="heroScreen">
-          <ShotImage id={HERO_SHOT} eager sizes="(max-width: 760px) 92vw, (max-width: 1180px) 50vw, 600px" />
+          <ShotImage id={HERO_SHOT} eager sizes="(max-width: 1040px) min(92vw, 680px), 640px" />
         </div>
         <NexaVideo />
       </div>

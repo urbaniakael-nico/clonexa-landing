@@ -6,7 +6,7 @@ import { spawn } from "node:child_process";
 import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { CARTA_VIDEO, cartaVideoTarget, cartaWhatsapp } from "../src/cartaVideo.js";
+import { CARTA_DEMO_URL, CARTA_VIDEO, cartaVideoTarget, cartaWhatsapp } from "../src/cartaVideo.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const HAS_DIST = fs.existsSync(path.join(ROOT, "dist", "index.html"));
@@ -54,9 +54,30 @@ test("los archivos de la demo existen y el GIF del correo pesa menos de 1 MB", (
   assert.equal(head, "GIF89a");
 });
 
-test("la seccion no cambia el HTML prerenderizado (se decide en el navegador)", { skip: !HAS_DIST && "sin dist/" }, () => {
+test("inicio: sin la seccion arriba (solo prospeccion), pero con el bloque que lleva a /restaurantes#carta-video", { skip: !HAS_DIST && "sin dist/" }, () => {
   const html = fs.readFileSync(path.join(ROOT, "dist", "index.html"), "utf8");
   assert.doesNotMatch(html, /id="carta-video"/);
+  assert.match(html, /href="\/restaurantes#carta-video"/);
+  assert.match(html, /carta en video con QR/);
+});
+
+test("/restaurantes: la seccion arriba para TODAS las visitas, video, QR de la carta real y paso 1 con la carta nueva", { skip: !HAS_DIST && "sin dist/" }, () => {
+  const html = fs.readFileSync(path.join(ROOT, "dist", "restaurantes", "index.html"), "utf8");
+  const main = html.slice(html.indexOf('<main id="contenido">'));
+  assert.ok(main.indexOf('id="carta-video"') > 0 && main.indexOf('id="carta-video"') < main.indexOf("<h1"), "la seccion va arriba de la pagina");
+  assert.match(html, /carta-video-demo\.mp4/);
+  assert.ok(html.includes(`href="${CARTA_DEMO_URL}"`), "enlace a la carta real");
+  assert.match(html, /<span class="nowrap"><span class="grad">en video<\/span>,<\/span>/, "la coma no queda sola en una linea");
+  assert.doesNotMatch(html, /rest-qr/, "la captura vieja (Mesa 7) ya no se usa");
+  for (const page of ["index.html", "bares/index.html"]) {
+    assert.doesNotMatch(fs.readFileSync(path.join(ROOT, "dist", page), "utf8"), /rest-qr/, `${page}: captura vieja`);
+  }
+});
+
+test("el QR abre la carta real de la demo Brasa & Maiz", () => {
+  assert.match(CARTA_DEMO_URL, /^https:\/\/clonexa-backend-production\.up\.railway\.app\/carta-qr\?t=[\w-]{20,}$/);
+  const svg = fs.readFileSync(path.join(ROOT, "public", CARTA_VIDEO.qr), "utf8");
+  assert.match(svg, /<svg/);
 });
 
 test("el servidor entrega el GIF como image/gif", { skip: !HAS_DIST && "sin dist/" }, async () => {

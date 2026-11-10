@@ -4,7 +4,7 @@ import React from "react";
 import { readUtm, trackPageView } from "./analytics.js";
 import HomePage from "./App.jsx";
 import CartaVideoSection from "./CartaVideo.jsx";
-import { cartaVideoTarget } from "./cartaVideo.js";
+import { CARTA_PAGE, cartaVideoTarget } from "./cartaVideo.js";
 import { industryGreeting } from "./industries.js";
 import { FloatingWhatsapp, Footer, Header, useTheme } from "./layout.jsx";
 import { AboutPage, IndustryPage, NotFoundPage } from "./pages.jsx";
@@ -15,7 +15,8 @@ export default function Root({ path: rawPath }) {
   const [theme, setTheme] = useTheme();
   const industry = industryBySlug(path);
 
-  // Carta video arriba solo para visitas de la prospeccion de restaurantes (o #carta-video).
+  // Carta video arriba: siempre en /restaurantes (tambien en el HTML prerenderizado) y, en las demas
+  // paginas, para visitas de la prospeccion de restaurantes (o #carta-video).
   const [carta, setCarta] = React.useState({ show: false, code: "" });
 
   React.useEffect(() => {
@@ -41,7 +42,7 @@ export default function Root({ path: rawPath }) {
       </a>
       <Header theme={theme} setTheme={setTheme} current={path} />
       <main id="contenido">
-        {carta.show && <CartaVideoSection code={carta.code} />}
+        {(path === CARTA_PAGE || carta.show) && <CartaVideoSection code={carta.code} />}
         {page}
       </main>
       <Footer />

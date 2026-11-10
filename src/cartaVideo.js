@@ -5,6 +5,10 @@
 
 import { waLink } from "./content.js";
 
+export const CARTA_PAGE = "/restaurantes";
+// Carta REAL de la empresa demo Brasa & Maiz (datos inventados), la misma que imprime
+// scripts/menu_video_demo.py del backend.
+export const CARTA_DEMO_URL = "https://clonexa-backend-production.up.railway.app/carta-qr?t=KS6rM9ZZyYpyOKdyvBBzXwqLA88KDuXd";
 export const CARTA_TYPES = ["restaurante", "comidas-rapidas", "cafe", "panaderia"];
 export const CARTA_VIDEO = {
   src: "/clonexa-media/carta-video-demo.mp4",

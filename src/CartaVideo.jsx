@@ -2,7 +2,7 @@
 // restaurantes. Se decide en el navegador (useEffect): el HTML prerenderizado no cambia.
 import React from "react";
 import { sendEvent } from "./analytics.js";
-import { CARTA_VIDEO, cartaWhatsapp } from "./cartaVideo.js";
+import { CARTA_DEMO_URL, CARTA_VIDEO, cartaWhatsapp } from "./cartaVideo.js";
 import { ExternalLink } from "./layout.jsx";
 
 export default function CartaVideoSection({ code }) {
@@ -16,7 +16,11 @@ export default function CartaVideoSection({ code }) {
       <div className="cartaCopy">
         <p className="kicker">CARTA EN VIDEO CON QR</p>
         <h2 id="carta-video-titulo">
-          Tus platos <span className="grad">en video</span>, desde el QR de la mesa
+          Tus platos{" "}
+          <span className="nowrap">
+            <span className="grad">en video</span>,
+          </span>{" "}
+          desde el QR de la mesa
         </h2>
         <p className="sub">
           Tus clientes escanean el QR de la mesa y ven tus platos en video, de frente y de perfil, y piden desde el
@@ -59,8 +63,16 @@ export default function CartaVideoSection({ code }) {
           <figcaption>Demo con un restaurante de ejemplo (datos inventados).</figcaption>
         </figure>
         <div className="cartaQr">
-          <img src={CARTA_VIDEO.qr} width="132" height="132" alt="Código QR para ver esta demo en tu celular" />
-          <p>Escanéalo con tu celular y míralo como lo verían tus clientes.</p>
+          <img src={CARTA_VIDEO.qr} width="132" height="132" alt="Código QR de la carta real del restaurante de ejemplo" />
+          <p>
+            <span className="qrDesk">
+              Escanéalo y abre la carta real de un restaurante de ejemplo en tu celular, como la verían tus clientes.{" "}
+            </span>
+            <a href={CARTA_DEMO_URL} target="_blank" rel="noopener noreferrer">
+              <span className="qrDesk">Abrirla aquí</span>
+              <span className="qrMobile">Abre la carta real de un restaurante de ejemplo →</span>
+            </a>
+          </p>
         </div>
       </div>
     </section>

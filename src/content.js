@@ -114,7 +114,15 @@ const shot = (name, width, height, smWidth, alt, frame = "screen") => ({
   frame
 });
 
+// Carta nueva en video (demo Brasa & Maiz, datos inventados): en el marco de celular se reproduce
+// el video; la portada es su primer cuadro.
+const videoShot = (name, video, poster, width, height, alt) => ({
+  src: poster, srcSm: poster, width, height, smWidth: width, alt, frame: "phone", video
+});
+
 export const SHOTS = {
+  "rest-carta": videoShot("rest-carta", "/clonexa-media/carta-video-demo.mp4", "/clonexa-media/carta-video-demo-poster.webp", 390, 844,
+    "Carta en video con QR en el celular del cliente: cada plato en video con su nombre, descripción y precio"),
   "hero-caja": shot("hero-caja", 1600, 1000, 800, "Caja de Clonexa en un restaurante: total vendido, pedidos, ticket promedio, cobrado por método y las mesas abiertas con su estado"),
   "rest-qr": shot("rest-qr", 780, 1688, 480, "Menú QR de la mesa 7 en el celular del cliente: platos fuertes con precio y botones para agregar al pedido", "phone"),
   "rest-mesero": shot("rest-mesero", 780, 1688, 480, "Panel del mesero en el celular: categoría Platos fuertes con cada plato y su precio", "phone"),
@@ -157,7 +165,7 @@ export const SOLUTIONS = [
       ["Inventario y reportes", ": qué se vende y qué no"]
     ],
     steps: [
-      { shot: "rest-qr", title: "El cliente pide desde la mesa", text: "Escanea el QR de su mesa y arma su pedido desde el celular." },
+      { shot: "rest-carta", title: "El cliente pide desde la mesa", text: "Escanea el QR, ve los platos en video y arma su pedido desde el celular." },
       { shot: "rest-mesero", title: "El mesero toma el pedido", text: "Desde su celular, sin comandas de papel." },
       { shot: "rest-cocina", title: "Cocina lo recibe al instante", text: "En orden, con tiempos y con los domicilios en la misma pantalla." },
       { shot: "rest-cuenta", title: "La cuenta ya está armada", text: "La caja cobra la mesa exacta, en efectivo, transferencia o tarjeta." },

@@ -216,6 +216,23 @@ export function SectionHead({ kicker, title, sub, id, level = 2 }) {
 // Captura real de Clonexa: celular (390 px) o pantalla (1280 px), con su version pequena.
 export function ShotImage({ id, sizes, eager = false, className = "" }) {
   const shot = SHOTS[id];
+  if (shot.video) {
+    return (
+      <video
+        className={`shotImg shot-${shot.frame} shotVideo ${className}`}
+        src={shot.video}
+        poster={shot.src}
+        width={shot.width}
+        height={shot.height}
+        muted
+        autoPlay
+        loop
+        playsInline
+        preload="metadata"
+        aria-label={shot.alt}
+      />
+    );
+  }
   return (
     <img
       className={`shotImg shot-${shot.frame} ${className}`}

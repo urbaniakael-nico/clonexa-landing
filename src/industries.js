@@ -18,7 +18,7 @@ export const INDUSTRY_PAGES = [
       "No necesitas comprar equipos especiales: funciona en los celulares, tabletas y computadores que ya tienes. Lo configuramos con tu menú, tus mesas, tu marca y tus colores, y te acompañamos mientras tu equipo aprende a usarlo."
     ],
     steps: [
-      { shot: "rest-qr", title: "El cliente pide desde el QR de la mesa", text: "Escanea el código con su celular, ve el menú por categorías con sus precios, arma su pedido y lo confirma. No tiene que descargar ninguna aplicación." },
+      { shot: "rest-carta", title: "El cliente pide desde el QR de la mesa", text: "Escanea el código con su celular y ve tus platos en video, de frente y de perfil, con sus precios; arma su pedido y lo confirma. No tiene que descargar ninguna aplicación." },
       { shot: "rest-mesero", title: "El mesero toma el pedido en su celular", text: "Busca la categoría, toca el plato y lo envía a cocina. Se acaban las comandas de papel y la letra que nadie entiende." },
       { shot: "rest-cocina", title: "La cocina lo recibe al instante", text: "Cada comanda llega a la pantalla de cocina en la columna Pedido nuevo, pasa a Preparando y luego a Listo, con el tiempo que lleva cada una. Los domicilios llegan a la misma pantalla." },
       { shot: "rest-cuenta", title: "La caja cobra la cuenta exacta", text: "La cuenta de la mesa ya tiene todo lo que se pidió. Se cobra en efectivo, transferencia o tarjeta sin sumar a mano." },

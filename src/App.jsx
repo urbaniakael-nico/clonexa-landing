@@ -342,6 +342,15 @@ function Solutions() {
           <ExternalLink href={solutionWhatsapp(current)} className="btn" data-wa={current.id}>
             Quiero verlo en mi {current.business}
           </ExternalLink>
+          {current.id === "restaurantes" && (
+            <a href="/restaurantes#carta-video" className="cartaTeaser">
+              <img src="/clonexa-media/carta-video-demo-poster.webp" width="390" height="844" alt="" loading="lazy" />
+              <span>
+                <strong>Nuevo: carta en video con QR</strong>
+                Tus clientes ven los platos en video desde la mesa y piden desde el celular. Ver la carta en video →
+              </span>
+            </a>
+          )}
           {current.page && (
             <p className="tabMore">
               <a href={current.page}>Ver todo sobre Clonexa para {current.label.toLowerCase()} →</a>

@@ -2229,6 +2229,79 @@ html {
     gap: 24px;
   }
   .cartaQr {
+    max-width: none;
+    padding: 10px 14px;
+  }
+  .cartaQr img,
+  .qrDesk {
     display: none;
+  }
+  .qrMobile {
+    display: inline;
+  }
+}
+
+/* Carta en video: titulo sin coma suelta, video en el marco de celular y bloque en el inicio */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* .grad es de bloque en el titulo del inicio; aqui va en la misma linea que la coma */
+.cartaVideo h2 .grad {
+  display: inline;
+}
+
+.qrMobile {
+  display: none;
+}
+
+.shotVideo.shot-phone {
+  background: #000;
+  aspect-ratio: 390 / 844;
+  object-fit: cover;
+}
+
+.cartaQr a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.cartaTeaser {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  margin-top: 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--txt);
+  font-size: 14px;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.cartaTeaser:hover {
+  border-color: var(--accent);
+}
+
+.cartaTeaser img {
+  width: 56px;
+  height: auto;
+  aspect-ratio: 390 / 844;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #000;
+}
+
+.cartaTeaser strong {
+  display: block;
+  color: var(--accent);
+}
+
+@media (max-width: 860px) {
+  .cartaQr .qrMobile {
+    display: inline;
   }
 }

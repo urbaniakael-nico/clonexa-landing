@@ -8,6 +8,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import zlib from "node:zlib";
 import http from "node:http";
+import { SHOTS } from "../src/content.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const HAS_DIST = fs.existsSync(path.join(ROOT, "dist", "index.html"));
@@ -274,7 +275,11 @@ test("prerender: cada ruta trae en el HTML su title, description, canonical, og,
       assert.ok(page.faq.length >= 4 && page.faq.length <= 5);
       const crumbs = graph.find((n) => n["@type"] === "BreadcrumbList").itemListElement;
       assert.deepEqual(crumbs.map((c) => c.name), ["Inicio", page.name]);
-      for (const step of page.steps) assert.ok(html.includes(`src="/capturas/${step.shot}.webp"`), `${page.slug}: ${step.shot}`);
+      for (const step of page.steps) {
+        const shot = SHOTS[step.shot];
+        // las capturas son imagenes de /capturas; la carta nueva es un video con su portada
+        assert.ok(shot.video ? html.includes(`src="${shot.video}"`) && html.includes(`poster="${shot.src}"`) : html.includes(`src="/capturas/${step.shot}.webp"`), `${page.slug}: ${step.shot}`);
+      }
       for (const other of INDUSTRY_PAGES.filter((o) => o !== page)) assert.ok(html.includes(`href="/${other.slug}"`), `${page.slug}: enlace a ${other.slug}`);
       assert.ok(html.includes(encodeURIComponent(`Hola, quiero una demo de Clonexa para mi ${page.business}.`)), `${page.slug}: mensaje de WhatsApp`);
       const own = [page.h1, ...page.intro, page.fit, ...page.steps.flatMap((s) => [s.title, s.text]), ...page.modules.flat(), ...page.faq.flat()].join(" ");

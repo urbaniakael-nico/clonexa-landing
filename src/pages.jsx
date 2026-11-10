@@ -69,7 +69,7 @@ export function IndustryPage({ page }) {
                   <p>{step.text}</p>
                 </div>
                 <figure className="flowShot">
-                  <a href={SHOTS[step.shot].src} target="_blank" rel="noopener" aria-label={`Ampliar captura: ${step.title}`}>
+                  <a href={SHOTS[step.shot].video || SHOTS[step.shot].src} target="_blank" rel="noopener" aria-label={`Ampliar captura: ${step.title}`}>
                     <ShotImage id={step.shot} sizes={phone ? "210px" : "(max-width: 760px) 92vw, 640px"} />
                   </a>
                 </figure>

@@ -87,3 +87,12 @@ test("paginas de nicho: botones grandes 'Síguenos para tips' a Instagram, TikTo
     }
   }
 });
+
+test("GIF livianos de los 4 bumeranes (correo de prospeccion), publicos en /clonexa-media", () => {
+  for (const n of ["restaurante", "bar", "taller", "campo"]) {
+    const f = path.join(ROOT, "public", "clonexa-media", `bumeran-${n}.gif`);
+    const buf = fs.readFileSync(f);
+    assert.equal(buf.subarray(0, 6).toString("latin1"), "GIF89a", n);
+    assert.ok(buf.length <= 1_000_000, `${n}: ${buf.length} bytes`);
+  }
+});

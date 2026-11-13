@@ -27,6 +27,29 @@ function OtherIndustries({ current }) {
   );
 }
 
+// Botones grandes "Síguenos para tips" (Instagram, TikTok y Facebook) en cada página de nicho:
+// el mensaje de prospección invita a seguir a @clonexaapp.
+const TIPS_NETWORKS = ["instagram", "tiktok", "facebook"];
+const TIPS_HANDLE = { instagram: "@clonexaapp", tiktok: "@clonexxa", facebook: "Clonexa" };
+
+function FollowTips() {
+  const items = TIPS_NETWORKS.map((id) => SOCIAL.find((s) => s.id === id)).filter(Boolean);
+  return (
+    <section className="wrap section followTips" aria-labelledby="tips-titulo">
+      <SectionHead id="tips-titulo" kicker="SÍGUENOS" title="Síguenos para tips" sub="Ideas cortas para tu negocio, novedades de Clonexa y ejemplos en video." />
+      <ul className="tipsBtns">
+        {items.map((item) => (
+          <li key={item.id}>
+            <ExternalLink href={item.url} className={`btn tipsBtn tips-${item.id}`} data-follow={item.id}>
+              {item.label} <span>{TIPS_HANDLE[item.id]}</span>
+            </ExternalLink>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export function IndustryPage({ page }) {
   const greeting = industryGreeting(page);
   const path = `/${page.slug}`;
@@ -105,6 +128,8 @@ export function IndustryPage({ page }) {
         <SectionHead id="faq-titulo" kicker="PREGUNTAS" title="Preguntas frecuentes" />
         <FaqList items={page.faq} />
       </section>
+
+      <FollowTips />
 
       <DemoForm
         greeting={greeting}

@@ -7,6 +7,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import zlib from "node:zlib";
 import { resolveLegalPath } from "./legal/pages.js";
+import { matchShortLink, resolveShortLink } from "./shortlinks.js";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "dist");
 const PORT = Number(process.env.PORT || 8080);
@@ -120,6 +121,14 @@ async function handle(req, res) {
   const hostRedirect = redirectForHost(req.headers.host, url);
   if (hostRedirect) {
     res.writeHead(301, { Location: hostRedirect });
+    res.end();
+    return;
+  }
+
+  // Enlace corto de la prospeccion (/r /b /t /c /s /l + codigo): 302 a la pagina del nicho con sus utm.
+  if (matchShortLink(url)) {
+    const location = await resolveShortLink(url);
+    res.writeHead(302, { Location: location || "/", "Cache-Control": "no-store", "X-Robots-Tag": "noindex" });
     res.end();
     return;
   }

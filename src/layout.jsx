@@ -3,14 +3,12 @@
 // servidor (prerender): nada lee window/document durante el render.
 import React from "react";
 import { sendEvent } from "./analytics.js";
-import { LEGAL_LINKS, SHOTS, SOCIAL, WA_GENERAL, demoRequestMessage, waLink } from "./content.js";
+import { CTA_LABEL, LEGAL_LINKS, NAV_LINKS, SHOTS, SOCIAL, WA_GENERAL, demoRequestMessage, waLink } from "./content.js";
 import { validateDemoForm } from "./form.js";
 import { SOCIAL_ICONS, WhatsappIcon } from "./icons.jsx";
 import { ABOUT_PATH, INDUSTRY_LINKS } from "./site.js";
 
 const THEME_KEY = "clonexa_theme";
-// Tiempo de cada paso en los recorridos automaticos.
-const STEP_MS = 5000;
 
 // En el servidor y en el primer render del navegador el tema es "dark" (igual en los dos para
 // hidratar sin diferencias); despues del montaje se toma el que ya fijo index.html.
@@ -45,22 +43,6 @@ export function useTheme() {
   }
 
   return [theme, setTheme];
-}
-
-// true mientras el elemento esta en pantalla (los recorridos solo avanzan si se ven).
-function useInView(ref) {
-  const [inView, setInView] = React.useState(false);
-  React.useEffect(() => {
-    const node = ref.current;
-    if (!node || !("IntersectionObserver" in window)) {
-      setInView(true);
-      return undefined;
-    }
-    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.35 });
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [ref]);
-  return inView;
 }
 
 export function Logo({ className = "" }) {
@@ -116,12 +98,6 @@ function useCloseDetails(ref) {
   }, [ref]);
 }
 
-const SECTION_LINKS = [
-  ["/#arma", "Arma tu sistema"],
-  ["/#ejemplo", "Ejemplo en acción"],
-  ["/#planes", "Planes"]
-];
-
 export function Header({ theme, setTheme, current }) {
   const industries = React.useRef(null);
   const menu = React.useRef(null);
@@ -137,7 +113,7 @@ export function Header({ theme, setTheme, current }) {
         </a>
         <nav className="navLinks" aria-label="Secciones">
           <details className="navDrop" ref={industries}>
-            <summary>Industrias</summary>
+            <summary>Negocios</summary>
             <ul className="dropList">
               {INDUSTRY_LINKS.map(([href, label, icon]) => (
                 <li key={href}>
@@ -146,12 +122,14 @@ export function Header({ theme, setTheme, current }) {
                   </a>
                 </li>
               ))}
+              <li>
+                <a href={ABOUT_PATH} {...aria(ABOUT_PATH)}>
+                  <span aria-hidden="true">💡</span> ¿Qué es Clonexa?
+                </a>
+              </li>
             </ul>
           </details>
-          <a href={ABOUT_PATH} {...aria(ABOUT_PATH)}>
-            ¿Qué es Clonexa?
-          </a>
-          {SECTION_LINKS.map(([href, label]) => (
+          {NAV_LINKS.map(([href, label]) => (
             <a key={href} href={href}>
               {label}
             </a>
@@ -160,7 +138,7 @@ export function Header({ theme, setTheme, current }) {
         <div className="navRight">
           <ThemeSwitch theme={theme} setTheme={setTheme} />
           <a href="#agenda" className="btn btnSmall navCta">
-            Agenda tu demo
+            {CTA_LABEL}
           </a>
           <details className="mobileMenu" ref={menu}>
             <summary aria-label="Menú">
@@ -169,7 +147,7 @@ export function Header({ theme, setTheme, current }) {
               </svg>
             </summary>
             <nav className="mobilePanel" aria-label="Menú">
-              <p className="mobileTitle">Industrias</p>
+              <p className="mobileTitle">Negocios</p>
               <ul>
                 {INDUSTRY_LINKS.map(([href, label, icon]) => (
                   <li key={href}>
@@ -180,17 +158,17 @@ export function Header({ theme, setTheme, current }) {
                 ))}
               </ul>
               <ul className="mobileMore">
-                <li>
-                  <a href={ABOUT_PATH}>¿Qué es Clonexa?</a>
-                </li>
-                {SECTION_LINKS.map(([href, label]) => (
+                {NAV_LINKS.map(([href, label]) => (
                   <li key={href}>
                     <a href={href}>{label}</a>
                   </li>
                 ))}
                 <li>
+                  <a href={ABOUT_PATH}>¿Qué es Clonexa?</a>
+                </li>
+                <li>
                   <a href="#agenda" className="btn btnBlock">
-                    Agenda tu demo
+                    {CTA_LABEL}
                   </a>
                 </li>
               </ul>
@@ -249,108 +227,11 @@ export function ShotImage({ id, sizes, eager = false, className = "" }) {
   );
 }
 
-// Recorrido por pasos con capturas reales: flechas, pasos y avance automatico (pausable).
-export function Sequence({ steps, label, variant = "solution", legend }) {
-  const ref = React.useRef(null);
-  const inView = useInView(ref);
-  const [index, setIndex] = React.useState(0);
-  const [playing, setPlaying] = React.useState(true);
-  const [held, setHeld] = React.useState(false);
-  const running = playing && !held && inView && steps.length > 1;
-  const step = steps[index];
-
-  React.useEffect(() => {
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) setPlaying(false);
-  }, []);
-
-  React.useEffect(() => {
-    if (!running) return undefined;
-    const timer = setTimeout(() => setIndex((i) => (i + 1) % steps.length), STEP_MS);
-    return () => clearTimeout(timer);
-  }, [running, index, steps.length]);
-
-  const go = (next) => setIndex((next + steps.length) % steps.length);
-  const phone = SHOTS[step.shot].frame === "phone";
-
-  return (
-    <div
-      ref={ref}
-      className={`seq seq-${variant}${running ? " seqRunning" : ""}`}
-      style={{ "--step-ms": `${STEP_MS}ms` }}
-      onPointerEnter={() => setHeld(true)}
-      onPointerLeave={() => setHeld(false)}
-      onFocus={() => setHeld(true)}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setHeld(false);
-      }}
-    >
-      <div className="seqTop">
-        <ol className="seqSteps" aria-label={`Pasos: ${label}`}>
-          {steps.map((item, i) => (
-            <li key={item.shot}>
-              <button type="button" aria-current={i === index ? "step" : undefined} onClick={() => go(i)}>
-                <span className="seqNum">PASO {i + 1}</span>
-                <span className="seqTitle">{item.title}</span>
-                <span className="seqProgress" aria-hidden="true" key={i === index ? `on-${index}` : "off"} />
-              </button>
-            </li>
-          ))}
-        </ol>
-        {steps.length > 1 && (
-          <button type="button" className="seqPlay" aria-pressed={playing} onClick={() => setPlaying((p) => !p)}>
-            <span aria-hidden="true">{playing ? "⏸" : "▶"}</span> Recorrido automático
-          </button>
-        )}
-      </div>
-      <div className="seqStage">
-        <div className="seqText">
-          <p className="pill">
-            PASO {index + 1} DE {steps.length}
-          </p>
-          <h3>{step.title}</h3>
-          <p>{step.text}</p>
-          {legend && <p className="legend">{legend}</p>}
-          {steps.length > 1 && (
-            <div className="seqArrows">
-              <button type="button" onClick={() => go(index - 1)} aria-label="Paso anterior">
-                ←
-              </button>
-              <button type="button" onClick={() => go(index + 1)} aria-label="Paso siguiente">
-                →
-              </button>
-            </div>
-          )}
-        </div>
-        <div className={`seqMedia${phone ? " seqMediaPhone" : ""}`}>
-          {steps.map((item, i) => {
-            const active = i === index;
-            const shot = SHOTS[item.shot];
-            return (
-              <a
-                key={item.shot}
-                href={shot.src}
-                target="_blank"
-                rel="noopener"
-                className={`seqShot${active ? " seqShotOn" : ""}`}
-                aria-hidden={active ? undefined : true}
-                tabIndex={active ? undefined : -1}
-                aria-label={active ? `Ampliar captura: ${item.title}` : undefined}
-              >
-                <ShotImage id={item.shot} sizes={shot.frame === "phone" ? "260px" : "(max-width: 760px) 92vw, 720px"} />
-              </a>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // Preguntas frecuentes (acordeon). La primera abierta.
-export function FaqList({ items, idPrefix = "faq" }) {
+export function FaqList({ items, idPrefix = "faq", twoColumns = false }) {
   const [open, setOpen] = React.useState(0);
   return (
-    <div className="faq">
+    <div className={`faq${twoColumns ? " faqTwo" : ""}`}>
       {items.map(([question, answer], index) => {
         const isOpen = open === index;
         return (
@@ -379,7 +260,7 @@ export function FaqList({ items, idPrefix = "faq" }) {
 
 const EMPTY_FORM = { name: "", business: "", whatsapp: "" };
 
-// Formulario "Agenda tu demo": evento demo_request + abre WhatsApp con los datos.
+// Formulario de demo ("Pide tu demo gratis"): evento demo_request + abre WhatsApp con los datos.
 // En las paginas de industria el mensaje empieza con la industria.
 export function DemoForm({ greeting, page = "inicio", sub }) {
   const [form, setForm] = React.useState(EMPTY_FORM);
@@ -429,7 +310,9 @@ export function DemoForm({ greeting, page = "inicio", sub }) {
     <section id="agenda" className="wrap section" aria-labelledby="agenda-titulo">
       <div className="cta">
         <div>
-          <h2 id="agenda-titulo">Agenda tu demo gratis</h2>
+          <h2 id="agenda-titulo">
+            ¿Lo vemos con <span className="grad gradInline">tu negocio</span>?
+          </h2>
           <p className="ctaSub">
             {sub || "Te mostramos Clonexa funcionando con una empresa como la tuya. 20 minutos, sin compromiso."}
           </p>
@@ -464,7 +347,7 @@ export function DemoForm({ greeting, page = "inicio", sub }) {
               placeholder: "Tu número de WhatsApp"
             })}
             <button type="submit" className="btn btnBlock">
-              Quiero mi demo
+              {CTA_LABEL}
             </button>
           </form>
         )}
@@ -473,70 +356,40 @@ export function DemoForm({ greeting, page = "inicio", sub }) {
   );
 }
 
-export function Follow() {
-  return (
-    <section className="wrap follow" aria-labelledby="siguenos-titulo">
-      <h2 id="siguenos-titulo">Síguenos y obtén descuento en tu desarrollo</h2>
-      <p>Tips para tu negocio, novedades de Clonexa y promociones exclusivas para seguidores.</p>
-      <ul className="social">
-        {SOCIAL.map((item) => {
-          const Icon = SOCIAL_ICONS[item.id];
-          return (
-            <li key={item.id}>
-              <ExternalLink href={item.url} className={`social-${item.id}`} aria-label={`Clonexa en ${item.label}`}>
-                <Icon />
-              </ExternalLink>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
-  );
-}
-
 export function Footer() {
   return (
     <footer className="wrap footer">
-      <div className="footerTop">
-        <div className="footerBrand">
-          <Logo className="logoSmall" />
-          <p>Software a la medida, en la nube, hecho en Bogotá.</p>
-        </div>
-        <nav aria-label="Industrias" className="footerCol">
-          <p className="footerTitle">Industrias</p>
-          <ul>
-            {INDUSTRY_LINKS.map(([href, label]) => (
-              <li key={href}>
-                <a href={href}>{label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <nav aria-label="Clonexa" className="footerCol">
-          <p className="footerTitle">Clonexa</p>
-          <ul>
-            <li>
-              <a href={ABOUT_PATH}>¿Qué es Clonexa?</a>
-            </li>
-            {SECTION_LINKS.map(([href, label]) => (
-              <li key={href}>
-                <a href={href}>{label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-      <div className="footerBottom">
-        <p>© 2026 Clonexa · Bogotá, Colombia</p>
+      <div className="footerRow">
+        <Logo className="logoSmall" />
+        <p>© 2026 Clonexa</p>
         <nav aria-label="Legal" className="footerLegal">
-          {LEGAL_LINKS.map(([href, label], index) => (
-            <React.Fragment key={href}>
-              {index > 0 && <span aria-hidden="true"> · </span>}
-              <a href={href}>{label}</a>
-            </React.Fragment>
+          {LEGAL_LINKS.map(([href, label]) => (
+            <a key={href} href={href}>
+              {label}
+            </a>
           ))}
         </nav>
+        <ul className="footerSocial" aria-label="Redes de Clonexa">
+          {SOCIAL.map((item) => {
+            const Icon = SOCIAL_ICONS[item.id];
+            return (
+              <li key={item.id}>
+                <ExternalLink href={item.url} className={`social-${item.id}`} aria-label={`Clonexa en ${item.label}`}>
+                  <Icon />
+                </ExternalLink>
+              </li>
+            );
+          })}
+        </ul>
       </div>
+      <nav aria-label="Negocios" className="footerNiches">
+        {INDUSTRY_LINKS.map(([href, label]) => (
+          <a key={href} href={href}>
+            {label}
+          </a>
+        ))}
+        <a href={ABOUT_PATH}>¿Qué es Clonexa?</a>
+      </nav>
     </footer>
   );
 }
@@ -574,7 +427,7 @@ export function FloatingWhatsapp({ message }) {
         tabIndex={hidden ? -1 : undefined}
         aria-hidden={hidden || undefined}
       >
-        <WhatsappIcon />
+        <WhatsappIcon /> <span className="waText">WhatsApp</span>
       </ExternalLink>
     </aside>
   );

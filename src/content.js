@@ -1,8 +1,4 @@
-// Textos, enlaces y capturas de la landing v4.
-
-// Video vertical de Nexa en el hero: cambiar aqui cuando este el video final.
-export const NEXA_VIDEO_URL = "/nexa-presentacion.mp4";
-export const NEXA_VIDEO_POSTER = "/capturas/nexa-presentacion-poster.webp";
+// Textos, enlaces y capturas de la landing ("Tu negocio, en vivo").
 
 // WhatsApp: solo enlaces wa.me, el numero nunca se muestra como texto.
 const WHATSAPP_ID = "573144798220";
@@ -22,51 +18,18 @@ export function demoRequestMessage({ name, business, whatsapp }, greeting = "Hol
   ].join("\n");
 }
 
+// Menu fijo (en todas las paginas apunta a las secciones del inicio).
 export const NAV_LINKS = [
-  ["#soluciones", "Soluciones"],
-  ["#medida", "A la medida"],
-  ["#arma", "Arma tu sistema"],
-  ["#ejemplo", "Ejemplo en acción"],
-  ["#planes", "Planes"]
+  ["/#en-vivo", "En vivo 3D"],
+  ["/#disena", "Diseña en 3D"],
+  ["/#funciones", "Funciones"],
+  ["/#planes", "Planes"],
+  ["/#preguntas", "Preguntas"]
 ];
 
-export const HERO_CHECKS = [
-  ["Listo", " o ", "a la medida"],
-  ["", "Usuarios ilimitados"],
-  ["", "Celular, tableta o PC"],
-  ["", "Tu marca y tus colores"]
-];
+export const CTA_LABEL = "Pide tu demo gratis";
 
-// [icono, industria, pagina propia (solo las que tienen pantallas reales)].
-export const INDUSTRIES = [
-  ["🍽️", "Restaurantes", "/restaurantes"],
-  ["🍸", "Bares", "/bares"],
-  ["🧵", "Talleres y fábricas", "/talleres-y-fabricas"],
-  ["🚚", "Distribuidoras", null],
-  ["🏬", "Tiendas y cadenas", null],
-  ["🎧", "Call centers", "/call-centers"],
-  ["🦺", "Personal en campo", "/personal-en-campo"],
-  ["🛒", "Tiendas en línea", null]
-];
-
-export const PATHS = [
-  {
-    id: "listo",
-    tag: "LISTO PARA USAR",
-    title: "Soluciones probadas",
-    text: "Módulos que ya operan en negocios reales. Se configuran con tu marca y quedan funcionando en días.",
-    items: ["🧾 Pedidos y caja", "👨‍🍳 Cocina en vivo", "📦 Inventario", "🕐 Turnos y nómina", "📱 QR en mesa", "🎁 Fidelización", "📊 Reportes", "🤖 Bots de Telegram"],
-    cta: ["#soluciones", "Ver soluciones →"]
-  },
-  {
-    id: "medida",
-    tag: "HECHO A LA MEDIDA",
-    title: "Tu sistema, como lo imaginas",
-    text: "Diseñamos y construimos el sistema completo de tu empresa, por etapas, sobre la misma base de Clonexa.",
-    items: ["🎧 Call center", "🚚 Rutas y despachos", "🏭 Bodega y alistamiento", "🧑‍💼 Fuerza de ventas", "🏬 Red de tiendas", "🛒 Tienda en línea", "☎️ Telefonía", "📈 Tablero de gerencia"],
-    cta: ["#arma", "Arma tu sistema →"]
-  }
-];
+export const HERO_CHECKS = ["Usuarios ilimitados", "Tarifa plana", "Tu marca y tus colores", "Te ayudamos a pasar tus datos"];
 
 // "Arma tu sistema": [icono, modulo, peso para el tipo de proyecto].
 export const BUILDER_MODULES = [
@@ -85,10 +48,12 @@ export const BUILDER_MODULES = [
   ["🤝", "Clientes (CRM)", 1],
   ["🎁", "Fidelización", 1],
   ["📈", "Gerencia", 2],
-  ["🤖", "Bots y WhatsApp", 2]
+  ["🤖", "Bots y WhatsApp", 2],
+  ["🎮", "En vivo 3D", 2],
+  ["🧱", "Diseño 3D", 1]
 ];
 
-export const BUILDER_DEFAULT = ["Pedidos", "Bodega", "Rutas", "Call center", "Gerencia"];
+export const BUILDER_DEFAULT = ["Pedidos", "Inventario", "Call center", "En vivo 3D"];
 
 export function builderSummary(selected) {
   const chosen = BUILDER_MODULES.filter(([, name]) => selected.includes(name));
@@ -149,138 +114,11 @@ export const SHOTS = {
 
 export const HERO_SHOT = "hero-caja";
 
-// Soluciones listas: cada pestana es un recorrido por pasos con capturas reales.
-export const SOLUTIONS = [
-  {
-    id: "restaurantes",
-    page: "/restaurantes",
-    icon: "🍽️",
-    label: "Restaurantes",
-    business: "restaurante",
-    items: [
-      ["Pedidos por QR", " desde la mesa o con el mesero"],
-      ["Cocina en vivo", " con tiempos por comanda"],
-      ["Domicilios", " que llegan solos a la cocina"],
-      ["Caja y cierre", " del día sin descuadres"],
-      ["Inventario y reportes", ": qué se vende y qué no"]
-    ],
-    steps: [
-      { shot: "rest-carta", title: "El cliente pide desde la mesa", text: "Escanea el QR, ve los platos en video y arma su pedido desde el celular." },
-      { shot: "rest-mesero", title: "El mesero toma el pedido", text: "Desde su celular, sin comandas de papel." },
-      { shot: "rest-cocina", title: "Cocina lo recibe al instante", text: "En orden, con tiempos y con los domicilios en la misma pantalla." },
-      { shot: "rest-cuenta", title: "La cuenta ya está armada", text: "La caja cobra la mesa exacta, en efectivo, transferencia o tarjeta." },
-      { shot: "rest-cierre", title: "Cierre del día", text: "Total vendido, productos y cobrado por método, en un solo reporte." }
-    ]
-  },
-  {
-    id: "bares",
-    page: "/bares",
-    icon: "🍸",
-    label: "Bares",
-    business: "bar",
-    items: [
-      ["Pedidos por QR", " desde la mesa, directo a la barra"],
-      ["Cobros exactos", " por mesa"],
-      ["Música y juegos en vivo", " en la pantalla del bar"],
-      ["Inventario de licores", " con alertas"],
-      ["Cierre por día de negocio", ", aunque cierres a las 4 a. m."]
-    ],
-    steps: [
-      { shot: "bar-qr", title: "Piden desde la mesa", text: "Con el QR de la mesa: cocteles, la cuenta y hasta la canción." },
-      { shot: "bar-barra", title: "La barra lo ve en vivo", text: "Cada mesa con su total, los pedidos nuevos resaltados y las canciones pedidas." },
-      { shot: "bar-juegos", title: "Juegos en vivo en el TV", text: "Los clientes juegan desde el celular y la tabla sale en la pantalla del bar." },
-      { shot: "bar-cierre", title: "Cierre por día de negocio", text: "Lo vendido en la noche queda en el mismo día, aunque cierres de madrugada." }
-    ]
-  },
-  {
-    id: "talleres",
-    page: "/talleres-y-fabricas",
-    icon: "🧵",
-    label: "Talleres y fábricas",
-    business: "taller",
-    items: [
-      ["Tableta del taller", " con PIN para cada persona"],
-      ["Turnos y tiempo", " por referencia"],
-      ["Producción por lote", " con avance en vivo"],
-      ["Nómina", " por horas o por producción"],
-      ["Cotizaciones y cuentas de cobro", " desde lo producido"]
-    ],
-    steps: [
-      { shot: "taller-tablero", title: "El tablero del taller", text: "En la tableta: quién trabaja, quién está en pausa y hace cuánto." },
-      { shot: "taller-pin", title: "Cada quien entra con su PIN", text: "Escoge en qué referencia va a trabajar y empieza su turno." },
-      { shot: "taller-produccion", title: "Producción por lote", text: "Prendas cerradas, avance de cada lote y mano de obra por prenda." },
-      { shot: "taller-nomina", title: "La nómina sale sola", text: "Horas, extras y total a pagar del periodo, con el detalle por persona." }
-    ]
-  },
-  {
-    id: "campo",
-    page: "/personal-en-campo",
-    icon: "🦺",
-    label: "Personal en campo",
-    business: "operación en campo",
-    items: [
-      ["Inicio de operación", " con ubicación"],
-      ["Quién está en cada zona", ", en vivo"],
-      ["Solicitud de material", " desde el celular"],
-      ["Pausas y tiempo", " por colaborador"],
-      ["Bot de Telegram", " para el equipo"]
-    ],
-    steps: [
-      { shot: "campo-inicio", title: "Inicio de operación", text: "Cada técnico inicia su turno y se ve si está dentro de su zona de trabajo." },
-      { shot: "campo-materiales", title: "Solicitud de material", text: "El equipo pide material y se aprueba, entrega o devuelve con número de orden." }
-    ]
-  }
-];
-
 export function solutionWhatsapp(solution) {
   return waLink(`Hola Clonexa, quiero ver una demo de Clonexa para mi ${solution.business}.`);
 }
 
-// Ejemplo en accion: empresa demo con tiendas y call center.
-export const EXAMPLE_STEPS = [
-  {
-    shot: "ej-aperturas",
-    title: "Abren las tiendas",
-    text: "Cada tienda abre cuando su equipo inicia turno. Gerencia ve qué tiendas abrieron y cuánta gente está trabajando en cada una."
-  },
-  {
-    shot: "ej-ventas",
-    title: "Se vende en tiendas y redes",
-    text: "Cada vendedor registra sus ventas desde el celular. La meta del mes avanza sola, por vendedor y en total."
-  },
-  {
-    shot: "ej-callcenter",
-    title: "El call center llama y cotiza",
-    text: "El supervisor ve a cada asesor en vivo: en llamada, disponible o en pausa, con sus llamadas, cotizaciones y tickets."
-  },
-  {
-    shot: "ej-tickets",
-    title: "La cotización se vuelve servicio",
-    text: "Cuando el cliente aprueba, la cotización se convierte en ticket, se programa y se sigue hasta que el servicio se cumple."
-  },
-  {
-    shot: "ej-solicitudes",
-    title: "Bodega abastece las tiendas",
-    text: "Si a una tienda le falta mercancía, la pide a bodega y sigue el estado: Enviada → Alistando → Lista → Recibida."
-  },
-  {
-    shot: "ej-tesoreria",
-    title: "Tesorería y gerencia en vivo",
-    text: "Tesorería revisa los tickets antes de facturar y ve lo que está por cobrar; gerencia cierra el día con todo conectado."
-  }
-];
-
 export const COMMERCE_ITEMS = ["Multi-vendedor y multi-tienda", "Ofertas, cupones y envío gratis", "Inventario sincronizado con la bodega"];
-
-// Fila: [funcion, software generico, Clonexa]. "yes" = check, "soon" = PROXIMAMENTE.
-export const COMPARISON = [
-  ["Pedidos, caja e inventario", "yes", "yes"],
-  ["Se adapta a tu proceso", "no", "yes"],
-  ["Módulos nuevos a la medida (call center, rutas, tienda en línea…)", "no", "yes"],
-  ["Todo conectado: tiendas, bodega, ventas y gerencia", "Varios programas", "Uno solo"],
-  ["Cobro por usuario", "Casi siempre", "Nunca · tarifa plana"],
-  ["Factura electrónica DIAN", "yes", "soon"]
-];
 
 export const PROCESS = [
   ["Diagnóstico", "Entendemos cómo trabaja tu empresa hoy y qué se te escapa."],
@@ -289,22 +127,12 @@ export const PROCESS = [
   ["Acompañamiento", "Soporte por WhatsApp y mejoras continuas."]
 ];
 
-export const CASES = [
-  {
-    big: "< 5 min",
-    title: "para calcular la nómina",
-    text: "Taller de confección en Bogotá: pagos por horas de producción y costo por referencia. Antes, a mano."
-  },
-  {
-    big: "0",
-    title: "botellas por contar al cierre",
-    text: "Bar en Bogotá: cobros exactos, pedidos y canciones en tiempo real al barman."
-  },
-  {
-    big: "0",
-    title: "pedidos perdidos",
-    text: "Restaurante: pedidos desde el celular y domicilios directo a cocina, con inventario exacto."
-  }
+// "Por que Clonexa" (sin cifras de clientes: solo lo que el sistema hace).
+export const WHY = [
+  ["Se adapta a tu proceso", ", no tú a él: se arma por módulos y lo que falta se construye."],
+  ["Todo conectado", ": pedidos, caja, inventario, personal y reportes en un solo sistema."],
+  ["Usuarios ilimitados", " con tarifa plana: no pagas por cada persona."],
+  ["Módulos a la medida", ": call center, rutas, bodega, tienda en línea y lo que tu operación necesite."]
 ];
 
 export const PLANS = [
@@ -315,6 +143,7 @@ export const PLANS = [
     items: [
       ["Pedidos, caja e inventario", true],
       ["Reportes del día", false],
+      ["Carta en video con QR", false],
       ["Usuarios ilimitados", false]
     ]
   },
@@ -325,19 +154,21 @@ export const PLANS = [
     recommended: true,
     items: [
       ["Todo lo de Esencial", false],
-      ["Turnos y nómina", true],
-      ["QR, domicilios y fidelización", true],
-      ["Instalación y capacitación", false]
+      ["Turnos y nómina", false],
+      ["QR y domicilios", false],
+      ["Negocio en vivo 3D", true],
+      ["Diseño 3D del local y personajes", true]
     ]
   },
   {
     id: "medida",
-    name: "Empresas a la medida",
-    for: "Call center, rutas, red de tiendas, tienda en línea",
+    name: "A la medida",
+    for: "Call center, rutas, red de tiendas",
     items: [
       ["Diagnóstico y diseño", false],
       ["Desarrollo por etapas", true],
-      ["Tablero de gerencia", false]
+      ["Tablero de gerencia", false],
+      ["Tienda en línea o marketplace", false]
     ]
   }
 ];
@@ -348,7 +179,33 @@ export function planWhatsapp(plan) {
   return waLink(`Hola Clonexa, quiero cotizar el plan ${plan.name}.`);
 }
 
+// Preguntas frecuentes del inicio (tambien van como FAQPage en los datos estructurados).
+// Respuestas cortas y solo con lo que el sistema hace hoy.
 export const FAQ = [
+  [
+    "¿Cuánto cuesta?",
+    "Una tarifa plana mensual según el plan, con usuarios ilimitados. Te damos el precio exacto después de ver tu negocio y los módulos que necesitas."
+  ],
+  [
+    "¿Tengo que comprar equipos?",
+    "No. Funciona en el navegador del celular, la tableta o el computador que ya tienes. Para la cocina, la barra o el televisor sirve cualquier pantalla con navegador."
+  ],
+  [
+    "¿Me ayudan a pasar mis datos?",
+    "Sí. Te ayudamos a cargar tu menú o tus productos, tu inventario y tu equipo, y capacitamos a tu gente para que arranque sin enredos."
+  ],
+  [
+    "¿Funciona desde el celular?",
+    "Sí. Se abre desde el navegador del celular, sin instalar nada. Tus clientes también piden desde su celular con el QR de la mesa."
+  ],
+  [
+    "¿Mis datos están seguros?",
+    "Tu información se guarda en la nube y viaja cifrada. Cada persona entra con su usuario o su PIN y ve solo lo que le toca. Y si lo pides, borramos tus datos."
+  ],
+  [
+    "¿Qué pasa si se cae el internet?",
+    "Clonexa trabaja en la nube, así que necesita conexión. Lo que ya registraste queda guardado; si se cae el wifi del local, puedes seguir con los datos del celular."
+  ],
   [
     "¿Pueden construir un sistema que no está en esta página?",
     "Sí. Clonexa se arma por módulos. Si tu operación lo hace, lo diseñamos contigo y lo construimos por etapas, conectado a lo que ya tienes."
@@ -357,9 +214,7 @@ export const FAQ = [
     "¿Cuánto tarda?",
     "Las soluciones listas quedan funcionando en días. Un desarrollo a la medida se entrega por etapas para que lo uses desde temprano."
   ],
-  ["¿Tiene factura electrónica DIAN?", "Está en desarrollo y llega próximamente."],
-  ["¿Cobran por cada usuario?", "No. Tarifa plana: todo tu equipo usa Clonexa sin costo extra por usuario."],
-  ["¿Necesito comprar equipos?", "No. Funciona en el celular, la tableta o el computador que ya tienes."]
+  ["¿Tiene factura electrónica DIAN?", "Está en desarrollo y llega próximamente."]
 ];
 
 // Redes con utm_source=web para medir lo que llega desde la pagina.

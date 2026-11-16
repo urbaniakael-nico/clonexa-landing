@@ -4,14 +4,10 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import {
   BUILDER_MODULES,
-  COMPARISON,
-  EXAMPLE_STEPS,
   FAQ,
-  INDUSTRIES,
   PLANS,
   SHOTS,
   SOCIAL,
-  SOLUTIONS,
   WA_GENERAL,
   builderSummary,
   builderWhatsapp,
@@ -21,6 +17,7 @@ import {
   waLink
 } from "../src/content.js";
 import { validateDemoForm } from "../src/form.js";
+import { INSIDE_TABS } from "../src/live.js";
 
 const WA = /^https:\/\/wa\.me\/573144798220\?text=.+/;
 const text = (link) => decodeURIComponent(new URL(link).searchParams.get("text"));
@@ -28,7 +25,7 @@ const text = (link) => decodeURIComponent(new URL(link).searchParams.get("text")
 test("todos los enlaces de WhatsApp van a wa.me/573144798220 con un mensaje en español", () => {
   assert.match(WA_GENERAL, WA);
   assert.match(text(WA_GENERAL), /demo/i);
-  for (const tab of SOLUTIONS) {
+  for (const tab of INSIDE_TABS) {
     const link = solutionWhatsapp(tab);
     assert.match(link, WA);
     assert.ok(text(link).includes(tab.business), `${tab.id}: el mensaje nombra el negocio`);
@@ -64,24 +61,19 @@ test("redes: las 5 URL exactas con utm_source=web", () => {
   });
 });
 
-test("DIAN Próximamente sin fechas; planes sin precios; industrias, pestañas y ejemplo de 6 pasos", () => {
-  const dian = COMPARISON.find(([feature]) => /DIAN/.test(feature));
-  assert.equal(dian[2], "soon");
+test("DIAN Próximamente sin fechas; planes sin precios; módulos 3D en Arma tu sistema y en los planes", () => {
   const dianFaq = FAQ.find(([q]) => /DIAN/.test(q));
   assert.match(dianFaq[1], /próximamente/i);
   assert.doesNotMatch(dianFaq[1], /\b20\d\d\b|enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre/i);
   assert.doesNotMatch(JSON.stringify(PLANS), /\$|\bCOP\b|\d{2,}\.\d{3}/);
-  assert.deepEqual(
-    INDUSTRIES.map(([, label]) => label),
-    ["Restaurantes", "Bares", "Talleres y fábricas", "Distribuidoras", "Tiendas y cadenas", "Call centers", "Personal en campo", "Tiendas en línea"]
-  );
-  assert.deepEqual(SOLUTIONS.map((t) => t.label), ["Restaurantes", "Bares", "Talleres y fábricas", "Personal en campo"]);
-  assert.deepEqual(SOLUTIONS.map((t) => t.steps.length), [5, 4, 4, 2]);
-  SOLUTIONS.forEach((t) => assert.equal(t.items.length, 5, t.id));
-  assert.equal(EXAMPLE_STEPS.length, 6);
+  const names = BUILDER_MODULES.map(([, name]) => name);
+  assert.ok(names.includes("En vivo 3D") && names.includes("Diseño 3D"));
+  assert.deepEqual(PLANS.map((p) => p.name), ["Esencial", "Operación completa", "A la medida"]);
+  const completa = PLANS.find((p) => p.recommended).items.map(([t]) => t);
+  assert.ok(completa.includes("Negocio en vivo 3D") && completa.includes("Diseño 3D del local y personajes"));
 });
 
-const SOURCE = ["../src/content.js", "../src/App.jsx", "../src/layout.jsx", "../src/pages.jsx", "../src/industries.js", "../src/site.js", "../index.html"]
+const SOURCE = ["../src/content.js", "../src/live.js", "../src/live.jsx", "../src/App.jsx", "../src/layout.jsx", "../src/pages.jsx", "../src/industries.js", "../src/site.js", "../index.html"]
   .map((f) => fs.readFileSync(new URL(f, import.meta.url), "utf8"))
   .join("\n");
 
@@ -103,7 +95,7 @@ function webpWidth(buffer) {
 }
 
 test("cada captura usada existe con su version pequeña, alt y el ancho declarado", () => {
-  const used = [...SOLUTIONS.flatMap((t) => t.steps.map((s) => s.shot)), ...EXAMPLE_STEPS.map((s) => s.shot), "hero-caja"];
+  const used = [...INSIDE_TABS.map((t) => t.shot), "campo-inicio", "taller-produccion", "hero-caja"];
   for (const id of used) assert.ok(SHOTS[id], `${id}: captura sin definir`);
   for (const [id, shot] of Object.entries(SHOTS)) {
     assert.ok(shot.alt && shot.alt.length > 20, `${id}: alt descriptivo`);
@@ -165,7 +157,8 @@ test("bares paso 2: el panel de barra nuevo (no las columnas viejas rotas)", () 
   assert.doesNotMatch(SHOTS["bar-barra"].alt, /Alistando|columnas/);
 });
 
-test("la captura grande del inicio pide la version grande en tableta (sizes = ancho real en una columna)", () => {
-  const app = fs.readFileSync("src/App.jsx", "utf8");
-  assert.match(app, /ShotImage id=\{HERO_SHOT\} eager sizes="\(max-width: 1040px\) min\(92vw, 680px\), 640px"/);
+test("la portada pide el poster chico en celular y el grande en computador", () => {
+  const live = fs.readFileSync("src/live.jsx", "utf8");
+  assert.match(live, /srcSet=\{`\$\{HERO_VIDEO\.posterSm\} 640w, \$\{HERO_VIDEO\.poster\} 1280w`\}/);
+  assert.match(live, /fetchPriority="high"/);
 });

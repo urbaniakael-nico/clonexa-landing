@@ -50,7 +50,7 @@ test("rutas que deben seguir respondiendo", { skip: !HAS_DIST && "sin dist/ (cor
     const tiktok = fs.readdirSync(path.join(ROOT, "public")).filter((f) => /^tiktok.*\.txt$/.test(f));
     assert.ok(tiktok.length >= 2, "faltan los archivos de verificacion de TikTok");
     for (const p of ["/", "/privacidad", "/privacidad/", "/terminos", "/borrar-datos", "/nexa-prueba.mp4", "/nexa-presentacion.mp4", "/capturas/nexa-presentacion-poster.webp", "/robots.txt", "/sitemap.xml",
-      "/favicon.ico", "/apple-touch-icon.png", "/og-clonexa.png", "/brand/clonexa-logo.svg", "/brand/clonexa-logo-claro.svg", ...tiktok.map((f) => `/${f}`)]) {
+      "/favicon.ico", "/apple-touch-icon.png", "/og-clonexa.png", "/og-clonexa-en-vivo.jpg", "/en-vivo/hero-bar-960.mp4", "/en-vivo/carta-mini.mp4","/brand/clonexa-logo.svg", "/brand/clonexa-logo-claro.svg", ...tiktok.map((f) => `/${f}`)]) {
       const res = await get(port, p);
       assert.equal(res.status, 200, `${p} -> ${res.status}`);
     }
@@ -82,16 +82,15 @@ test("rutas que deben seguir respondiendo", { skip: !HAS_DIST && "sin dist/ (cor
     const gz = await get(port, "/");
     assert.equal(gz.status, 200);
     const html = await gz.text();
-    // Video de Nexa en el hero: el nuevo, con portada y sin precargar completo.
-    const video = html.match(/<video[^>]*>/)[0];
-    assert.match(video, /src="\/nexa-presentacion\.mp4"/);
-    assert.match(video, /poster="\/capturas\/nexa-presentacion-poster\.webp"/);
-    assert.match(video, /preload="(none|metadata)"/);
-    assert.doesNotMatch(video, /autoplay/);
-    assert.match(html, /Nexa es una presentadora creada con IA/);
+    // Portada: poster liviano como imagen y videos sin precargar (el video se pide despues de cargar).
+    assert.match(html, /<img class="heroPoster" src="\/en-vivo\/hero-bar-poster\.webp"/);
+    for (const video of html.match(/<video[^>]*>/g)) {
+      assert.match(video, /preload="none"/, video);
+      assert.doesNotMatch(video, / src="/, `video sin carga diferida: ${video}`);
+    }
     assert.match(html, /<link rel="canonical" href="https:\/\/www\.clonexa\.com\.co\/"/);
     assert.match(html, /property="og:url" content="https:\/\/www\.clonexa\.com\.co\/"/);
-    assert.match(html, /og-clonexa\.png/);
+    assert.match(html, /og-clonexa-en-vivo\.jpg/);
     assert.match(html, /name="twitter:card" content="summary_large_image"/);
     assert.match(html, /localStorage\.getItem\("clonexa_theme"\)/, "tema antes de pintar");
 
@@ -228,7 +227,7 @@ test("prerender: cada ruta trae en el HTML su title, description, canonical, og,
       assert.match(html, new RegExp(`<meta property="og:url" content="${url}" />`), `${p}: og:url`);
       assert.match(html, /<meta property="og:title" content="[^"]+" \/>/);
       assert.match(html, /<meta property="og:description" content="[^"]+" \/>/);
-      assert.match(html, /<meta property="og:image" content="https:\/\/www\.clonexa\.com\.co\/og-clonexa\.png" \/>/);
+      assert.match(html, /<meta property="og:image" content="https:\/\/www\.clonexa\.com\.co\/og-clonexa-en-vivo\.jpg" \/>/);
       assert.equal((html.match(/<h1[\s>]/g) || []).length, 1, `${p}: un solo H1`);
       for (const icon of ['href="/favicon.ico"', 'href="/favicon.svg"', 'href="/icon-192.png"', 'href="/icon-512.png"', 'rel="apple-touch-icon" href="/apple-touch-icon.png"']) {
         assert.ok(html.includes(icon), `${p}: icono ${icon}`);
@@ -249,7 +248,12 @@ test("prerender: cada ruta trae en el HTML su title, description, canonical, og,
     assert.equal(org.logo, `${SITE}/icon-512.png`);
     assert.equal(org.email, "clonexasaas@gmail.com");
     assert.equal(org.address.addressLocality, "Bogotá");
-    assert.equal(org.areaServed.name, "Colombia");
+    assert.deepEqual(org.areaServed.map((a) => a.name), ["Colombia", "United States"]);
+    // Inicio: preguntas frecuentes como FAQPage
+    const { FAQ } = await import("../src/content.js");
+    const homeFaq = home.find((n) => n["@type"] === "FAQPage");
+    assert.equal(homeFaq.mainEntity.length, FAQ.length);
+    assert.ok(homeFaq.mainEntity.some((q) => q.name === "¿Cuánto cuesta?"));
     assert.ok(org.description.length > 40);
     const { SOCIAL } = await import("../src/content.js");
     assert.deepEqual(org.sameAs, SOCIAL.map((s) => s.url.replace("?utm_source=web", "")));
@@ -260,8 +264,8 @@ test("prerender: cada ruta trae en el HTML su title, description, canonical, og,
     assert.ok(about.some((n) => n["@type"] === "AboutPage"));
     assert.ok(about.some((n) => n["@type"] === "Organization"));
     const aboutText = visibleText(aboutHtml);
-    assert.ok(aboutText.includes("Clonexa es un software en la nube (SaaS) hecho en Bogotá, Colombia, que conecta en un solo sistema los pedidos, el inventario, la caja, el personal, los turnos, la nómina y los reportes de los negocios."));
-    assert.ok(aboutText.includes("Clonexa, la empresa de software de Bogotá, no tiene relación con medicamentos de nombre parecido."));
+    assert.ok(aboutText.includes("Clonexa es un software en la nube (SaaS) que conecta en un solo sistema los pedidos, el inventario, la caja, el personal, los turnos, la nómina y los reportes de los negocios"));
+    assert.ok(aboutText.includes("Clonexa, la empresa de software, no tiene relación con medicamentos de nombre parecido."));
 
     // Industrias: FAQPage + BreadcrumbList, H1, capturas reales con alt, enlaces a las demas, 500-900 palabras propias
     const { INDUSTRY_PAGES } = await import("../src/industries.js");

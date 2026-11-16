@@ -1,8 +1,9 @@
 // Paginas propias: industria, "¿Que es Clonexa?" y 404. Se prerenderizan a HTML en el build.
 import React from "react";
-import { SHOTS, SOCIAL, waLink } from "./content.js";
+import { CTA_LABEL, SHOTS, SOCIAL, waLink } from "./content.js";
 import { INDUSTRY_PAGES, industryGreeting } from "./industries.js";
 import { Breadcrumbs, DemoForm, ExternalLink, FaqList, SectionHead, ShotImage } from "./layout.jsx";
+import { Inside, LiveSim } from "./live.jsx";
 import { ABOUT_META, ABOUT_PATH, INDUSTRY_LINKS } from "./site.js";
 
 function OtherIndustries({ current }) {
@@ -50,7 +51,17 @@ function FollowTips() {
   );
 }
 
+// Pestana de "Asi funciona por dentro" y de la simulacion con la que abre cada pagina de nicho.
+const NICHE_TABS = {
+  restaurantes: ["restaurante", "restaurante"],
+  bares: ["bar", "bar"],
+  "talleres-y-fabricas": ["taller", "taller"],
+  "call-centers": ["callcenter", "callcenter"],
+  "personal-en-campo": ["campo", "campo"]
+};
+
 export function IndustryPage({ page }) {
+  const [insideTab, simTab] = NICHE_TABS[page.slug] || ["restaurante", "restaurante"];
   const greeting = industryGreeting(page);
   const path = `/${page.slug}`;
   return (
@@ -59,19 +70,27 @@ export function IndustryPage({ page }) {
       <section className="wrap pageHero" data-wa-hide>
         <p className="kicker">CLONEXA PARA {page.name.toUpperCase()}</p>
         <h1>{page.h1}</h1>
-        {page.intro.map((text, i) => (
-          <p key={i} className={i === 0 ? "lead" : "pageText"}>
-            {text}
-          </p>
-        ))}
+        <p className="lead">{page.intro[0]}</p>
         <div className="heroActions">
           <a href="#agenda" className="btn">
-            Agenda tu demo
+            {CTA_LABEL}
           </a>
           <ExternalLink href={waLink(greeting)} className="btn btnGhost" data-wa={`hero-${page.slug}`}>
             Escríbenos por WhatsApp
           </ExternalLink>
         </div>
+      </section>
+
+      <Inside initial={insideTab} />
+      <LiveSim initial={simTab} />
+
+      <section className="wrap section" aria-labelledby="como-titulo">
+        <SectionHead id="como-titulo" kicker="CÓMO LO RESOLVEMOS" title={`Clonexa para ${page.name.toLowerCase()}`} />
+        {page.intro.slice(1).map((text, i) => (
+          <p key={i} className="pageText">
+            {text}
+          </p>
+        ))}
       </section>
 
       <section className="wrap section" aria-labelledby="funciona-titulo">
@@ -149,8 +168,9 @@ export function AboutPage() {
         <p className="kicker">SOBRE CLONEXA</p>
         <h1>{ABOUT_META.h1}</h1>
         <p className="lead">
-          Clonexa es un software en la nube (SaaS) hecho en Bogotá, Colombia, que conecta en un solo sistema los
-          pedidos, el inventario, la caja, el personal, los turnos, la nómina y los reportes de los negocios.
+          Clonexa es un software en la nube (SaaS) que conecta en un solo sistema los pedidos, el inventario, la caja,
+          el personal, los turnos, la nómina y los reportes de los negocios, y te deja verlos funcionando en 3D y en
+          tiempo real.
         </p>
         <p className="pageText">
           En vez de tener un programa para la caja, otro para el inventario, una hoja de cálculo para la nómina y los
@@ -206,8 +226,8 @@ export function AboutPage() {
             <strong>Sin equipos especiales:</strong> funciona en el celular, la tableta o el computador que ya tienes.
           </li>
           <li>
-            <strong>Hecho en Colombia:</strong> pensado para cómo trabajan los negocios aquí. La factura electrónica DIAN
-            llega próximamente.
+            <strong>Tu negocio, en vivo:</strong> ves el local en 3D con cada mesa, máquina o escritorio moviéndose con
+            los datos reales. La factura electrónica DIAN llega próximamente.
           </li>
         </ul>
 
@@ -223,8 +243,7 @@ export function AboutPage() {
           <ExternalLink href={waLink("Hola Clonexa, quiero saber más sobre Clonexa.")} data-wa="que-es-clonexa">
             WhatsApp
           </ExternalLink>{" "}
-          o al correo <a href="mailto:clonexasaas@gmail.com">clonexasaas@gmail.com</a>. Estamos en Bogotá, Colombia, y
-          puedes seguirnos en{" "}
+          o al correo <a href="mailto:clonexasaas@gmail.com">clonexasaas@gmail.com</a>, y puedes seguirnos en{" "}
           {SOCIAL.map((item, i) => (
             <React.Fragment key={item.id}>
               {i > 0 && (i === SOCIAL.length - 1 ? " y " : ", ")}
@@ -234,7 +253,7 @@ export function AboutPage() {
           .
         </p>
         <p className="disclaimer">
-          Clonexa, la empresa de software de Bogotá, no tiene relación con medicamentos de nombre parecido.
+          Clonexa, la empresa de software, no tiene relación con medicamentos de nombre parecido.
         </p>
       </article>
       <DemoForm page="que-es-clonexa" />

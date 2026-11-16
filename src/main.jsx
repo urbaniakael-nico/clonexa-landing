@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import Root from "./Root.jsx";
 import "./landing.css";
+import "./live.css";
 
 // En produccion el HTML ya viene prerenderizado (se hidrata); en desarrollo se renderiza aqui.
 const container = document.getElementById("root");

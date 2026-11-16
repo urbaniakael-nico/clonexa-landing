@@ -2,6 +2,7 @@
 // Lo usan la app (navegacion) y el prerender (HTML listo para Google).
 import { FAQ, SOCIAL } from "./content.js";
 import { INDUSTRY_PAGES } from "./industries.js";
+import { HERO_POSTER_SIZES, HERO_VIDEO } from "./live.js";
 
 export const SITE_URL = "https://www.clonexa.com.co";
 export const ABOUT_PATH = "/que-es-clonexa";
@@ -91,6 +92,8 @@ export function pageMeta(pathname) {
       description:
         "Pedidos, caja, inventario, turnos y nómina en un solo sistema, y lo ves en 3D y en tiempo real desde el celular o un televisor. Pide tu demo gratis.",
       ogTitle: "Clonexa · Tu negocio, en vivo",
+      // Poster de la portada (elemento LCP): se precarga desde el <head>.
+      preloadImage: { href: HERO_VIDEO.posterSm, srcset: `${HERO_VIDEO.posterSm} 800w, ${HERO_VIDEO.poster} 1280w`, sizes: HERO_POSTER_SIZES },
       jsonLd: graph(ORGANIZATION, WEBSITE, faqPage(FAQ))
     };
   }

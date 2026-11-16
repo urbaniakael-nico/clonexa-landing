@@ -789,7 +789,7 @@ h2 {
   padding: 8px 10px;
   border: 0;
   border-radius: 12px;
-  background: #f20b6d;
+  background: #c9085c;
   color: #fff;
   font: inherit;
   font-size: 12px;
@@ -924,10 +924,27 @@ h2 {
   text-decoration: none;
 }
 
+.followRow .followBtn {
+  color: var(--txt) !important;
+}
+
 .followBtn svg {
   width: 18px;
   height: 18px;
   fill: currentColor;
+}
+
+.followBtn.social-instagram svg {
+  fill: #e1306c;
+}
+.followBtn.social-facebook svg {
+  fill: #1877f2;
+}
+.followBtn.social-linkedin svg {
+  fill: #2f8fd8;
+}
+.followBtn.social-youtube svg {
+  fill: #ff0000;
 }
 
 .reelModal {

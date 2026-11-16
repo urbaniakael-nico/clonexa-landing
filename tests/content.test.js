@@ -159,6 +159,6 @@ test("bares paso 2: el panel de barra nuevo (no las columnas viejas rotas)", () 
 
 test("la portada pide el poster chico en celular y el grande en computador", () => {
   const live = fs.readFileSync("src/live.jsx", "utf8");
-  assert.match(live, /srcSet=\{`\$\{HERO_VIDEO\.posterSm\} 640w, \$\{HERO_VIDEO\.poster\} 1280w`\}/);
+  assert.match(live, /srcSet=\{`\$\{HERO_VIDEO\.posterSm\} 800w, \$\{HERO_VIDEO\.poster\} 1280w`\}/);
   assert.match(live, /fetchPriority="high"/);
 });

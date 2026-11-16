@@ -13,6 +13,7 @@ import {
   HERO_ORDERS,
   HERO_SALES_START,
   HERO_SONGS,
+  HERO_POSTER_SIZES,
   HERO_VIDEO,
   INSIDE_TABS,
   NICHE_STRIP,
@@ -85,7 +86,10 @@ export function CartaPhone({ moment = "ceviche", badge, className = "", children
 
   React.useEffect(() => {
     const v = video.current;
-    if (!v || reduced) return;
+    if (!v) return;
+    // El poster (primer cuadro del plato) tambien es diferido: no compite con la portada.
+    if (active && !v.getAttribute("poster")) v.setAttribute("poster", poster);
+    if (reduced) return;
     if (!active) {
       v.pause();
       return;
@@ -103,7 +107,7 @@ export function CartaPhone({ moment = "ceviche", badge, className = "", children
       v.src = CARTA_MINI;
     }
     v.play?.()?.catch?.(() => {});
-  }, [active, reduced, start]);
+  }, [active, reduced, start, poster]);
 
   return (
     <div className={`cphone ${className}`} ref={box}>
@@ -113,7 +117,7 @@ export function CartaPhone({ moment = "ceviche", badge, className = "", children
         loop
         playsInline
         preload="none"
-        poster={poster}
+        data-moment={moment}
         width="300"
         height="650"
         aria-label={label || "Carta en video de un restaurante de ejemplo en el celular del cliente"}
@@ -199,8 +203,8 @@ function HeroVideo() {
       <img
         className="heroPoster"
         src={HERO_VIDEO.poster}
-        srcSet={`${HERO_VIDEO.posterSm} 640w, ${HERO_VIDEO.poster} 1280w`}
-        sizes="(max-width: 1040px) 92vw, 640px"
+        srcSet={`${HERO_VIDEO.posterSm} 800w, ${HERO_VIDEO.poster} 1280w`}
+        sizes={HERO_POSTER_SIZES}
         width="1280"
         height="720"
         alt={HERO_VIDEO.alt}

@@ -9,9 +9,12 @@ export const HERO_VIDEO = {
   small: `${MEDIA}/hero-bar-640.mp4`,
   large: `${MEDIA}/hero-bar-960.mp4`,
   poster: `${MEDIA}/hero-bar-poster.webp`,
-  posterSm: `${MEDIA}/hero-bar-poster-640.webp`,
+  posterSm: `${MEDIA}/hero-bar-poster-800.webp`,
   alt: "Escena 3D en vivo de un bar de ejemplo: mesas con clientes, barra, pista de baile y pantalla de canciones pedidas"
 };
+
+// Ancho del poster en pantalla (el mismo en la precarga del <head> y en la imagen).
+export const HERO_POSTER_SIZES = "(max-width: 1040px) 92vw, 640px";
 
 // Carta en video real (la misma de /restaurantes, en tamano chico para los celulares de la pagina).
 // Momentos de cada plato: ceviche 0-3 s, nachos 3-6,5 s, lomo 6,5-9 s, hamburguesa 9,5-12 s.

@@ -132,7 +132,9 @@ test("inicio: secciones en orden, CTA único, celulares con video y sin cifras d
   // celulares de carta: video (con poster del plato), nunca la captura vieja de iconos
   const phones = html.match(/<div class="cphone[^"]*"><video[^>]*>/g) || [];
   assert.ok(phones.length >= 4, `celulares con video: ${phones.length}`);
-  for (const p of phones) assert.match(p, /poster="\/en-vivo\/carta-(ceviche|nachos|lomo|hamburguesa)\.webp"/);
+  for (const p of phones) assert.match(p, /data-moment="(ceviche|nachos|lomo|hamburguesa)"/);
+  const live = fs.readFileSync(path.join(ROOT, "src/live.jsx"), "utf8");
+  assert.match(live, /v\.src = CARTA_MINI/, "los celulares cargan la carta en video real");
   assert.doesNotMatch(html, /rest-qr|bar-qr/);
   assert.doesNotMatch(visibleText(html), /RESULTADOS DE CLIENTES|100 ?%|< ?5 min/);
   // Siguenos con los enlaces de siempre

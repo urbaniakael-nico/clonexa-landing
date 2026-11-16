@@ -26,6 +26,10 @@ function headFor(meta) {
     `<meta name="twitter:title" content="${attr(ogTitle)}" />`,
     `<meta name="twitter:description" content="${attr(meta.description)}" />`
   ];
+  if (meta.preloadImage) {
+    const { href, srcset, sizes } = meta.preloadImage;
+    tags.push(`<link rel="preload" as="image" href="${attr(href)}" imagesrcset="${attr(srcset)}" imagesizes="${attr(sizes)}" fetchpriority="high" />`);
+  }
   if (meta.jsonLd) {
     tags.push(`<script type="application/ld+json">${JSON.stringify(meta.jsonLd).replace(/</g, "\\u003c")}</script>`);
   }

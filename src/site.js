@@ -1,11 +1,11 @@
 // Rutas del sitio, metadatos de cada pagina (title, description, canonical, og) y JSON-LD.
 // Lo usan la app (navegacion) y el prerender (HTML listo para Google).
-import { SOCIAL } from "./content.js";
+import { FAQ, SOCIAL } from "./content.js";
 import { INDUSTRY_PAGES } from "./industries.js";
 
 export const SITE_URL = "https://www.clonexa.com.co";
 export const ABOUT_PATH = "/que-es-clonexa";
-export const OG_IMAGE = `${SITE_URL}/og-clonexa.png`;
+export const OG_IMAGE = `${SITE_URL}/og-clonexa-en-vivo.jpg`;
 
 export const INDUSTRY_LINKS = INDUSTRY_PAGES.map((page) => [`/${page.slug}`, page.name, page.icon]);
 
@@ -30,8 +30,12 @@ export const ORGANIZATION = {
   url: `${SITE_URL}/`,
   logo: `${SITE_URL}/icon-512.png`,
   description:
-    "Clonexa es un software en la nube (SaaS) hecho en Bogotá, Colombia, que conecta en un solo sistema los pedidos, el inventario, la caja, el personal, los turnos, la nómina y los reportes de los negocios.",
-  areaServed: { "@type": "Country", name: "Colombia" },
+    "Clonexa es un software en la nube (SaaS) que conecta en un solo sistema los pedidos, el inventario, la caja, el personal, los turnos, la nómina y los reportes de los negocios, y los muestra en 3D y en tiempo real.",
+  // La direccion solo vive aqui (datos estructurados, no visibles).
+  areaServed: [
+    { "@type": "Country", name: "Colombia" },
+    { "@type": "Country", name: "United States" }
+  ],
   address: { "@type": "PostalAddress", addressLocality: "Bogotá", addressCountry: "CO" },
   email: "clonexasaas@gmail.com",
   sameAs
@@ -71,9 +75,9 @@ function faqPage(items) {
 }
 
 export const ABOUT_META = {
-  title: "¿Qué es Clonexa? | Software en la nube hecho en Bogotá",
+  title: "¿Qué es Clonexa? | Software en la nube para negocios",
   description:
-    "Clonexa es un software en la nube (SaaS) hecho en Bogotá que conecta pedidos, inventario, caja, personal, turnos, nómina y reportes de los negocios.",
+    "Clonexa es un software en la nube (SaaS) que conecta pedidos, inventario, caja, personal, turnos, nómina y reportes de los negocios, en 3D y en tiempo real.",
   h1: "¿Qué es Clonexa?"
 };
 
@@ -83,11 +87,11 @@ export function pageMeta(pathname) {
   if (path === "/") {
     return {
       path,
-      title: "Clonexa | Sistema para restaurantes, bares, talleres y más",
+      title: "Clonexa · Tu negocio, en vivo",
       description:
-        "Clonexa: soluciones listas y sistemas a la medida para restaurantes, bares, talleres, tiendas, call centers y personal en campo. Agenda tu demo gratis.",
-      ogTitle: "Clonexa | Si tu negocio lo hace, Clonexa lo conecta",
-      jsonLd: graph(ORGANIZATION, WEBSITE)
+        "Pedidos, caja, inventario, turnos y nómina en un solo sistema, y lo ves en 3D y en tiempo real desde el celular o un televisor. Pide tu demo gratis.",
+      ogTitle: "Clonexa · Tu negocio, en vivo",
+      jsonLd: graph(ORGANIZATION, WEBSITE, faqPage(FAQ))
     };
   }
   if (path === ABOUT_PATH) {

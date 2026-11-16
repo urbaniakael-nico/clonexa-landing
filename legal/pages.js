@@ -20,10 +20,11 @@ const CLOSE_ICON =
   '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
 
 const SECTIONS = [
-  ["/#soluciones", "Soluciones"],
-  ["/#medida", "A la medida"],
-  ["/#arma", "Arma tu sistema"],
-  ["/#planes", "Planes"]
+  ["/#soluciones", "Negocios"],
+  ["/#en-vivo", "En vivo 3D"],
+  ["/#disena", "Diseña en 3D"],
+  ["/#planes", "Planes"],
+  ["/#preguntas", "Preguntas"]
 ];
 
 function brand(footer) {
@@ -47,14 +48,14 @@ export function legalHeader() {
       ${brand(false)}
       <div class="navLinks">
         ${links}
-        <a href="/#agenda" class="navCta">Agenda tu demo</a>
+        <a href="/#agenda" class="navCta">Pide tu demo gratis</a>
       </div>
       <button class="menuButton" type="button" data-menu-open aria-label="Abrir menu">${MENU_ICON}</button>
     </nav>
     <div class="mobileMenu" data-menu hidden>
       <button class="closeButton" type="button" data-menu-close aria-label="Cerrar menu">${CLOSE_ICON}</button>
       ${SECTIONS.map(([href, label]) => `<a href="${href}">${label}</a>`).join("\n      ")}
-      <a href="/#agenda">Agenda tu demo</a>
+      <a href="/#agenda">Pide tu demo gratis</a>
     </div>`;
 }
 
@@ -62,7 +63,7 @@ export function legalFooter(current) {
   return `<footer class="footer">
       ${brand(true)}
       <div class="footerRight">
-        <span>© 2026 Clonexa · Bogotá, Colombia</span>
+        <span>© 2026 Clonexa</span>
         <nav class="footerLegal" aria-label="Legal">${legalLinks(current)}</nav>
       </div>
     </footer>`;

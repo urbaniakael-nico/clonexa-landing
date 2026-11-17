@@ -14,3 +14,12 @@ menu?.querySelectorAll("a").forEach((link) => {
     menu.hidden = true;
   });
 });
+
+// Selector de idioma: recuerda la eleccion (la landing ya no muestra el aviso de idioma).
+document.querySelectorAll("[data-lang-link]").forEach((link) => {
+  link.addEventListener("click", () => {
+    try {
+      localStorage.setItem("clonexa_lang", link.dataset.langLink);
+    } catch (_) {}
+  });
+});

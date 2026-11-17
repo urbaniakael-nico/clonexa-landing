@@ -21,6 +21,7 @@ const OWN_HOSTS = new Set(["clonexa.com.co", "www.clonexa.com.co"]);
 const RAILWAY_KEEP = [
   /^\/tiktok[\w-]*\.txt$/i,
   /^\/(privacidad|terminos|borrar-datos|privacy|terms|data-deletion)\/?$/,
+  /^\/(en|fr)\/(privacidad|terminos|borrar-datos)\/?$/,
   /^\/(assets|brand)\//,
   /^\/(favicon\.ico|apple-touch-icon\.png)$/
 ];

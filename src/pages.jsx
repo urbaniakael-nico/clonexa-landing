@@ -28,7 +28,7 @@ function OtherIndustries({ current }) {
   );
 }
 
-// Botones grandes "Síguenos para tips" (Instagram, TikTok y Facebook) en cada página de nicho:
+// Botones grandes "Síguenos" (Instagram, TikTok y Facebook) en cada página de nicho:
 // el mensaje de prospección invita a seguir a @clonexaapp.
 const TIPS_NETWORKS = ["instagram", "tiktok", "facebook"];
 const TIPS_HANDLE = { instagram: "@clonexaapp", tiktok: "@clonexxa", facebook: "Clonexa" };
@@ -37,7 +37,7 @@ function FollowTips() {
   const items = TIPS_NETWORKS.map((id) => SOCIAL.find((s) => s.id === id)).filter(Boolean);
   return (
     <section className="wrap section followTips" aria-labelledby="tips-titulo">
-      <SectionHead id="tips-titulo" kicker="SÍGUENOS" title="Síguenos para tips" sub="Ideas cortas para tu negocio, novedades de Clonexa y ejemplos en video." />
+      <SectionHead id="tips-titulo" kicker="REDES" title="Síguenos" sub="Novedades de Clonexa y ejemplos en video." />
       <ul className="tipsBtns">
         {items.map((item) => (
           <li key={item.id}>

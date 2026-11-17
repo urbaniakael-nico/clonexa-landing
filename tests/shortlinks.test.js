@@ -75,10 +75,11 @@ test("servidor: /b/<codigo> responde 302 al destino del backend; codigo inexiste
   }
 });
 
-test("paginas de nicho: botones grandes 'Síguenos para tips' a Instagram, TikTok y Facebook", { skip: !HAS_DIST && "falta npm run build" }, () => {
+test("paginas de nicho: botones grandes 'Síguenos' a Instagram, TikTok y Facebook (sin el eslogan de tips)", { skip: !HAS_DIST && "falta npm run build" }, () => {
   for (const page of ["restaurantes", "bares", "talleres-y-fabricas", "personal-en-campo"]) {
     const html = fs.readFileSync(path.join(ROOT, "dist", page, "index.html"), "utf8");
-    assert.match(html, /Síguenos para tips/, page);
+    assert.match(html, />Síguenos</, page);
+    assert.doesNotMatch(html, /para (más )?tips/i, page);
     for (const [cls, url] of [["tips-instagram", "instagram.com/clonexaapp"], ["tips-tiktok", "tiktok.com/@clonexxa"], ["tips-facebook", "facebook.com/1397005896827159"]]) {
       const esc = (v) => v.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
       const href = esc(`https://www.${url}`);

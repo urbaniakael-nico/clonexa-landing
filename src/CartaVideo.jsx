@@ -1,11 +1,14 @@
-// Seccion "Tu carta en video con QR" (arriba de la pagina) para visitas de la prospeccion de
-// restaurantes. Se decide en el navegador (useEffect): el HTML prerenderizado no cambia.
+// Seccion "Tu carta en video con QR" (arriba de /restaurantes en cada idioma, y en las demas paginas
+// para visitas de la prospeccion de restaurantes). Textos en t.carta.
 import React from "react";
 import { sendEvent } from "./analytics.js";
 import { CARTA_DEMO_URL, CARTA_VIDEO, cartaWhatsapp } from "./cartaVideo.js";
+import { useI18n } from "./i18n/index.jsx";
 import { ExternalLink } from "./layout.jsx";
 
 export default function CartaVideoSection({ code }) {
+  const { t, href } = useI18n();
+  const c = t.carta;
   const ref = React.useRef(null);
   React.useEffect(() => {
     const video = ref.current;
@@ -14,33 +17,27 @@ export default function CartaVideoSection({ code }) {
   return (
     <section id="carta-video" className="wrap cartaVideo" aria-labelledby="carta-video-titulo">
       <div className="cartaCopy">
-        <p className="kicker">CARTA EN VIDEO CON QR</p>
+        <p className="kicker">{c.kicker}</p>
         <h2 id="carta-video-titulo">
-          Tus platos{" "}
+          {c.title1}
           <span className="nowrap">
-            <span className="grad">en video</span>,
-          </span>{" "}
-          desde el QR de la mesa
+            <span className="grad">{c.titleGrad}</span>
+            {c.titleComma}
+          </span>
+          {c.title2}
         </h2>
-        <p className="sub">
-          Tus clientes escanean el QR de la mesa y ven tus platos en video, de frente y de perfil, y piden desde el
-          celular. Sin descargar nada. Los clips salen de fotos y videos de tu propio celular.
-        </p>
+        <p className="sub">{c.sub}</p>
         <ul className="cartaPoints">
-          <li>Un plato que se ve bien se vende solo.</li>
-          <li>El pedido llega directo a la cocina o a la barra.</li>
-          <li>Cambias la carta cuando quieras, sin reimprimir.</li>
+          {c.points.map((p) => (
+            <li key={p}>{p}</li>
+          ))}
         </ul>
         <div className="heroActions">
-          <ExternalLink
-            href={cartaWhatsapp(code)}
-            className="btn"
-            onClick={() => sendEvent("carta_video_whatsapp", { code: code || "" })}
-          >
-            Escríbenos por WhatsApp
+          <ExternalLink href={cartaWhatsapp(t, code)} className="btn" onClick={() => sendEvent("carta_video_whatsapp", { code: code || "" })}>
+            {c.wa}
           </ExternalLink>
-          <a href="/restaurantes" className="btn btnGhost">
-            Ver todo para restaurantes
+          <a href={href("/restaurantes")} className="btn btnGhost">
+            {c.seeAll}
           </a>
         </div>
       </div>
@@ -57,20 +54,18 @@ export default function CartaVideoSection({ code }) {
               loop
               playsInline
               preload="metadata"
-              aria-label="Demo: carta en video de un restaurante de ejemplo"
+              aria-label={c.videoLabel}
             />
           </div>
-          <figcaption>Demo con un restaurante de ejemplo (datos inventados).</figcaption>
+          <figcaption>{c.caption}</figcaption>
         </figure>
         <div className="cartaQr">
-          <img src={CARTA_VIDEO.qr} width="132" height="132" alt="Código QR de la carta real del restaurante de ejemplo" />
+          <img src={CARTA_VIDEO.qr} width="132" height="132" alt={c.qrAlt} />
           <p>
-            <span className="qrDesk">
-              Escanéalo y abre la carta real de un restaurante de ejemplo en tu celular, como la verían tus clientes.{" "}
-            </span>
+            <span className="qrDesk">{c.qrText}</span>
             <a href={CARTA_DEMO_URL} target="_blank" rel="noopener noreferrer">
-              <span className="qrDesk">Abrirla aquí</span>
-              <span className="qrMobile">Abre la carta real de un restaurante de ejemplo →</span>
+              <span className="qrDesk">{c.openHere}</span>
+              <span className="qrMobile">{c.openMobile}</span>
             </a>
           </p>
         </div>

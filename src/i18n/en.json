@@ -1,0 +1,730 @@
+{
+  "meta": {
+    "home": {
+      "title": "Clonexa · Your business, live",
+      "description": "Orders, POS, inventory, shifts and payroll in one system, and you watch it run in 3D and in real time from your phone or a TV. Get your free demo.",
+      "ogTitle": "Clonexa · Your business, live"
+    },
+    "about": {
+      "title": "What is Clonexa? | Cloud software for businesses",
+      "description": "Clonexa is cloud software (SaaS) that connects a business's orders, inventory, POS, staff, shifts, payroll and reports, in 3D and in real time."
+    },
+    "notFound": {
+      "title": "Page not found | Clonexa",
+      "description": "This page doesn't exist. See the industries Clonexa works with or book your demo."
+    },
+    "ogImageAlt": "Clonexa: your business, live. 3D scene of a sample bar running in real time",
+    "orgDescription": "Clonexa is cloud software (SaaS) that connects a business's orders, inventory, POS, staff, shifts, payroll and reports in one system, and shows them in 3D and in real time."
+  },
+  "common": {
+    "cta": "Get your free demo",
+    "ctaNav": "Free demo",
+    "skip": "Skip to content",
+    "logoHome": "Clonexa, go to home page",
+    "theme": { "group": "Page theme", "dark": "Dark", "light": "Light" },
+    "nav": {
+      "sections": "Sections",
+      "business": "Industries",
+      "about": "What is Clonexa?",
+      "menu": "Menu",
+      "links": { "en-vivo": "Live 3D", "disena": "Design in 3D", "funciones": "Features", "planes": "Pricing", "preguntas": "FAQ" }
+    },
+    "lang": { "label": "Language" },
+    "footer": { "legal": "Legal", "social": "Clonexa on social media", "on": "Clonexa on {network}", "business": "Industries" },
+    "legalLinks": { "privacidad": "Privacy", "terminos": "Terms", "borrar-datos": "Delete my data" },
+    "wa": {
+      "general": "Hi Clonexa, I'd like to book a free 20-minute demo.",
+      "write": "Message us on WhatsApp",
+      "talk": "Chat on WhatsApp",
+      "region": "WhatsApp contact"
+    },
+    "crumbs": { "label": "Breadcrumb", "home": "Home" },
+    "seeAll": "See everything for {name} →"
+  },
+  "form": {
+    "title1": "Shall we try it with ",
+    "titleGrad": "your business",
+    "title2": "?",
+    "sub": "We'll show you Clonexa running for a business just like yours. 20 minutes, no strings attached.",
+    "subIndustry": "We'll show you Clonexa running for a business just like yours. 20 minutes, no strings attached. Get a quote for your {name} system.",
+    "name": "Your name",
+    "namePh": "Your name",
+    "business": "Company and type of business",
+    "businessPh": "e.g. The Grill, restaurant",
+    "whatsapp": "WhatsApp",
+    "whatsappPh": "Your WhatsApp number",
+    "errors": {
+      "name": "Please enter your name.",
+      "business": "Tell us your business name and type.",
+      "whatsapp": "Please enter a valid WhatsApp number."
+    },
+    "thanksTitle": "Thank you! Almost done.",
+    "thanksText": "We opened WhatsApp with your details to schedule the demo. If it didn't open, tap the button.",
+    "openWa": "Open WhatsApp",
+    "again": "Send another request",
+    "message": { "greeting": "Hi Clonexa, I'd like to book my free demo.", "name": "Name", "business": "Business", "whatsapp": "WhatsApp" }
+  },
+  "hero": {
+    "kicker": "BUSINESS SOFTWARE · IN REAL TIME",
+    "title1": "Your business, ",
+    "titleGrad": "live.",
+    "lead1": "Orders, POS, inventory, shifts and payroll in one system… and you watch it run in ",
+    "leadStrong": "3D, in real time",
+    "lead2": ", from your phone or a TV.",
+    "demo": "Watch the live demo",
+    "checks": ["Unlimited users", "Flat monthly rate", "Your brand, your colors", "We help you move your data"],
+    "videoAlt": "Live 3D scene of a sample bar: tables with guests, bar counter, dance floor and a screen with song requests",
+    "live": "LIVE",
+    "liveExtra": "· video",
+    "ago": "3 s ago",
+    "orders": [
+      ["🍺", "Table 4 ordered 2 beers", "straight to the bar"],
+      ["🍸", "Table 2 ordered 3 cocktails", "straight to the bar"],
+      ["🍟", "Table 9 ordered a sharing platter", "straight to the kitchen"],
+      ["🍺", "Bar ordered 4 beers", "bar tab"]
+    ],
+    "sales": "Sales today",
+    "song": "Song request",
+    "songs": [
+      ["Table 7", "#2 in queue"],
+      ["Table 3", "#3 in queue"],
+      ["Table 11", "#4 in queue"]
+    ],
+    "cartaBadge": "▶ Video menu",
+    "cartaLabel": "Video menu of a sample restaurant on the guest's phone"
+  },
+  "niches": {
+    "label": "Industries",
+    "items": {
+      "restaurantes": "Restaurants",
+      "bares": "Bars",
+      "talleres": "Workshops",
+      "callcenters": "Call centers",
+      "campo": "Field teams",
+      "tiendas": "Stores",
+      "domicilios": "Delivery"
+    }
+  },
+  "inside": {
+    "kicker": "HOW IT WORKS INSIDE",
+    "title1": "The real system, ",
+    "titleGrad": "not a slide deck.",
+    "sub": "Real screens from demo companies. Pick your business and see the full flow.",
+    "tabsLabel": "Type of business",
+    "cta": "Show me with my business",
+    "waMessage": "Hi Clonexa, I'd like to see a Clonexa demo for my {business}.",
+    "ago": "2 s ago",
+    "tabs": {
+      "restaurante": {
+        "label": "Restaurant",
+        "business": "restaurant",
+        "toasts": [["🛎️", "Table 7 · new order"], ["🛵", "Delivery #19 · to kitchen"], ["✅", "Table 3 · order ready"]],
+        "steps": [
+          ["Guests order with the QR code", "From their table, with the video menu. Nothing to download."],
+          ["Straight to the kitchen", "Every ticket with its timer: new, cooking, ready."],
+          ["The register balances itself", "Exact bill per table and end-of-day close in one tap."]
+        ]
+      },
+      "bar": {
+        "label": "Bar",
+        "business": "bar",
+        "toasts": [["🍺", "Table 4 · 2 beers"], ["🎶", "Table 7 · song request"], ["🍸", "Bar · 3 cocktails"]],
+        "steps": [
+          ["They order from the table", "With the QR code and the video menu. They can even request songs."],
+          ["The bar sees it instantly", "Every table with its total and new orders highlighted."],
+          ["Close the night balanced", "Close by business day, even if you shut at 4 a.m."]
+        ]
+      },
+      "taller": {
+        "label": "Workshop",
+        "business": "workshop or factory",
+        "toasts": [["🧵", "REF 2041 · 36 of 50 pieces"], ["⏱️", "Operator 3 · clocked in"], ["✅", "Batch REF 2038 · closed"]],
+        "steps": [
+          ["Everyone clocks in with a PIN", "On the workshop tablet. No usernames or passwords."],
+          ["Watch every batch move", "Finished pieces, progress and labor cost per piece."],
+          ["Payroll runs itself", "Regular and overtime hours for the period, ready to pay."]
+        ]
+      },
+      "campo": {
+        "label": "Field",
+        "business": "field operation",
+        "toasts": [["📍", "Tech 4 · GPS clock-in"], ["📦", "Material order · approved"], ["⏸️", "Tech 2 · on break"]],
+        "steps": [
+          ["They clock in with GPS", "From their phone, with their location and work zone."],
+          ["See who's where", "Active, on break or out of zone, live."],
+          ["Every material has an order", "Requested, delivered or returned, always with a number."]
+        ]
+      },
+      "callcenter": {
+        "label": "Call center",
+        "business": "call center",
+        "toasts": [["📞", "Agent 3 · on a call"], ["🧾", "Quote · approved"], ["✅", "Agent 5 · closed a sale"]],
+        "steps": [
+          ["Every agent, live", "On a call, available or on break, with their time."],
+          ["Calls turn into sales", "From the call to the quote to the scheduled service."],
+          ["Finance collects on time", "Everything ready to invoice, in one inbox."]
+        ]
+      },
+      "tienda": {
+        "label": "Store",
+        "business": "store",
+        "toasts": [["🛍️", "Sale logged · Store 2"], ["📦", "Warehouse · order picked"], ["🎯", "Monthly goal · 78 %"]],
+        "steps": [
+          ["Every sale counts toward the goal", "Sales reps log it from their phone."],
+          ["The warehouse restocks on time", "Stores request stock and track the order."],
+          ["Management sees it all together", "Sales, stores and goals on one dashboard."]
+        ]
+      }
+    }
+  },
+  "sim": {
+    "kicker": "LIVE SIMULATION",
+    "title1": "See what ",
+    "titleGrad": "yours would look like",
+    "sub": "Demo companies running on the same system our customers use. It's a simulation: tap the button and watch what happens.",
+    "tabsLabel": "Simulation by business",
+    "sceneAlt": "3D scene of a sample {name} with its staff and its tables or workstations",
+    "tabs": {
+      "restaurante": {
+        "label": "Restaurant",
+        "title": "Every table, every order, in real time",
+        "points": ["📲 Tables that order with the QR code", "👨‍🍳 Kitchen with a timer on every ticket", "🛵 Delivery orders on the same screen", "💵 Register and daily sales, instantly"],
+        "action": "🛎️ Simulate an order",
+        "toast": "🛎️ Table {n} · new order · straight to the kitchen",
+        "labels": [
+          ["+Table 1 · QR active", "+Table 1 · ordered 2 dishes", "Table 1 · eating"],
+          ["Table 2 · free", "+Table 2 · QR active", "+Table 2 · ordered 3 dishes"],
+          ["+Table 3 · QR active", "+Table 3 · ordered drinks", "Table 3 · asked for the bill"],
+          ["+Table 4 · QR active", "Table 4 · order on its way", "Table 4 · eating"],
+          ["Table 5 · free", "+Table 5 · QR active", "+Table 5 · ordered 2 dishes"],
+          ["Table 6 · free", "+Table 6 · QR active", "+Table 6 · ordered dessert"],
+          ["+Table 7 · QR active", "+Table 7 · ordered 4 dishes", "Table 7 · eating"],
+          ["Table 8 · free", "+Table 8 · QR active", "+Table 8 · ordered 2 dishes"],
+          ["Grill cook · Table 7 · 2 platters", "Grill cook · Table 4 · steak", "Grill cook · Delivery #20"],
+          ["Kitchen · Delivery #19", "Kitchen · Table 1 · ready", "+Kitchen · Table 5 · cooking"],
+          ["Register · Charging Table 2", "Register · Table 3 paid", "Register · Available"],
+          ["+Server · Bringing order · Table 4", "Server · Taking order · Table 8", "+Server · Bringing order · Table 1"],
+          ["Courier · Leaving · #18", "Courier · On the way · #18", "+Courier · Delivered · #18 ✓"]
+        ],
+        "zones": ["KITCHEN & GRILL", "DINING ROOM", "REGISTER & DELIVERY"],
+        "kpis": { "mesas": "Active tables", "pedidos": "Orders today", "cocina": "In the kitchen", "ventas": "Sales today" }
+      },
+      "bar": {
+        "label": "Bar",
+        "title": "The whole night, table by table",
+        "points": ["🍺 QR orders straight to the bar", "🎶 Song requests from the table", "🧾 Exact tab for every table", "🌙 Close by business day"],
+        "action": "🍺 Order from the table",
+        "toast": "🍺 Table {n} ordered 2 beers · straight to the bar",
+        "labels": [
+          ["+Table 1 · QR active", "+Table 1 · ordered 2 beers", "+Table 1 · requested a song"],
+          ["Table 2 · free", "+Table 2 · QR active", "+Table 2 · ordered 3 cocktails"],
+          ["Table 3 · free", "+Table 3 · QR active", "+Table 3 · ordered a platter"],
+          ["+Table 4 · QR active", "+Table 4 · ordered 2 beers", "Table 4 · tab $86"],
+          ["+Table 5 · QR active", "+Table 5 · requested a song", "+Table 5 · ordered 4 shots"],
+          ["Table 6 · free", "+Table 6 · QR active", "+Table 6 · ordered 2 cocktails"],
+          ["+Table 7 · QR active", "+Table 7 · requested a song", "+Table 7 · ordered a bottle"],
+          ["+Table 8 · QR active", "+Table 8 · ordered 3 beers", "Table 8 · asked for the bill"],
+          ["Table 9 · free", "+Table 9 · QR active", "+Table 9 · ordered nachos"],
+          ["+Bartender · Making 3 items · Table 7", "+Bartender · Making 2 cocktails · Table 2", "Bartender · Served · Table 4 ✓"],
+          ["+DJ · Now playing: Salsa night", "DJ · Up next: Table 7's song", "+DJ · Now playing: Table 5's request"],
+          ["+Server · Bringing order · Table 7", "+Server · Bringing order · Table 2", "Server · Charging · Table 8"]
+        ],
+        "zones": [],
+        "kpis": { "mesas": "Open tables", "pedidos": "Orders", "canciones": "Songs in queue", "ventas": "Sales today" }
+      },
+      "taller": {
+        "label": "Workshop",
+        "title": "Every machine, every batch, in real time",
+        "points": ["🔢 Everyone clocks in with a PIN", "🧵 Live progress on every batch", "⏸️ Breaks and time per style", "💰 Payroll from real hours"],
+        "action": "🧵 Close batch",
+        "toast": "✅ Batch REF 2041 closed · 50 pieces · ready to ship",
+        "labels": [
+          ["+Operator · Sewing · REF 2041", "+Operator · 12 pieces · REF 2041", "Operator · Checking · REF 2041"],
+          ["+Operator · Sewing · REF 2041", "Operator · 9 pieces · REF 2041", "!Operator · On break · 5 min"],
+          ["+Operator · Sewing · REF 2041", "Operator · 14 pieces · REF 2041", "+Operator · Sewing · REF 2041"],
+          ["+Operator · Sewing · REF 2041", "Operator · 11 pieces · REF 2041", "+Operator · Sewing · REF 2041"],
+          ["Cutting · Preparing batch", "+Cutting · Batch REF 2042 ready ✓", "Cutting · Preparing batch"],
+          ["!Operator · On break · 12 min", "Operator · Back · REF 2041", "+Operator · Sewing · REF 2041"],
+          ["Machine free", "+Operator · Clocked in · PIN ✓", "+Operator · Sewing · REF 2041"],
+          ["Machine free", "Machine free", "+Operator · Clocked in · PIN ✓"],
+          ["Machine free", "+Operator · Clocked in · PIN ✓", "+Operator · Sewing · REF 2041"]
+        ],
+        "zones": ["PRODUCTION", "CUTTING", "READY TO SHIP", "BREAK AREA"],
+        "kpis": { "prendas": "Pieces today", "lotes": "Batches in progress", "pausa": "On break", "avance": "REF 2041 progress" }
+      },
+      "campo": {
+        "label": "Field",
+        "title": "Your team on the road, as if you were there",
+        "points": ["📍 GPS clock-in and clock-out", "🗺️ Who's inside or outside their zone", "⏸️ Breaks and time for every tech", "📦 Materials with a numbered order"],
+        "action": "📍 Clock in with GPS",
+        "toast": "📍 Tech 31 clocked in with GPS · inside their zone ✓",
+        "labels": [
+          ["North · Tech · Rack A3 · wiring", "+North · Tech · Rack A3 · done ✓", "North · Tech · Rack A4 · wiring"],
+          ["North · Tech · Rack A6 · wiring", "!North · Tech · On break · 4 min", "North · Tech · Rack A6 · wiring"],
+          ["North · Supervisor · Checking progress", "+North · Supervisor · Approved materials ✓", "North · Supervisor · Checking progress"],
+          ["North · Stockroom · Bringing materials", "+North · Stockroom · Order #214 delivered ✓", "North · Stockroom · Available"],
+          ["South · Tech · Rack C1", "+South · Tech · Rack C1 · done ✓", "South · Tech · Rack C2"],
+          ["South · Tech · Rack C4", "South · Tech · Requested materials", "South · Tech · Rack C4"],
+          ["South · Supervisor · Checking progress", "South · Supervisor · 15 on shift", "South · Supervisor · Checking progress"],
+          ["!South · Tech · ⚠ Out of zone", "+South · Tech · Back in zone ✓", "South · Tech · Rack D4"]
+        ],
+        "zones": ["NORTH SITE", "SOUTH SITE"],
+        "kpis": { "turno": "On shift", "fuera": "Out of zone", "pausa": "On break", "material": "Materials delivered" }
+      },
+      "callcenter": {
+        "label": "Call center",
+        "title": "Every call, every agent, in real time",
+        "points": ["📞 Call queue with wait times", "🎧 Status of every agent", "💰 Sales and quotes", "📊 Daily goals"],
+        "action": "📞 Simulate an incoming call",
+        "toast": "📞 Incoming call · assigned to Agent 3",
+        "labels": [
+          ["+Agent 1 · On a call · {t}"],
+          ["+Agent 2 · On a call · {t}"],
+          ["Agent 3 · Available", "+Agent 3 · On a call · {t}"],
+          ["+Agent 4 · On a call · {t}", "+Agent 4 · Sent a quote ✓"],
+          ["+Agent 5 · Closed a sale ✓", "Agent 5 · Available", "+Agent 5 · On a call · {t}"],
+          ["+Agent 6 · On a call · {t}"],
+          ["!Agent 7 · Break · 3 min", "Agent 7 · Available", "+Agent 7 · On a call · {t}"],
+          ["+Agent 8 · On a call · {t}", "+Agent 8 · Closed a sale ✓"],
+          ["Supervisor · 7 on calls · goal 80 %", "Supervisor · goal 82 %", "Supervisor · goal 84 %"]
+        ],
+        "zones": ["AGENTS", "SUPERVISION"],
+        "kpis": { "cola": "In queue", "llamada": "On a call", "espera": "Avg. wait", "ventas": "Sales today" }
+      }
+    }
+  },
+  "design": {
+    "kicker": "NEW · DESIGN YOUR BUSINESS IN 3D",
+    "title1": "Build your place like ",
+    "titleGrad": "a video game.",
+    "sub": "Pick a template, move walls and furniture, dress your team in their uniform and connect it to your real data. What you design is what you see live.",
+    "mainAlt": "Clonexa builder mode: 3D floor plan of a sample restaurant with tables, kitchen and bar, plus the furniture catalog to drag in",
+    "templatesAlt": "Builder templates: bar, restaurant, workshop, call center, warehouse or office to start in one tap",
+    "characters": [
+      ["🧍 Human", "Human character wearing a warehouse uniform in the character editor"],
+      ["🙂 Cartoon", "Cartoon-style character in the character editor"]
+    ],
+    "points": [
+      ["🏗️ Ready-made templates", "Bar, restaurant, workshop, call center, warehouse or office. Or start from scratch with your own measurements."],
+      ["🎨 With your brand", "One tap and the place takes on your colors: sign, lights, furniture and uniforms."],
+      ["🔗 Truly connected", "Every table, machine or desk moves with your business's real data."]
+    ]
+  },
+  "toys": {
+    "kicker": "CLONEXA'S BEST TOYS",
+    "title1": "What your customers and your team ",
+    "titleGrad": "will love",
+    "carta": {
+      "badge": "▶ video",
+      "title": "🎬 Video menu with QR code",
+      "text": "Every dish on video before ordering. It looks so good… they order more.",
+      "link": "See the video menu with QR →"
+    },
+    "order": {
+      "title": "📲 Order from the table",
+      "text": "They scan, they order, and the bill comes out exact for every table.",
+      "add": "＋ Add · Table 7",
+      "bag": "🛒 Your order ({count}) · {total}",
+      "phoneLabel": "Video menu: grilled steak with the button to add it to table 7's order"
+    },
+    "gps": { "title": "📍 GPS shifts", "text": "Your team clocks in and out; you see who showed up and where they are." },
+    "prod": { "title": "🧵 Production and payroll", "text": "Batches, hours and pay calculated in minutes, no spreadsheets." }
+  },
+  "reels": {
+    "kicker": "SEE IT IN 15 SECONDS",
+    "title1": "Clonexa, ",
+    "titleGrad": "in action.",
+    "sub": "The same videos we post on social media. Follow us to see a new business every day.",
+    "items": {
+      "restaurante": "Restaurant",
+      "bar": "Bar",
+      "taller": "Workshop",
+      "callcenter": "Call center",
+      "campo": "Field",
+      "domicilios": "Delivery"
+    },
+    "watch": ": watch the 15-second video",
+    "dialog": "Video: {name}, live",
+    "close": "Close video",
+    "follow": {
+      "instagram": "Instagram @clonexaapp",
+      "tiktok": "TikTok @clonexxa",
+      "facebook": "Facebook",
+      "linkedin": "LinkedIn",
+      "youtube": "YouTube"
+    }
+  },
+  "builder": {
+    "kicker": "INTERACTIVE",
+    "title": "Build your system in 30 s",
+    "sub": "Tap what you need and we'll show you the demo with all of it connected.",
+    "modulesLabel": "Modules",
+    "modules": {
+      "pedidos": "Orders",
+      "caja": "POS",
+      "inventario": "Inventory",
+      "bodega": "Warehouse",
+      "rutas": "Routes",
+      "callcenter": "Call center",
+      "telefonia": "Phone system",
+      "vendedores": "Sales reps",
+      "tiendas": "Store network",
+      "tiendaOnline": "Online store",
+      "turnos": "Shifts",
+      "nomina": "Payroll",
+      "crm": "Customers (CRM)",
+      "fidelizacion": "Loyalty",
+      "gerencia": "Management",
+      "bots": "Bots & WhatsApp",
+      "envivo": "Live 3D",
+      "diseno3d": "3D design"
+    },
+    "connected": "{n} connected modules · {level}",
+    "choose": "Pick at least one module",
+    "levels": { "lista": "Ready-made solution", "completa": "Full operation", "medida": "Custom enterprise" },
+    "quote": "Get a quote on WhatsApp",
+    "waMessage": "Hi Clonexa, I'd like a quote for a Clonexa system with: {list}."
+  },
+  "how": {
+    "kicker": "HOW WE WORK",
+    "title": "From idea to a working system",
+    "steps": [
+      ["Discovery", "We learn how your company works today and what's slipping through the cracks."],
+      ["Design", "We show you the screens and the flow before we build."],
+      ["Build in stages", "We deliver module by module, tested and with your team."],
+      ["Ongoing support", "WhatsApp support and continuous improvements."]
+    ],
+    "whyTitle": "Why Clonexa",
+    "why": [
+      ["It fits your process", ", not the other way around: it's built from modules, and whatever's missing gets built."],
+      ["Everything connected", ": orders, POS, inventory, staff and reports in one system."],
+      ["Unlimited users", " at a flat rate: you don't pay per person."],
+      ["Custom modules", ": call center, routes, warehouse, online store and whatever your operation needs."]
+    ]
+  },
+  "plans": {
+    "kicker": "PRICING",
+    "title1": "Fixed price. ",
+    "titleGrad": "Unlimited users.",
+    "sub": "A fixed monthly fee based on your modules. Custom development is quoted in stages.",
+    "recommended": "RECOMMENDED",
+    "cta": "Get a quote for this plan",
+    "waMessage": "Hi Clonexa, I'd like a quote for the {name} plan.",
+    "items": {
+      "esencial": {
+        "name": "Essential",
+        "for": "To get your business organized",
+        "items": [["Orders, POS and inventory", true], ["Daily reports", false], ["Video menu with QR code", false], ["Unlimited users", false]]
+      },
+      "completa": {
+        "name": "Full operation",
+        "for": "For businesses with a team",
+        "items": [["Everything in Essential", false], ["Shifts and payroll", false], ["QR ordering and delivery", false], ["Live 3D business view", true], ["3D design of your place and characters", true]]
+      },
+      "medida": {
+        "name": "Custom",
+        "for": "Call center, routes, store network",
+        "items": [["Discovery and design", false], ["Development in stages", true], ["Management dashboard", false], ["Online store or marketplace", false]]
+      }
+    }
+  },
+  "commerce": {
+    "kicker": "E-COMMERCE",
+    "title": "Your own online store or marketplace",
+    "sub": "Catalog, cart, online payments, multiple sellers and shipping, connected to your warehouse, your POS and your reports. No commission on every sale to someone else's platform.",
+    "items": ["Multi-seller and multi-store", "Deals, coupons and free shipping", "Inventory synced with the warehouse"],
+    "cta": "I want my online store",
+    "waMessage": "Hi Clonexa, I'd like a quote for my online store."
+  },
+  "faq": {
+    "kicker": "FREQUENTLY ASKED QUESTIONS",
+    "title1": "What everyone ",
+    "titleGrad": "asks us",
+    "items": [
+      ["How much does it cost?", "A flat monthly rate based on your plan, with unlimited users. We give you the exact price once we've seen your business and the modules you need."],
+      ["Do I need to buy equipment?", "No. It runs in the browser of the phone, tablet or computer you already have. For the kitchen, the bar or the TV, any screen with a browser will do."],
+      ["Will you help me move my data?", "Yes. We help you load your menu or products, your inventory and your team, and we train your people so they get started without a hitch."],
+      ["Does it work on a phone?", "Yes. It opens in the phone's browser, nothing to install. Your customers also order from their own phone with the table's QR code."],
+      ["Is my data safe?", "Your information is stored in the cloud and travels encrypted. Each person signs in with their own user or PIN and sees only what they need. And if you ask, we delete your data."],
+      ["What if the internet goes down?", "Clonexa runs in the cloud, so it needs a connection. Everything you've already logged stays saved; if your venue's Wi-Fi drops, you can keep going on mobile data."],
+      ["Can you build a system that isn't on this page?", "Yes. Clonexa is built from modules. If your operation does it, we design it with you and build it in stages, connected to what you already have."],
+      ["How long does it take?", "Ready-made solutions are up and running in days. Custom development is delivered in stages so you can start using it early."],
+      ["Does it support electronic invoicing?", "It's in development and coming soon."]
+    ]
+  },
+  "carta": {
+    "kicker": "VIDEO MENU WITH QR CODE",
+    "title1": "Your dishes ",
+    "titleGrad": "on video",
+    "titleComma": ",",
+    "title2": " right from the table's QR code",
+    "sub": "Guests scan the table's QR code, see your dishes on video, from the front and from the side, and order from their phone. Nothing to download. The clips are made from photos and videos taken with your own phone.",
+    "points": ["A dish that looks great sells itself.", "Orders go straight to the kitchen or the bar.", "Change the menu anytime, no reprinting."],
+    "wa": "Message us on WhatsApp",
+    "seeAll": "See everything for restaurants",
+    "videoLabel": "Demo: video menu of a sample restaurant",
+    "caption": "Demo with a sample restaurant (made-up data).",
+    "qrAlt": "QR code for the real menu of the sample restaurant",
+    "qrText": "Scan it and open the real menu of a sample restaurant on your phone, just as your guests would see it. ",
+    "openHere": "Open it here",
+    "openMobile": "Open the real menu of a sample restaurant →",
+    "waCode": "Hi, I saw the video menu (code {code})",
+    "waNoCode": "Hi, I saw Clonexa's video menu and I'd like a demo"
+  },
+  "shots": {
+    "rest-carta": "Video menu with QR code on the guest's phone: every dish on video with its name, description and price",
+    "hero-caja": "Clonexa POS in a restaurant: total sales, orders, average ticket, payments by method and open tables with their status",
+    "rest-qr": "QR menu for table 7 on the guest's phone: main dishes with prices and buttons to add them to the order",
+    "rest-mesero": "Server panel on the phone: main dishes category with every dish and its price",
+    "rest-cocina": "Clonexa kitchen screen: table and delivery tickets in New order, Cooking and Ready columns, with their timers",
+    "rest-cuenta": "Table 7's bill at the register: items ordered, bill total and payment in cash, transfer or card",
+    "rest-cierre": "End-of-day register close in Clonexa: total sales, items sold, orders paid and payments by method",
+    "bar-qr": "Bar QR menu on the phone: cocktails with prices, the table's tab and song requests",
+    "bar-barra": "Bar panel: open tables and bar tabs with their totals, new orders highlighted, a + button to add items and the songs each table requested",
+    "bar-juegos": "Live games on the bar TV: Lightning memory game with the timer, the prize and the player leaderboard",
+    "bar-cierre": "Bar register close for the business day: total sales, bar sales and payments by method",
+    "taller-tablero": "Workshop board on the tablet: who is working, on break or off shift, and for how long",
+    "taller-pin": "Workshop board: the person types their 4-digit PIN on the tablet to start working",
+    "taller-produccion": "Workshop production in Clonexa: finished pieces, batches in progress with their progress, days per batch and labor cost per piece",
+    "taller-nomina": "Workshop payroll in Clonexa: regular and overtime hours, total to pay for the period and each person's shift details",
+    "campo-inicio": "Clonexa Field CRM: live operation with active and on-break staff, their time and their location within the work zone",
+    "campo-materiales": "Materials in Clonexa: material orders requested by technicians with their status, quantity and destination",
+    "ej-aperturas": "Field CRM for the demo company: active staff, each store's opening and staff per store with their time",
+    "ej-ventas": "Sales in Clonexa: total monthly goal, sales progress against the goal and each sales rep with their goal",
+    "ej-callcenter": "Call center in Clonexa: calls, tickets and quotes for the period, average duration and each agent with their status",
+    "ej-tickets": "Quotes and tickets in Clonexa: documents with customer, service, amount and status En route, Scheduled or Approved",
+    "ej-solicitudes": "Warehouse requests in Clonexa: store requests, being picked, received and the details of request 88",
+    "ej-tesoreria": "Finance in Clonexa: tickets pending review, ready to invoice, available credit and invoices receivable"
+  },
+  "industryPage": {
+    "kicker": "CLONEXA FOR {name}",
+    "greeting": "Hi, I'd like a Clonexa demo for my {business}.",
+    "how": { "kicker": "HOW WE SOLVE IT", "title": "Clonexa for {name}" },
+    "flow": {
+      "kicker": "HOW IT WORKS",
+      "title": "How Clonexa works for {name}",
+      "sub": "Real Clonexa screens with sample data.",
+      "step": "STEP {n}",
+      "zoom": "Enlarge screenshot: {title}"
+    },
+    "fit": { "kicker": "WHO IT'S FOR", "title": "Which businesses is it for?" },
+    "modules": {
+      "kicker": "MODULES",
+      "title": "Clonexa modules for {name}",
+      "sub": "Use the ones you need and they all connect. If something's missing, we build it for you."
+    },
+    "faq": { "kicker": "QUESTIONS", "title": "Frequently asked questions" },
+    "follow": { "kicker": "SOCIAL", "title": "Follow us", "sub": "Clonexa news and examples on video." },
+    "others": { "kicker": "MORE INDUSTRIES", "title": "Clonexa also works with" }
+  },
+  "industries": {
+    "restaurantes": {
+      "name": "Restaurants",
+      "business": "restaurant",
+      "title": "Restaurants | Clonexa",
+      "description": "Restaurant system: QR ordering and orders from the server's phone, kitchen display, POS, end-of-day close, inventory and reports. Book your demo.",
+      "h1": "Restaurant system: orders, kitchen and POS connected",
+      "intro": [
+        "In a busy restaurant, every order goes through many hands. The guest tells the server, the server writes it on a ticket, the kitchen deciphers the handwriting and, in the end, the cashier puts the bill together from memory. At every step a dish can get lost, a table can be undercharged or left waiting. At closing time, balancing the register and knowing what sold takes time nobody has.",
+        "Clonexa connects that whole journey in one system. Guests can order from the QR code on their table, or the server takes the order on their phone. The kitchen gets it instantly on a screen organized in columns, with a timer on every ticket, together with delivery orders. The cashier finds each table's bill already built and charges cash, transfer or card. At the end of the day, the register close shows what was sold and what came in by each payment method.",
+        "You don't need to buy special equipment: it runs on the phones, tablets and computers you already have. We set it up with your menu, your tables, your brand and your colors, and we stay with you while your team learns to use it."
+      ],
+      "fit": "It works for sit-down restaurants, fast food, cafés and businesses with delivery, whether they have one location or several. If your restaurant works in a particular way, we adapt the modules to your process.",
+      "steps": [
+        ["Guests order from the table's QR code", "They scan the code with their phone and see your dishes on video, from the front and from the side, with their prices; they build their order and confirm it. No app to download."],
+        ["The server takes the order on their phone", "They pick the category, tap the dish and send it to the kitchen. No more paper tickets and handwriting nobody can read."],
+        ["The kitchen gets it instantly", "Every ticket lands on the kitchen screen in the New order column, moves to Cooking and then to Ready, with how long each one has taken. Delivery orders arrive on the same screen."],
+        ["The register charges the exact bill", "The table's bill already has everything that was ordered. Charge cash, transfer or card without adding things up by hand."],
+        ["End-of-day close with no gaps", "When you finish, the register close shows total sales, items, paid orders and how much came in by each payment method."]
+      ],
+      "modules": [
+        ["QR menu per table", "guests see the menu and order from their phone."],
+        ["Server panel", "orders from the phone, straight to the kitchen."],
+        ["Kitchen display", "tickets in columns, with timers."],
+        ["Delivery", "orders reach the kitchen along with the tables."],
+        ["POS and daily close", "payments by method and register close."],
+        ["Inventory", "your products and stock levels."],
+        ["Reports", "what sells, how much and how people pay."],
+        ["Shifts and payroll", "team hours and pay for the period."]
+      ],
+      "faq": [
+        ["Do I need to buy special equipment?", "No. Clonexa runs in the browser of the phones, tablets and computers you already have. If you want a screen for the kitchen, any tablet or TV with a browser will do."],
+        ["Do my guests have to download an app to order by QR?", "No. Scanning the table's QR code opens the menu in the phone's browser, and from there they build and confirm their order."],
+        ["Do you charge per server or user?", "No. It's a flat rate: your whole team uses Clonexa at no extra cost per user. The price depends on the modules you need; get a quote for your system on WhatsApp."],
+        ["Does it support electronic invoicing?", "Electronic invoicing is in development and coming soon. In the meantime, Clonexa handles your orders, your register, your inventory and your reports."],
+        ["How long until it's up and running?", "Ready-made restaurant solutions are up and running in days: we set up your menu, your tables and your brand, and we train your team."]
+      ]
+    },
+    "bares": {
+      "name": "Bars",
+      "business": "bar",
+      "title": "Bars | Clonexa",
+      "description": "Bar system: QR ordering from the table, bar display, live games on the TV, tabs per table and close by business day. Book your demo.",
+      "h1": "Bar system: QR ordering, bar display and live games",
+      "intro": [
+        "In a packed bar, servers can't keep up, orders get shouted over the music and the bar loses track of which table ordered what. At the end of the night you have to rebuild the tabs, and since closing comes after midnight, sales end up split across two dates and the numbers don't add up.",
+        "Clonexa brings order to the night. Every table has its own QR code: guests see the menu, order from their phone, check the table's tab and even request the song they want to hear. The bar sees every order on a screen, from pending to delivered, and the register charges each table's exact tab. Closing is done by business day, so whatever you sell after midnight stays in the same night.",
+        "To keep people around and coming back, Clonexa has live games: guests play from their phone and the leaderboard shows up on the bar's TV, along with the round's prize. Everything runs on the equipment you already have, with your brand and your colors."
+      ],
+      "fit": "It works for bars, gastropubs, nightclubs and nightlife venues that serve both at tables and at the bar, and want faster orders, clear tabs and guests who stay longer. If your bar has its own dynamic, like events or special rounds, we tailor it for you.",
+      "steps": [
+        ["They order from the table with the QR code", "The guest opens the menu on their phone, adds cocktails or beers, sees the table's total tab and can request a song."],
+        ["The bar sees every order live", "Orders reach the bar panel by table: each table with its total, new orders highlighted in red, a + to add items without looking for the table, and the songs each table requested. Nobody has to shout an order."],
+        ["Live games on the TV", "Guests play from their phone and the bar screen shows the game, the timer, the prize and the player leaderboard."],
+        ["Close by business day", "The register close brings together the whole night's sales even if you close after midnight, with bar sales and payments by method."]
+      ],
+      "modules": [
+        ["QR menu per table", "orders, the table's tab and song requests."],
+        ["Bar display", "orders by table with their status."],
+        ["Live games", "games from the phone with the leaderboard on the TV."],
+        ["Loyalty", "rewards that bring your guests back."],
+        ["POS and close", "tabs per table and close by business day."],
+        ["Inventory", "liquor and product stock."],
+        ["Reports", "the night's sales and payments by method."]
+      ],
+      "faq": [
+        ["Do guests need an app to order or play?", "No. The table's QR code opens the menu in the phone's browser, and the live games are played from the browser too."],
+        ["What happens to sales after midnight?", "Clonexa closes by business day: whatever you sell after midnight stays in the same night, not split across two dates."],
+        ["What do I need to show the games on the TV?", "A TV or screen with a browser, or a computer connected to it. The games screen opens like a web page."],
+        ["Do you charge per user?", "No. A flat rate with unlimited users; the price depends on the modules. Get a quote for your system on WhatsApp."],
+        ["Does it support electronic invoicing?", "It's in development and coming soon."]
+      ]
+    },
+    "talleres-y-fabricas": {
+      "name": "Workshops and factories",
+      "business": "workshop or factory",
+      "title": "Workshops and factories | Clonexa",
+      "description": "System for workshops and factories: workshop board with PIN, time per style, production by batch and hourly payroll. Book your Clonexa demo.",
+      "h1": "System for workshops and factories: time, production and payroll",
+      "intro": [
+        "In a garment workshop or a small factory, knowing who worked on what and how long it took usually depends on paper timesheets. At the end of the pay period someone spends hours adding up shifts, overtime and breaks to calculate payroll, and nobody knows for sure how much each piece costs to make or how each batch is going.",
+        "Clonexa puts a tablet in the workshop. Each person clocks in with their PIN, picks the style they're going to work on and starts their shift; if they take a break, the system logs it. With that, the production board shows finished pieces, the progress of each batch, how many days each one has taken and the labor cost per piece, without anyone typing data by hand.",
+        "Those same hours flow into payroll: regular hours, overtime and the total to pay for the period, with every shift detailed per person. And from what was produced you can generate quotes and invoices for your customers."
+      ],
+      "fit": "It works for garment workshops, contract shops that produce for brands, small factories and any operation that produces by style or batch and pays by time worked. The owner sees in one place how much the workshop produces, how much the labor for each piece costs and how much is owed for the pay period, without waiting for someone to finish adding up timesheets. If your process has its own steps, like quality control or partial deliveries to the customer, we build them to measure on the same foundation.",
+      "steps": [
+        ["The workshop board", "The tablet shows who's working, who's on break and who hasn't started yet, with each person's time."],
+        ["Everyone clocks in with their PIN", "The person types their four-digit PIN, picks the style they'll work on and starts their shift."],
+        ["Production by batch", "Pieces finished this week or month, batches in progress with their progress, days per batch and labor cost per piece."],
+        ["Payroll comes from real hours", "Regular and overtime hours, deductions and total to pay for the period, with each person's shift details."]
+      ],
+      "modules": [
+        ["Workshop board", "a tablet with a PIN for each person."],
+        ["Styles", "what each person works on and for how long."],
+        ["Production", "finished pieces, batches and labor cost per piece."],
+        ["Payroll", "periods, regular and overtime hours, total to pay."],
+        ["Quotes and invoices", "PDF documents from what was produced."],
+        ["Staff", "team members, roles and shifts."]
+      ],
+      "faq": [
+        ["What do I need for the workshop board?", "A tablet or computer with a browser in the workshop. Each person clocks in with their PIN; no username or password needed."],
+        ["Is payroll calculated automatically?", "Clonexa takes the hours logged in the shifts, separates regular and overtime hours and calculates the total for the period. You review it and close the period."],
+        ["Does it work for factories outside the garment industry?", "Yes, if you work by style or batch and need to measure time and production. We review your process and tailor it for you."],
+        ["Do you charge per operator?", "No. A flat rate with unlimited users; get a quote for your system on WhatsApp."],
+        ["Does it support electronic invoicing?", "It's in development and coming soon."]
+      ]
+    },
+    "call-centers": {
+      "name": "Call centers",
+      "business": "call center",
+      "title": "Call centers | Clonexa",
+      "description": "System for call centers that sell services: live agents, calls and results, quotes and tickets, contracts and finance. Book your demo.",
+      "h1": "Call center system: agents, quotes and finance connected",
+      "intro": [
+        "When a call center sells services, information usually ends up scattered: calls on a spreadsheet, quotes in loose documents, approved services somewhere else and payments in accounting. The supervisor doesn't know in real time what each agent is doing, and finance finds out late about what needs to be collected.",
+        "Clonexa brings the whole operation into one system. The supervisor sees every agent with their status (on a call, available or on break), how many calls they've made, how many quotes and tickets came out of them and how long they last. When a customer asks for a price, the quote is created in the system; if they approve it, it becomes a ticket or service order, gets scheduled and is tracked until it's fulfilled.",
+        "Finance reviews tickets before invoicing and sees what's ready to collect, the available credit on each contract and the invoices coming due. That way sales, operations and money speak the same language. It's a solution we build to fit each operation, on top of Clonexa."
+      ],
+      "fit": "It works for companies that take calls and sell services by phone that then need to be scheduled and collected: special transportation, tourism, events and business services, among others. We roll it out in stages: first agent supervision and call logging, then quotes and tickets, and then finance and contracts. That way your team starts using it quickly and each stage is tested with the real operation before moving to the next one.",
+      "steps": [
+        ["The supervisor sees every agent", "Calls, tickets and quotes for the period, average duration and the list of agents with their status and results."],
+        ["The quote becomes a service", "Quotes and tickets are printed with an original and a copy, linked to a contract or guarantee, and change status: approved, scheduled, en route."],
+        ["Finance reviews and collects", "Tickets to review, ready to invoice, available contract credit and invoices receivable in a single inbox."]
+      ],
+      "modules": [
+        ["Agent supervision", "live status, calls and results."],
+        ["Call logging", "result, duration and campaign for every call."],
+        ["Quotes and tickets", "printable documents with an original and a copy."],
+        ["Contracts and guarantees", "balances for each customer with a contract."],
+        ["Finance and payments", "review, invoicing and accounts receivable."],
+        ["Staff and shifts", "each agent's workday and breaks."]
+      ],
+      "faq": [
+        ["What kind of call center is it for?", "For teams that sell or book services by phone and need to go from the call to the quote, to the service and to payment. We adapt it to your process."],
+        ["Can the supervisor see agents live?", "Yes. They see each agent's status (on a call, available or on break), their calls, quotes, tickets and call duration."],
+        ["Can quotes and tickets be printed?", "Yes. They're generated as PDFs to print with an original and a copy, and can be linked to a customer's contract or guarantee."],
+        ["Do you charge per agent?", "No. A flat rate with unlimited users. Since it's custom-built, it's quoted in stages based on your operation."],
+        ["Does it support electronic invoicing?", "It's in development and coming soon."]
+      ]
+    },
+    "personal-en-campo": {
+      "name": "Field teams",
+      "business": "field operation",
+      "title": "Field teams | Clonexa",
+      "description": "System for field teams: shift start with location, breaks, work zones and material requests with numbered orders. Book your Clonexa demo.",
+      "h1": "System for field teams: shifts, location and materials",
+      "intro": [
+        "When your team works outside the office, on construction sites, installations or setups, it's hard to know what time each person started, whether they're in the right place and what materials they took. Hours are reported by chat, breaks aren't logged and materials leave the warehouse without a clear order, so in the end nobody knows where they went.",
+        "With Clonexa, every technician starts their shift from their phone and the system logs the time and whether they're inside their work zone. The supervisor sees live who's active, who's on break and how long each person has been at it, without calling anyone.",
+        "When the team needs materials, they request them in the system and a numbered order is created. The warehouse approves and delivers it, and on delivery it's deducted from inventory; if the material comes back, the return is logged against that same order. The hours worked are ready for payroll."
+      ],
+      "fit": "It works for companies in installations, assembly, construction, maintenance, networks, security and any operation with technicians or crews working outside the office. The supervisor stops calling people one by one to find out where they are, the warehouse knows what materials went out and for which job, and the back office receives the hours worked without having to rebuild them from chats. We set it up with your work zones, your materials and your team, and we expand it in stages based on what your operation needs.",
+      "steps": [
+        ["Shift start with location", "The supervisor sees active and on-break team members, each person's time and whether they're inside their work zone. If someone is on break you can see for how long, and when the shift ends the hours are logged for payroll."],
+        ["Material requests with a numbered order", "Every material request becomes a numbered order showing who requested it, the quantity, the destination and its status: pending, approved, delivered or returned."]
+      ],
+      "modules": [
+        ["Field CRM", "shifts, breaks and each team member's time, live."],
+        ["GPS by zones", "whether the team member is inside their work zone."],
+        ["Materials", "material orders, deliveries and returns."],
+        ["Inventory", "stock deducted on delivery."],
+        ["Shifts and payroll", "hours worked and pay for the period."],
+        ["Telegram bot", "the team starts and ends their shift from Telegram."]
+      ],
+      "faq": [
+        ["Do technicians need to install an app?", "Not necessarily. They can use the phone's browser or the Telegram bot to start and end their shift."],
+        ["How do you know they're in the right place?", "With the GPS-by-zones module: the system shows whether the team member is inside or outside their assigned work zone. Zones are set up for each job site or location, and the supervisor sees live who's inside and who's outside."],
+        ["How are materials controlled?", "Every request becomes a numbered order. On delivery it's deducted from inventory, and returns are logged against that order."],
+        ["Do you charge per technician?", "No. A flat rate with unlimited users; get a quote for your system on WhatsApp."],
+        ["Does it support electronic invoicing?", "It's in development and coming soon."]
+      ]
+    }
+  },
+  "about": {
+    "crumb": "What is Clonexa?",
+    "kicker": "ABOUT CLONEXA",
+    "h1": "What is Clonexa?",
+    "lead": "Clonexa is cloud software (SaaS) that connects a business's orders, inventory, POS, staff, shifts, payroll and reports in one system, and lets you watch it all run in 3D and in real time.",
+    "text1": "Instead of having one program for the register, another for inventory, a spreadsheet for payroll and orders scattered across chats, Clonexa brings everything together in one place. It's used from the browser on a phone, tablet or computer, with nothing to install, and every business sees it with its own brand and colors.",
+    "shotCaption": "A restaurant's POS in Clonexa (real screen with sample data).",
+    "whoTitle": "Who is it for?",
+    "whoText": "Clonexa works with businesses that have day-to-day operations and teams on the move: from a restaurant with servers and a kitchen to a company with a call center, a warehouse and sales reps. These are the industries with ready-made solutions:",
+    "alsoText": "We also build custom systems for stores and chains, distributors and online stores, on the same Clonexa foundation.",
+    "howTitle": "How is it rolled out?",
+    "howText": "We start with a review of how your business works today. If a ready-made solution fits, we set it up with your information and it's running in days. If you need something of your own, we design it with you, show you the screens before we build and deliver it in stages, module by module. Throughout the process we support you and train your team, and support continues on WhatsApp.",
+    "diffTitle": "What makes it different?",
+    "diff": [
+      ["Everything connected:", " the order, the kitchen, the register, the inventory and the reports are one system, not separate programs."],
+      ["It fits your process:", " it's built from modules, and whatever's missing is built to measure."],
+      ["Unlimited users:", " a flat rate based on your modules, with no charge per user."],
+      ["No special equipment:", " it runs on the phone, tablet or computer you already have."],
+      ["Your business, live:", " see your place in 3D with every table, machine or desk moving with real data. Electronic invoicing is coming soon."]
+    ],
+    "nexaTitle": "Who is Nexa?",
+    "nexaText": "Nexa is Clonexa's presenter, created with artificial intelligence. She appears in our videos and on social media to explain how the system works. She always identifies herself as a presenter created with AI.",
+    "contactTitle": "Contact",
+    "contact1": "Message us on ",
+    "contact2": " or email ",
+    "contact3": ", and you can follow us on ",
+    "and": " and ",
+    "disclaimer": "Clonexa, the software company, has no connection with medicines with a similar name.",
+    "waMessage": "Hi Clonexa, I'd like to know more about Clonexa."
+  },
+  "notFound": {
+    "kicker": "ERROR 404",
+    "h1": "This page doesn't exist",
+    "lead": "The link may be mistyped or the page may no longer exist. These may help:",
+    "home": "Home",
+    "waMessage": "Hi Clonexa, I'd like to book a free demo."
+  }
+}

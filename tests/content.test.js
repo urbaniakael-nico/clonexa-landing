@@ -4,50 +4,59 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import {
   BUILDER_MODULES,
-  FAQ,
-  PLANS,
+  PLAN_IDS,
+  PLAN_RECOMMENDED,
   SHOTS,
   SOCIAL,
-  WA_GENERAL,
   builderSummary,
   builderWhatsapp,
   demoRequestMessage,
   planWhatsapp,
   solutionWhatsapp,
+  waGeneral,
   waLink
 } from "../src/content.js";
 import { validateDemoForm } from "../src/form.js";
 import { INSIDE_TABS } from "../src/live.js";
+import es from "../src/i18n/es.json" with { type: "json" };
+import en from "../src/i18n/en.json" with { type: "json" };
+import fr from "../src/i18n/fr.json" with { type: "json" };
 
-const WA = /^https:\/\/wa\.me\/573144798220\?text=.+/;
+const WA = /^https:[/][/]wa[.]me[/]573144798220[?]text=.+/;
 const text = (link) => decodeURIComponent(new URL(link).searchParams.get("text"));
 
-test("todos los enlaces de WhatsApp van a wa.me/573144798220 con un mensaje en español", () => {
-  assert.match(WA_GENERAL, WA);
-  assert.match(text(WA_GENERAL), /demo/i);
-  for (const tab of INSIDE_TABS) {
-    const link = solutionWhatsapp(tab);
-    assert.match(link, WA);
-    assert.ok(text(link).includes(tab.business), `${tab.id}: el mensaje nombra el negocio`);
+test("todos los enlaces de WhatsApp van a wa.me/573144798220 con el mensaje en el idioma de la pagina", () => {
+  for (const t of [es, en, fr]) {
+    assert.match(waGeneral(t), WA);
+    assert.match(text(waGeneral(t)), /d[eé]mo/i);
+    for (const tab of INSIDE_TABS) {
+      const business = t.inside.tabs[tab.id].business;
+      const link = solutionWhatsapp(t, business);
+      assert.match(link, WA);
+      assert.ok(text(link).includes(business), `${tab.id}: el mensaje nombra el negocio`);
+    }
+    for (const id of PLAN_IDS) {
+      const link = planWhatsapp(t, id);
+      assert.match(link, WA);
+      assert.ok(text(link).includes(t.plans.items[id].name), `${id}: el mensaje nombra el plan`);
+    }
   }
-  for (const plan of PLANS) {
-    const link = planWhatsapp(plan);
-    assert.match(link, WA);
-    assert.ok(text(link).includes(plan.name), `${plan.id}: el mensaje nombra el plan`);
-  }
-  const form = waLink(demoRequestMessage({ name: "Ana", business: "La Brasa, restaurante", whatsapp: "300 123 4567" }));
+  const form = waLink(demoRequestMessage(es, { name: "Ana", business: "La Brasa, restaurante", whatsapp: "300 123 4567" }));
   assert.match(form, WA);
-  assert.match(text(form), /Nombre: Ana\nNegocio: La Brasa, restaurante\nWhatsApp: 300 123 4567/);
+  assert.equal(text(form), "Hola Clonexa, quiero agendar mi demo gratis.\nNombre: Ana\nNegocio: La Brasa, restaurante\nWhatsApp: 300 123 4567");
+  assert.match(text(waLink(demoRequestMessage(en, { name: "Ann", business: "Grill", whatsapp: "300" }))), /^Hi Clonexa.*\nName: Ann\nBusiness: Grill/s);
+  assert.match(text(waLink(demoRequestMessage(fr, { name: "Anne", business: "Grill", whatsapp: "300" }))), /^Bonjour Clonexa.*\nNom: Anne\nEntreprise: Grill/s);
 });
 
 test("arma tu sistema: el mensaje de WhatsApp lleva los modulos elegidos", () => {
-  const link = builderWhatsapp(["Call center", "Pedidos", "Gerencia"]);
+  const link = builderWhatsapp(es, ["callcenter", "pedidos", "gerencia"]);
   assert.match(link, WA);
   assert.equal(text(link), "Hola Clonexa, quiero cotizar un sistema Clonexa con: Pedidos, Call center, Gerencia.");
+  assert.equal(text(builderWhatsapp(en, ["pedidos", "envivo"])), "Hi Clonexa, I'd like a quote for a Clonexa system with: Orders, Live 3D.");
   assert.equal(builderSummary([]).level, "");
-  assert.equal(builderSummary(["Pedidos"]).level, "Solución lista");
-  const all = BUILDER_MODULES.map(([, name]) => name);
-  assert.equal(builderSummary(all).level, "Empresa a la medida");
+  assert.equal(es.builder.levels[builderSummary(["pedidos"]).level], "Solución lista");
+  const all = BUILDER_MODULES.map(([, id]) => id);
+  assert.equal(es.builder.levels[builderSummary(all).level], "Empresa a la medida");
   assert.equal(builderSummary(all).percent, 100);
 });
 
@@ -61,24 +70,27 @@ test("redes: las 5 URL exactas con utm_source=web", () => {
   });
 });
 
-test("DIAN Próximamente sin fechas; planes sin precios; módulos 3D en Arma tu sistema y en los planes", () => {
-  const dianFaq = FAQ.find(([q]) => /DIAN/.test(q));
+test("factura electronica 'proximamente' sin fechas; planes sin precios; modulos 3D en Arma tu sistema y en los planes", () => {
+  const dianFaq = es.faq.items.find(([q]) => /DIAN/.test(q));
   assert.match(dianFaq[1], /próximamente/i);
-  assert.doesNotMatch(dianFaq[1], /\b20\d\d\b|enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre/i);
-  assert.doesNotMatch(JSON.stringify(PLANS), /\$|\bCOP\b|\d{2,}\.\d{3}/);
-  const names = BUILDER_MODULES.map(([, name]) => name);
-  assert.ok(names.includes("En vivo 3D") && names.includes("Diseño 3D"));
-  assert.deepEqual(PLANS.map((p) => p.name), ["Esencial", "Operación completa", "A la medida"]);
-  const completa = PLANS.find((p) => p.recommended).items.map(([t]) => t);
+  for (const t of [es, en, fr]) {
+    const invoice = t.faq.items[t.faq.items.length - 1][1];
+    assert.doesNotMatch(invoice, /20[0-9][0-9]|enero|january|janvier|diciembre|december|décembre/i);
+    assert.doesNotMatch(JSON.stringify(t.plans), /[$]|COP|[0-9]{2,}[.,][0-9]{3}/);
+  }
+  const ids = BUILDER_MODULES.map(([, id]) => id);
+  assert.ok(ids.includes("envivo") && ids.includes("diseno3d"));
+  assert.deepEqual(PLAN_IDS.map((id) => es.plans.items[id].name), ["Esencial", "Operación completa", "A la medida"]);
+  const completa = es.plans.items[PLAN_RECOMMENDED].items.map(([t]) => t);
   assert.ok(completa.includes("Negocio en vivo 3D") && completa.includes("Diseño 3D del local y personajes"));
 });
 
-const SOURCE = ["../src/content.js", "../src/live.js", "../src/live.jsx", "../src/App.jsx", "../src/layout.jsx", "../src/pages.jsx", "../src/industries.js", "../src/site.js", "../index.html"]
+const SOURCE = ["../src/content.js", "../src/live.js", "../src/live.jsx", "../src/sim.jsx", "../src/extras.jsx", "../src/App.jsx", "../src/layout.jsx", "../src/pages.jsx", "../src/industries.js", "../src/site.js", "../src/i18n/es.json", "../src/i18n/en.json", "../src/i18n/fr.json", "../index.html"]
   .map((f) => fs.readFileSync(new URL(f, import.meta.url), "utf8"))
   .join("\n");
 
 test("sin cifras de clientes o usuarios en la pagina", () => {
-  assert.doesNotMatch(SOURCE, /\d[\d.,]*\s*\+?\s*(clientes|usuarios|negocios|empresas)\b/i);
+  assert.doesNotMatch(SOURCE, /\d[\d.,]*\s*\+?\s*(clientes|usuarios|negocios|empresas|customers|users|businesses|companies|utilisateurs|entreprises)\b/i);
 });
 
 test("sin nombres de clientes reales ni funciones que no existen", () => {
@@ -98,7 +110,7 @@ test("cada captura usada existe con su version pequeña, alt y el ancho declarad
   const used = [...INSIDE_TABS.map((t) => t.shot), "campo-inicio", "taller-produccion", "hero-caja"];
   for (const id of used) assert.ok(SHOTS[id], `${id}: captura sin definir`);
   for (const [id, shot] of Object.entries(SHOTS)) {
-    assert.ok(shot.alt && shot.alt.length > 20, `${id}: alt descriptivo`);
+    for (const t of [es, en, fr]) assert.ok(t.shots[id] && t.shots[id].length > 20, `${id}: alt descriptivo en cada idioma`);
     assert.ok(shot.width <= 1600, `${id}: max 1600 px`);
     for (const [src, width] of [
       [shot.src, shot.width],
@@ -154,7 +166,7 @@ test("cada captura declara las medidas reales de su archivo (no se estira ni se 
 
 test("bares paso 2: el panel de barra nuevo (no las columnas viejas rotas)", () => {
   assert.equal(SHOTS["bar-barra"].width, 1600);
-  assert.doesNotMatch(SHOTS["bar-barra"].alt, /Alistando|columnas/);
+  assert.doesNotMatch(es.shots["bar-barra"], /Alistando|columnas/);
 });
 
 test("la portada pide el poster chico en celular y el grande en computador", () => {

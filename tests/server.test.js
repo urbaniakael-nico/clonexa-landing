@@ -196,9 +196,14 @@ test("SEO: robots, sitemap con todas las paginas, sin noindex ni X-Robots-Tag", 
     assert.equal(robots.replace(/\r\n/g, "\n").trim(), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml`);
     const sitemap = await (await get(41735, "/sitemap.xml")).text();
     const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-    assert.deepEqual(locs, ["/", ...NEW_PAGES, "/privacidad", "/terminos", "/borrar-datos"].map((p) => `${SITE}${p}`));
+    const bases = ["/", ...NEW_PAGES, "/privacidad", "/terminos", "/borrar-datos"];
+    const inLang = (lang, p) => (lang === "es" ? p : p === "/" ? `/${lang}` : `/${lang}${p}`);
+    assert.deepEqual(locs, bases.flatMap((p) => ["es", "en", "fr"].map((l) => `${SITE}${inLang(l, p)}`)));
     assert.equal((sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) || []).length, locs.length);
-    for (const p of ["/", ...NEW_PAGES, "/privacidad", "/terminos", "/borrar-datos", "/robots.txt", "/sitemap.xml"]) {
+    // cada URL lleva sus alternativas es/en/fr + x-default
+    assert.equal((sitemap.match(/<xhtml:link rel="alternate" hreflang="x-default"/g) || []).length, locs.length);
+    assert.match(sitemap, /<xhtml:link rel="alternate" hreflang="fr" href="https:\/\/www\.clonexa\.com\.co\/fr\/bares" \/>/);
+    for (const p of [...bases.flatMap((b) => ["es", "en", "fr"].map((l) => inLang(l, b))), "/en/", "/fr/bares/", "/robots.txt", "/sitemap.xml"]) {
       const res = await get(41735, p);
       assert.equal(res.status, 200, p);
       assert.equal(res.headers.get("x-robots-tag"), null, `${p}: X-Robots-Tag`);
@@ -212,14 +217,25 @@ test("SEO: robots, sitemap con todas las paginas, sin noindex ni X-Robots-Tag", 
 test("prerender: cada ruta trae en el HTML su title, description, canonical, og, H1 y texto", { skip: !HAS_DIST && "sin dist/" }, async () => {
   const server = await startServer(41736);
   try {
+    const LOCALE = { es: "es_CO", en: "en_US", fr: "fr_FR" };
+    const inLang = (lang, p) => (lang === "es" ? p : p === "/" ? `/${lang}` : `/${lang}${p}`);
+    for (const lang of ["es", "en", "fr"]) {
     const titles = new Set();
-    for (const p of ["/", ...NEW_PAGES]) {
+    for (const base of ["/", ...NEW_PAGES]) {
+      const p = inLang(lang, base);
       const html = await (await get(41736, p)).text();
       const url = `${SITE}${p === "/" ? "/" : p}`;
       const title = html.match(/<title>([^<]+)<\/title>/)[1];
-      assert.ok(/^Clonexa|\| Clonexa$|Clonexa\?/.test(title), `${p}: title ${title}`);
+      assert.ok(/^Clonexa|\| Clonexa$|Clonexa ?\?/.test(title), `${p}: title ${title}`);
       assert.ok(!titles.has(title), `${p}: title repetido`);
       titles.add(title);
+      assert.match(html, new RegExp(`<html lang="${lang}"`), `${p}: html lang`);
+      assert.match(html, new RegExp(`<meta property="og:locale" content="${LOCALE[lang]}" />`), `${p}: og:locale`);
+      for (const l of ["es", "en", "fr"]) {
+        const alt = `${SITE}${inLang(l, base) === "/" ? "/" : inLang(l, base)}`;
+        assert.ok(html.includes(`<link rel="alternate" hreflang="${l}" href="${alt}" />`), `${p}: hreflang ${l}`);
+      }
+      assert.ok(html.includes(`<link rel="alternate" hreflang="x-default" href="${SITE}${base}" />`), `${p}: x-default`);
       assert.equal((html.match(/<title>/g) || []).length, 1, `${p}: un solo title`);
       const description = html.match(/<meta name="description" content="([^"]+)"/)[1];
       assert.ok(description.length >= 70 && description.length <= 165, `${p}: description ${description.length}`);
@@ -236,6 +252,7 @@ test("prerender: cada ruta trae en el HTML su title, description, canonical, og,
       assert.ok(words > 400, `${p}: ${words} palabras en el HTML sin JS`);
       assert.ok(!/573144798220|314\s?479\s?8220|13468244098|346\s?824/.test(visibleText(html)), `${p}: numero de WhatsApp como texto`);
     }
+    }
 
     // Inicio: WebSite + Organization
     const home = jsonLd(await (await get(41736, "/")).text());
@@ -249,11 +266,16 @@ test("prerender: cada ruta trae en el HTML su title, description, canonical, og,
     assert.equal(org.email, "clonexasaas@gmail.com");
     assert.equal(org.address.addressLocality, "Bogotá");
     assert.deepEqual(org.areaServed.map((a) => a.name), ["Colombia", "United States"]);
-    // Inicio: preguntas frecuentes como FAQPage
-    const { FAQ } = await import("../src/content.js");
+    // Inicio: preguntas frecuentes como FAQPage, en el idioma de cada pagina
+    const { default: es } = await import("../src/i18n/es.json", { with: { type: "json" } });
     const homeFaq = home.find((n) => n["@type"] === "FAQPage");
-    assert.equal(homeFaq.mainEntity.length, FAQ.length);
+    assert.equal(homeFaq.mainEntity.length, es.faq.items.length);
     assert.ok(homeFaq.mainEntity.some((q) => q.name === "¿Cuánto cuesta?"));
+    const homeEn = jsonLd(await (await get(41736, "/en")).text());
+    assert.ok(homeEn.find((n) => n["@type"] === "FAQPage").mainEntity.some((q) => q.name === "How much does it cost?"));
+    assert.equal(homeEn.find((n) => n["@type"] === "WebSite").inLanguage, "en");
+    const homeFr = jsonLd(await (await get(41736, "/fr")).text());
+    assert.ok(homeFr.find((n) => n["@type"] === "FAQPage").mainEntity.some((q) => q.name === "Combien ça coûte ?"));
     assert.ok(org.description.length > 40);
     const { SOCIAL } = await import("../src/content.js");
     assert.deepEqual(org.sameAs, SOCIAL.map((s) => s.url.replace("?utm_source=web", "")));
@@ -269,26 +291,53 @@ test("prerender: cada ruta trae en el HTML su title, description, canonical, og,
 
     // Industrias: FAQPage + BreadcrumbList, H1, capturas reales con alt, enlaces a las demas, 500-900 palabras propias
     const { INDUSTRY_PAGES } = await import("../src/industries.js");
-    for (const page of INDUSTRY_PAGES) {
-      const html = await (await get(41736, `/${page.slug}`)).text();
-      assert.equal(html.match(/<title>([^<]+)<\/title>/)[1], `${page.name} | Clonexa`);
-      assert.ok(html.includes(`>${page.h1}</h1>`), `${page.slug}: H1`);
-      const graph = jsonLd(html);
-      const faq = graph.find((n) => n["@type"] === "FAQPage");
-      assert.equal(faq.mainEntity.length, page.faq.length);
-      assert.ok(page.faq.length >= 4 && page.faq.length <= 5);
-      const crumbs = graph.find((n) => n["@type"] === "BreadcrumbList").itemListElement;
-      assert.deepEqual(crumbs.map((c) => c.name), ["Inicio", page.name]);
-      for (const step of page.steps) {
-        const shot = SHOTS[step.shot];
-        // las capturas son imagenes de /capturas; la carta nueva es un video con su portada
-        assert.ok(shot.video ? html.includes(`src="${shot.video}"`) && html.includes(`poster="${shot.src}"`) : html.includes(`src="/capturas/${step.shot}.webp"`), `${page.slug}: ${step.shot}`);
+    const DICTS = {
+      es,
+      en: (await import("../src/i18n/en.json", { with: { type: "json" } })).default,
+      fr: (await import("../src/i18n/fr.json", { with: { type: "json" } })).default
+    };
+    for (const lang of ["es", "en", "fr"]) {
+      const t = DICTS[lang];
+      for (const page of INDUSTRY_PAGES) {
+        const text = t.industries[page.slug];
+        const html = await (await get(41736, inLang(lang, `/${page.slug}`))).text();
+        assert.equal(html.match(/<title>([^<]+)<\/title>/)[1], text.title.replace(/&/g, "&amp;"));
+        assert.ok(html.includes(`>${text.h1.replace(/&/g, "&amp;").replace(/'/g, "&#x27;")}</h1>`), `${lang}/${page.slug}: H1`);
+        const graph = jsonLd(html);
+        const faq = graph.find((n) => n["@type"] === "FAQPage");
+        assert.equal(faq.mainEntity.length, text.faq.length);
+        assert.equal(faq.mainEntity[0].name, text.faq[0][0], `${lang}/${page.slug}: FAQPage en el idioma`);
+        assert.ok(text.faq.length >= 4 && text.faq.length <= 5);
+        const crumbs = graph.find((n) => n["@type"] === "BreadcrumbList").itemListElement;
+        assert.deepEqual(crumbs.map((c) => c.name), [t.common.crumbs.home, text.name]);
+        for (const id of page.shots) {
+          const shot = SHOTS[id];
+          // las capturas son imagenes de /capturas; la carta nueva es un video con su portada
+          assert.ok(shot.video ? html.includes(`src="${shot.video}"`) && html.includes(`poster="${shot.src}"`) : html.includes(`src="/capturas/${id}.webp"`), `${page.slug}: ${id}`);
+        }
+        for (const other of INDUSTRY_PAGES.filter((o) => o !== page)) assert.ok(html.includes(`href="${inLang(lang, `/${other.slug}`)}"`), `${lang}/${page.slug}: enlace a ${other.slug}`);
+        const greeting = t.industryPage.greeting.replace("{business}", text.business);
+        // React escribe el apostrofe del enlace como &#x27; dentro del atributo href
+        assert.ok(html.includes(encodeURIComponent(greeting).replace(/'/g, "&#x27;")), `${lang}/${page.slug}: mensaje de WhatsApp`);
+        if (lang === "es") {
+          const own = [text.h1, ...text.intro, text.fit, ...text.steps.flat(), ...text.modules.flat(), ...text.faq.flat()].join(" ");
+          const words = own.split(/\s+/).length;
+          assert.ok(words >= 500 && words <= 900, `${page.slug}: ${words} palabras propias`);
+        }
       }
-      for (const other of INDUSTRY_PAGES.filter((o) => o !== page)) assert.ok(html.includes(`href="/${other.slug}"`), `${page.slug}: enlace a ${other.slug}`);
-      assert.ok(html.includes(encodeURIComponent(`Hola, quiero una demo de Clonexa para mi ${page.business}.`)), `${page.slug}: mensaje de WhatsApp`);
-      const own = [page.h1, ...page.intro, page.fit, ...page.steps.flatMap((s) => [s.title, s.text]), ...page.modules.flat(), ...page.faq.flat()].join(" ");
-      const words = own.split(/\s+/).length;
-      assert.ok(words >= 500 && words <= 900, `${page.slug}: ${words} palabras propias`);
+    }
+
+    // Paginas legales en ingles y frances: traduccion con la nota de que prevalece el espanol y hreflang
+    for (const lang of ["en", "fr"]) {
+      for (const slug of ["privacidad", "terminos", "borrar-datos"]) {
+        const res = await get(41736, `/${lang}/${slug}`);
+        assert.equal(res.status, 200, `/${lang}/${slug}`);
+        const html = await res.text();
+        assert.match(html, new RegExp(`<html lang="${lang}"`));
+        assert.ok(html.includes("Si hay diferencias, prevalece la versión en español."), `/${lang}/${slug}: nota`);
+        assert.ok(html.includes(`<link rel="canonical" href="${SITE}/${lang}/${slug}" />`), `/${lang}/${slug}: canonical`);
+        assert.ok(html.includes(`<link rel="alternate" hreflang="es" href="${SITE}/${slug}" />`), `/${lang}/${slug}: hreflang es`);
+      }
     }
   } finally {
     server.kill();

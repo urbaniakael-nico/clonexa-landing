@@ -69,6 +69,9 @@ export function buildEvent(eventType, extra = {}) {
     extra: {
       landing: "clonexa-public",
       tracker: "v4",
+      // Idioma de la pagina (es/en/fr) para saber en que idioma atender al prospecto. El backend
+      // guarda "extra" completo (extra_json); "language" es el idioma del navegador.
+      lang: document.documentElement?.lang || "es",
       host: window.location.host,
       userAgent: navigator.userAgent,
       ...extra

@@ -32,7 +32,8 @@ export function cartaVideoTarget({ search = "", hash = "", saved = {} } = {}) {
   return { show: fromProspect || clean(hash).toLowerCase() === "#carta-video", code };
 }
 
-export function cartaWhatsapp(code) {
-  const text = code ? `Hola, vi la carta video (código ${code})` : "Hola, vi la carta video de Clonexa y quiero una demo";
+// t = diccionario del idioma de la pagina (t.carta.waCode / t.carta.waNoCode).
+export function cartaWhatsapp(t, code) {
+  const text = code ? t.carta.waCode.replace("{code}", code) : t.carta.waNoCode;
   return waLink(text); // el numero vive solo en content.js
 }

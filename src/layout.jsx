@@ -1,10 +1,12 @@
-// Piezas compartidas por todas las paginas: tema, barra, pie, capturas, recorridos,
-// preguntas, formulario de demo y WhatsApp flotante. Todo se puede renderizar en el
-// servidor (prerender): nada lee window/document durante el render.
+// Piezas compartidas por todas las paginas: tema, barra, selector de idioma, pie, capturas,
+// preguntas, formulario de demo, aviso de idioma y WhatsApp flotante. Todo se puede renderizar en
+// el servidor (prerender): nada lee window/document durante el render.
 import React from "react";
 import { sendEvent } from "./analytics.js";
-import { CTA_LABEL, LEGAL_LINKS, NAV_LINKS, SHOTS, SOCIAL, WA_GENERAL, demoRequestMessage, waLink } from "./content.js";
+import { LEGAL_SLUGS, NAV_IDS, SHOTS, SOCIAL, demoRequestMessage, waGeneral, waLink } from "./content.js";
+import { whenIdle } from "./defer.jsx";
 import { validateDemoForm } from "./form.js";
+import { LANGS, LANG_NAMES, LANG_SHORT, localize, saveLang, savedLang, useI18n } from "./i18n/index.jsx";
 import { SOCIAL_ICONS, WhatsappIcon } from "./icons.jsx";
 import { ABOUT_PATH, INDUSTRY_LINKS } from "./site.js";
 
@@ -49,7 +51,7 @@ export function Logo({ className = "" }) {
   return (
     <span className={`logo ${className}`}>
       <img className="logoDark" src="/brand/clonexa-logo.svg" alt="Clonexa" width="181" height="32" />
-      <img className="logoLight" src="/brand/clonexa-logo-claro.svg" alt="Clonexa" width="181" height="32" />
+      <img className="logoLight" src="/brand/clonexa-logo-claro.svg" alt="Clonexa" width="181" height="32" loading="lazy" />
     </span>
   );
 }
@@ -63,15 +65,92 @@ export function ExternalLink({ href, className, children, ...rest }) {
 }
 
 function ThemeSwitch({ theme, setTheme }) {
+  const { t } = useI18n();
   return (
-    <div className="themeSwitch" role="group" aria-label="Tema de la página">
+    <div className="themeSwitch" role="group" aria-label={t.common.theme.group}>
       <button type="button" aria-pressed={theme === "dark"} onClick={() => setTheme("dark")}>
         <span aria-hidden="true">🌙</span>
-        <span className="themeLabel"> Oscuro</span>
+        <span className="themeLabel"> {t.common.theme.dark}</span>
       </button>
       <button type="button" aria-pressed={theme === "light"} onClick={() => setTheme("light")}>
         <span aria-hidden="true">☀️</span>
-        <span className="themeLabel"> Claro</span>
+        <span className="themeLabel"> {t.common.theme.light}</span>
+      </button>
+    </div>
+  );
+}
+
+// Lleva a la MISMA pagina en otro idioma (conserva ?utm y #seccion) y recuerda la eleccion.
+function goToLang(event, lang, base) {
+  saveLang(lang);
+  const extra = window.location.search + window.location.hash;
+  if (extra) {
+    event.preventDefault();
+    window.location.href = localize(lang, base) + extra;
+  }
+}
+
+// Selector ES · EN · FR (compacto). Se usa en la barra, en el menu del celular y en el pie.
+export function LangSwitch({ className = "" }) {
+  const { t, lang, base } = useI18n();
+  return (
+    <nav className={`langSwitch ${className}`} aria-label={t.common.lang.label}>
+      {LANGS.map((l) => (
+        <a
+          key={l}
+          href={localize(l, base)}
+          hrefLang={l}
+          lang={l}
+          title={LANG_NAMES[l]}
+          aria-label={LANG_NAMES[l]}
+          aria-current={l === lang ? "true" : undefined}
+          onClick={(event) => goToLang(event, l, base)}
+        >
+          {LANG_SHORT[l]}
+        </a>
+      ))}
+    </nav>
+  );
+}
+
+// Primera visita con el navegador en ingles o frances (y sin eleccion guardada): aviso pequeno con
+// un boton para ver la misma pagina en ese idioma. No redirige solo (malo para SEO).
+const NOTICE = {
+  en: { question: "View in English?", yes: "Yes", close: "Close" },
+  fr: { question: "Voir en français ?", yes: "Oui", close: "Fermer" },
+  es: { question: "¿Ver en español?", yes: "Sí", close: "Cerrar" }
+};
+
+export function LangNotice() {
+  const { lang, base } = useI18n();
+  const [target, setTarget] = React.useState(null);
+  React.useEffect(
+    () =>
+      whenIdle(() => {
+        if (savedLang()) return;
+        const first = String((navigator.languages && navigator.languages[0]) || navigator.language || "").slice(0, 2).toLowerCase();
+        if ((first === "en" || first === "fr") && first !== lang) setTarget(first);
+      }, 4000),
+    [lang]
+  );
+  if (!target) return null;
+  const text = NOTICE[target];
+  return (
+    <div className="langNotice" role="region" aria-label={text.question} lang={target}>
+      <span>{text.question}</span>
+      <a href={localize(target, base)} hrefLang={target} className="btn btnSmall" onClick={(event) => goToLang(event, target, base)}>
+        {text.yes}
+      </a>
+      <button
+        type="button"
+        className="langNoticeClose"
+        aria-label={text.close}
+        onClick={() => {
+          saveLang(lang);
+          setTarget(null);
+        }}
+      >
+        ✕
       </button>
     </div>
   );
@@ -98,77 +177,81 @@ function useCloseDetails(ref) {
   }, [ref]);
 }
 
-export function Header({ theme, setTheme, current }) {
+export function Header({ theme, setTheme }) {
+  const { t, base, href, anchor } = useI18n();
   const industries = React.useRef(null);
   const menu = React.useRef(null);
   useCloseDetails(industries);
   useCloseDetails(menu);
-  const aria = (href) => (href === current ? { "aria-current": "page" } : {});
+  const aria = (path) => (path === base ? { "aria-current": "page" } : {});
+  const nav = t.common.nav;
 
   return (
     <div className="navBar">
       <header className="wrap nav">
-        <a href="/" className="navBrand" aria-label="Clonexa, ir al inicio">
+        <a href={href("/")} className="navBrand" aria-label={t.common.logoHome}>
           <Logo />
         </a>
-        <nav className="navLinks" aria-label="Secciones">
+        <nav className="navLinks" aria-label={nav.sections}>
           <details className="navDrop" ref={industries}>
-            <summary>Negocios</summary>
+            <summary>{nav.business}</summary>
             <ul className="dropList">
-              {INDUSTRY_LINKS.map(([href, label, icon]) => (
-                <li key={href}>
-                  <a href={href} {...aria(href)}>
-                    <span aria-hidden="true">{icon}</span> {label}
+              {INDUSTRY_LINKS.map(([path, slug, icon]) => (
+                <li key={path}>
+                  <a href={href(path)} {...aria(path)}>
+                    <span aria-hidden="true">{icon}</span> {t.industries[slug].name}
                   </a>
                 </li>
               ))}
               <li>
-                <a href={ABOUT_PATH} {...aria(ABOUT_PATH)}>
-                  <span aria-hidden="true">💡</span> ¿Qué es Clonexa?
+                <a href={href(ABOUT_PATH)} {...aria(ABOUT_PATH)}>
+                  <span aria-hidden="true">💡</span> {nav.about}
                 </a>
               </li>
             </ul>
           </details>
-          {NAV_LINKS.map(([href, label]) => (
-            <a key={href} href={href}>
-              {label}
+          {NAV_IDS.map((id) => (
+            <a key={id} href={anchor(id)}>
+              {nav.links[id]}
             </a>
           ))}
         </nav>
         <div className="navRight">
+          <LangSwitch className="langNav" />
           <ThemeSwitch theme={theme} setTheme={setTheme} />
           <a href="#agenda" className="btn btnSmall navCta">
-            {CTA_LABEL}
+            {t.common.ctaNav}
           </a>
           <details className="mobileMenu" ref={menu}>
-            <summary aria-label="Menú">
+            <summary aria-label={nav.menu}>
               <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
                 <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </summary>
-            <nav className="mobilePanel" aria-label="Menú">
-              <p className="mobileTitle">Negocios</p>
+            <nav className="mobilePanel" aria-label={nav.menu}>
+              <LangSwitch className="langMobile" />
+              <p className="mobileTitle">{nav.business}</p>
               <ul>
-                {INDUSTRY_LINKS.map(([href, label, icon]) => (
-                  <li key={href}>
-                    <a href={href} {...aria(href)}>
-                      <span aria-hidden="true">{icon}</span> {label}
+                {INDUSTRY_LINKS.map(([path, slug, icon]) => (
+                  <li key={path}>
+                    <a href={href(path)} {...aria(path)}>
+                      <span aria-hidden="true">{icon}</span> {t.industries[slug].name}
                     </a>
                   </li>
                 ))}
               </ul>
               <ul className="mobileMore">
-                {NAV_LINKS.map(([href, label]) => (
-                  <li key={href}>
-                    <a href={href}>{label}</a>
+                {NAV_IDS.map((id) => (
+                  <li key={id}>
+                    <a href={anchor(id)}>{nav.links[id]}</a>
                   </li>
                 ))}
                 <li>
-                  <a href={ABOUT_PATH}>¿Qué es Clonexa?</a>
+                  <a href={href(ABOUT_PATH)}>{nav.about}</a>
                 </li>
                 <li>
                   <a href="#agenda" className="btn btnBlock">
-                    {CTA_LABEL}
+                    {t.common.cta}
                   </a>
                 </li>
               </ul>
@@ -193,7 +276,9 @@ export function SectionHead({ kicker, title, sub, id, level = 2 }) {
 
 // Captura real de Clonexa: celular (390 px) o pantalla (1280 px), con su version pequena.
 export function ShotImage({ id, sizes, eager = false, className = "" }) {
+  const { t } = useI18n();
   const shot = SHOTS[id];
+  const alt = t.shots[id];
   if (shot.video) {
     return (
       <video
@@ -207,7 +292,7 @@ export function ShotImage({ id, sizes, eager = false, className = "" }) {
         loop
         playsInline
         preload="metadata"
-        aria-label={shot.alt}
+        aria-label={alt}
       />
     );
   }
@@ -217,7 +302,7 @@ export function ShotImage({ id, sizes, eager = false, className = "" }) {
       src={shot.src}
       srcSet={`${shot.srcSm} ${shot.smWidth}w, ${shot.src} ${shot.width}w`}
       sizes={sizes}
-      alt={shot.alt}
+      alt={alt}
       width={shot.width}
       height={shot.height}
       loading={eager ? "eager" : "lazy"}
@@ -260,9 +345,11 @@ export function FaqList({ items, idPrefix = "faq", twoColumns = false }) {
 
 const EMPTY_FORM = { name: "", business: "", whatsapp: "" };
 
-// Formulario de demo ("Pide tu demo gratis"): evento demo_request + abre WhatsApp con los datos.
-// En las paginas de industria el mensaje empieza con la industria.
+// Formulario de demo ("Pide tu demo gratis"): evento demo_request (con utm, codigo de prospecto e
+// idioma) + abre WhatsApp con los datos. En las paginas de industria el mensaje empieza con la industria.
 export function DemoForm({ greeting, page = "inicio", sub }) {
+  const { t, lang } = useI18n();
+  const f = t.form;
   const [form, setForm] = React.useState(EMPTY_FORM);
   const [errors, setErrors] = React.useState({});
   const [sentLink, setSentLink] = React.useState("");
@@ -280,16 +367,16 @@ export function DemoForm({ greeting, page = "inicio", sub }) {
       return;
     }
     const data = { name: form.name.trim(), business: form.business.trim(), whatsapp: form.whatsapp.trim() };
-    sendEvent("demo_request", { form: "agenda-demo", page, ...data });
-    const link = waLink(demoRequestMessage(data, greeting));
+    sendEvent("demo_request", { form: "agenda-demo", page, lang, ...data });
+    const link = waLink(demoRequestMessage(t, data, greeting));
     window.open(link, "_blank", "noopener");
     setSentLink(link);
     setForm(EMPTY_FORM);
   }
 
-  const field = (id, label, props) => (
+  const field = (id, props) => (
     <div className="field">
-      <label htmlFor={`demo-${id}`}>{label}</label>
+      <label htmlFor={`demo-${id}`}>{f[id]}</label>
       <input
         id={`demo-${id}`}
         value={form[id]}
@@ -300,7 +387,7 @@ export function DemoForm({ greeting, page = "inicio", sub }) {
       />
       {errors[id] && (
         <p className="fieldError" id={`demo-${id}-error`}>
-          {errors[id]}
+          {f.errors[id]}
         </p>
       )}
     </div>
@@ -311,43 +398,35 @@ export function DemoForm({ greeting, page = "inicio", sub }) {
       <div className="cta">
         <div>
           <h2 id="agenda-titulo">
-            ¿Lo vemos con <span className="grad gradInline">tu negocio</span>?
+            {f.title1}
+            <span className="grad gradInline">{f.titleGrad}</span>
+            {f.title2}
           </h2>
-          <p className="ctaSub">
-            {sub || "Te mostramos Clonexa funcionando con una empresa como la tuya. 20 minutos, sin compromiso."}
-          </p>
+          <p className="ctaSub">{sub || f.sub}</p>
           {greeting && (
             <ExternalLink href={waLink(greeting)} className="ctaWa" data-wa={`demo-${page}`}>
-              <WhatsappIcon /> Escríbenos por WhatsApp
+              <WhatsappIcon /> {t.common.wa.write}
             </ExternalLink>
           )}
         </div>
         {sentLink ? (
           <div className="thanks" role="status">
-            <h3>¡Gracias! Ya casi está.</h3>
-            <p>Abrimos WhatsApp con tus datos para coordinar la demo. Si no se abrió, toca el botón.</p>
+            <h3>{f.thanksTitle}</h3>
+            <p>{f.thanksText}</p>
             <ExternalLink href={sentLink} className="btn btnBlock" data-wa="formulario">
-              Abrir WhatsApp
+              {f.openWa}
             </ExternalLink>
             <button type="button" className="linkButton" onClick={() => setSentLink("")}>
-              Enviar otra solicitud
+              {f.again}
             </button>
           </div>
         ) : (
           <form className="demoForm" onSubmit={submit} noValidate>
-            {field("name", "Tu nombre", { autoComplete: "name", placeholder: "Tu nombre" })}
-            {field("business", "Empresa y tipo de negocio", {
-              autoComplete: "organization",
-              placeholder: "Ej: La Brasa, restaurante"
-            })}
-            {field("whatsapp", "WhatsApp", {
-              type: "tel",
-              inputMode: "tel",
-              autoComplete: "tel",
-              placeholder: "Tu número de WhatsApp"
-            })}
+            {field("name", { autoComplete: "name", placeholder: f.namePh })}
+            {field("business", { autoComplete: "organization", placeholder: f.businessPh })}
+            {field("whatsapp", { type: "tel", inputMode: "tel", autoComplete: "tel", placeholder: f.whatsappPh })}
             <button type="submit" className="btn btnBlock">
-              {CTA_LABEL}
+              {t.common.cta}
             </button>
           </form>
         )}
@@ -357,24 +436,27 @@ export function DemoForm({ greeting, page = "inicio", sub }) {
 }
 
 export function Footer() {
+  const { t, href, fill } = useI18n();
+  const ft = t.common.footer;
   return (
     <footer className="wrap footer">
       <div className="footerRow">
         <Logo className="logoSmall" />
         <p>© 2026 Clonexa</p>
-        <nav aria-label="Legal" className="footerLegal">
-          {LEGAL_LINKS.map(([href, label]) => (
-            <a key={href} href={href}>
-              {label}
+        <nav aria-label={ft.legal} className="footerLegal">
+          {LEGAL_SLUGS.map((slug) => (
+            <a key={slug} href={href(`/${slug}`)}>
+              {t.common.legalLinks[slug]}
             </a>
           ))}
         </nav>
-        <ul className="footerSocial" aria-label="Redes de Clonexa">
+        <LangSwitch className="langFooter" />
+        <ul className="footerSocial" aria-label={ft.social}>
           {SOCIAL.map((item) => {
             const Icon = SOCIAL_ICONS[item.id];
             return (
               <li key={item.id}>
-                <ExternalLink href={item.url} className={`social-${item.id}`} aria-label={`Clonexa en ${item.label}`}>
+                <ExternalLink href={item.url} className={`social-${item.id}`} aria-label={fill(ft.on, { network: item.label })}>
                   <Icon />
                 </ExternalLink>
               </li>
@@ -382,13 +464,13 @@ export function Footer() {
           })}
         </ul>
       </div>
-      <nav aria-label="Negocios" className="footerNiches">
-        {INDUSTRY_LINKS.map(([href, label]) => (
-          <a key={href} href={href}>
-            {label}
+      <nav aria-label={ft.business} className="footerNiches">
+        {INDUSTRY_LINKS.map(([path, slug]) => (
+          <a key={path} href={href(path)}>
+            {t.industries[slug].name}
           </a>
         ))}
-        <a href={ABOUT_PATH}>¿Qué es Clonexa?</a>
+        <a href={href(ABOUT_PATH)}>{t.common.nav.about}</a>
       </nav>
     </footer>
   );
@@ -397,6 +479,7 @@ export function Footer() {
 // Boton flotante: se esconde mientras el formulario o el pie estan en pantalla
 // y, en celular, mientras se ve el encabezado (no tapa el video ni el titulo).
 export function FloatingWhatsapp({ message }) {
+  const { t } = useI18n();
   const [hidden, setHidden] = React.useState(false);
   React.useEffect(() => {
     const mobile = Boolean(window.matchMedia?.("(max-width: 760px)").matches);
@@ -418,11 +501,11 @@ export function FloatingWhatsapp({ message }) {
     return () => observer.disconnect();
   }, []);
   return (
-    <aside aria-label="Contacto por WhatsApp">
+    <aside aria-label={t.common.wa.region}>
       <ExternalLink
-        href={message ? waLink(message) : WA_GENERAL}
+        href={message ? waLink(message) : waGeneral(t)}
         className={`waFloat${hidden ? " waHidden" : ""}`}
-        aria-label="Escríbenos por WhatsApp"
+        aria-label={t.common.wa.write}
         data-wa="flotante"
         tabIndex={hidden ? -1 : undefined}
         aria-hidden={hidden || undefined}
@@ -435,11 +518,12 @@ export function FloatingWhatsapp({ message }) {
 
 // Migas de pan visibles: Inicio > pagina.
 export function Breadcrumbs({ label }) {
+  const { t, href } = useI18n();
   return (
-    <nav className="wrap crumbs" aria-label="Ruta de navegación">
+    <nav className="wrap crumbs" aria-label={t.common.crumbs.label}>
       <ol>
         <li>
-          <a href="/">Inicio</a>
+          <a href={href("/")}>{t.common.crumbs.home}</a>
         </li>
         <li aria-current="page">{label}</li>
       </ol>

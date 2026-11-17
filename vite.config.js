@@ -11,12 +11,20 @@ export default defineConfig(({ isSsrBuild }) => ({
   build: isSsrBuild
     ? {}
     : {
+        // manifest: el prerender lo lee para precargar el diccionario del idioma de cada pagina.
+        manifest: true,
         rollupOptions: {
           input: {
             main: "index.html",
             privacidad: "privacidad/index.html",
             terminos: "terminos/index.html",
-            "borrar-datos": "borrar-datos/index.html"
+            "borrar-datos": "borrar-datos/index.html",
+            "en-privacidad": "en/privacidad/index.html",
+            "en-terminos": "en/terminos/index.html",
+            "en-borrar-datos": "en/borrar-datos/index.html",
+            "fr-privacidad": "fr/privacidad/index.html",
+            "fr-terminos": "fr/terminos/index.html",
+            "fr-borrar-datos": "fr/borrar-datos/index.html"
           }
         }
       },

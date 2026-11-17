@@ -7,6 +7,7 @@ import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { CARTA_DEMO_URL, CARTA_VIDEO, cartaVideoTarget, cartaWhatsapp } from "../src/cartaVideo.js";
+import es from "../src/i18n/es.json" with { type: "json" };
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const HAS_DIST = fs.existsSync(path.join(ROOT, "dist", "index.html"));
@@ -38,10 +39,10 @@ test("codigo raro no se usa (solo 6 letras o numeros)", () => {
 });
 
 test("WhatsApp: wa.me/573144798220 con 'Hola, vi la carta video (código XXXX)'", () => {
-  const link = new URL(cartaWhatsapp("K7M2QD"));
+  const link = new URL(cartaWhatsapp(es, "K7M2QD"));
   assert.equal(link.origin + link.pathname, "https://wa.me/573144798220");
   assert.equal(link.searchParams.get("text"), "Hola, vi la carta video (código K7M2QD)");
-  assert.match(new URL(cartaWhatsapp("")).searchParams.get("text"), /carta video/);
+  assert.match(new URL(cartaWhatsapp(es, "")).searchParams.get("text"), /carta video/);
 });
 
 test("los archivos de la demo existen y el GIF del correo pesa menos de 1 MB", () => {

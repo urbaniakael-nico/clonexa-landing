@@ -1419,3 +1419,126 @@ body.noScroll {
     width: 126px;
   }
 }
+
+/* ---------- Idiomas: selector ES · EN · FR y aviso de primera visita ---------- */
+.langSwitch {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--card);
+}
+
+.langSwitch a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  min-height: 30px;
+  padding: 0 8px;
+  border-radius: 99px;
+  color: var(--mut);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+}
+
+.langSwitch a[aria-current="true"] {
+  background: var(--soft);
+  color: var(--txt);
+}
+
+.langSwitch a:hover {
+  color: var(--txt);
+}
+
+.langMobile {
+  margin-bottom: 14px;
+}
+
+.langMobile a {
+  min-width: 52px;
+  min-height: 40px;
+  font-size: 14px;
+}
+
+.langNotice {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100vw - 32px);
+  padding: 10px 10px 10px 16px;
+  border: 1px solid var(--line2);
+  border-radius: 16px;
+  background: var(--pillbg);
+  color: var(--pilltxt);
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+  animation: pillIn 0.4s ease both;
+}
+
+.langNoticeClose {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--mut);
+  font: inherit;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Barra en pantallas medianas (1041-1240 px, con enlaces): el selector de idioma se queda y el de
+   tema se esconde para que todo quepa en una linea. En celular el idioma va en el menu. */
+@media (min-width: 1041px) and (max-width: 1240px) {
+  .navRight .themeSwitch {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .langNav {
+    display: none;
+  }
+
+  .langNotice {
+    bottom: 76px;
+  }
+}
+
+/* Botones y pestanas con textos largos (frances): pueden partir linea sin desbordar. */
+.btn {
+  text-align: center;
+}
+
+.heroActions .btn,
+.simAction,
+.insideCopy .btn {
+  white-space: normal;
+}
+
+/* Barra en computador: todo en una linea en los tres idiomas */
+.navLinks a,
+.navLinks summary,
+.navCta {
+  white-space: nowrap;
+}
+
+@media (max-width: 1500px) {
+  .navLinks {
+    gap: 16px;
+    font-size: 14.5px;
+  }
+
+  .themeSwitch .themeLabel {
+    display: none;
+  }
+}

@@ -1,0 +1,730 @@
+{
+  "meta": {
+    "home": {
+      "title": "Clonexa · Votre entreprise, en direct",
+      "description": "Commandes, caisse, stock, plannings et paie dans un seul système, que vous voyez tourner en 3D et en temps réel sur mobile ou à la télé. Démo gratuite.",
+      "ogTitle": "Clonexa · Votre entreprise, en direct"
+    },
+    "about": {
+      "title": "Qu’est-ce que Clonexa ? | Logiciel cloud pour entreprises",
+      "description": "Clonexa est un logiciel cloud (SaaS) qui relie commandes, stock, caisse, personnel, plannings, paie et rapports d’une entreprise, en 3D et en temps réel."
+    },
+    "notFound": {
+      "title": "Page introuvable | Clonexa",
+      "description": "Cette page n’existe pas. Découvrez les secteurs avec lesquels Clonexa travaille ou réservez votre démo."
+    },
+    "ogImageAlt": "Clonexa : votre entreprise, en direct. Scène 3D d’un bar d’exemple qui tourne en temps réel",
+    "orgDescription": "Clonexa est un logiciel cloud (SaaS) qui relie dans un seul système les commandes, le stock, la caisse, le personnel, les plannings, la paie et les rapports d’une entreprise, et les montre en 3D et en temps réel."
+  },
+  "common": {
+    "cta": "Demandez votre démo gratuite",
+    "ctaNav": "Démo gratuite",
+    "skip": "Aller au contenu",
+    "logoHome": "Clonexa, aller à l’accueil",
+    "theme": { "group": "Thème de la page", "dark": "Sombre", "light": "Clair" },
+    "nav": {
+      "sections": "Sections",
+      "business": "Secteurs",
+      "about": "Qu’est-ce que Clonexa ?",
+      "menu": "Menu",
+      "links": { "en-vivo": "En direct 3D", "disena": "Conception 3D", "funciones": "Fonctionnalités", "planes": "Tarifs", "preguntas": "FAQ" }
+    },
+    "lang": { "label": "Langue" },
+    "footer": { "legal": "Mentions légales", "social": "Clonexa sur les réseaux sociaux", "on": "Clonexa sur {network}", "business": "Secteurs" },
+    "legalLinks": { "privacidad": "Confidentialité", "terminos": "Conditions", "borrar-datos": "Supprimer mes données" },
+    "wa": {
+      "general": "Bonjour Clonexa, je souhaite réserver une démo gratuite de 20 minutes.",
+      "write": "Écrivez-nous sur WhatsApp",
+      "talk": "Discuter sur WhatsApp",
+      "region": "Contact WhatsApp"
+    },
+    "crumbs": { "label": "Fil d’Ariane", "home": "Accueil" },
+    "seeAll": "Tout voir pour : {name} →"
+  },
+  "form": {
+    "title1": "On essaie avec ",
+    "titleGrad": "votre entreprise",
+    "title2": " ?",
+    "sub": "Nous vous montrons Clonexa en action pour une entreprise comme la vôtre. 20 minutes, sans engagement.",
+    "subIndustry": "Nous vous montrons Clonexa en action pour une entreprise comme la vôtre. 20 minutes, sans engagement. Demandez un devis pour votre système ({name}).",
+    "name": "Votre nom",
+    "namePh": "Votre nom",
+    "business": "Entreprise et type d’activité",
+    "businessPh": "Ex. : Le Grill, restaurant",
+    "whatsapp": "WhatsApp",
+    "whatsappPh": "Votre numéro WhatsApp",
+    "errors": {
+      "name": "Indiquez votre nom.",
+      "business": "Indiquez le nom et le type de votre entreprise.",
+      "whatsapp": "Indiquez un numéro WhatsApp valide."
+    },
+    "thanksTitle": "Merci ! C’est presque fini.",
+    "thanksText": "Nous avons ouvert WhatsApp avec vos informations pour planifier la démo. S’il ne s’est pas ouvert, touchez le bouton.",
+    "openWa": "Ouvrir WhatsApp",
+    "again": "Envoyer une autre demande",
+    "message": { "greeting": "Bonjour Clonexa, je souhaite réserver ma démo gratuite.", "name": "Nom", "business": "Entreprise", "whatsapp": "WhatsApp" }
+  },
+  "hero": {
+    "kicker": "LOGICIEL POUR ENTREPRISES · EN TEMPS RÉEL",
+    "title1": "Votre entreprise, ",
+    "titleGrad": "en direct.",
+    "lead1": "Commandes, caisse, stock, plannings et paie dans un seul système… et vous le voyez tourner en ",
+    "leadStrong": "3D, en temps réel",
+    "lead2": ", sur votre mobile ou une télé.",
+    "demo": "Voir la démo en direct",
+    "checks": ["Utilisateurs illimités", "Forfait fixe", "Votre marque, vos couleurs", "Nous migrons vos données avec vous"],
+    "videoAlt": "Scène 3D en direct d’un bar d’exemple : tables avec clients, comptoir, piste de danse et écran des chansons demandées",
+    "live": "EN DIRECT",
+    "liveExtra": "· vidéo",
+    "ago": "il y a 3 s",
+    "orders": [
+      ["🍺", "Table 4 a commandé 2 bières", "direct au bar"],
+      ["🍸", "Table 2 a commandé 3 cocktails", "direct au bar"],
+      ["🍟", "Table 9 a commandé une planche", "direct en cuisine"],
+      ["🍺", "Le bar a commandé 4 bières", "note du bar"]
+    ],
+    "sales": "Ventes du jour",
+    "song": "Chanson demandée",
+    "songs": [
+      ["Table 7", "n° 2 en file"],
+      ["Table 3", "n° 3 en file"],
+      ["Table 11", "n° 4 en file"]
+    ],
+    "cartaBadge": "▶ Menu vidéo",
+    "cartaLabel": "Menu vidéo d’un restaurant d’exemple sur le téléphone du client"
+  },
+  "niches": {
+    "label": "Secteurs",
+    "items": {
+      "restaurantes": "Restaurants",
+      "bares": "Bars",
+      "talleres": "Ateliers",
+      "callcenters": "Centres d’appels",
+      "campo": "Équipes terrain",
+      "tiendas": "Boutiques",
+      "domicilios": "Livraison"
+    }
+  },
+  "inside": {
+    "kicker": "COMMENT ÇA MARCHE DE L’INTÉRIEUR",
+    "title1": "Le vrai système, ",
+    "titleGrad": "pas une présentation.",
+    "sub": "De vrais écrans d’entreprises de démonstration. Choisissez votre activité et suivez tout le parcours.",
+    "tabsLabel": "Type d’activité",
+    "cta": "Je veux le voir avec mon entreprise",
+    "waMessage": "Bonjour Clonexa, je souhaite voir une démo de Clonexa pour mon activité : {business}.",
+    "ago": "il y a 2 s",
+    "tabs": {
+      "restaurante": {
+        "label": "Restaurant",
+        "business": "restaurant",
+        "toasts": [["🛎️", "Table 7 · nouvelle commande"], ["🛵", "Livraison n° 19 · en cuisine"], ["✅", "Table 3 · commande prête"]],
+        "steps": [
+          ["Le client commande avec le QR", "Depuis sa table, avec le menu vidéo. Rien à télécharger."],
+          ["Direct en cuisine", "Chaque bon avec son minuteur : nouveau, en préparation, prêt."],
+          ["La caisse tombe juste", "Addition exacte par table et clôture du jour en un geste."]
+        ]
+      },
+      "bar": {
+        "label": "Bar",
+        "business": "bar",
+        "toasts": [["🍺", "Table 4 · 2 bières"], ["🎶", "Table 7 · chanson demandée"], ["🍸", "Bar · 3 cocktails"]],
+        "steps": [
+          ["Ils commandent depuis la table", "Avec le QR et le menu vidéo. Ils peuvent même demander une chanson."],
+          ["Le bar le voit aussitôt", "Chaque table avec son total et les nouvelles commandes en surbrillance."],
+          ["Une soirée qui tombe juste", "Clôture par journée d’activité, même si vous fermez à 4 h du matin."]
+        ]
+      },
+      "taller": {
+        "label": "Atelier",
+        "business": "atelier ou usine",
+        "toasts": [["🧵", "RÉF 2041 · 36 sur 50 pièces"], ["⏱️", "Opératrice 3 · a pointé"], ["✅", "Lot RÉF 2038 · clôturé"]],
+        "steps": [
+          ["Chacun pointe avec son code PIN", "Sur la tablette de l’atelier. Sans identifiant ni mot de passe."],
+          ["Chaque lot avance sous vos yeux", "Pièces terminées, avancement et coût de main-d’œuvre par pièce."],
+          ["La paie se calcule toute seule", "Heures normales et supplémentaires de la période, prêtes à payer."]
+        ]
+      },
+      "campo": {
+        "label": "Terrain",
+        "business": "équipe terrain",
+        "toasts": [["📍", "Technicien 4 · pointage GPS"], ["📦", "Commande de matériel · approuvée"], ["⏸️", "Technicien 2 · en pause"]],
+        "steps": [
+          ["Ils pointent avec le GPS", "Depuis leur mobile, avec leur position et leur zone de travail."],
+          ["Vous voyez qui est où", "Actifs, en pause ou hors zone, en direct."],
+          ["Chaque matériel a son bon", "Demandé, livré ou retourné, toujours avec un numéro."]
+        ]
+      },
+      "callcenter": {
+        "label": "Centre d’appels",
+        "business": "centre d’appels",
+        "toasts": [["📞", "Agent 3 · en appel"], ["🧾", "Devis · approuvé"], ["✅", "Agent 5 · vente conclue"]],
+        "steps": [
+          ["Chaque conseiller en direct", "En appel, disponible ou en pause, avec son temps."],
+          ["L’appel devient une vente", "De l’appel au devis, puis au service planifié."],
+          ["La trésorerie encaisse à temps", "Tout ce qui est prêt à facturer, dans une seule boîte."]
+        ]
+      },
+      "tienda": {
+        "label": "Boutique",
+        "business": "boutique",
+        "toasts": [["🛍️", "Vente enregistrée · Boutique 2"], ["📦", "Entrepôt · commande préparée"], ["🎯", "Objectif du mois · 78 %"]],
+        "steps": [
+          ["Chaque vente compte pour l’objectif", "Le vendeur l’enregistre depuis son mobile."],
+          ["L’entrepôt réapprovisionne à temps", "Les boutiques commandent et suivent l’état de la commande."],
+          ["La direction voit tout d’un coup d’œil", "Ventes, boutiques et objectifs sur un seul tableau de bord."]
+        ]
+      }
+    }
+  },
+  "sim": {
+    "kicker": "SIMULATION EN DIRECT",
+    "title1": "Voyez à quoi ressemblerait ",
+    "titleGrad": "la vôtre",
+    "sub": "Des entreprises de démonstration qui tournent sur le même système que nos clients. C’est une simulation : touchez le bouton et regardez ce qui se passe.",
+    "tabsLabel": "Simulation par activité",
+    "sceneAlt": "Scène 3D d’exemple ({name}) avec son personnel et ses tables ou postes de travail",
+    "tabs": {
+      "restaurante": {
+        "label": "Restaurant",
+        "title": "Chaque table, chaque commande, en temps réel",
+        "points": ["📲 Des tables qui commandent par QR", "👨‍🍳 Une cuisine avec le temps de chaque bon", "🛵 Les livraisons sur le même écran", "💵 Caisse et ventes du jour en un instant"],
+        "action": "🛎️ Simuler une commande",
+        "toast": "🛎️ Table {n} · nouvelle commande · direct en cuisine",
+        "labels": [
+          ["+Table 1 · QR actif", "+Table 1 · a commandé 2 plats", "Table 1 · en train de manger"],
+          ["Table 2 · libre", "+Table 2 · QR actif", "+Table 2 · a commandé 3 plats"],
+          ["+Table 3 · QR actif", "+Table 3 · a commandé des boissons", "Table 3 · a demandé l’addition"],
+          ["+Table 4 · QR actif", "Table 4 · commande en route", "Table 4 · en train de manger"],
+          ["Table 5 · libre", "+Table 5 · QR actif", "+Table 5 · a commandé 2 plats"],
+          ["Table 6 · libre", "+Table 6 · QR actif", "+Table 6 · a commandé un dessert"],
+          ["+Table 7 · QR actif", "+Table 7 · a commandé 4 plats", "Table 7 · en train de manger"],
+          ["Table 8 · libre", "+Table 8 · QR actif", "+Table 8 · a commandé 2 plats"],
+          ["Grillardin · Table 7 · 2 planches", "Grillardin · Table 4 · filet", "Grillardin · Livraison n° 20"],
+          ["Cuisine · Livraison n° 19", "Cuisine · Table 1 · prêt", "+Cuisine · Table 5 · en préparation"],
+          ["Caisse · Encaisse la table 2", "Caisse · Table 3 réglée", "Caisse · Disponible"],
+          ["+Serveur · Apporte la commande · Table 4", "Serveur · Prend la commande · Table 8", "+Serveur · Apporte la commande · Table 1"],
+          ["Livreur · Départ · n° 18", "Livreur · En route · n° 18", "+Livreur · Livré · n° 18 ✓"]
+        ],
+        "zones": ["CUISINE ET GRILL", "SALLE", "CAISSE ET LIVRAISONS"],
+        "kpis": { "mesas": "Tables actives", "pedidos": "Commandes du jour", "cocina": "En cuisine", "ventas": "Ventes du jour" }
+      },
+      "bar": {
+        "label": "Bar",
+        "title": "Toute la soirée, table par table",
+        "points": ["🍺 Commandes par QR direct au bar", "🎶 Chansons demandées depuis la table", "🧾 Addition exacte pour chaque table", "🌙 Clôture par journée d’activité"],
+        "action": "🍺 Commander depuis la table",
+        "toast": "🍺 Table {n} a commandé 2 bières · direct au bar",
+        "labels": [
+          ["+Table 1 · QR actif", "+Table 1 · a commandé 2 bières", "+Table 1 · a demandé une chanson"],
+          ["Table 2 · libre", "+Table 2 · QR actif", "+Table 2 · a commandé 3 cocktails"],
+          ["Table 3 · libre", "+Table 3 · QR actif", "+Table 3 · a commandé une planche"],
+          ["+Table 4 · QR actif", "+Table 4 · a commandé 2 bières", "Table 4 · addition 86 $ US"],
+          ["+Table 5 · QR actif", "+Table 5 · a demandé une chanson", "+Table 5 · a commandé 4 shots"],
+          ["Table 6 · libre", "+Table 6 · QR actif", "+Table 6 · a commandé 2 cocktails"],
+          ["+Table 7 · QR actif", "+Table 7 · a demandé une chanson", "+Table 7 · a commandé une bouteille"],
+          ["+Table 8 · QR actif", "+Table 8 · a commandé 3 bières", "Table 8 · a demandé l’addition"],
+          ["Table 9 · libre", "+Table 9 · QR actif", "+Table 9 · a commandé des nachos"],
+          ["+Barman · Prépare 3 articles · Table 7", "+Barman · Prépare 2 cocktails · Table 2", "Barman · Servi · Table 4 ✓"],
+          ["+DJ · En ce moment : soirée salsa", "DJ · À suivre : la chanson de la table 7", "+DJ · En ce moment : demande de la table 5"],
+          ["+Serveur · Apporte la commande · Table 7", "+Serveur · Apporte la commande · Table 2", "Serveur · Encaisse · Table 8"]
+        ],
+        "zones": [],
+        "kpis": { "mesas": "Tables ouvertes", "pedidos": "Commandes", "canciones": "Chansons en file", "ventas": "Ventes du jour" }
+      },
+      "taller": {
+        "label": "Atelier",
+        "title": "Chaque machine, chaque lot, en temps réel",
+        "points": ["🔢 Chacun pointe avec son code PIN", "🧵 Avancement de chaque lot en direct", "⏸️ Pauses et temps par référence", "💰 Paie basée sur les heures réelles"],
+        "action": "🧵 Clôturer le lot",
+        "toast": "✅ Lot RÉF 2041 clôturé · 50 pièces · prêt à expédier",
+        "labels": [
+          ["+Opérateur · Couture · RÉF 2041", "+Opérateur · 12 pièces · RÉF 2041", "Opérateur · Contrôle · RÉF 2041"],
+          ["+Opératrice · Couture · RÉF 2041", "Opératrice · 9 pièces · RÉF 2041", "!Opératrice · En pause · 5 min"],
+          ["+Opératrice · Couture · RÉF 2041", "Opératrice · 14 pièces · RÉF 2041", "+Opératrice · Couture · RÉF 2041"],
+          ["+Opératrice · Couture · RÉF 2041", "Opératrice · 11 pièces · RÉF 2041", "+Opératrice · Couture · RÉF 2041"],
+          ["Coupe · Prépare un lot", "+Coupe · Lot RÉF 2042 prêt ✓", "Coupe · Prépare un lot"],
+          ["!Opératrice · En pause · 12 min", "Opératrice · De retour · RÉF 2041", "+Opératrice · Couture · RÉF 2041"],
+          ["Machine libre", "+Opératrice · A pointé · PIN ✓", "+Opératrice · Couture · RÉF 2041"],
+          ["Machine libre", "Machine libre", "+Opérateur · A pointé · PIN ✓"],
+          ["Machine libre", "+Opératrice · A pointé · PIN ✓", "+Opératrice · Couture · RÉF 2041"]
+        ],
+        "zones": ["PRODUCTION", "COUPE", "PRÊT À EXPÉDIER", "CAFÉ · PAUSES"],
+        "kpis": { "prendas": "Pièces du jour", "lotes": "Lots en cours", "pausa": "En pause", "avance": "Avancement RÉF 2041" }
+      },
+      "campo": {
+        "label": "Terrain",
+        "title": "Votre équipe sur le terrain, comme si vous y étiez",
+        "points": ["📍 Pointage d’arrivée et de départ par GPS", "🗺️ Qui est dans sa zone ou en dehors", "⏸️ Pauses et temps de chaque technicien", "📦 Matériel avec bon numéroté"],
+        "action": "📍 Pointer avec le GPS",
+        "toast": "📍 Technicien 31 a pointé par GPS · dans sa zone ✓",
+        "labels": [
+          ["Nord · Technicien · Baie A3 · câblage", "+Nord · Technicien · Baie A3 · terminé ✓", "Nord · Technicien · Baie A4 · câblage"],
+          ["Nord · Technicien · Baie A6 · câblage", "!Nord · Technicien · En pause · 4 min", "Nord · Technicien · Baie A6 · câblage"],
+          ["Nord · Superviseur · Suivi de l’avancement", "+Nord · Superviseur · Matériel approuvé ✓", "Nord · Superviseur · Suivi de l’avancement"],
+          ["Nord · Magasin · Apporte du matériel", "+Nord · Magasin · Bon n° 214 livré ✓", "Nord · Magasin · Disponible"],
+          ["Sud · Technicien · Baie C1", "+Sud · Technicien · Baie C1 · terminé ✓", "Sud · Technicien · Baie C2"],
+          ["Sud · Technicien · Baie C4", "Sud · Technicien · A demandé du matériel", "Sud · Technicien · Baie C4"],
+          ["Sud · Superviseur · Suivi de l’avancement", "Sud · Superviseur · 15 en poste", "Sud · Superviseur · Suivi de l’avancement"],
+          ["!Sud · Technicien · ⚠ Hors périmètre", "+Sud · Technicien · De retour dans sa zone ✓", "Sud · Technicien · Baie D4"]
+        ],
+        "zones": ["SITE NORD", "SITE SUD"],
+        "kpis": { "turno": "En poste", "fuera": "Hors zone", "pausa": "En pause", "material": "Matériel livré" }
+      },
+      "callcenter": {
+        "label": "Centre d’appels",
+        "title": "Chaque appel, chaque agent, en temps réel",
+        "points": ["📞 File d’appels avec temps d’attente", "🎧 Statut de chaque agent", "💰 Ventes et devis", "📊 Objectifs du jour"],
+        "action": "📞 Simuler un appel entrant",
+        "toast": "📞 Appel entrant · attribué à l’agent 3",
+        "labels": [
+          ["+Agent 1 · En appel · {t}"],
+          ["+Agent 2 · En appel · {t}"],
+          ["Agent 3 · Disponible", "+Agent 3 · En appel · {t}"],
+          ["+Agent 4 · En appel · {t}", "+Agent 4 · Devis envoyé ✓"],
+          ["+Agent 5 · Vente conclue ✓", "Agent 5 · Disponible", "+Agent 5 · En appel · {t}"],
+          ["+Agent 6 · En appel · {t}"],
+          ["!Agent 7 · Pause · 3 min", "Agent 7 · Disponible", "+Agent 7 · En appel · {t}"],
+          ["+Agent 8 · En appel · {t}", "+Agent 8 · Vente conclue ✓"],
+          ["Superviseur · 7 en appel · objectif 80 %", "Superviseur · objectif 82 %", "Superviseur · objectif 84 %"]
+        ],
+        "zones": ["AGENTS", "SUPERVISION"],
+        "kpis": { "cola": "En file", "llamada": "En appel", "espera": "Attente moy.", "ventas": "Ventes du jour" }
+      }
+    }
+  },
+  "design": {
+    "kicker": "NOUVEAU · CONCEVEZ VOTRE ENTREPRISE EN 3D",
+    "title1": "Aménagez votre lieu comme dans ",
+    "titleGrad": "un jeu vidéo.",
+    "sub": "Choisissez un modèle, déplacez murs et meubles, habillez votre équipe avec son uniforme et connectez le tout à vos vraies données. Ce que vous concevez, c’est ce que vous voyez en direct.",
+    "mainAlt": "Mode constructeur de Clonexa : plan 3D d’un restaurant d’exemple avec tables, cuisine et bar, et le catalogue de meubles à glisser",
+    "templatesAlt": "Modèles du constructeur : bar, restaurant, atelier, centre d’appels, entrepôt ou bureau pour démarrer en un geste",
+    "characters": [
+      ["🧍 Réaliste", "Personnage réaliste en uniforme d’entrepôt dans l’éditeur de personnages"],
+      ["🙂 Cartoon", "Personnage style cartoon dans l’éditeur de personnages"]
+    ],
+    "points": [
+      ["🏗️ Modèles prêts à l’emploi", "Bar, restaurant, atelier, centre d’appels, entrepôt ou bureau. Ou partez de zéro avec vos propres dimensions."],
+      ["🎨 À votre image", "Un geste et le lieu prend vos couleurs : enseigne, lumières, meubles et uniformes."],
+      ["🔗 Vraiment connecté", "Chaque table, machine ou bureau bouge avec les vraies données de votre entreprise."]
+    ]
+  },
+  "toys": {
+    "kicker": "LES PÉPITES DE CLONEXA",
+    "title1": "Ce que vos clients et votre équipe ",
+    "titleGrad": "vont adorer",
+    "carta": {
+      "badge": "▶ vidéo",
+      "title": "🎬 Menu vidéo avec QR",
+      "text": "Chaque plat en vidéo avant de commander. Ça donne envie… et on commande plus.",
+      "link": "Voir le menu vidéo avec QR →"
+    },
+    "order": {
+      "title": "📲 Commande depuis la table",
+      "text": "On scanne, on commande, et l’addition sort exacte pour chaque table.",
+      "add": "＋ Ajouter · Table 7",
+      "bag": "🛒 Votre commande ({count}) · {total}",
+      "phoneLabel": "Menu vidéo : filet grillé avec le bouton pour l’ajouter à la commande de la table 7"
+    },
+    "gps": { "title": "📍 Plannings avec GPS", "text": "Votre équipe pointe à l’arrivée et au départ ; vous voyez qui est là et où." },
+    "prod": { "title": "🧵 Production et paie", "text": "Lots, heures et paie calculés en quelques minutes, sans tableur." }
+  },
+  "reels": {
+    "kicker": "VOYEZ-LE EN 15 SECONDES",
+    "title1": "Clonexa, ",
+    "titleGrad": "en action.",
+    "sub": "Les mêmes vidéos que nous publions sur les réseaux. Suivez-nous pour découvrir une nouvelle entreprise chaque jour.",
+    "items": {
+      "restaurante": "Restaurant",
+      "bar": "Bar",
+      "taller": "Atelier",
+      "callcenter": "Centre d’appels",
+      "campo": "Terrain",
+      "domicilios": "Livraison"
+    },
+    "watch": " : voir la vidéo de 15 secondes",
+    "dialog": "Vidéo : {name}, en direct",
+    "close": "Fermer la vidéo",
+    "follow": {
+      "instagram": "Instagram @clonexaapp",
+      "tiktok": "TikTok @clonexxa",
+      "facebook": "Facebook",
+      "linkedin": "LinkedIn",
+      "youtube": "YouTube"
+    }
+  },
+  "builder": {
+    "kicker": "INTERACTIF",
+    "title": "Composez votre système en 30 s",
+    "sub": "Touchez ce dont vous avez besoin et nous vous montrons la démo avec tout ça connecté.",
+    "modulesLabel": "Modules",
+    "modules": {
+      "pedidos": "Commandes",
+      "caja": "Caisse",
+      "inventario": "Stock",
+      "bodega": "Entrepôt",
+      "rutas": "Tournées",
+      "callcenter": "Centre d’appels",
+      "telefonia": "Téléphonie",
+      "vendedores": "Commerciaux",
+      "tiendas": "Réseau de boutiques",
+      "tiendaOnline": "Boutique en ligne",
+      "turnos": "Plannings",
+      "nomina": "Paie",
+      "crm": "Clients (CRM)",
+      "fidelizacion": "Fidélisation",
+      "gerencia": "Direction",
+      "bots": "Bots et WhatsApp",
+      "envivo": "En direct 3D",
+      "diseno3d": "Conception 3D"
+    },
+    "connected": "{n} modules connectés · {level}",
+    "choose": "Choisissez au moins un module",
+    "levels": { "lista": "Solution prête à l’emploi", "completa": "Opération complète", "medida": "Entreprise sur mesure" },
+    "quote": "Demander un devis sur WhatsApp",
+    "waMessage": "Bonjour Clonexa, je souhaite un devis pour un système Clonexa avec : {list}."
+  },
+  "how": {
+    "kicker": "NOTRE MÉTHODE",
+    "title": "De l’idée à votre système en marche",
+    "steps": [
+      ["Diagnostic", "Nous comprenons comment votre entreprise fonctionne aujourd’hui et ce qui vous échappe."],
+      ["Conception", "Nous vous montrons les écrans et le parcours avant de construire."],
+      ["Construction par étapes", "Nous livrons module par module, testé et avec votre équipe."],
+      ["Accompagnement", "Support sur WhatsApp et améliorations continues."]
+    ],
+    "whyTitle": "Pourquoi Clonexa",
+    "why": [
+      ["S’adapte à votre façon de travailler", ", et non l’inverse : il se compose de modules, et ce qui manque se construit."],
+      ["Tout est connecté", " : commandes, caisse, stock, personnel et rapports dans un seul système."],
+      ["Utilisateurs illimités", " au forfait : vous ne payez pas par personne."],
+      ["Modules sur mesure", " : centre d’appels, tournées, entrepôt, boutique en ligne et tout ce dont votre activité a besoin."]
+    ]
+  },
+  "plans": {
+    "kicker": "TARIFS",
+    "title1": "Prix fixe. ",
+    "titleGrad": "Utilisateurs illimités.",
+    "sub": "Un forfait mensuel fixe selon vos modules. Les développements sur mesure sont chiffrés par étapes.",
+    "recommended": "RECOMMANDÉ",
+    "cta": "Demander un devis pour ce forfait",
+    "waMessage": "Bonjour Clonexa, je souhaite un devis pour le forfait {name}.",
+    "items": {
+      "esencial": {
+        "name": "Essentiel",
+        "for": "Pour organiser votre activité",
+        "items": [["Commandes, caisse et stock", true], ["Rapports du jour", false], ["Menu vidéo avec QR", false], ["Utilisateurs illimités", false]]
+      },
+      "completa": {
+        "name": "Opération complète",
+        "for": "Pour les entreprises avec une équipe",
+        "items": [["Tout Essentiel", false], ["Plannings et paie", false], ["QR et livraisons", false], ["Entreprise en direct 3D", true], ["Conception 3D du lieu et personnages", true]]
+      },
+      "medida": {
+        "name": "Sur mesure",
+        "for": "Centre d’appels, tournées, réseau de boutiques",
+        "items": [["Diagnostic et conception", false], ["Développement par étapes", true], ["Tableau de bord de direction", false], ["Boutique en ligne ou marketplace", false]]
+      }
+    }
+  },
+  "commerce": {
+    "kicker": "E-COMMERCE",
+    "title": "Votre propre boutique en ligne ou marketplace",
+    "sub": "Catalogue, panier, paiement en ligne, plusieurs vendeurs et livraisons, connectés à votre entrepôt, votre caisse et vos rapports. Sans commission sur chaque vente reversée à une plateforme tierce.",
+    "items": ["Multi-vendeurs et multi-boutiques", "Promos, coupons et livraison gratuite", "Stock synchronisé avec l’entrepôt"],
+    "cta": "Je veux ma boutique en ligne",
+    "waMessage": "Bonjour Clonexa, je souhaite un devis pour ma boutique en ligne."
+  },
+  "faq": {
+    "kicker": "QUESTIONS FRÉQUENTES",
+    "title1": "Ce que tout le monde ",
+    "titleGrad": "nous demande",
+    "items": [
+      ["Combien ça coûte ?", "Un forfait mensuel fixe selon l’offre, avec utilisateurs illimités. Nous vous donnons le prix exact après avoir vu votre activité et les modules dont vous avez besoin."],
+      ["Dois-je acheter du matériel ?", "Non. Il fonctionne dans le navigateur du téléphone, de la tablette ou de l’ordinateur que vous avez déjà. Pour la cuisine, le bar ou la télé, n’importe quel écran avec un navigateur fait l’affaire."],
+      ["Vous m’aidez à migrer mes données ?", "Oui. Nous vous aidons à charger votre menu ou vos produits, votre stock et votre équipe, et nous formons vos collaborateurs pour un démarrage sans accroc."],
+      ["Ça marche sur mobile ?", "Oui. Il s’ouvre dans le navigateur du téléphone, sans rien installer. Vos clients commandent aussi depuis leur téléphone avec le QR de la table."],
+      ["Mes données sont-elles en sécurité ?", "Vos informations sont stockées dans le cloud et circulent chiffrées. Chaque personne se connecte avec son identifiant ou son code PIN et ne voit que ce qui la concerne. Et sur simple demande, nous supprimons vos données."],
+      ["Et si internet tombe en panne ?", "Clonexa fonctionne dans le cloud, il a donc besoin d’une connexion. Tout ce qui est déjà enregistré reste sauvegardé ; si le wifi de votre établissement coupe, vous pouvez continuer avec les données mobiles."],
+      ["Pouvez-vous construire un système qui n’est pas sur cette page ?", "Oui. Clonexa se compose de modules. Si votre activité le fait, nous le concevons avec vous et le construisons par étapes, connecté à ce que vous avez déjà."],
+      ["Combien de temps faut-il ?", "Les solutions prêtes à l’emploi tournent en quelques jours. Un développement sur mesure est livré par étapes pour que vous l’utilisiez au plus tôt."],
+      ["Gère-t-il la facture électronique ?", "C’est en cours de développement et ça arrive bientôt."]
+    ]
+  },
+  "carta": {
+    "kicker": "MENU VIDÉO AVEC QR",
+    "title1": "Vos plats ",
+    "titleGrad": "en vidéo",
+    "titleComma": ",",
+    "title2": " depuis le QR de la table",
+    "sub": "Vos clients scannent le QR de la table, voient vos plats en vidéo, de face et de profil, et commandent depuis leur téléphone. Rien à télécharger. Les vidéos sont réalisées à partir de photos et vidéos prises avec votre propre téléphone.",
+    "points": ["Un plat qui a l’air bon se vend tout seul.", "La commande arrive directement en cuisine ou au bar.", "Vous changez le menu quand vous voulez, sans réimprimer."],
+    "wa": "Écrivez-nous sur WhatsApp",
+    "seeAll": "Tout voir pour les restaurants",
+    "videoLabel": "Démo : menu vidéo d’un restaurant d’exemple",
+    "caption": "Démo avec un restaurant d’exemple (données fictives).",
+    "qrAlt": "QR code du vrai menu du restaurant d’exemple",
+    "qrText": "Scannez-le et ouvrez le vrai menu d’un restaurant d’exemple sur votre téléphone, comme le verraient vos clients. ",
+    "openHere": "L’ouvrir ici",
+    "openMobile": "Ouvrir le vrai menu d’un restaurant d’exemple →",
+    "waCode": "Bonjour, j’ai vu le menu vidéo (code {code})",
+    "waNoCode": "Bonjour, j’ai vu le menu vidéo de Clonexa et je souhaite une démo"
+  },
+  "shots": {
+    "rest-carta": "Menu vidéo avec QR sur le téléphone du client : chaque plat en vidéo avec son nom, sa description et son prix",
+    "hero-caja": "Caisse Clonexa dans un restaurant : total vendu, commandes, ticket moyen, encaissé par mode de paiement et tables ouvertes avec leur statut",
+    "rest-qr": "Menu QR de la table 7 sur le téléphone du client : plats principaux avec prix et boutons pour les ajouter à la commande",
+    "rest-mesero": "Panneau du serveur sur le téléphone : catégorie Plats principaux avec chaque plat et son prix",
+    "rest-cocina": "Écran de cuisine Clonexa : bons des tables et des livraisons en colonnes Nouvelle commande, En préparation et Prêt, avec leurs minuteurs",
+    "rest-cuenta": "Addition de la table 7 à la caisse : articles commandés, total et paiement en espèces, virement ou carte",
+    "rest-cierre": "Clôture de caisse du jour dans Clonexa : total des ventes, articles vendus, commandes encaissées et encaissé par mode de paiement",
+    "bar-qr": "Menu QR du bar sur le téléphone : cocktails avec prix, addition de la table et demande de chanson",
+    "bar-barra": "Panneau du bar : tables et notes du bar ouvertes avec leur total, nouvelles commandes en surbrillance, bouton + pour ajouter et chansons demandées par table",
+    "bar-juegos": "Jeux en direct sur la télé du bar : jeu Mémoire éclair avec le temps, le lot et le classement des joueurs",
+    "bar-cierre": "Clôture de caisse de la journée d’activité du bar : total des ventes, ventes au bar et encaissé par mode de paiement",
+    "taller-tablero": "Tableau de l’atelier sur la tablette : qui travaille, qui est en pause ou hors service, et depuis combien de temps",
+    "taller-pin": "Tableau de l’atelier : la personne saisit son code PIN à 4 chiffres sur la tablette pour commencer à travailler",
+    "taller-produccion": "Production de l’atelier dans Clonexa : pièces terminées, lots en cours avec leur avancement, jours par lot et main-d’œuvre par pièce",
+    "taller-nomina": "Paie de l’atelier dans Clonexa : heures normales et supplémentaires, total à payer pour la période et détail des pointages par personne",
+    "campo-inicio": "CRM Terrain de Clonexa : opération en direct avec les collaborateurs actifs et en pause, leur temps et leur position dans la zone de travail",
+    "campo-materiales": "Matériel dans Clonexa : bons de matériel demandés par les techniciens avec leur statut, leur quantité et leur destination",
+    "ej-aperturas": "CRM Terrain de l’entreprise de démonstration : personnel actif, ouverture de chaque boutique et collaborateurs par boutique avec leur temps",
+    "ej-ventas": "Ventes dans Clonexa : objectif total du mois, avancement des ventes par rapport à l’objectif et chaque vendeur avec son objectif",
+    "ej-callcenter": "Centre d’appels dans Clonexa : appels, tickets et devis de la période, durée moyenne et chaque conseiller avec son statut",
+    "ej-tickets": "Devis et tickets dans Clonexa : documents avec client, service, montant et statut En route, Planifié ou Approuvé",
+    "ej-solicitudes": "Demandes à l’entrepôt dans Clonexa : demandes des boutiques, en préparation, reçues et détail de la demande 88",
+    "ej-tesoreria": "Trésorerie dans Clonexa : tickets à vérifier, prêts à facturer, crédit disponible et factures à encaisser"
+  },
+  "industryPage": {
+    "kicker": "CLONEXA POUR : {name}",
+    "greeting": "Bonjour, je souhaite une démo de Clonexa pour mon activité : {business}.",
+    "how": { "kicker": "NOTRE SOLUTION", "title": "Clonexa pour : {name}" },
+    "flow": {
+      "kicker": "COMMENT ÇA MARCHE",
+      "title": "Comment fonctionne Clonexa ({name})",
+      "sub": "De vrais écrans de Clonexa avec des données d’exemple.",
+      "step": "ÉTAPE {n}",
+      "zoom": "Agrandir la capture : {title}"
+    },
+    "fit": { "kicker": "POUR QUI", "title": "Pour quelles entreprises ?" },
+    "modules": {
+      "kicker": "MODULES",
+      "title": "Modules de Clonexa ({name})",
+      "sub": "Vous utilisez ceux dont vous avez besoin et ils se connectent entre eux. S’il vous manque quelque chose, nous le construisons sur mesure."
+    },
+    "faq": { "kicker": "QUESTIONS", "title": "Questions fréquentes" },
+    "follow": { "kicker": "RÉSEAUX", "title": "Suivez-nous", "sub": "Actualités de Clonexa et exemples en vidéo." },
+    "others": { "kicker": "AUTRES SECTEURS", "title": "Clonexa travaille aussi avec" }
+  },
+  "industries": {
+    "restaurantes": {
+      "name": "Restaurants",
+      "business": "restaurant",
+      "title": "Restaurants | Clonexa",
+      "description": "Système pour restaurants : commande par QR et depuis le mobile du serveur, écran de cuisine, caisse, clôture du jour, stock et rapports. Réservez votre démo.",
+      "h1": "Système pour restaurants : commandes, cuisine et caisse connectées",
+      "intro": [
+        "Dans un restaurant animé, chaque commande passe par beaucoup de mains. Le client la donne au serveur, le serveur la note sur un bon, la cuisine déchiffre l’écriture et, à la fin, la caisse reconstitue l’addition de mémoire. À chaque étape, un plat peut se perdre, une table être sous-facturée ou attendre trop longtemps. À la fermeture, faire la caisse et savoir ce qui s’est vendu prend un temps que personne n’a.",
+        "Clonexa relie tout ce parcours dans un seul système. Le client peut commander depuis le QR code de sa table, ou le serveur prend la commande sur son téléphone. La cuisine la reçoit aussitôt sur un écran organisé en colonnes, avec le temps de chaque bon, en même temps que les livraisons. La caisse trouve l’addition de chaque table déjà prête et encaisse en espèces, par virement ou par carte. En fin de journée, la clôture de caisse montre ce qui a été vendu et encaissé par mode de paiement.",
+        "Pas besoin d’acheter du matériel spécial : il fonctionne sur les téléphones, tablettes et ordinateurs que vous avez déjà. Nous le configurons avec votre menu, vos tables, votre marque et vos couleurs, et nous vous accompagnons pendant que votre équipe apprend à l’utiliser."
+      ],
+      "fit": "Il convient aux restaurants avec service à table, à la restauration rapide, aux cafés et aux établissements qui livrent, avec un ou plusieurs sites. Si votre restaurant fonctionne d’une façon particulière, nous adaptons les modules à votre organisation.",
+      "steps": [
+        ["Le client commande depuis le QR de la table", "Il scanne le code avec son téléphone et voit vos plats en vidéo, de face et de profil, avec leurs prix ; il compose sa commande et la confirme. Aucune application à télécharger."],
+        ["Le serveur prend la commande sur son téléphone", "Il choisit la catégorie, touche le plat et l’envoie en cuisine. Fini les bons papier et l’écriture que personne ne comprend."],
+        ["La cuisine la reçoit aussitôt", "Chaque bon arrive sur l’écran de cuisine dans la colonne Nouvelle commande, passe à En préparation puis à Prêt, avec le temps écoulé pour chacun. Les livraisons arrivent sur le même écran."],
+        ["La caisse encaisse l’addition exacte", "L’addition de la table contient déjà tout ce qui a été commandé. On encaisse en espèces, par virement ou par carte sans rien additionner à la main."],
+        ["Une clôture du jour sans écarts", "À la fin, la clôture de caisse affiche le total vendu, les articles, les commandes encaissées et le montant encaissé par mode de paiement."]
+      ],
+      "modules": [
+        ["Menu QR par table", "le client voit le menu et commande depuis son téléphone."],
+        ["Panneau du serveur", "commandes depuis le mobile, direct en cuisine."],
+        ["Écran de cuisine", "bons en colonnes, avec leurs temps."],
+        ["Livraisons", "elles arrivent en cuisine avec les tables."],
+        ["Caisse et clôture du jour", "encaissements par mode de paiement et clôture."],
+        ["Stock", "produits et stocks de l’établissement."],
+        ["Rapports", "ce qui se vend, combien et comment on paie."],
+        ["Plannings et paie", "heures de l’équipe et paie de la période."]
+      ],
+      "faq": [
+        ["Dois-je acheter du matériel spécial ?", "Non. Clonexa fonctionne dans le navigateur des téléphones, tablettes et ordinateurs que vous avez déjà. Pour un écran en cuisine, n’importe quelle tablette ou télé avec un navigateur convient."],
+        ["Mes clients doivent-ils télécharger une application pour commander par QR ?", "Non. En scannant le QR code de la table, le menu s’ouvre dans le navigateur du téléphone et ils composent et confirment leur commande depuis là."],
+        ["Facturez-vous par serveur ou par utilisateur ?", "Non. C’est un forfait : toute votre équipe utilise Clonexa sans frais supplémentaires par utilisateur. Le prix dépend des modules dont vous avez besoin ; demandez un devis sur WhatsApp."],
+        ["Gère-t-il la facture électronique ?", "La facture électronique est en cours de développement et arrive bientôt. En attendant, Clonexa gère vos commandes, votre caisse, votre stock et vos rapports."],
+        ["Combien de temps pour être opérationnel ?", "Les solutions prêtes à l’emploi pour restaurants tournent en quelques jours : nous configurons votre menu, vos tables et votre marque, et nous formons votre équipe."]
+      ]
+    },
+    "bares": {
+      "name": "Bars",
+      "business": "bar",
+      "title": "Bars | Clonexa",
+      "description": "Système pour bars : commande par QR depuis la table, écran du bar, jeux en direct sur la télé, additions par table et clôture par journée. Réservez votre démo.",
+      "h1": "Système pour bars : commande par QR, bar et jeux en direct",
+      "intro": [
+        "Dans un bar plein, les serveurs sont débordés, les commandes se crient par-dessus la musique et le bar ne sait plus quelle table a commandé quoi. En fin de soirée, il faut reconstituer les additions, et comme la clôture arrive après minuit, les ventes se retrouvent réparties sur deux dates et les chiffres ne tombent pas juste.",
+        "Clonexa met de l’ordre dans la soirée. Chaque table a son QR code : les clients voient la carte, commandent depuis leur téléphone, consultent l’addition de la table et peuvent même demander la chanson qu’ils veulent entendre. Le bar voit chaque commande sur un écran, de en attente à servie, et la caisse encaisse l’addition exacte de chaque table. La clôture se fait par journée d’activité : ce qui est vendu après minuit reste dans la même soirée.",
+        "Pour que les clients restent et reviennent, Clonexa propose des jeux en direct : les clients jouent depuis leur téléphone et le classement s’affiche sur la télé du bar, avec le lot de la manche. Tout fonctionne sur le matériel que vous avez déjà, avec votre marque et vos couleurs."
+      ],
+      "fit": "Il convient aux bars, bistrots, discothèques et établissements de nuit qui servent à table et au comptoir, et qui veulent des commandes plus rapides, des additions claires et des clients qui restent plus longtemps. Si votre bar a sa propre dynamique, comme des événements ou des tournées spéciales, nous l’adaptons sur mesure.",
+      "steps": [
+        ["Ils commandent depuis la table avec le QR", "Le client ouvre la carte sur son téléphone, ajoute des cocktails ou des bières, voit l’addition totale de la table et peut demander une chanson."],
+        ["Le bar voit chaque commande en direct", "Les commandes arrivent par table sur le panneau du bar : chaque table avec son total, les nouvelles commandes en rouge, un + pour ajouter sans chercher la table et les chansons demandées par chaque table. Plus besoin de crier les commandes."],
+        ["Des jeux en direct sur la télé", "Les clients jouent depuis leur téléphone et l’écran du bar affiche le jeu, le temps, le lot et le classement des joueurs."],
+        ["Clôture par journée d’activité", "La clôture de caisse regroupe les ventes de la soirée même si vous fermez après minuit, avec les ventes au bar et l’encaissé par mode de paiement."]
+      ],
+      "modules": [
+        ["Carte QR par table", "commandes, addition de la table et demande de chanson."],
+        ["Écran du bar", "commandes par table avec leur statut."],
+        ["Jeux en direct", "jeux depuis le téléphone avec le classement sur la télé."],
+        ["Fidélisation", "des récompenses pour que vos clients reviennent."],
+        ["Caisse et clôture", "additions par table et clôture par journée d’activité."],
+        ["Stock", "stocks d’alcools et de produits."],
+        ["Rapports", "ventes de la soirée et par mode de paiement."]
+      ],
+      "faq": [
+        ["Les clients ont-ils besoin d’une application pour commander ou jouer ?", "Non. Le QR de la table ouvre la carte dans le navigateur du téléphone, et les jeux en direct se jouent aussi depuis le navigateur."],
+        ["Que deviennent les ventes après minuit ?", "Clonexa clôture par journée d’activité : ce que vous vendez après minuit reste dans la même soirée, sans être réparti sur deux dates."],
+        ["Que faut-il pour afficher les jeux sur la télé ?", "Une télé ou un écran avec un navigateur, ou un ordinateur branché dessus. L’écran des jeux s’ouvre comme une page web."],
+        ["Facturez-vous par utilisateur ?", "Non. Forfait avec utilisateurs illimités ; le prix dépend des modules. Demandez un devis sur WhatsApp."],
+        ["Gère-t-il la facture électronique ?", "C’est en cours de développement et ça arrive bientôt."]
+      ]
+    },
+    "talleres-y-fabricas": {
+      "name": "Ateliers et usines",
+      "business": "atelier ou usine",
+      "title": "Ateliers et usines | Clonexa",
+      "description": "Système pour ateliers et usines : tableau d’atelier avec code PIN, temps par référence, production par lot et paie à l’heure. Réservez votre démo Clonexa.",
+      "h1": "Système pour ateliers et usines : temps, production et paie",
+      "intro": [
+        "Dans un atelier de confection ou une petite usine, savoir qui a travaillé sur quoi et combien de temps cela a pris dépend souvent de feuilles de temps papier. En fin de période, quelqu’un passe des heures à additionner pointages, heures supplémentaires et pauses pour calculer la paie, et personne ne sait vraiment combien coûte la fabrication de chaque pièce ni où en est chaque lot.",
+        "Clonexa installe une tablette dans l’atelier. Chaque personne pointe avec son code PIN, choisit la référence sur laquelle elle va travailler et démarre son poste ; si elle fait une pause, le système l’enregistre. Le tableau de production affiche alors les pièces terminées, l’avancement de chaque lot, le nombre de jours de chacun et la main-d’œuvre par pièce, sans que personne ait à saisir de données à la main.",
+        "Ces mêmes heures alimentent la paie : heures normales, heures supplémentaires et total à payer pour la période, avec le détail de chaque pointage par personne. Et à partir de ce qui a été produit, vous pouvez éditer devis et factures pour vos clients."
+      ],
+      "fit": "Il convient aux ateliers de confection, aux sous-traitants qui produisent pour des marques, aux petites usines et à toute activité qui produit par références ou par lots et paie au temps travaillé. Le dirigeant voit au même endroit combien l’atelier produit, combien coûte la main-d’œuvre de chaque pièce et combien il doit payer sur la période, sans attendre que quelqu’un finisse d’additionner les feuilles de temps. Si votre processus a ses propres étapes, comme le contrôle qualité ou les livraisons partielles au client, nous les construisons sur mesure sur la même base.",
+      "steps": [
+        ["Le tableau de l’atelier", "La tablette montre qui travaille, qui est en pause et qui n’a pas encore commencé, avec le temps de chacun."],
+        ["Chacun pointe avec son code PIN", "La personne saisit son code PIN à quatre chiffres, choisit la référence sur laquelle elle va travailler et démarre son poste."],
+        ["Production par lot", "Pièces terminées dans la semaine ou le mois, lots en cours avec leur avancement, jours par lot et main-d’œuvre par pièce."],
+        ["La paie vient des heures réelles", "Heures normales et supplémentaires, retenues et total à payer pour la période, avec le détail des pointages de chaque personne."]
+      ],
+      "modules": [
+        ["Tableau de l’atelier", "une tablette avec un code PIN pour chaque personne."],
+        ["Références", "sur quoi chacun travaille et combien de temps."],
+        ["Production", "pièces terminées, lots et main-d’œuvre par pièce."],
+        ["Paie", "périodes, heures normales et supplémentaires, total à payer."],
+        ["Devis et factures", "documents PDF à partir de la production."],
+        ["Personnel", "collaborateurs, rôles et plannings."]
+      ],
+      "faq": [
+        ["Que faut-il pour le tableau de l’atelier ?", "Une tablette ou un ordinateur avec un navigateur dans l’atelier. Chaque personne pointe avec son code PIN, sans identifiant ni mot de passe."],
+        ["La paie se calcule-t-elle toute seule ?", "Clonexa reprend les heures enregistrées dans les pointages, sépare les heures normales et supplémentaires et calcule le total de la période. Vous vérifiez et clôturez la période."],
+        ["Est-ce adapté aux usines hors confection ?", "Oui, si vous travaillez par références ou par lots et devez mesurer le temps et la production. Nous étudions votre processus et l’adaptons sur mesure."],
+        ["Facturez-vous par opérateur ?", "Non. Forfait avec utilisateurs illimités ; demandez un devis sur WhatsApp."],
+        ["Gère-t-il la facture électronique ?", "C’est en cours de développement et ça arrive bientôt."]
+      ]
+    },
+    "call-centers": {
+      "name": "Centres d’appels",
+      "business": "centre d’appels",
+      "title": "Centres d’appels | Clonexa",
+      "description": "Système pour centres d’appels qui vendent des services : conseillers en direct, appels et résultats, devis et tickets, contrats et trésorerie. Réservez votre démo.",
+      "h1": "Système pour centres d’appels : conseillers, devis et trésorerie connectés",
+      "intro": [
+        "Quand un centre d’appels vend des services, l’information finit souvent éparpillée : les appels dans un tableur, les devis dans des documents isolés, les services approuvés ailleurs et les paiements en comptabilité. Le superviseur ne sait pas en temps réel ce que fait chaque conseiller, et la trésorerie apprend trop tard ce qu’il faut encaisser.",
+        "Clonexa réunit toute l’activité dans un seul système. Le superviseur voit chaque conseiller avec son statut (en appel, disponible ou en pause), le nombre d’appels passés, les devis et tickets qui en sont issus et leur durée. Quand un client demande un prix, le devis est créé dans le système ; s’il l’accepte, il devient un ticket ou un ordre de service, est planifié et suivi jusqu’à sa réalisation.",
+        "La trésorerie vérifie les tickets avant de facturer, voit ce qui est prêt à encaisser, le crédit disponible de chaque contrat et les factures à échéance. Ainsi, ventes, opérations et finances parlent la même langue. C’est une solution que nous construisons sur mesure pour chaque activité, sur la base de Clonexa."
+      ],
+      "fit": "Il convient aux entreprises qui prennent des appels et vendent par téléphone des services qu’il faut ensuite planifier et encaisser : transport spécialisé, tourisme, événementiel et services aux entreprises, entre autres. Nous le déployons par étapes : d’abord la supervision des conseillers et l’enregistrement des appels, puis les devis et les tickets, et ensuite la trésorerie et les contrats. Votre équipe l’utilise ainsi rapidement et chaque étape est testée en conditions réelles avant de passer à la suivante.",
+      "steps": [
+        ["Le superviseur voit chaque conseiller", "Appels, tickets et devis de la période, durée moyenne et liste des conseillers avec leur statut et leurs résultats."],
+        ["Le devis devient un service", "Devis et tickets s’impriment avec original et copie, se rattachent à un contrat ou une garantie et changent de statut : approuvé, planifié, en route."],
+        ["La trésorerie vérifie et encaisse", "Tickets à vérifier, prêts à facturer, crédit disponible des contrats et factures à encaisser dans une seule boîte."]
+      ],
+      "modules": [
+        ["Supervision des conseillers", "statut en direct, appels et résultats."],
+        ["Enregistrement des appels", "résultat, durée et campagne de chaque appel."],
+        ["Devis et tickets", "documents imprimables avec original et copie."],
+        ["Contrats et garanties", "soldes de chaque client sous contrat."],
+        ["Trésorerie et paiements", "vérification, facturation et créances à encaisser."],
+        ["Personnel et plannings", "journée et pauses de chaque conseiller."]
+      ],
+      "faq": [
+        ["Pour quel type de centre d’appels ?", "Pour les équipes qui vendent ou planifient des services par téléphone et doivent passer de l’appel au devis, au service et à l’encaissement. Nous l’adaptons à votre processus."],
+        ["Le superviseur peut-il voir les conseillers en direct ?", "Oui. Il voit le statut de chaque conseiller (en appel, disponible ou en pause), ses appels, devis, tickets et la durée de ses appels."],
+        ["Peut-on imprimer les devis et les tickets ?", "Oui. Ils sont générés en PDF pour être imprimés avec original et copie, et peuvent être rattachés au contrat ou à la garantie d’un client."],
+        ["Facturez-vous par conseiller ?", "Non. Forfait avec utilisateurs illimités. Comme c’est sur mesure, c’est chiffré par étapes selon votre activité."],
+        ["Gère-t-il la facture électronique ?", "C’est en cours de développement et ça arrive bientôt."]
+      ]
+    },
+    "personal-en-campo": {
+      "name": "Équipes terrain",
+      "business": "équipe terrain",
+      "title": "Équipes terrain | Clonexa",
+      "description": "Système pour équipes terrain : prise de poste géolocalisée, pauses, zones de travail et demandes de matériel avec bons numérotés. Réservez votre démo Clonexa.",
+      "h1": "Système pour équipes terrain : plannings, position et matériel",
+      "intro": [
+        "Quand votre équipe travaille hors du bureau, sur des chantiers, des montages ou des installations, il est difficile de savoir à quelle heure chacun a commencé, s’il est au bon endroit et quel matériel il a emporté. Les heures se déclarent par messagerie, les pauses ne sont pas enregistrées et le matériel sort de l’entrepôt sans bon clair, si bien qu’à la fin personne ne sait où il est passé.",
+        "Avec Clonexa, chaque technicien prend son poste depuis son téléphone et le système enregistre l’heure et s’il se trouve dans sa zone de travail. Le superviseur voit en direct qui est actif, qui est en pause et depuis combien de temps chacun travaille, sans appeler personne.",
+        "Quand l’équipe a besoin de matériel, elle le demande dans le système et un bon numéroté est créé. L’entrepôt l’approuve et le livre, et à la livraison il est déduit du stock ; si le matériel revient, le retour est enregistré sur ce même bon. Les heures travaillées sont prêtes pour la paie."
+      ],
+      "fit": "Il convient aux entreprises d’installation, de montage, de chantiers, de maintenance, de réseaux, de sécurité et à toute activité avec des techniciens ou des équipes qui travaillent hors du bureau. Le superviseur n’appelle plus chacun pour savoir où il se trouve, l’entrepôt sait quel matériel est sorti et pour quel chantier, et l’administration reçoit les heures travaillées sans devoir les reconstituer à partir des messages. Nous le configurons avec vos zones de travail, votre matériel et votre équipe, puis nous l’étendons par étapes selon les besoins de votre activité.",
+      "steps": [
+        ["Prise de poste géolocalisée", "Le superviseur voit les collaborateurs actifs et en pause, le temps de chacun et s’ils sont dans leur zone de travail. Si quelqu’un est en pause, on voit depuis combien de temps, et à la fin du poste les heures sont enregistrées pour la paie."],
+        ["Demande de matériel avec bon", "Chaque demande de matériel devient un bon numéroté indiquant qui l’a demandé, la quantité, la destination et son statut : en attente, approuvé, livré ou retourné."]
+      ],
+      "modules": [
+        ["CRM Terrain", "pointages, pauses et temps de chaque collaborateur en direct."],
+        ["GPS par zones", "si le collaborateur est dans sa zone de travail."],
+        ["Matériel", "bons de matériel, livraisons et retours."],
+        ["Stock", "stocks déduits à la livraison."],
+        ["Plannings et paie", "heures travaillées et paie de la période."],
+        ["Bot Telegram", "l’équipe prend et termine son poste depuis Telegram."]
+      ],
+      "faq": [
+        ["Les techniciens doivent-ils installer une application ?", "Pas forcément. Ils peuvent utiliser le navigateur du téléphone ou le bot Telegram pour prendre et terminer leur poste."],
+        ["Comment savoir s’ils sont au bon endroit ?", "Avec le module GPS par zones : le système indique si le collaborateur est dans la zone de travail qui lui est attribuée ou en dehors. Les zones se configurent pour chaque chantier ou site, et le superviseur voit en direct qui est dedans et qui est dehors."],
+        ["Comment contrôler le matériel ?", "Chaque demande devient un bon numéroté. À la livraison, il est déduit du stock et le retour est enregistré sur ce bon."],
+        ["Facturez-vous par technicien ?", "Non. Forfait avec utilisateurs illimités ; demandez un devis sur WhatsApp."],
+        ["Gère-t-il la facture électronique ?", "C’est en cours de développement et ça arrive bientôt."]
+      ]
+    }
+  },
+  "about": {
+    "crumb": "Qu’est-ce que Clonexa ?",
+    "kicker": "À PROPOS DE CLONEXA",
+    "h1": "Qu’est-ce que Clonexa ?",
+    "lead": "Clonexa est un logiciel cloud (SaaS) qui relie dans un seul système les commandes, le stock, la caisse, le personnel, les plannings, la paie et les rapports d’une entreprise, et vous permet de tout voir fonctionner en 3D et en temps réel.",
+    "text1": "Au lieu d’avoir un logiciel pour la caisse, un autre pour le stock, un tableur pour la paie et des commandes éparpillées dans les messageries, Clonexa réunit tout au même endroit. Il s’utilise depuis le navigateur du téléphone, de la tablette ou de l’ordinateur, sans rien installer, et chaque entreprise le voit avec sa marque et ses couleurs.",
+    "shotCaption": "Caisse d’un restaurant dans Clonexa (vrai écran avec des données d’exemple).",
+    "whoTitle": "Pour qui ?",
+    "whoText": "Clonexa travaille avec des entreprises qui ont une activité quotidienne et des équipes en mouvement : du restaurant avec serveurs et cuisine à l’entreprise avec centre d’appels, entrepôt et commerciaux. Voici les secteurs avec des solutions prêtes à l’emploi :",
+    "alsoText": "Nous construisons aussi des systèmes sur mesure pour les boutiques et chaînes, les distributeurs et les boutiques en ligne, sur la même base Clonexa.",
+    "howTitle": "Comment se déroule la mise en place ?",
+    "howText": "Nous commençons par un diagnostic de votre fonctionnement actuel. Si une solution prête à l’emploi vous convient, nous la configurons avec vos informations et elle tourne en quelques jours. Si vous avez besoin de quelque chose de spécifique, nous le concevons avec vous, vous montrons les écrans avant de construire et le livrons par étapes, module par module. Tout au long du projet, nous vous accompagnons et formons votre équipe, et le support continue sur WhatsApp.",
+    "diffTitle": "Qu’est-ce qui le rend différent ?",
+    "diff": [
+      ["Tout est connecté :", " la commande, la cuisine, la caisse, le stock et les rapports forment un seul système, pas des logiciels séparés."],
+      ["S’adapte à votre façon de travailler :", " il se compose de modules, et ce qui manque se construit sur mesure."],
+      ["Utilisateurs illimités :", " un forfait selon les modules, sans frais par utilisateur."],
+      ["Pas de matériel spécial :", " il fonctionne sur le téléphone, la tablette ou l’ordinateur que vous avez déjà."],
+      ["Votre entreprise, en direct :", " vous voyez votre lieu en 3D avec chaque table, machine ou bureau qui bouge avec les vraies données. La facture électronique arrive bientôt."]
+    ],
+    "nexaTitle": "Qui est Nexa ?",
+    "nexaText": "Nexa est la présentatrice de Clonexa, créée par intelligence artificielle. Elle apparaît dans nos vidéos et sur nos réseaux pour expliquer le fonctionnement du système. Elle se présente toujours comme une présentatrice créée par IA.",
+    "contactTitle": "Contact",
+    "contact1": "Écrivez-nous sur ",
+    "contact2": " ou par e-mail à ",
+    "contact3": ", et suivez-nous sur ",
+    "and": " et ",
+    "disclaimer": "Clonexa, l’éditeur de logiciels, n’a aucun lien avec des médicaments au nom similaire.",
+    "waMessage": "Bonjour Clonexa, je souhaite en savoir plus sur Clonexa."
+  },
+  "notFound": {
+    "kicker": "ERREUR 404",
+    "h1": "Cette page n’existe pas",
+    "lead": "Le lien est peut-être mal saisi ou la page n’existe plus. Ces pages peuvent vous aider :",
+    "home": "Accueil",
+    "waMessage": "Bonjour Clonexa, je souhaite réserver une démo gratuite."
+  }
+}
